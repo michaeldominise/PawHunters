@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1bdd58fd6cde09b40bdbb1a0a481aaa9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 153154
+  packageName: 'Fantasy Backgrounds [Megapack]'
+  packageVersion: 1.0
+  assetPath: Assets/FantasyBackgrounds/ParallaxSeamlessBackgrounds#1/Scripts/ColorSpring.cs
+  uploadId: 704222

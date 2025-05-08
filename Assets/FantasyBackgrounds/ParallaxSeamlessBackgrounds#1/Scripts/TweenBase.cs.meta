@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8e096eadfffa0404eb077bacb7136e7d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 153154
+  packageName: 'Fantasy Backgrounds [Megapack]'
+  packageVersion: 1.0
+  assetPath: Assets/FantasyBackgrounds/ParallaxSeamlessBackgrounds#1/Scripts/TweenBase.cs
+  uploadId: 704222
