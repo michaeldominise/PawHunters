@@ -1,4 +1,4 @@
-using Assets.FantasyMonsters.Scripts;
+using Assets.FantasyMonsters.Common.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

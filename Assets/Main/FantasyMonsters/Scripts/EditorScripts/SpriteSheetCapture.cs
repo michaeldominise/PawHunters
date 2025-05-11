@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Assets.FantasyMonsters.Scripts.Utils;
+using Assets.FantasyMonsters.Common.Scripts.Utils;
 using UnityEngine;
 
-namespace Assets.FantasyMonsters.Scripts.EditorScripts
+namespace Assets.FantasyMonsters.Common.Scripts.EditorScripts
 {
     /// <summary>
     /// Used for creating sprite sheets for frame-by-frame animation.

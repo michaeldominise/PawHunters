@@ -7,6 +7,7 @@ namespace PawHunters
         public static EnvironmentManager Instance { get; private set; }
 
         [SerializeField] Vector3 characterOffset = Vector3.right;
+        [SerializeField] float speed = 10f;
         public EnvironmentItem environmentItem;
 
         public int GroundOrderInLayer => environmentItem.GroundOrderInLayer;
@@ -29,6 +30,11 @@ namespace PawHunters
         private void Start() => Init();
         public void Init()
         {
+        }
+
+        public void MoveCameraForward()
+        {
+            Camera.main.transform.Translate(Vector3.right * speed * Time.deltaTime);
         }
     }
 }

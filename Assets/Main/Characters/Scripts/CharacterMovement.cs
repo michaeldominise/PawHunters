@@ -1,4 +1,4 @@
-using Assets.FantasyMonsters.Scripts;
+using Assets.FantasyMonsters.Common.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,7 +30,7 @@ namespace PawHunters
 
         void Move()
         {
-            if (m_moveAmt.magnitude == 0)
+            if (!m_moveAction.IsPressed())
             {
                 monster.SetState(MonsterState.Idle);
                 return;
@@ -39,7 +39,10 @@ namespace PawHunters
             monster.SetState(MonsterState.Walk);
             var xPos = Mathf.Clamp(transform.localPosition.x + m_moveAmt.x * Time.deltaTime * speed, EnvironmentManager.GroundBoundingBox.Left, EnvironmentManager.GroundBoundingBox.Right);
             var yPos = Mathf.Clamp(transform.localPosition.y + m_moveAmt.y * Time.deltaTime * speed, EnvironmentManager.GroundBoundingBox.Bottom, EnvironmentManager.GroundBoundingBox.Top);
-            transform.position = new Vector3(xPos, yPos, transform.position.z);
+            transform.position = new Vector3(xPos, yPos, -yPos);
+
+            if (m_moveAmt.x > 0)
+                EnvironmentManager.Instance.MoveCameraForward();
         }
     }
 }
