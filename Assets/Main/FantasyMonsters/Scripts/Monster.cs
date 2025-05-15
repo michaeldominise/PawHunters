@@ -22,8 +22,6 @@ namespace Assets.FantasyMonsters.Common.Scripts
         public bool Variations;
         public event Action<string> OnEvent = eventName => { };
 
-        [SerializeField] LayerManager layerManager;
-
         /// <summary>
         /// Called on Awake.
         /// </summary>
@@ -51,13 +49,6 @@ namespace Assets.FantasyMonsters.Common.Scripts
 
             Animator.keepAnimatorStateOnDisable = true;
             //Animator.keepAnimatorControllerStateOnDisable = true;
-        }
-
-        IEnumerator Start()
-        {
-            yield return null;
-            layerManager.SetSortingGroupOrder(EnvironmentManager.Instance.GroundOrderInLayer);
-            transform.position = EnvironmentManager.Instance.GetInitialCharacterPosition();
         }
 
         /// <summary>

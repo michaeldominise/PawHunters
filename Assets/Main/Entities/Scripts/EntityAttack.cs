@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace PawHunters
 {
     [RequireComponent(typeof(Monster))]
-    public class CharacterAtack : MonoBehaviour
+    public class EntityAtack : MonoBehaviour
     {
         [SerializeField] Monster monster;
 

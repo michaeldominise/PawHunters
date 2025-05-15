@@ -7,15 +7,17 @@ namespace PawHunters
     {
         [SerializeField] SpriteRenderer[] layers;
         [SerializeField] Transform groundTopCenter;
-        [SerializeField] Transform groundTopLeft;
-        [SerializeField] Transform groundTopRight;
+        [SerializeField] Transform groundMiddleCenter;
+        [SerializeField] Transform groundMiddleLeft;
+        [SerializeField] Transform groundMiddleRight;
         [SerializeField] Transform groundBottomCenter;
         [SerializeField] int groundOrderInLayer = 5;
 
         public int GroundOrderInLayer => groundOrderInLayer;
         public Vector3 GroundTopCenterPosition => groundTopCenter.position;
-        public Vector3 GroundTopLeftPosition => groundTopLeft.position;
-        public Vector3 GroundTopRightPosition => groundTopRight.position;
+        public Vector3 GroundMiddleCenterPosition => groundMiddleCenter.position;
+        public Vector3 GroundMiddleLeftPosition => groundMiddleLeft.position;
+        public Vector3 GroundMiddleRightPosition => groundMiddleRight.position;
         public Vector3 GroundBottomCenterPosition => groundBottomCenter.position;
 
         private void Start() => Init();
@@ -23,8 +25,8 @@ namespace PawHunters
         [Button]
         public void Init()
         {
-            groundTopLeft.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.zero).x, groundTopLeft.position.y, groundTopLeft.position.z);
-            groundTopRight.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.right).x, groundTopLeft.position.y, groundTopLeft.position.z);
+            groundMiddleLeft.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.zero).x, groundMiddleLeft.position.y, groundMiddleLeft.position.z);
+            groundMiddleRight.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.right).x, groundMiddleLeft.position.y, groundMiddleLeft.position.z);
         }
 
     }
