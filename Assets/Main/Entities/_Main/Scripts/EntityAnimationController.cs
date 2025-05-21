@@ -1,0 +1,80 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace PawHunters
+{
+    public class EntityAnimationController : MonoBehaviour
+    {
+        public enum State { Idle, Walking, Running, Attacking, Hurt, AttackDone, Dead = 10 }
+
+        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
+        [SerializeField] Animator animator;
+        [SerializeField] SpriteRenderer head;
+        [SerializeField] SpriteRenderer jaw;
+        [SerializeField] List<Sprite> HeadSprites;
+        [SerializeField] List<Sprite> JawSprites;
+
+        EntityMainController playerMainController;
+
+        private void Start()
+        {
+            var behaviours = animator.GetBehaviours<EntityAnimationControllerSetState>();
+            foreach (var behaviour in behaviours)
+                behaviour.Init(this);
+        }
+
+        public void Init(EntityMainController playerMainController) => this.playerMainController = playerMainController;
+
+        [Button]
+        public void SetState(State state, float delay = 0)
+        {
+            StopAllCoroutines();
+            StartCoroutine(_SetState(state, delay));
+        }
+
+        IEnumerator _SetState(State state, float delay = 0)
+        {
+            if (CurrentState.Value == state)
+                yield break;
+
+            yield return new WaitForSeconds(delay);
+
+            animator.SetInteger("State", (int)state);
+            CurrentState.Value = state;
+        }
+
+        public void OnAnimationStateEnter(State state)
+        {
+            switch (state)
+            {
+                case State.AttackDone:
+                    SetState(State.AttackDone);
+                    break;
+            }
+        }
+
+        public void OnAnimationStateUpdate(State state) { }
+
+        public void OnAnimationStateExit(State state)
+        {
+            switch(state)
+            {
+                case State.AttackDone:
+                    SetState(State.Idle);
+                    break;
+            }
+        }
+
+        public void SetHead(int index)
+        {
+            if (head && index < HeadSprites.Count)
+                head.sprite = HeadSprites[index];
+
+            if (jaw && index < JawSprites.Count)
+                jaw.sprite = JawSprites[index];
+        }
+    }
+}

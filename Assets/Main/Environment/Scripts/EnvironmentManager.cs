@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace PawHunters
@@ -7,20 +10,27 @@ namespace PawHunters
     {
         public static EnvironmentManager Instance { get; private set; }
 
-        [SerializeField] Vector3 characterOffset = Vector3.right;
-        [SerializeField] float speed = 10f;
-        [SerializeField] EnvironmentItem environmentItem;
+        public enum State { Idle, Walking, Running }
 
+        [Serializable]
+        public class StateSpeed
+        {
+            public State state;
+            public float speed;
+        }
+
+        [SerializeField] EnvironmentItem environmentItem;
+        [SerializeField] List<StateSpeed> stateSpeedList = new();
+        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
+        public event Action OnMove;
+
+        public float Speed => stateSpeedList.FirstOrDefault(x => CurrentState.Value == x.state)?.speed ?? 0;
         public int GroundOrderInLayer => environmentItem.GroundOrderInLayer;
         public Vector3 GroundTopCenterPosition => environmentItem.GroundTopCenterPosition;
         public Vector3 GroundMiddleCenterPosition => environmentItem.GroundMiddleCenterPosition;
         public Vector3 GroundMiddleLeftPosition => environmentItem.GroundMiddleLeftPosition;
         public Vector3 GroundMiddleRightPosition => environmentItem.GroundMiddleRightPosition;
         public Vector3 GroundBottomCenterPosition => environmentItem.GroundBottomCenterPosition;
-
-        public event Action<Vector3> OnMoveCamera;
-
-        public Vector3 InitialCharacterPosition => GroundMiddleLeftPosition + characterOffset;
 
         public static class GroundBoundingBox
         {
@@ -30,19 +40,35 @@ namespace PawHunters
             public static float Bottom => Instance.GroundBottomCenterPosition.y;
         }
 
-        private void Awake() => Instance = this;
-        private void Start() => Init();
+        void Awake() => Instance = this;
+
+        [Button]
+        public void SetState(State state) => CurrentState.Value = state;
         public void Init()
         {
+            environmentItem.Init();
+            SetState(State.Walking);
         }
 
-        private void Update() => MoveCamera();
-
-        public void MoveCamera()
+        void Update() => Move();
+        void Move()
         {
-            var movement = Vector3.right * speed * Time.deltaTime;
+            var speed = Speed;
+            if (speed == 0)
+                return;
+            var movement = speed * Time.deltaTime * Vector3.right;
+            if (CurrentState.Value == State.Running && TeamManager_GameEnemy.Instance.IsAlive)
+            {
+                var targetPositionX = TeamManager_GameEnemy.Instance.SpawnParent.position.x + TeamManager_GamePlayer.Instance.offset.x;
+                if (targetPositionX - Camera.main.transform.position.x < movement.x)
+                {
+                    movement = (targetPositionX - Camera.main.transform.position.x) * Vector3.right;
+                    CurrentState.Value = State.Idle;
+                }
+            }
+
             Camera.main.transform.Translate(movement);
-            OnMoveCamera?.Invoke(movement);
+            OnMove?.Invoke();
         }
     }
 }

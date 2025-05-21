@@ -3,21 +3,26 @@ using UnityEngine;
 
 namespace PawHunters
 {
-    public class StateController<State> : MonoBehaviour where State : Enum
+    [Serializable]
+    public class StateController<State> where State : Enum
     {
-        [SerializeField] State currentState;
-        public State CurrentState
+        [SerializeField] State value;
+        public State Value
         {
-            get => currentState;
-            protected set
+            get => value;
+            set
             {
-                if (currentState.ToString() == value.ToString())
+                if (this.value.ToString() == value.ToString())
                     return;
-                currentState = value;
-                OnStateUpdate?.Invoke(currentState);
+                this.value = value;
+                OnStateUpdate?.Invoke(this.value);
             }
         }
 
         public event Action<State> OnStateUpdate;
+        public void OnStateUpdateClear() => OnStateUpdate = null;
+
+        public StateController() { }
+        public StateController(State value) => this.value = value;
     }
 }

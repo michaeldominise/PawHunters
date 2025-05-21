@@ -16,7 +16,7 @@ namespace PawHunters
         public void StartGame()
         {
             var success = int.TryParse(numberOfPlayers.text, out int spawnCount);
-            PlayerSpawner.Instance.StartGame(success && spawnCount > 0 ? spawnCount : 1);
+            //PlayerSpawner.Instance.StartGame(success && spawnCount > 0 ? spawnCount : 1);
             Show(false);
         }
     }

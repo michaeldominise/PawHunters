@@ -13,7 +13,7 @@ namespace PawHunters
         [SerializeField] ParticleSystem particle;
         [SerializeField] LayerMask playerLayer;
 
-        public BulletData BulletData => source.CharacterData.inGameObjects.weaponData.inGameObjects.bulletData;
+        public BulletData BulletData;
 
         BulletData.Attribute Attribute => BulletData.attribute;
         Transform SpawnPoint => source.EntitySkillsController.SpawnPoint;

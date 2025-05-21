@@ -12,31 +12,11 @@ namespace PawHunters
             public float startValue;
             public float endValue;
             public float duration;
-            public AnimationCurve animationCurve;
+            public float progress;
+            public AnimationCurve animationCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
-            float currentValue;
-            public float CurrentValue
-            {
-                get => currentValue;
-                set
-                {
-                    currentValue = value;
-                    progress = value / endValue;
-                }
-            }
-
-            float progress;
-            public float Progress
-            {
-                get => progress;
-                set
-                {
-                    progress = value;
-                    currentValue = Mathf.Lerp(startValue, endValue, value);
-                }
-            }
-
-            public bool IsDone => startValue == endValue;
+            public float CurrentValue => Mathf.Lerp(startValue, endValue, progress);
+            public bool IsDone => progress == 1;
 
             public Status(float startValue, float endValue, float duration, AnimationCurve animationCurve)
             {
@@ -63,12 +43,12 @@ namespace PawHunters
         {
             while (status.startTime + status.duration > Time.time)
             {
-                status.Progress = status.animationCurve.Evaluate((Time.time - status.startTime) / status.duration);
+                status.progress = status.animationCurve.Evaluate((Time.time - status.startTime) / status.duration);
                 onUpdate?.Invoke(status);
                 yield return null;
             }
 
-            status.Progress = 1;
+            status.progress = 1;
             onUpdate?.Invoke(status);
         }
     }

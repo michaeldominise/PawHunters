@@ -231,7 +231,6 @@ GameObject:
   - component: {fileID: 4111692128740468907}
   - component: {fileID: 5458500271463625463}
   - component: {fileID: 1678612865106565805}
-  - component: {fileID: 1046478864840223766}
   m_Layer: 0
   m_Name: BlackCat
   m_TagString: Untagged
@@ -355,15 +354,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaaef9088dda44fd790948583df403f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
-  characterData: {fileID: 0}
+  teamManager: {fileID: 0}
+  characterData:
+    attribute:
+      maxHealth: 100
+      movementSpeed: 1
+      randomPathRange: 5
+      rotateSpeed: 1
+      attackCooldown: {x: 0.5, y: 3}
+      aggressiveValue: 0.5
   model: {fileID: 7382414992683298494}
   worldUIPoint: {fileID: 1379937909889951032}
   layerManager: {fileID: 3996665792535199064}
   entitySkillsController: {fileID: 4111692128740468907}
   entityHealthController: {fileID: 5458500271463625463}
   entityMovementController: {fileID: 1678612865106565805}
-  entityAnimationController: {fileID: 1046478864840223766}
+  entityAnimationController: {fileID: 4782495482079277387}
 --- !u!114 &4111692128740468907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,7 +383,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 1561862648249497568}
-  currentState: 0
 --- !u!114 &5458500271463625463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bbe7bc0102f49089cc1147e875a8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   currentHealth: 0
 --- !u!114 &1678612865106565805
 MonoBehaviour:
@@ -404,28 +408,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87328c8f0ca444c509c303d17e8e32ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
---- !u!114 &1046478864840223766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2764976406971579630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed59daddbc1b44dfe905f4e87898e006, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  animator: {fileID: 4185019879900310937}
-  Head: {fileID: 1950112669454547807}
-  Jaw: {fileID: 0}
-  HeadSprites:
-  - {fileID: -1828946549344447192, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
-  - {fileID: -7252215782646672311, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
-  - {fileID: -1381065623766834176, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
-  JawSprites: []
 --- !u!1 &2911963365007586375
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +725,7 @@ Transform:
   m_GameObject: {fileID: 3431128317874158329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.61, z: 0}
+  m_LocalPosition: {x: 0, y: -0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -759,6 +741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7382414992683298494}
   - component: {fileID: 4185019879900310937}
+  - component: {fileID: 4782495482079277387}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -805,6 +788,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4782495482079277387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5251403640720427370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed59daddbc1b44dfe905f4e87898e006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4185019879900310937}
+  head: {fileID: 1950112669454547807}
+  jaw: {fileID: 0}
+  HeadSprites:
+  - {fileID: -1828946549344447192, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
+  - {fileID: -7252215782646672311, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
+  - {fileID: -1381065623766834176, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
+  JawSprites: []
 --- !u!1 &6030882830843013028
 GameObject:
   m_ObjectHideFlags: 0

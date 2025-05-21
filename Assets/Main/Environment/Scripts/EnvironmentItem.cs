@@ -20,8 +20,6 @@ namespace PawHunters
         public Vector3 GroundMiddleRightPosition => groundMiddleRight.position;
         public Vector3 GroundBottomCenterPosition => groundBottomCenter.position;
 
-        private void Start() => Init();
-
         [Button]
         public void Init()
         {
