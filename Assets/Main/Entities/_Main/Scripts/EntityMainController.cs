@@ -35,8 +35,7 @@ namespace PawHunters
         public void Init(TeamManager teamManager, SaveableCharacterData characterData)
         {
             this.teamManager = teamManager;
-            this.characterData = characterData;
-            characterData.RegisterOnValueChange(Refresh);
+            SaveableData.Initialize(ref this.characterData, characterData, Refresh);
 
             RegisterListener();
 

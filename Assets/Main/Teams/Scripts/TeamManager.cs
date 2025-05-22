@@ -19,9 +19,7 @@ namespace PawHunters
         public void Init(SaveableTeamData teamData)
         {
             Clear();
-            this.teamData?.UnregisterOnValueChange(Refresh);
-            this.teamData = teamData;
-            teamData.RegisterOnValueChange(Refresh);
+            SaveableData.Initialize(ref this.teamData, teamData, Refresh);
 
             for (var x = 0; x < teamData.characters.Count; x++)
                 Spawn(prefab, init: entity => EntityInit(x, entity, teamData.characters[x]));

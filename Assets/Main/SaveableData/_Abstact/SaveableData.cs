@@ -34,5 +34,13 @@ namespace PawHunters
                 return;
             OnExecuteUpdateList.Add(OnValueChangeMethod);
         }
+
+        public static T Initialize<T>(ref T oldData, T newData, Action onValueChange) where T : SaveableData
+        {
+            oldData?.UnregisterOnValueChange(onValueChange);
+            newData?.RegisterOnValueChange(onValueChange);
+            oldData = newData;
+            return newData;
+        }
     }
 }
