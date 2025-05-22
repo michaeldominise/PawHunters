@@ -14,8 +14,6 @@ namespace PawHunters
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
         [SerializeField] Transform spawnPoint;
 
-        public event Action<State> OnStateUpdate;
-
         public Transform SpawnPoint => spawnPoint;
 
         EntityMainController playerMainController;

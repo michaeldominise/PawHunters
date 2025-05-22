@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParent: {fileID: 2260869497902021793}
-  spawnedlist: []
+  spawnedList: []
   teamData:
     teamName: 
     characters: []
@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 8134222878837761947}
   - {fileID: 6126343527379344836}
   - {fileID: 403047677833993757}
-  offset: {x: 10, y: 0, z: 1}
+  offset: {x: 5, y: 0, z: 1}
 --- !u!1 &2200218932746502470
 GameObject:
   m_ObjectHideFlags: 0

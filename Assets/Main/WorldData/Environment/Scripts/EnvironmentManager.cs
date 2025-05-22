@@ -19,6 +19,7 @@ namespace PawHunters
             public float speed;
         }
 
+        [SerializeField] Transform cameraTransform;
         [SerializeField] EnvironmentItem environmentItem;
         [SerializeField] List<StateSpeed> stateSpeedList = new();
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
@@ -44,9 +45,11 @@ namespace PawHunters
 
         [Button]
         public void SetState(State state) => CurrentState.Value = state;
-        public void Init()
+        public void Init(EnvironmentItem environmentItem)
         {
-            environmentItem.Init();
+            this.environmentItem = Instantiate(environmentItem, cameraTransform);
+            this.environmentItem.transform.localPosition = Vector3.forward * 10;
+            this.environmentItem.Init();
             SetState(State.Walking);
         }
 
@@ -60,14 +63,14 @@ namespace PawHunters
             if (CurrentState.Value == State.Running && TeamManager_GameEnemy.Instance.IsAlive)
             {
                 var targetPositionX = TeamManager_GameEnemy.Instance.SpawnParent.position.x + TeamManager_GamePlayer.Instance.offset.x;
-                if (targetPositionX - Camera.main.transform.position.x < movement.x)
+                if (targetPositionX - cameraTransform.position.x < movement.x)
                 {
-                    movement = (targetPositionX - Camera.main.transform.position.x) * Vector3.right;
+                    movement = (targetPositionX - cameraTransform.position.x) * Vector3.right;
                     CurrentState.Value = State.Idle;
                 }
             }
 
-            Camera.main.transform.Translate(movement);
+            cameraTransform.Translate(movement);
             OnMove?.Invoke();
         }
     }

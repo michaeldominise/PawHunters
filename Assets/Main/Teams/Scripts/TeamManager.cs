@@ -11,9 +11,8 @@ namespace PawHunters
         [SerializeField] EntityMainController prefab;
         [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
 
-        public bool IsAlive => spawnedList.FirstOrDefault(x => x.CurrentState.Value != EntityMainController.State.Dead) != null;
         public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.CurrentState.Value != EntityMainController.State.Dead)?.Select(x => x.entityMainController).ToList();
-
+        public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.CurrentState.Value != EntityMainController.State.Dead) != null;
 
         void Refresh() => Init(teamData);
         public void Init(SaveableTeamData teamData)
@@ -38,7 +37,7 @@ namespace PawHunters
             if (entity.CurrentState.Value != EntityMainController.State.Dead)
                 return;
 
-            entity.transform.parent = transform;
+            entity.transform.SetParent(transform);
             teamManger_EntityParents.FirstOrDefault(x => x.entityMainController == entity).Init(null);
         }
 
@@ -56,7 +55,7 @@ namespace PawHunters
 
         public override void Clear()
         {
-            spawnedList.ForEach(x => x.transform.parent = transform);
+            spawnedList.ForEach(x => x.transform.SetParent(transform));
             base.Clear();
         }
     }

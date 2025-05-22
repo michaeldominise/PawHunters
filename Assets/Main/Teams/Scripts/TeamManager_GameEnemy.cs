@@ -27,7 +27,7 @@ namespace PawHunters
 
             base.CurrentState_OnStateUpdate(entity);
             if (!IsAlive)
-                EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
+                SceneGameManager_Hunt.Instance.NextJourney();
         }
     }
 }

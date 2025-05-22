@@ -19,6 +19,7 @@ namespace PawHunters
             public float aggressiveValue = 0.5f;
         }
 
+        public string masterID;
         public Attribute attribute;
     }
 }

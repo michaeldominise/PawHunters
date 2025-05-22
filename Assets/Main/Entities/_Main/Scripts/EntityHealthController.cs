@@ -38,6 +38,11 @@ namespace PawHunters
             OnHealthUpdate?.Invoke();
             CurrentState.Value = currentHealth > 0 ? State.Alive : State.Dead;
         }
+
+        [Button]
         public void DoDamage(int value) => AddHealth(-value);
+
+        [Button]
+        public void Kill() => AddHealth(-currentHealth);
     }
 }

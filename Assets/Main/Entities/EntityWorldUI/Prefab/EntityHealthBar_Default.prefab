@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 5924196083419480386}
   - component: {fileID: 5621727315464976385}
   m_Layer: 5
-  m_Name: EntityWorldUI_Default
+  m_Name: EntityHealthBar_Default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
     m_ColorSpace: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
-  updateDuration: 1
+  updateDuration: 0.5
   animationCurve:
     serializedVersion: 2
     m_Curve:

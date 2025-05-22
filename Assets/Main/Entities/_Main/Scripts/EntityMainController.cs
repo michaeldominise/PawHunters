@@ -11,7 +11,7 @@ namespace PawHunters
     {
         public enum State { None, Walking, Running, Attacking, Hit, Dead }
 
-        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.Dead);
+        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.None);
         [SerializeField] TeamManager teamManager;
         [SerializeField] SaveableCharacterData characterData;
         [SerializeField] Transform model;
@@ -49,7 +49,7 @@ namespace PawHunters
 
             layerManager.SetSortingGroupOrder(EnvironmentManager.Instance.GroundOrderInLayer);
 
-            SetToIdle();
+            CheckState();
         }
 
         private void RegisterListener()
