@@ -11,9 +11,9 @@ namespace PawHunters
     {
         public enum State { None, Walking, Running, Attacking, Hit, Dead }
 
-        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.None);
-        [SerializeField] TeamManager teamManager;
         [SerializeField] SaveableCharacterData characterData;
+        [SerializeField] Sprite avatarSprite;
+        [SerializeField] TeamManager teamManager;
         [SerializeField] Transform model;
         [SerializeField] Transform worldUIPoint;
         [SerializeField] LayerManager layerManager;
@@ -21,31 +21,40 @@ namespace PawHunters
         [SerializeField] EntityHealthController entityHealthController;
         [SerializeField] EntityMovementController entityMovementController;
         [SerializeField] EntityAnimationController entityAnimationController;
+        [SerializeField] EntityStatusEffectController entityStatusEffectController;
+        [SerializeField] BattleAttributes battleAttributes;
+        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.None);
 
+        public Sprite AvatarSprite => avatarSprite;
         public SaveableCharacterData CharacterData => characterData;
+        public BattleAttributes BattleAttributes => battleAttributes;
         public Transform Model => model;
         public Transform WorldUIPoint => worldUIPoint;
         public EntitySkillsController EntitySkillsController => entitySkillsController;
         public EntityHealthController EntityHealthController => entityHealthController;
         public EntityMovementController EntityMovementController => entityMovementController;
         public EntityAnimationController EntityAnimationController => entityAnimationController;
-        TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
+        public EntityStatusEffectController EntityStatusEffectController => entityStatusEffectController;
+        public TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
+        public bool IsAlive => CurrentState.Value != State.Dead;
+
 
         void Refresh() => Init(teamManager, characterData);
         public void Init(TeamManager teamManager, SaveableCharacterData characterData)
         {
             this.teamManager = teamManager;
             SaveableData.Initialize(ref this.characterData, characterData, Refresh);
-
+            battleAttributes.Init(characterData.attribute);
             RegisterListener();
 
             gameObject.SetActive(true);
             //gameObject.name = $"{gameObject.name.TrimEnd(':')}:{characterData.name}";
 
-            entityMovementController.Init(this);
             entitySkillsController.Init(this);
             entityHealthController.Init(this);
+            entityMovementController.Init(this);
             entityAnimationController.Init(this);
+            EntityStatusEffectController.Init(this);
 
             layerManager.SetSortingGroupOrder(EnvironmentManager.Instance.GroundOrderInLayer);
 
@@ -54,24 +63,17 @@ namespace PawHunters
 
         private void RegisterListener()
         {
-            entityMovementController.CurrentState.OnStateUpdateClear();
-            entitySkillsController.CurrentState.OnStateUpdateClear();
-            entityHealthController.CurrentState.OnStateUpdateClear();
-            entityHealthController.CurrentState.OnStateUpdateClear();
+            CurrentState.ClearListeners();
+            entitySkillsController.CurrentState.ClearListeners();
+            entityHealthController.CurrentState.ClearListeners();
 
-            entityMovementController.CurrentState.OnStateUpdate += state => CheckState();
-            entitySkillsController.CurrentState.OnStateUpdate += state => CheckState();
-            entityHealthController.CurrentState.OnStateUpdate += state => CheckState();
-            entityHealthController.CurrentState.OnStateUpdate += state => CheckState();
+            entitySkillsController.CurrentState.RegisterListener(CheckState);
+            entityHealthController.CurrentState.RegisterListener(CheckState);
 
             if (TeamManager_GamePlayer)
-            {
-                EnvironmentManager.Instance.CurrentState.OnStateUpdate -= TeamManager_Game_OnStateUpdate;
-                EnvironmentManager.Instance.CurrentState.OnStateUpdate += TeamManager_Game_OnStateUpdate;
-            }
+                EnvironmentManager.Instance.CurrentState.RegisterListener(CheckState);
         }
 
-        void TeamManager_Game_OnStateUpdate(EnvironmentManager.State teamState) => CheckState();
         public void CheckState()
         {
             if (CurrentState.Value == State.Dead)
@@ -108,22 +110,15 @@ namespace PawHunters
                 default:
                     break;
             }
-            
         }
 
-        void SetToAttacking()
-        {
-            CurrentState.Value = State.Attacking;
-            EntityAnimationController.SetState(EntityAnimationController.State.Attacking);
-        }
+        void SetToAttacking() => CurrentState.Value = State.Attacking;
 
-        void SetToDead() => StartCoroutine(_SetToDead());
-        IEnumerator _SetToDead()
+        void SetToDead()
         {
             CurrentState.Value = State.Dead;
             EntityAnimationController.SetState(EntityAnimationController.State.Dead);
-            yield return new WaitForSeconds(2);
-            gameObject.SetActive(false);
+            EntityStatusEffectController.Clear();
         }
     }
 }

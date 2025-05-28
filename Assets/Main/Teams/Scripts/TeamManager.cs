@@ -11,8 +11,8 @@ namespace PawHunters
         [SerializeField] EntityMainController prefab;
         [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
 
-        public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.CurrentState.Value != EntityMainController.State.Dead)?.Select(x => x.entityMainController).ToList();
-        public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.CurrentState.Value != EntityMainController.State.Dead) != null;
+        public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.IsAlive)?.Select(x => x.entityMainController).ToList();
+        public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.IsAlive) != null;
 
         void Refresh() => Init(teamData);
         public void Init(SaveableTeamData teamData)
@@ -28,16 +28,16 @@ namespace PawHunters
         {
             entity.Init(this, saveableCharacterData);
             teamManger_EntityParents[index].Init(entity);
-            entity.EntityHealthController.CurrentState.OnStateUpdate += state => CurrentState_OnStateUpdate(entity);
+            entity.EntityHealthController.CurrentState.RegisterListener(state => CurrentState_OnStateUpdate(entity));
             return entity;
         }
 
         protected virtual void CurrentState_OnStateUpdate(EntityMainController entity)
         {
-            if (entity.CurrentState.Value != EntityMainController.State.Dead)
+            if (entity.IsAlive)
                 return;
 
-            entity.transform.SetParent(transform);
+            Despawn(entity, 2);
             teamManger_EntityParents.FirstOrDefault(x => x.entityMainController == entity).Init(null);
         }
 

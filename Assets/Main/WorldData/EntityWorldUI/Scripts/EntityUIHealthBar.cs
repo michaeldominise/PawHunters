@@ -3,29 +3,31 @@ using UnityEngine.UI;
 
 namespace PawHunters
 {
-    public class EntityHealthBar : MonoBehaviour
+    public class EntityUIHealthBar : MonoBehaviour
     {
-        [SerializeField] EntityWorldUI entityWorldUI;
+        [SerializeField] EntityUIWorld entityUIWorld;
         [SerializeField] Slider healthSlider;
         [SerializeField] Gradient healthColor;
         [SerializeField] float updateDuration = 1;
         [SerializeField] AnimationCurve animationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
         public float UpdateDuration => updateDuration;
-        EntityMainController EntityMainController => entityWorldUI.EntityMainController;
-        EntityHealthController PlayerHealthController => EntityMainController.EntityHealthController;
+        EntityMainController entityMainController;
         Coroutine updateHealthCoroutine;
 
-        public void Init()
+        public void Init(EntityMainController entityMainController)
         {
-            if (this.EntityMainController)
+            if (this.entityMainController)
             {
-                this.EntityMainController.EntityHealthController.OnHealthUpdate -= PlayerHealthController_OnHealthUpdate;
-                this.EntityMainController.CurrentState.OnStateUpdate -= PlayerMainController_OnStateUpdate;
+                this.entityMainController.BattleAttributes.maxHealth.OnUpdateValueVoid -= PlayerHealthController_OnHealthUpdate;
+                this.entityMainController.BattleAttributes.currentHealth.OnUpdateValueVoid -= PlayerHealthController_OnHealthUpdate;
+                this.entityMainController.CurrentState.UnregisterListener(PlayerMainController_OnStateUpdate);
             }
 
-            this.EntityMainController.EntityHealthController.OnHealthUpdate += PlayerHealthController_OnHealthUpdate;
-            this.EntityMainController.CurrentState.OnStateUpdate += PlayerMainController_OnStateUpdate;
+            this.entityMainController = entityMainController;
+            this.entityMainController.BattleAttributes.maxHealth.OnUpdateValueVoid += PlayerHealthController_OnHealthUpdate;
+            this.entityMainController.BattleAttributes.currentHealth.OnUpdateValueVoid += PlayerHealthController_OnHealthUpdate;
+            this.entityMainController.CurrentState.RegisterListener(PlayerMainController_OnStateUpdate);
 
             healthSlider.value = 0;
             updateHealthCoroutine = null;
@@ -35,7 +37,7 @@ namespace PawHunters
         private void PlayerMainController_OnStateUpdate(EntityMainController.State state)
         {
             if (state == EntityMainController.State.Dead)
-                entityWorldUI.Kill();
+                entityUIWorld.Kill();
         }
 
         void PlayerHealthController_OnHealthUpdate()
@@ -43,7 +45,7 @@ namespace PawHunters
             if (updateHealthCoroutine != null || !gameObject.activeInHierarchy)
                 return;
 
-            updateHealthCoroutine = GradualChangeValue.Execute(healthSlider.value, PlayerHealthController.HealthProgress, updateDuration,
+            updateHealthCoroutine = GradualChangeValue.Execute(healthSlider.value, entityMainController.BattleAttributes.HealthPercentage, updateDuration,
                 status =>
                 {
                     healthSlider.value = status.CurrentValue;

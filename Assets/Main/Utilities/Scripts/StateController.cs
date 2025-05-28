@@ -16,13 +16,46 @@ namespace PawHunters
                     return;
                 this.value = value;
                 OnStateUpdate?.Invoke(this.value);
+                OnStateUpdateVoid?.Invoke();
             }
         }
 
-        public event Action<State> OnStateUpdate;
-        public void OnStateUpdateClear() => OnStateUpdate = null;
+        event Action<State> OnStateUpdate;
+        event Action OnStateUpdateVoid;
+
+        public void ClearListeners()
+        {
+            OnStateUpdateVoid = null;
+            OnStateUpdate = null;
+        }
 
         public StateController() { }
         public StateController(State value) => this.value = value;
+
+        public StateController<State> RegisterListener(Action<State> onValueChange)
+        {
+            OnStateUpdate -= onValueChange;
+            OnStateUpdate += onValueChange;
+            return this;
+        }
+
+        public StateController<State> RegisterListener(Action onValueChange)
+        {
+            OnStateUpdateVoid -= onValueChange;
+            OnStateUpdateVoid += onValueChange;
+            return this;
+        }
+
+        public StateController<State> UnregisterListener(Action<State> onValueChange)
+        {
+            OnStateUpdate -= onValueChange;
+            return this;
+        }
+
+        public StateController<State> UnregisterListener(Action onValueChange)
+        {
+            OnStateUpdateVoid -= onValueChange;
+            return this;
+        }
     }
 }

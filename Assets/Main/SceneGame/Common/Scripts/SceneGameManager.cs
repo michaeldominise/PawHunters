@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,6 +14,8 @@ namespace PawHunters
         [SerializeField] SaveableTeamData teamData;
         [ShowInInspector, ReadOnly] public int CurrentJourney { get; private set; } = -1;
 
+        public LevelData LevelData => levelData;
+
         private void Awake() => Instance = this;
         protected virtual IEnumerator Start()
         {
@@ -22,13 +26,27 @@ namespace PawHunters
         }
 
         [Button]
-        public virtual void NextJourney()
+        public async virtual void NextJourney()
         {
+            await Task.Delay(500);
             if (TeamManager_GameEnemy.Instance.IsAlive)
                 TeamManager_GameEnemy.Instance.Kill();
             EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
             CurrentJourney++;
-            levelData.journeys[CurrentJourney].Init();
+            if (levelData.journeys.Count == CurrentJourney)
+                JourneyComplete();
+            else
+                levelData.journeys[CurrentJourney].Init();
+        }
+
+        [Button]
+        public virtual void JourneyFailed()
+        {
+        }
+
+        [Button]
+        public virtual void JourneyComplete()
+        {
         }
     }
 }

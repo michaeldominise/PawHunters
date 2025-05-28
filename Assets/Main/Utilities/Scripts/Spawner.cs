@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -35,9 +36,17 @@ namespace PawHunters
             return item;
         }
 
+        public void Despawn(T1 spawnedItem, float setInactiveDelay = 0) => StartCoroutine(_Despawn(spawnedItem, setInactiveDelay));
+        IEnumerator _Despawn(T1 spawnedItem, float setInactiveDelay)
+        {
+            spawnedItem.transform.SetParent(transform);
+            yield return new WaitForSeconds(setInactiveDelay);
+            spawnedItem.gameObject.SetActive(false);
+        }
+
         public virtual void Clear() => spawnedList.ForEach(x =>
         {
-            x.transform.parent = spawnParent;
+            x.transform.SetParent(spawnParent);
             x.gameObject.SetActive(false);
         });
     }

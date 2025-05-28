@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,68 +11,34 @@ namespace PawHunters
 {
     public class EntitySkillsController : MonoBehaviour
     {
-        public enum State { None, Attacking, AttackDone, Cooldown }
+        public enum State { None, Attacking, AttackDone }
 
+        [SerializeField] List<SkillData> skillList;
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
-        [SerializeField] Transform spawnPoint;
 
-        public Transform SpawnPoint => spawnPoint;
-
-        EntityMainController playerMainController;
-        Coroutine atttackCoroutine;
-        SaveableCharacterData CharacterData => playerMainController.CharacterData;
+        EntityMainController entityMainController;
 
         public void Init(EntityMainController playerMainController)
         {
             CurrentState.Value = State.None;
-            this.playerMainController = playerMainController;
-            StartCoroutine(CheckEnemies());
+            this.entityMainController = playerMainController;
         }
 
-        IEnumerator CheckEnemies()
+        public async Task Execute()
         {
-            yield return new WaitForSeconds(Random.value * 3);
-            while(true)
-            {
-                if (playerMainController.CurrentState.Value == EntityMainController.State.Dead)
-                    break;
+            if (!entityMainController.IsAlive)
+                return;
 
-                if (CurrentState.Value == State.AttackDone)
-                    yield return StartCooldown();
-                RefreshTarget();
-                yield return null;
-            }
-        }
-
-        void RefreshTarget()
-        {
-            
-        }
-
-        void StartAttack()
-        {
-            if(atttackCoroutine == null)
-                atttackCoroutine = StartCoroutine(_StartAttack());
-        }
-
-        IEnumerator _StartAttack()
-        {
             CurrentState.Value = State.Attacking;
 
-            yield return null;
-            //yield return new WaitForSeconds(CharacterData.inGameObjects.weaponData.attribute.attackDelay);
-
-            //BulletSpawner.Instance.Spawn(playerMainController);
+            foreach (var skill in skillList)
+            {
+                await skill.Execute(entityMainController);
+                if (!entityMainController.IsAlive)
+                    return;
+            }
 
             CurrentState.Value = State.AttackDone;
-            atttackCoroutine = null;
-        }
-
-        IEnumerator StartCooldown()
-        {
-            CurrentState.Value = State.Cooldown;
-            yield return new WaitForSeconds(Random.Range(CharacterData.attribute.attackCooldown.x, CharacterData.attribute.attackCooldown.y));
-            CurrentState.Value = State.None;
         }
     }
 }

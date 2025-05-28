@@ -2,11 +2,11 @@
 
 namespace PawHunters
 {
-    public class EntityWorldUISpawner : Spawner<EntityWorldUI>
+    public class EntityUIWorldSpawner : Spawner<EntityUIWorld>
     {
-        public static EntityWorldUISpawner Instance { get; private set; }
+        public static EntityUIWorldSpawner Instance { get; private set; }
 
-        [SerializeField] EntityWorldUI prefab;
+        [SerializeField] EntityUIWorld prefab;
 
         private void OnEnable()
         {

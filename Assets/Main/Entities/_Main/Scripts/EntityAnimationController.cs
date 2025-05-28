@@ -8,8 +8,8 @@ namespace PawHunters
 {
     public class EntityAnimationController : MonoBehaviour
     {
-        public enum State { Idle, Walking, Running, Attacking, Hurt, AttackDone, Dead = 10 }
-
+        public enum State { Idle, Walking, Running, Attacking, Hurt, AttackDone = 9, Dead = 10 }
+         
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
         [SerializeField] Animator animator;
         [SerializeField] SpriteRenderer head;
@@ -50,6 +50,9 @@ namespace PawHunters
         {
             switch (state)
             {
+                case State.Idle:
+                    SetState(State.Idle);
+                    break;
                 case State.AttackDone:
                     SetState(State.AttackDone);
                     break;
@@ -58,15 +61,7 @@ namespace PawHunters
 
         public void OnAnimationStateUpdate(State state) { }
 
-        public void OnAnimationStateExit(State state)
-        {
-            switch(state)
-            {
-                case State.AttackDone:
-                    SetState(State.Idle);
-                    break;
-            }
-        }
+        public void OnAnimationStateExit(State state) { }
 
         public void SetHead(int index)
         {

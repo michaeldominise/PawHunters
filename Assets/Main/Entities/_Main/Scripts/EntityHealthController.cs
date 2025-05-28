@@ -9,40 +9,39 @@ namespace PawHunters
         public enum State { Alive, Dead }
 
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
-        [SerializeField] int currentHealth;
 
-        public int CurrentHealth => currentHealth;
-        public int MaxHealth => CharacterData.attribute.maxHealth;
-        public float HealthProgress => (float)CurrentHealth / CharacterData.attribute.maxHealth;
-
-        public event Action OnHealthUpdate;
-
-        EntityMainController playerMainController;
-        SaveableCharacterData CharacterData => playerMainController.CharacterData;
+        EntityMainController entityMainController;
+        BattleAttributes BattleAttributes => entityMainController.BattleAttributes;
 
         public void Init(EntityMainController playerMainController)
         {
             CurrentState.Value = State.Alive;
-            this.playerMainController = playerMainController;
-            currentHealth = 0;
-            AddHealth(MaxHealth);
+            this.entityMainController = playerMainController;
         }
 
         [Button]
-        public void AddHealth(int value)
+        public void AddHealth(float value, object obj = null)
         {
             if (CurrentState.Value == State.Dead)
                 return;
-
-            currentHealth = Mathf.Clamp(currentHealth + value, 0, CharacterData.attribute.maxHealth);
-            OnHealthUpdate?.Invoke();
-            CurrentState.Value = currentHealth > 0 ? State.Alive : State.Dead;
+            if (value < 0)
+                entityMainController.EntityAnimationController.SetState(EntityAnimationController.State.Hurt);
+            BattleAttributes.currentHealth.Update(value, obj, currentValue => Math.Clamp(value, -BattleAttributes.currentHealth.Value, BattleAttributes.maxHealth.Value - currentValue));
+            CurrentState.Value = BattleAttributes.currentHealth.Value > 0 ? State.Alive : State.Dead;
         }
 
         [Button]
-        public void DoDamage(int value) => AddHealth(-value);
+        public void AddMaxHealth(float value, object obj = null)
+        {
+            var healthPercentage = BattleAttributes.HealthPercentage;
+            BattleAttributes.maxHealth.Update(value, obj);
+            BattleAttributes.currentHealth.Update(BattleAttributes.maxHealth.Value * healthPercentage, obj);
+        }
 
         [Button]
-        public void Kill() => AddHealth(-currentHealth);
+        public void AddSheild(float value, object obj = null) => BattleAttributes.sheild.Update(value, obj, currentValue => Math.Max(value, -currentValue));
+
+        [Button]
+        public void Kill() => AddHealth(-BattleAttributes.currentHealth.Value);
     }
 }

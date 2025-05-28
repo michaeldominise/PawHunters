@@ -16,7 +16,7 @@ namespace PawHunters
         public BulletData BulletData;
 
         BulletData.Attribute Attribute => BulletData.attribute;
-        Transform SpawnPoint => source.EntitySkillsController.SpawnPoint;
+        Transform SpawnPoint;
         Vector3 bulletForwardForce => SpawnPoint.TransformPoint(0, Attribute.force.y, Attribute.force.x) - SpawnPoint.position;
 
         public void Init(EntityMainController entityMainController)
@@ -55,7 +55,7 @@ namespace PawHunters
             if (!target)
                 return;
 
-            target.EntityHealthController.DoDamage(BulletData.attribute.damage);
+            target.EntityHealthController.AddHealth(-BulletData.attribute.damage);
         }
 
         public IEnumerator AutoKill()

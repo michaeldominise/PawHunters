@@ -19,15 +19,5 @@ namespace PawHunters
             EnvironmentManager.Instance.SetState(EnvironmentManager.State.Running);
             Init(teamData);
         }
-
-        protected override void CurrentState_OnStateUpdate(EntityMainController entity)
-        {
-            if (entity.CurrentState.Value != EntityMainController.State.Dead)
-                return;
-
-            base.CurrentState_OnStateUpdate(entity);
-            if (!IsAlive)
-                SceneGameManager_Hunt.Instance.NextJourney();
-        }
     }
 }

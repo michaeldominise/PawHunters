@@ -7,6 +7,7 @@ namespace PawHunters
     public class LevelData : ScriptableObject
     {
         public EnvironmentItem environmentItem;
+        public int maxRound = -1;
         public List<JourneyData> journeys;
     }
 }
