@@ -14,16 +14,17 @@ namespace PawHunters
         [SerializeField] List<EntityUIPortrait> entityUIList;
 
         [ShowInInspector, ReadOnly] int CurrentRound { get; set; }
-        [ShowInInspector, ReadOnly] int MaxRound => SceneGameManager.Instance.LevelData.maxRound;
+
+        int MaxRound => SceneGameManager.Instance.LevelData.maxRound;
         TeamManager_GamePlayer TeamManager_GamePlayer => TeamManager_GamePlayer.Instance;
         TeamManager_GameEnemy TeamManager_GameEnemy => TeamManager_GameEnemy.Instance;
+
+        public event Action<int> OnRoundCountUpdate;
 
         private void Awake() => Instance = this;
 
         public void Execute()
         {
-            CurrentRound = 0;
-
             foreach (var entity in TeamManager_GamePlayer.AliveEntityList)
                 entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnPlayer(entity));
             foreach (var entity in TeamManager_GameEnemy.AliveEntityList)
@@ -34,8 +35,12 @@ namespace PawHunters
 
         async void StartRound()
         {
-            await Task.Delay(500);
+            await Task.Delay(250);
             CurrentRound++;
+            if (CheckEndBattle())
+                return;
+
+            RoundUIManager.Instance.UpdateUI(CurrentRound);
             RearrangeEntities();
 
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(StatusEffectData.TriggerType.StartRound);
@@ -68,7 +73,7 @@ namespace PawHunters
 
         bool CheckEndBattle()
         {
-            if (!TeamManager_GamePlayer.IsAlive)
+            if (!TeamManager_GamePlayer.IsAlive || CurrentRound == MaxRound)
                 SceneGameManager.Instance.JourneyFailed();
             else if (!TeamManager_GameEnemy.IsAlive)
                 SceneGameManager.Instance.NextJourney();
@@ -89,8 +94,10 @@ namespace PawHunters
 
         void Clear()
         {
-            EntityUIPortraitSpawner.Instance.Clear();
+            CurrentRound = 0;
             entityUIList.Clear();
+            RoundUIManager.Instance.UpdateUI(CurrentRound);
+            EntityUIPortraitSpawner.Instance.Clear();
         }
     }
 }

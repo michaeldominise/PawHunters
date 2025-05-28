@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level_GameHuntTest
   m_EditorClassIdentifier: 
   environmentItem: {fileID: 2825751399301525957, guid: 5683f05ea332b43d9ba295dcd0e9f2e4, type: 3}
+  maxRound: 30
   journeys:
   - {fileID: 11400000, guid: 0e835fa8a76024b35976f644b1e59f04, type: 2}
   - {fileID: 11400000, guid: 0e835fa8a76024b35976f644b1e59f04, type: 2}

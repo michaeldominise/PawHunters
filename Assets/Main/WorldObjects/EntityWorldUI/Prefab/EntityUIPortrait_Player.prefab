@@ -283,7 +283,7 @@ MonoBehaviour:
   scaleStates:
   - 0.8
   - 1
-  duration: 0.5
+  duration: 0.15
 --- !u!1 &6417218855801103808
 GameObject:
   m_ObjectHideFlags: 0

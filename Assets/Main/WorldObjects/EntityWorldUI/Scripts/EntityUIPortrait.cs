@@ -26,25 +26,30 @@ namespace PawHunters
                 return;
 
             gameObject.SetActive(true);
+
+            if(this.entityMainController)
+                this.entityMainController.CurrentState.UnregisterListener(CheckState);
+
             this.entityMainController = entityMainController;
             this.entityMainController.CurrentState.RegisterListener(CheckState);
 
             avatar.sprite = entityMainController.AvatarSprite;
-            SetState(State.Idle);
+            SetState(State.Idle, true);
+            CheckState();
         }
 
         [Button]
         public void CheckState()
         {
-            if (entityMainController.CurrentState.Value == EntityMainController.State.Attacking)
-                SetState(State.Attacking);
-            else if (entityMainController.CurrentState.Value == EntityMainController.State.Attacking)
+            if (entityMainController.CurrentState.Value != EntityMainController.State.Attacking)
+                SetState(State.Idle);
+            else
                 SetState(State.Attacking);
         }
 
-        public void SetState(State state)
+        public void SetState(State state, bool ingnoreCurrentState = false)
         {
-            if (this.CurrentState.Value == state)
+            if (!ingnoreCurrentState && this.CurrentState.Value == state)
                 return;
 
             CurrentState.Value = state;
