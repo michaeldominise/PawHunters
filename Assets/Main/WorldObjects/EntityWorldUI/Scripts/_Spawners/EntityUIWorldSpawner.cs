@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace PawHunters
 {
@@ -8,13 +9,14 @@ namespace PawHunters
 
         [SerializeField] EntityUIWorld prefab;
 
-        private void OnEnable()
+        private IEnumerator Start()
         {
+            yield return null;
             TeamManager_GamePlayer.Instance.OnSpawned += Spawn;
             TeamManager_GameEnemy.Instance.OnSpawned += Spawn;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             TeamManager_GamePlayer.Instance.OnSpawned -= Spawn;
             TeamManager_GameEnemy.Instance.OnSpawned -= Spawn;

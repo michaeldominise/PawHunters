@@ -9,9 +9,10 @@ namespace PawHunters
 {
     public class EntityMainController : MonoBehaviour
     {
-        public enum State { None, Walking, Running, Attacking, Hit, Dead }
+        public enum State { None, Walking, Running, Attacking, Dead }
 
         [SerializeField] SaveableCharacterData characterData;
+        [SerializeField] ElementType element;
         [SerializeField] Sprite avatarSprite;
         [SerializeField] TeamManager teamManager;
         [SerializeField] Transform model;
@@ -25,8 +26,9 @@ namespace PawHunters
         [SerializeField] BattleAttributes battleAttributes;
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.None);
 
-        public Sprite AvatarSprite => avatarSprite;
         public SaveableCharacterData CharacterData => characterData;
+        public ElementType Element => element;
+        public Sprite AvatarSprite => avatarSprite;
         public BattleAttributes BattleAttributes => battleAttributes;
         public Transform Model => model;
         public Transform WorldUIPoint => worldUIPoint;
@@ -48,7 +50,7 @@ namespace PawHunters
             RegisterListener();
 
             gameObject.SetActive(true);
-            //gameObject.name = $"{gameObject.name.TrimEnd(':')}:{characterData.name}";
+            gameObject.name = $"{gameObject.name.TrimEnd(':')}:{(TeamManager_GamePlayer ? "Player" : "Enemy")}";
 
             entitySkillsController.Init(this);
             entityHealthController.Init(this);

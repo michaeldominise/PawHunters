@@ -13,7 +13,7 @@ namespace PawHunters
 
         [SerializeField] List<EntityUIPortrait> entityUIList;
 
-        [ShowInInspector, ReadOnly] int CurrentRound { get; set; }
+        [ShowInInspector, ReadOnly] public int CurrentRound { get; set; }
 
         int MaxRound => SceneGameManager.Instance.LevelData.maxRound;
         TeamManager_GamePlayer TeamManager_GamePlayer => TeamManager_GamePlayer.Instance;
@@ -35,40 +35,44 @@ namespace PawHunters
 
         async void StartRound()
         {
-            await Task.Delay(250);
             CurrentRound++;
-            if (CheckEndBattle())
-                return;
 
             RoundUIManager.Instance.UpdateUI(CurrentRound);
             RearrangeEntities();
 
-            await GameActionTriggersManager.Instance.ExecuteOnTrigger(StatusEffectData.TriggerType.StartRound);
+            await Task.Delay(500);
+            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StartRound);
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.StartRound);
             if (CheckEndBattle())
                 return;
 
-            ExecuteSkills();
+            ExecuteInstantSkills();
         }
 
-        async void ExecuteSkills()
+        async void ExecuteInstantSkills()
         {
-            foreach (var entity in entityUIList)
-            {
-                await entity.EntityMainController.EntitySkillsController.Execute();
-                if (CheckEndBattle())
-                    return;
-            }
-
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.Instant);
             EndRound();
         }
 
         async void EndRound()
         {
-            await GameActionTriggersManager.Instance.ExecuteOnTrigger(StatusEffectData.TriggerType.EndRound);
+            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.EndRound);
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.EndRound);
             if (CheckEndBattle())
                 return;
 
             StartRound();
+        }
+
+        async Task ExecuteSkills(GameActionTriggersManager.TriggerType trigger)
+        {
+            foreach (var entity in entityUIList)
+            {
+                await entity.EntityMainController.EntitySkillsController.Execute(trigger);
+                if (CheckEndBattle())
+                    return;
+            }
         }
 
         bool CheckEndBattle()
@@ -88,8 +92,8 @@ namespace PawHunters
         void RearrangeEntities()
         {
             entityUIList = entityUIList.OrderBy(x => x.EntityMainController.BattleAttributes.speed.Value).ToList();
-            foreach (var entityUI in entityUIList)
-                entityUI.transform.SetAsLastSibling();
+            for (int i = 0; i < entityUIList.Count; i++)
+                entityUIList[i].SetOrder(i);
         }
 
         void Clear()

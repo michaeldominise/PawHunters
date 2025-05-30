@@ -7,37 +7,62 @@ namespace PawHunters
 {
     public class SkillTargetData : MonoBehaviour
     {
-        [System.Flags]
         public enum GroupType
         {
-            None,
+            All = (1 << 2) - 1,
             Allies = 1 << 0,
             Opponent = 1 << 1,
+            Caster = 1 << 2,
+            TriggerSource = 1 << 3,
+        }
+
+        public enum HealthStatusType
+        {
+            Alive = 1 << 0,
+            Dead = 1 << 1,
             All = (1 << 2) - 1,
         }
+
         public enum GroupOrderType { Accending, Decending, Middle, Random }
 
         [SerializeField] List<StatusEffectData> statusEffects;
-        [SerializeField] GroupType targetGroupType;
+        [SerializeField] GroupType targetGroupType = GroupType.Allies;
         [SerializeField] GroupOrderType groupOrderType;
+        [SerializeField] HealthStatusType healthStatusType = HealthStatusType.Alive;
         [SerializeField] int targetCount = 1;
+        [SerializeField] List<SkillCustomCondition> customConditions;
 
-        public async Task Execute(EntityMainController caster)
+        public async Task Execute(EntityMainController caster, StatusEffectDataHandler triggerSource = null)
         {
-            var targets = GetTargetEntities(caster);
+            var targets = GetTargetEntities(caster, triggerSource);
             foreach (var target in targets)
-                foreach(var statusEffect in statusEffects)
+                foreach (var statusEffect in statusEffects)
                     await target.EntityStatusEffectController.ApplyStatusEffect(statusEffect, caster);
         }
 
-        List<EntityMainController> GetTargetEntities(EntityMainController caster)
+        public List<EntityMainController> GetTargetEntities(EntityMainController caster, StatusEffectDataHandler triggerSource = null)
         {
             var targetGroup = new List<EntityMainController>();
 
             if (targetGroupType.HasFlag(GroupType.Allies))
-                targetGroup.AddRange(caster.TeamManager_GamePlayer ? TeamManager_GamePlayer.Instance.AliveEntityList : TeamManager_GameEnemy.Instance.AliveEntityList);
+                targetGroup.AddRange(caster.TeamManager_GamePlayer ? TeamManager_GamePlayer.Instance.EntityList : TeamManager_GameEnemy.Instance.EntityList);
             if (targetGroupType.HasFlag(GroupType.Opponent))
-                targetGroup.AddRange(caster.TeamManager_GamePlayer ? TeamManager_GameEnemy.Instance.AliveEntityList : TeamManager_GamePlayer.Instance.AliveEntityList);
+                targetGroup.AddRange(caster.TeamManager_GamePlayer ? TeamManager_GameEnemy.Instance.EntityList : TeamManager_GamePlayer.Instance.EntityList);
+            if (targetGroupType.HasFlag(GroupType.TriggerSource) && triggerSource != null)
+                targetGroup.Add(triggerSource.caster);
+            if (targetGroupType.HasFlag(GroupType.Caster))
+                targetGroup.Add(caster);
+
+            targetGroup = targetGroup.Where(x =>
+                {
+                    if (healthStatusType == HealthStatusType.Alive && !x.IsAlive)
+                        return false;
+                    else if (healthStatusType == HealthStatusType.Dead && x.IsAlive)
+                        return false;
+                    if (customConditions.FirstOrDefault(condition => !condition.IsVaild(caster, x)))
+                        return false;
+                    return true;
+                }).ToList();
 
             if (targetGroup.Count == 0)
                 return targetGroup;

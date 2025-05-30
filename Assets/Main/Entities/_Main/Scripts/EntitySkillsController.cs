@@ -18,13 +18,13 @@ namespace PawHunters
 
         EntityMainController entityMainController;
 
-        public void Init(EntityMainController playerMainController)
+        public void Init(EntityMainController entityMainController)
         {
             CurrentState.Value = State.None;
-            this.entityMainController = playerMainController;
+            this.entityMainController = entityMainController;
         }
 
-        public async Task Execute()
+        public async Task Execute(GameActionTriggersManager.TriggerType trigger, object srouceTrigger = null)
         {
             if (!entityMainController.IsAlive)
                 return;
@@ -33,7 +33,7 @@ namespace PawHunters
 
             foreach (var skill in skillList)
             {
-                await skill.Execute(entityMainController);
+                await skill.Execute(trigger, entityMainController, srouceTrigger);
                 if (!entityMainController.IsAlive)
                     return;
             }

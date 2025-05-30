@@ -10,36 +10,21 @@ namespace PawHunters
     public abstract class StatusEffectData : MonoBehaviour
     {
         public enum ModifierType { Add, Subtract }
-        public enum ExecuteTargetType { Target, Caster, TriggerSource }
         public enum ExpireActionType { None, RevertStatusEffects }
-
-        [System.Flags] public enum TriggerType
-        {
-            Instant = 0,
-            StartRound = 1 << 1,
-            EndRound = 1 << 2,
-            WhenAttacked = 1 << 3,
-            WhenAttacking = 1 << 4,
-        }
 
         [System.Serializable]
         public class AttributeModifiers
         {
             public enum ModifierType { Add, Subtract, Divide, Multiply }
-            public enum SourceType { Caster, Target, TriggerSource }
+            public enum SourceType { Target, Caster }
 
-            [SerializeField] SourceType sourceType;
             [SerializeField] SkillAttributeData.AttributeType attributeData;
             [SerializeField] ModifierType modifierType;
+            [SerializeField] SourceType sourceType;
 
-            public float GetValue(float referenceValue, EntityMainController caster, EntityMainController target, EntityMainController triggerSource)
+            public float GetValue(float referenceValue, EntityMainController caster, EntityMainController target)
             {
-                var getValueTarget = sourceType switch
-                {
-                    SourceType.Target => target,
-                    SourceType.TriggerSource => triggerSource,
-                    _ => caster
-                };
+                var getValueTarget = sourceType == SourceType.Caster ? caster : target;
                 var attributeValue = attributeData.GetValue(getValueTarget);
                 return modifierType switch
                 {
@@ -51,52 +36,63 @@ namespace PawHunters
             }
         }
 
-        [SerializeField, TextArea] string description;
-        [SerializeField] Sprite icon;
-        [SerializeField] float baseValue;
-        [SerializeField, TableList] List<AttributeModifiers> attributeModifiers;
-        [SerializeField] ModifierType modifierType;
-        [SerializeField] int expirationCount = 0;
-        [SerializeField] TriggerType executeTrigger;
-        [SerializeField] TriggerType expirationTrigger;
-        [SerializeField] ExpireActionType expireAction;
-        [SerializeField] ExecuteTargetType executeTo;
-        [SerializeField] bool refreshValueOnExecute;
-        [SerializeField] bool runToTargetBeforeCast;
+        [SerializeField, FoldoutGroup("Basic")] string title;
+        [SerializeField, FoldoutGroup("Basic"), TextArea] string description;
+        [SerializeField, FoldoutGroup("Basic")] Sprite icon;
+        [SerializeField, FoldoutGroup("Basic")] ElementType elementType;
+        [SerializeField, FoldoutGroup("Basic")] StatusEffectTags tags;
 
+        [SerializeField, FoldoutGroup("Value and Computation")] float baseValue;
+        [SerializeField, FoldoutGroup("Value and Computation")] ModifierType modifierType;
+        [SerializeField, FoldoutGroup("Value and Computation"), TableList] List<AttributeModifiers> attributeModifiers;
+
+        [SerializeField, FoldoutGroup("Execution")] GameActionTriggersManager.TriggerType executeTrigger = GameActionTriggersManager.TriggerType.Instant;
+        [SerializeField, FoldoutGroup("Execution")] StatusEffectVisual statusEffectExecuteVisual;
+        [SerializeField, FoldoutGroup("Execution")] float executeFinishDelay = 0.5f;
+        [SerializeField, FoldoutGroup("Execution")] SkillTargetData.HealthStatusType targetHealthStatus = SkillTargetData.HealthStatusType.Alive;
+        [SerializeField, FoldoutGroup("Execution")] List<SkillCustomCondition> customConditions;
+
+        [SerializeField, FoldoutGroup("Expiration")] GameActionTriggersManager.TriggerType expirationTrigger = GameActionTriggersManager.TriggerType.Instant;
+        [SerializeField, FoldoutGroup("Expiration")] ExpireActionType expireAction;
+        [SerializeField, FoldoutGroup("Expiration")] int expirationCount = 0;
+        [SerializeField, FoldoutGroup("Expiration")] StatusEffectVisual statusEffectExpireVisual;
+        [SerializeField, FoldoutGroup("Expiration")] float expireFinishDelay = 0f;
+
+        public string Title => title;
         public string Description => description;
         public Sprite Icon => icon;
-        public int ExpirationCount => expirationCount;
-        public TriggerType ExecuteTrigger => executeTrigger;
-        public TriggerType ExpirationTrigger => expirationTrigger;
-        public ExpireActionType ExpireAction => expireAction;
-        public ExecuteTargetType ExecuteTo => executeTo;
-        public bool RefreshValueOnExecute => refreshValueOnExecute;
-        public bool RunToTargetBeforeCast => runToTargetBeforeCast;
+        public ElementType Element => elementType;
+        public StatusEffectTags Tags => tags;
 
-        public float GetValue(EntityMainController caster, EntityMainController target, EntityMainController triggerSource)
+        public GameActionTriggersManager.TriggerType ExecuteTrigger => executeTrigger;
+        public int ExpirationCount => expirationCount;
+        public SkillTargetData.HealthStatusType TargetHealthStatus => targetHealthStatus;
+
+        public GameActionTriggersManager.TriggerType ExpirationTrigger => expirationTrigger;
+        public ExpireActionType ExpireAction => expireAction;
+
+        public float GetValue(EntityMainController caster, EntityMainController target)
         {
             var value = baseValue;
             foreach (var attributeModifier in attributeModifiers)
-                value = attributeModifier.GetValue(value, caster, target, triggerSource);
+                value = attributeModifier.GetValue(value, caster, target);
             return modifierType == ModifierType.Add ? value : -value;
         }
 
         public virtual async Task Execute(StatusEffectDataHandler statusEffectDataHandler)
         {
+            if (customConditions.FirstOrDefault(x => !x.IsVaild(statusEffectDataHandler.caster, statusEffectDataHandler.target)))
+                return;
+
             while(statusEffectDataHandler.caster.EntityMovementController.CurrentState.Value == EntityMovementController.State.Moving)
                 await Task.Yield();
-        }
 
-        public virtual async Task Expire(StatusEffectDataHandler statusEffectDataHandler) => await Task.Yield();
+            await Task.Delay((int)(executeFinishDelay * 1000));
+        }
 
         public virtual async Task PlayExecuteVisual(StatusEffectDataHandler statusEffectDataHandler)
         {
             var isAttackDone = false;
-
-            if(RunToTargetBeforeCast)
-                await statusEffectDataHandler.caster.EntityMovementController.MoveToFront(statusEffectDataHandler.ExecuteToEntity, true);
-
             void OnAnimationStateUpdate(EntityAnimationController.State state) => isAttackDone = state == EntityAnimationController.State.AttackDone;
 
             statusEffectDataHandler.caster.EntityAnimationController.SetState(EntityAnimationController.State.Attacking);
@@ -105,11 +101,18 @@ namespace PawHunters
                 await Task.Yield();
             statusEffectDataHandler.caster.EntityAnimationController.CurrentState.UnregisterListener(OnAnimationStateUpdate);
 
-            if (RunToTargetBeforeCast)
-                _ = statusEffectDataHandler.caster.EntityMovementController.MoveToStartPosition();
+            if (statusEffectExecuteVisual)
+                await statusEffectExpireVisual.Execute();
         }
 
+        public virtual async Task Expire(StatusEffectDataHandler statusEffectDataHandler) => await Task.Delay((int)(expireFinishDelay * 1000));
         public virtual async Task PlayExpireCountdownVisual(StatusEffectDataHandler statusEffectDataHandler) => await Task.Yield();
-        public virtual async Task PlayExpireDoneVisual(StatusEffectDataHandler statusEffectDataHandler) => await Task.Yield();
+        public virtual async Task PlayExpireDoneVisual(StatusEffectDataHandler statusEffectDataHandler)
+        {
+            if (statusEffectExpireVisual)
+                await statusEffectExpireVisual.Execute();
+            else
+                await Task.Yield();
+        }
     }
 }

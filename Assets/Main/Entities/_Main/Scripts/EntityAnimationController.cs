@@ -17,7 +17,7 @@ namespace PawHunters
         [SerializeField] List<Sprite> HeadSprites;
         [SerializeField] List<Sprite> JawSprites;
 
-        EntityMainController playerMainController;
+        EntityMainController entityMainController;
 
         private void Start()
         {
@@ -26,7 +26,7 @@ namespace PawHunters
                 behaviour.Init(this);
         }
 
-        public void Init(EntityMainController playerMainController) => this.playerMainController = playerMainController;
+        public void Init(EntityMainController entityMainController) => this.entityMainController = entityMainController;
 
         [Button]
         public void SetState(State state, float delay = 0)

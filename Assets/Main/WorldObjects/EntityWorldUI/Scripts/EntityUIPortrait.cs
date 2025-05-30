@@ -13,6 +13,7 @@ namespace PawHunters
         public enum State { Idle, Attacking }
 
         [SerializeField] EntityMainController entityMainController;
+        [SerializeField] TextMeshProUGUI orderLabel;
         [SerializeField] Image avatar;
         [SerializeField] float[] scaleStates;
         [SerializeField] float duration = 0.5f;
@@ -54,6 +55,12 @@ namespace PawHunters
 
             CurrentState.Value = state;
             transform.DOScale(scaleStates[(int)CurrentState.Value], duration);
+        }
+
+        internal void SetOrder(int i)
+        {
+            transform.SetSiblingIndex(i);
+            orderLabel.text = $"{i + 1}";
         }
     }
 }

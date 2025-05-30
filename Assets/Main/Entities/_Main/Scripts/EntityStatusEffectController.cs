@@ -13,14 +13,14 @@ namespace PawHunters
 
         private void OnEnable()
         {
-            GameActionTriggersManager.Instance.OnTrigger += TrigerExecute;
-            GameActionTriggersManager.Instance.OnTrigger += TriggerExpire;
+            GameActionTriggersManager.Instance.Register(TrigerExecute);
+            GameActionTriggersManager.Instance.Register(TriggerExpire);
         }
 
         private void OnDisable()
         {
-            GameActionTriggersManager.Instance.OnTrigger -= TrigerExecute;
-            GameActionTriggersManager.Instance.OnTrigger -= TriggerExpire;
+            GameActionTriggersManager.Instance.Unegister(TrigerExecute);
+            GameActionTriggersManager.Instance.Unegister(TriggerExpire);
         }
 
         public void Init(EntityMainController entityMainController) => this.entityMainController = entityMainController;
@@ -28,29 +28,27 @@ namespace PawHunters
         [Button]
         public async Task ApplyStatusEffect(StatusEffectData statusEffectData, EntityMainController caster)
         {
-            var statusEffect = new StatusEffectDataHandler(StatusEffectSpawner.Instance.Spawn(statusEffectData), caster, entityMainController);
-            statusEffects.Add(statusEffect);
-            if (statusEffect.data.ExecuteTrigger == StatusEffectData.TriggerType.Instant)
-                await statusEffect.Execute();
-            if (statusEffect.data.ExpirationTrigger == StatusEffectData.TriggerType.Instant)
-                await statusEffect.Expire();
+            var statusEffectDataHandler = new StatusEffectDataHandler(StatusEffectSpawner.Instance.Spawn(statusEffectData), caster, entityMainController);
+            statusEffects.Add(statusEffectDataHandler);
+            if (statusEffectDataHandler.data.ExecuteTrigger == GameActionTriggersManager.TriggerType.Instant)
+                await statusEffectDataHandler.Execute();
+            if (statusEffectDataHandler.data.ExpirationTrigger == GameActionTriggersManager.TriggerType.Instant)
+                await statusEffectDataHandler.Expire();
         }
 
         [Button]
-        public async Task TrigerExecute(StatusEffectData.TriggerType triggerType, EntityMainController triggerSource = null)
+        public async Task TrigerExecute(GameActionTriggersManager.TriggerType triggerType, EntityMainController triggerSource = null)
         {
             foreach (var statusEffect in statusEffects)
             {
                 if (!statusEffect.data.ExecuteTrigger.HasFlag(triggerType))
                     continue;
-
-                statusEffect.triggerSource = triggerSource;
                 await statusEffect.Execute();
             }
         }
 
         [Button]
-        public async Task TriggerExpire(StatusEffectData.TriggerType triggerType, EntityMainController triggerSource = null)
+        public async Task TriggerExpire(GameActionTriggersManager.TriggerType triggerType, EntityMainController triggerSource = null)
         {
             var statusEffectCopy = new List<StatusEffectDataHandler>(statusEffects);
             foreach (var statusEffect in statusEffectCopy)

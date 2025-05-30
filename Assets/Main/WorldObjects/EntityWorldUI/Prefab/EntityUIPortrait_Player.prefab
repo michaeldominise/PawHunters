@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5065119258028694245}
   - component: {fileID: 2070666881917272341}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: OrderLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
+  orderLabel: {fileID: 2070666881917272341}
   avatar: {fileID: 1686986414756369906}
   scaleStates:
   - 0.8

@@ -12,36 +12,36 @@ namespace PawHunters
 
         public override async Task Execute(StatusEffectDataHandler statusEffectDataHandler)
         {
-            var executeToEntity = statusEffectDataHandler.ExecuteToEntity;
+            var target = statusEffectDataHandler.target;
             var cachedValue = statusEffectDataHandler.cachedValue;
             switch (targetAttribute)
             {
                 case SkillAttributeData.AttributeType.CurrentHealth:
                     if(cachedValue < 0)
-                        Debug.LogError($"This is prohibited to use. Use {nameof(StatusEffectData_CurrentHealthUpdate)}");
+                        Debug.LogError($"This is prohibited to use. Use {nameof(StatusEffectData_DoDamage)}");
                     else
-                        executeToEntity.EntityHealthController.AddHealth(cachedValue, statusEffectDataHandler);
+                        target.EntityHealthController.AddHealth(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.MaxHealth:
-                    executeToEntity.EntityHealthController.AddMaxHealth(cachedValue, statusEffectDataHandler);
+                    target.EntityHealthController.AddMaxHealth(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Attack:
-                    executeToEntity.BattleAttributes.attack.Update(cachedValue, statusEffectDataHandler);
+                    target.BattleAttributes.attack.Update(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Defense:
-                    executeToEntity.BattleAttributes.defense.Update(cachedValue, statusEffectDataHandler);
+                    target.BattleAttributes.defense.Update(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Speed:
-                    executeToEntity.BattleAttributes.speed.Update(cachedValue, statusEffectDataHandler);
+                    target.BattleAttributes.speed.Update(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.CritChance:
-                    executeToEntity.BattleAttributes.critChance.Update(cachedValue, statusEffectDataHandler);
+                    target.BattleAttributes.critChance.Update(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.CritDamage:
-                    executeToEntity.BattleAttributes.critDamage.Update(cachedValue, statusEffectDataHandler);
+                    target.BattleAttributes.critDamage.Update(cachedValue, statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Sheild:
-                    executeToEntity.EntityHealthController.AddSheild(cachedValue, statusEffectDataHandler);
+                    target.EntityHealthController.AddSheild(cachedValue, statusEffectDataHandler);
                     break;
                 default:
                     break;
@@ -54,34 +54,33 @@ namespace PawHunters
             if (ExpireAction == ExpireActionType.None)
                 return base.Expire(statusEffectDataHandler);
 
-            var executeToEntity = statusEffectDataHandler.ExecuteToEntity;
-
+            var target = statusEffectDataHandler.target;
             switch (targetAttribute)
             {
                 case SkillAttributeData.AttributeType.MaxHealth:
-                    executeToEntity.BattleAttributes.maxHealth.Remove(statusEffectDataHandler);
-                    executeToEntity.BattleAttributes.currentHealth.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.maxHealth.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.currentHealth.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.CurrentHealth:
-                    executeToEntity.BattleAttributes.currentHealth.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.currentHealth.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Attack:
-                    executeToEntity.BattleAttributes.attack.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.attack.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Defense:
-                    executeToEntity.BattleAttributes.defense.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.defense.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Speed:
-                    executeToEntity.BattleAttributes.speed.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.speed.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.CritChance:
-                    executeToEntity.BattleAttributes.critChance.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.critChance.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.CritDamage:
-                    executeToEntity.BattleAttributes.critDamage.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.critDamage.Remove(statusEffectDataHandler);
                     break;
                 case SkillAttributeData.AttributeType.Sheild:
-                    executeToEntity.BattleAttributes.sheild.Remove(statusEffectDataHandler);
+                    target.BattleAttributes.sheild.Remove(statusEffectDataHandler);
                     break;
             }
 

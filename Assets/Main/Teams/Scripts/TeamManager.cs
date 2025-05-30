@@ -11,6 +11,7 @@ namespace PawHunters
         [SerializeField] EntityMainController prefab;
         [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
 
+        public List<EntityMainController> EntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController)?.Select(x => x.entityMainController).ToList();
         public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.IsAlive)?.Select(x => x.entityMainController).ToList();
         public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.IsAlive) != null;
 

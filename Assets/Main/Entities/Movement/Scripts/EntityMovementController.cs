@@ -22,7 +22,7 @@ namespace PawHunters
         public async Task MoveToFront(EntityMainController moveTo, bool isRunning = true) => await MoveTo(moveTo.transform.TransformPoint(Vector3.right * 4), isRunning, false);
         public async Task MoveTo(Vector3 moveTo, bool isRunning = true, bool isLocal = false)
         {
-            if (CurrentState.Value == State.Moving)
+            if (CurrentState.Value == State.Moving || !entityMainController.IsAlive)
                 return;
             CurrentState.Value = State.Moving;
             entityMainController.EntityAnimationController.SetState(isRunning ? EntityAnimationController.State.Running : EntityAnimationController.State.Walking);

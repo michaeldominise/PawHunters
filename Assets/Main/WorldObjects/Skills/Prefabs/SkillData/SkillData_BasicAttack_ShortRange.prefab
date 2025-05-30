@@ -44,21 +44,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b8f08f2c7044e199b7b65b0756867a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: Basic Attack
   description: 
   icon: {fileID: 0}
+  elementType: 0
+  tags: 1
   baseValue: 0
-  attributeModifiers:
-  - sourceType: 0
-    attributeData: 2
-    modifierType: 0
   modifierType: 1
-  expirationCount: 0
-  executeTrigger: 0
-  expirationTrigger: 0
+  attributeModifiers:
+  - attributeData: 2
+    modifierType: 0
+    sourceType: 1
+  executeTrigger: 1
+  statusEffectExecuteVisual: {fileID: 0}
+  executeFinishDelay: 0.5
+  targetHealthStatus: 1
+  customConditions: []
+  expirationTrigger: 1
   expireAction: 0
-  executeTo: 0
-  refreshValueOnExecute: 1
-  runToTargetBeforeCast: 1
+  expirationCount: 0
+  statusEffectExpireVisual: {fileID: 0}
+  expireFinishDelay: 0
   ignoreCrit: 0
   ignoreDefense: 0
   ignoreSheild: 0
@@ -107,10 +113,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68de5fc8cd9fa43ca826fbb94bee366e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: Basic Attack
   description: Deal attack damage to the first enemy target
   icon: {fileID: 0}
   skillTargets:
   - {fileID: 4411864041380861982}
+  runToTargetBeforeExecute: 0
+  trigger: 1
+  customConditions: []
+  animationCastType: 1
 --- !u!1 &8358170826795819579
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,4 +171,6 @@ MonoBehaviour:
   - {fileID: 2549772209375805188}
   targetGroupType: 2
   groupOrderType: 0
+  healthStatusType: 1
   targetCount: 1
+  customConditions: []
