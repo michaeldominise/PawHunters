@@ -26,8 +26,6 @@ namespace PawHunters
             if (!entityMainController)
                 return;
 
-            gameObject.SetActive(true);
-
             if(this.entityMainController)
                 this.entityMainController.CurrentState.UnregisterListener(CheckState);
 

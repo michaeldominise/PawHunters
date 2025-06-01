@@ -9,11 +9,15 @@ namespace PawHunters
 {
     public class BattleManager : MonoBehaviour
     {
+        public enum State { None, StartRound, ExecuteInstantSkils, EndRound, JourneyFailed, NextJourney }
+
         public static BattleManager Instance { get; private set; }
 
         [SerializeField] List<EntityUIPortrait> entityUIList;
+        [SerializeField] SkillData resetSpecialSkill;
 
         [ShowInInspector, ReadOnly] public int CurrentRound { get; set; }
+        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
 
         int MaxRound => SceneGameManager.Instance.LevelData.maxRound;
         TeamManager_GamePlayer TeamManager_GamePlayer => TeamManager_GamePlayer.Instance;
@@ -35,6 +39,7 @@ namespace PawHunters
 
         async void StartRound()
         {
+            CurrentState.Value = State.StartRound;
             CurrentRound++;
 
             RoundUIManager.Instance.UpdateUI(CurrentRound);
@@ -42,8 +47,11 @@ namespace PawHunters
 
             await Task.Delay(500);
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StartRound);
+            if (CheckStopBattle())
+                return;
+
             await ExecuteSkills(GameActionTriggersManager.TriggerType.StartRound);
-            if (CheckEndBattle())
+            if (CheckStopBattle())
                 return;
 
             ExecuteInstantSkills();
@@ -51,15 +59,23 @@ namespace PawHunters
 
         async void ExecuteInstantSkills()
         {
+            CurrentState.Value = State.ExecuteInstantSkils;
             await ExecuteSkills(GameActionTriggersManager.TriggerType.Instant);
+            if (CheckStopBattle())
+                return;
+
             EndRound();
         }
 
         async void EndRound()
         {
+            CurrentState.Value = State.EndRound;
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.EndRound);
+            if (CheckStopBattle())
+                return;
+
             await ExecuteSkills(GameActionTriggersManager.TriggerType.EndRound);
-            if (CheckEndBattle())
+            if (CheckStopBattle())
                 return;
 
             StartRound();
@@ -70,23 +86,40 @@ namespace PawHunters
             foreach (var entity in entityUIList)
             {
                 await entity.EntityMainController.EntitySkillsController.Execute(trigger);
-                if (CheckEndBattle())
+                if (CheckStopBattle())
                     return;
             }
         }
 
-        bool CheckEndBattle()
+        bool CheckStopBattle()
         {
+            if (CurrentState.Value == State.None)
+                return true;
             if (!TeamManager_GamePlayer.IsAlive || CurrentRound == MaxRound)
-                SceneGameManager.Instance.JourneyFailed();
+                CurrentState.Value = State.JourneyFailed;
             else if (!TeamManager_GameEnemy.IsAlive)
-                SceneGameManager.Instance.NextJourney();
+                CurrentState.Value = State.NextJourney;
             else
                 return false;
 
-            Clear();
-
+            StopBattle();
             return true;
+        }
+
+        void StopBattle()
+        {
+            CurrentRound = 0;
+            entityUIList.Clear();
+            RoundUIManager.Instance.UpdateUI(CurrentRound);
+            EntityUIPortraitSpawner.Instance.Clear();
+            _ = resetSpecialSkill.Execute();
+
+            if (CurrentState.Value == State.JourneyFailed)
+                SceneGameManager.Instance.JourneyFailed();
+            else
+                SceneGameManager.Instance.NextJourney();
+
+            CurrentState.Value = State.None;
         }
 
         void RearrangeEntities()
@@ -94,14 +127,6 @@ namespace PawHunters
             entityUIList = entityUIList.OrderBy(x => x.EntityMainController.BattleAttributes.speed.Value).ToList();
             for (int i = 0; i < entityUIList.Count; i++)
                 entityUIList[i].SetOrder(i);
-        }
-
-        void Clear()
-        {
-            CurrentRound = 0;
-            entityUIList.Clear();
-            RoundUIManager.Instance.UpdateUI(CurrentRound);
-            EntityUIPortraitSpawner.Instance.Clear();
         }
     }
 }

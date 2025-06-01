@@ -67,6 +67,7 @@ namespace PawHunters
         public GameActionTriggersManager.TriggerType ExecuteTrigger => executeTrigger;
         public int ExpirationCount => expirationCount;
         public SkillTargetData.HealthStatusType TargetHealthStatus => targetHealthStatus;
+        public List<SkillCustomCondition> CustomConditions => customConditions;
 
         public GameActionTriggersManager.TriggerType ExpirationTrigger => expirationTrigger;
         public ExpireActionType ExpireAction => expireAction;
@@ -79,30 +80,22 @@ namespace PawHunters
             return modifierType == ModifierType.Add ? value : -value;
         }
 
-        public virtual async Task Execute(StatusEffectDataHandler statusEffectDataHandler)
+        public virtual async Task WaitStopMoving(StatusEffectDataHandler statusEffectDataHandler)
         {
-            if (customConditions.FirstOrDefault(x => !x.IsVaild(statusEffectDataHandler.caster, statusEffectDataHandler.target)))
-                return;
-
-            while(statusEffectDataHandler.caster.EntityMovementController.CurrentState.Value == EntityMovementController.State.Moving)
+            while (statusEffectDataHandler.caster.EntityMovementController.CurrentState.Value == EntityMovementController.State.Moving)
                 await Task.Yield();
+        }
 
+        public virtual async Task<float> Execute(StatusEffectDataHandler statusEffectDataHandler)
+        {
             await Task.Delay((int)(executeFinishDelay * 1000));
+            return 0;
         }
 
         public virtual async Task PlayExecuteVisual(StatusEffectDataHandler statusEffectDataHandler)
         {
-            var isAttackDone = false;
-            void OnAnimationStateUpdate(EntityAnimationController.State state) => isAttackDone = state == EntityAnimationController.State.AttackDone;
-
-            statusEffectDataHandler.caster.EntityAnimationController.SetState(EntityAnimationController.State.Attacking);
-            statusEffectDataHandler.caster.EntityAnimationController.CurrentState.RegisterListener(OnAnimationStateUpdate);
-            while (!isAttackDone)
-                await Task.Yield();
-            statusEffectDataHandler.caster.EntityAnimationController.CurrentState.UnregisterListener(OnAnimationStateUpdate);
-
             if (statusEffectExecuteVisual)
-                await statusEffectExpireVisual.Execute();
+                await statusEffectExecuteVisual.Execute();
         }
 
         public virtual async Task Expire(StatusEffectDataHandler statusEffectDataHandler) => await Task.Delay((int)(expireFinishDelay * 1000));
@@ -111,8 +104,6 @@ namespace PawHunters
         {
             if (statusEffectExpireVisual)
                 await statusEffectExpireVisual.Execute();
-            else
-                await Task.Yield();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace PawHunters
             CritChance,
             CritDamage,
             Sheild,
+            SpecialSkill,
         }
 
         public static float GetValue(this AttributeType targetAttribute, EntityMainController entityMainController)
@@ -29,7 +30,8 @@ namespace PawHunters
                 AttributeType.Speed => entityMainController.BattleAttributes.speed.Value,
                 AttributeType.CritChance => entityMainController.BattleAttributes.critChance.Value,
                 AttributeType.CritDamage => entityMainController.BattleAttributes.critDamage.Value,
-                AttributeType.Sheild => entityMainController.BattleAttributes.sheild.Value,
+                AttributeType.Sheild => entityMainController.BattleAttributes.shield.Value,
+                AttributeType.SpecialSkill => entityMainController.BattleAttributes.specialSkill.Value,
                 _ => 0,
             };
         }

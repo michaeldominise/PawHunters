@@ -125,6 +125,7 @@ MonoBehaviour:
   - {fileID: 7216353333477649020}
   - {fileID: 892066354897139537}
   animationCastType: 0
+  playAttackAnimation: 1
 --- !u!1 &6327854710724427346
 GameObject:
   m_ObjectHideFlags: 0

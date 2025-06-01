@@ -27,6 +27,7 @@ namespace PawHunters
             else
                 spawnedList.Remove(item);
 
+            item.gameObject.SetActive(true);
             item.transform.localPosition = GetSpawnPoint();
             item.transform.rotation = Quaternion.identity;
             item.transform.SetParent(spawnParent);

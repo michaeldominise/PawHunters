@@ -15,7 +15,7 @@ namespace PawHunters
         {
             if (!EntityMainController)
                 return;
-            var viewportPoint = WorldCamera.WorldToViewportPoint(EntityMainController.WorldUIPoint.position);
+            var viewportPoint = WorldCamera.WorldToViewportPoint(EntityMainController.Anchor.worldUI.position);
             var halfScreenSize = new Vector3(RectParent.rect.width, RectParent.rect.height) * 0.5f;
             transform.localPosition = new Vector3(Mathf.LerpUnclamped(-halfScreenSize.x, halfScreenSize.x, viewportPoint.x), Mathf.LerpUnclamped(-halfScreenSize.y, halfScreenSize.y, viewportPoint.y));
         }

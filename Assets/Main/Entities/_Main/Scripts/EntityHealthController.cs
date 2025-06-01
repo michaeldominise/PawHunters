@@ -39,7 +39,7 @@ namespace PawHunters
         }
 
         [Button]
-        public void AddSheild(float value, object obj = null) => BattleAttributes.sheild.Update(value, obj, currentValue => Math.Max(value, -currentValue));
+        public void AddSheild(float value, object obj = null) => BattleAttributes.shield.Update(value, obj, currentValue => Math.Max(value, -currentValue));
 
         [Button]
         public void Kill() => AddHealth(-BattleAttributes.currentHealth.Value);

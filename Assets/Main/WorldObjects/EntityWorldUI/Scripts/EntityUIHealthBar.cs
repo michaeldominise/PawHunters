@@ -1,58 +1,40 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace PawHunters
 {
-    public class EntityUIHealthBar : MonoBehaviour
+    public class EntityUIHealthBar : EntityUIProgressBar
     {
-        [SerializeField] EntityUIWorld entityUIWorld;
-        [SerializeField] Slider healthSlider;
-        [SerializeField] Gradient healthColor;
-        [SerializeField] float updateDuration = 1;
-        [SerializeField] AnimationCurve animationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+        Gradient HealthColor => GlobalSettings.Instance.colorTheme.healthProgressColor;
 
-        public float UpdateDuration => updateDuration;
-        EntityMainController entityMainController;
-        Coroutine updateHealthCoroutine;
+        protected override float SliderCurrentValue => entityMainController.BattleAttributes.HealthPercentage;
 
-        public void Init(EntityMainController entityMainController)
+        public override void Init(EntityMainController entityMainController)
         {
             if (this.entityMainController)
             {
-                this.entityMainController.BattleAttributes.maxHealth.OnUpdateValueVoid -= PlayerHealthController_OnHealthUpdate;
-                this.entityMainController.BattleAttributes.currentHealth.OnUpdateValueVoid -= PlayerHealthController_OnHealthUpdate;
-                this.entityMainController.CurrentState.UnregisterListener(PlayerMainController_OnStateUpdate);
+                this.entityMainController.BattleAttributes.maxHealth.OnUpdateValueVoid -= Refresh;
+                this.entityMainController.BattleAttributes.currentHealth.OnUpdateValueVoid -= Refresh;
             }
 
-            this.entityMainController = entityMainController;
-            this.entityMainController.BattleAttributes.maxHealth.OnUpdateValueVoid += PlayerHealthController_OnHealthUpdate;
-            this.entityMainController.BattleAttributes.currentHealth.OnUpdateValueVoid += PlayerHealthController_OnHealthUpdate;
-            this.entityMainController.CurrentState.RegisterListener(PlayerMainController_OnStateUpdate);
+            entityMainController.BattleAttributes.maxHealth.OnUpdateValueVoid += Refresh;
+            entityMainController.BattleAttributes.currentHealth.OnUpdateValueVoid += Refresh;
 
-            healthSlider.value = 0;
-            updateHealthCoroutine = null;
-            PlayerHealthController_OnHealthUpdate();
+            base.Init(entityMainController);
         }
 
-        private void PlayerMainController_OnStateUpdate(EntityMainController.State state)
+        protected override void OnProgressUpdate(GradualChangeValue.Status status)
         {
-            if (state == EntityMainController.State.Dead)
-                entityUIWorld.Kill();
+            sliderProgress.image.CrossFadeColor(HealthColor.Evaluate(status.CurrentValue), 0, true, false);
+            base.OnProgressUpdate(status);
         }
 
-        void PlayerHealthController_OnHealthUpdate()
+        protected override void SetLabel(GradualChangeValue.Status status)
         {
-            if (updateHealthCoroutine != null || !gameObject.activeInHierarchy)
+            if (entityMainController.BattleAttributes.shield.Value > 0)
                 return;
-
-            updateHealthCoroutine = GradualChangeValue.Execute(healthSlider.value, entityMainController.BattleAttributes.HealthPercentage, updateDuration,
-                status =>
-                {
-                    healthSlider.value = status.CurrentValue;
-                    healthSlider.image.CrossFadeColor(healthColor.Evaluate(healthSlider.value), 0, true, false);
-                    if (status.IsDone)
-                        updateHealthCoroutine = null;
-                }, animationCurve);
+            label.text = Mathf.Lerp(0, entityMainController.BattleAttributes.maxHealth.Value, status.CurrentValue).Format();
         }
     }
 }

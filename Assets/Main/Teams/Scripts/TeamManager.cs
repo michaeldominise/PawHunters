@@ -29,7 +29,7 @@ namespace PawHunters
         {
             entity.Init(this, saveableCharacterData);
             teamManger_EntityParents[index].Init(entity);
-            entity.EntityHealthController.CurrentState.RegisterListener(state => CurrentState_OnStateUpdate(entity));
+            entity.CurrentState.RegisterListener(state => CurrentState_OnStateUpdate(entity));
             return entity;
         }
 

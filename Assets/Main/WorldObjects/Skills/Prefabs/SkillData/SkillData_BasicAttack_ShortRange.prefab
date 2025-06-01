@@ -1,5 +1,120 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &692211541133860485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5892987903533418483}
+  - component: {fileID: 5752838740499357331}
+  m_Layer: 0
+  m_Name: StatusEffectData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5892987903533418483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692211541133860485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1222193199847053492}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5752838740499357331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692211541133860485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d581988e30c1546418abc4a409813fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Add Special Skill
+  description: 
+  icon: {fileID: 0}
+  elementType: 0
+  tags: 0
+  baseValue: 0.25
+  modifierType: 0
+  attributeModifiers: []
+  executeTrigger: 1
+  statusEffectExecuteVisual: {fileID: 0}
+  executeFinishDelay: 0
+  targetHealthStatus: 1
+  customConditions: []
+  expirationTrigger: 1
+  expireAction: 0
+  expirationCount: 0
+  statusEffectExpireVisual: {fileID: 0}
+  expireFinishDelay: 0
+  targetAttribute: 8
+--- !u!1 &3013112964061770568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1222193199847053492}
+  - component: {fileID: 5757460704594295366}
+  m_Layer: 0
+  m_Name: SkillTargetData_Caster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1222193199847053492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013112964061770568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5892987903533418483}
+  m_Father: {fileID: 1203930370509765833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5757460704594295366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013112964061770568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492d83ca08d947bea4b2488b081b343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffects:
+  - {fileID: 5752838740499357331}
+  targetGroupType: 4
+  groupOrderType: 0
+  healthStatusType: 1
+  targetCount: 1
+  customConditions: []
 --- !u!1 &4401550728580501793
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +214,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6648097949891356573}
+  - {fileID: 1222193199847053492}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7754968525061356826
@@ -118,10 +234,12 @@ MonoBehaviour:
   icon: {fileID: 0}
   skillTargets:
   - {fileID: 4411864041380861982}
+  - {fileID: 5757460704594295366}
   runToTargetBeforeExecute: 0
   trigger: 1
   customConditions: []
   animationCastType: 1
+  playAttackAnimation: 1
 --- !u!1 &8358170826795819579
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +251,7 @@ GameObject:
   - component: {fileID: 6648097949891356573}
   - component: {fileID: 4411864041380861982}
   m_Layer: 0
-  m_Name: SkillTargetData
+  m_Name: SkillTargetData_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

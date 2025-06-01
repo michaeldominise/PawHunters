@@ -11,19 +11,29 @@ namespace PawHunters
     {
         public enum State { None, Walking, Running, Attacking, Dead }
 
+        [Serializable]
+        public class AnchorGroup
+        {
+            public Transform worldUI;
+            public Transform statusTextUI;
+            public Transform body;
+            public Transform weapon;
+        }
+
         [SerializeField] SaveableCharacterData characterData;
         [SerializeField] ElementType element;
         [SerializeField] Sprite avatarSprite;
         [SerializeField] TeamManager teamManager;
         [SerializeField] Transform model;
-        [SerializeField] Transform worldUIPoint;
         [SerializeField] LayerManager layerManager;
         [SerializeField] EntitySkillsController entitySkillsController;
         [SerializeField] EntityHealthController entityHealthController;
         [SerializeField] EntityMovementController entityMovementController;
         [SerializeField] EntityAnimationController entityAnimationController;
         [SerializeField] EntityStatusEffectController entityStatusEffectController;
+        [SerializeField] AnchorGroup anchor;
         [SerializeField] BattleAttributes battleAttributes;
+
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.None);
 
         public SaveableCharacterData CharacterData => characterData;
@@ -31,26 +41,24 @@ namespace PawHunters
         public Sprite AvatarSprite => avatarSprite;
         public BattleAttributes BattleAttributes => battleAttributes;
         public Transform Model => model;
-        public Transform WorldUIPoint => worldUIPoint;
         public EntitySkillsController EntitySkillsController => entitySkillsController;
         public EntityHealthController EntityHealthController => entityHealthController;
         public EntityMovementController EntityMovementController => entityMovementController;
         public EntityAnimationController EntityAnimationController => entityAnimationController;
         public EntityStatusEffectController EntityStatusEffectController => entityStatusEffectController;
         public TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
+        public AnchorGroup Anchor => anchor;
         public bool IsAlive => CurrentState.Value != State.Dead;
-
 
         void Refresh() => Init(teamManager, characterData);
         public void Init(TeamManager teamManager, SaveableCharacterData characterData)
         {
             this.teamManager = teamManager;
+            gameObject.name = $"{gameObject.name.TrimEnd(':')}:{(TeamManager_GamePlayer ? "Player" : "Enemy")}";
+
             SaveableData.Initialize(ref this.characterData, characterData, Refresh);
             battleAttributes.Init(characterData.attribute);
             RegisterListener();
-
-            gameObject.SetActive(true);
-            gameObject.name = $"{gameObject.name.TrimEnd(':')}:{(TeamManager_GamePlayer ? "Player" : "Enemy")}";
 
             entitySkillsController.Init(this);
             entityHealthController.Init(this);

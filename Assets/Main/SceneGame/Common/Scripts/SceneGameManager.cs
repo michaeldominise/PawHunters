@@ -20,6 +20,7 @@ namespace PawHunters
         protected virtual IEnumerator Start()
         {
             yield return null;
+            yield return null;
             EnvironmentManager.Instance.Init(levelData.environmentItem);
             TeamManager_GamePlayer.Instance.Init(teamData);
             NextJourney();

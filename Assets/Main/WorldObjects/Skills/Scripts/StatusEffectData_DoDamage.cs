@@ -12,29 +12,35 @@ namespace PawHunters
         [SerializeField] bool ignoreDefense;
         [SerializeField] bool ignoreSheild;
 
-        public override async Task Execute(StatusEffectDataHandler statusEffectDataHandler)
+        public override async Task<float> Execute(StatusEffectDataHandler statusEffectDataHandler)
         {
             var target = statusEffectDataHandler.target;
             var cachedValue = statusEffectDataHandler.cachedValue;
+            var colorLabel = GlobalSettings.Instance.colorTheme.damageColor;
 
             if (cachedValue < 0)
             {
                 if (!ignoreCrit && Random.Range(0, 1f) <= statusEffectDataHandler.caster.BattleAttributes.critChance.Value)
+                {
+                    colorLabel = GlobalSettings.Instance.colorTheme.criticalColor;
                     cachedValue *= statusEffectDataHandler.caster.BattleAttributes.critDamage.Value;
+                }
 
                 if (!ignoreDefense)
                     cachedValue = Mathf.Min(cachedValue + Random.Range(0, target.BattleAttributes.defense.Value), 0);
 
                 if (!ignoreSheild)
                 {
-                    cachedValue = Mathf.Min(cachedValue + target.BattleAttributes.sheild.Value, 0);
-                    var sheildDamage = Mathf.Max(cachedValue + target.BattleAttributes.sheild.Value, 0);
-                    target.BattleAttributes.sheild.Update(sheildDamage, statusEffectDataHandler);
+                    cachedValue = Mathf.Min(cachedValue + target.BattleAttributes.shield.Value, 0);
+                    var shieldDamage = Mathf.Max(cachedValue + target.BattleAttributes.shield.Value, 0);
+                    target.BattleAttributes.shield.Update(shieldDamage, statusEffectDataHandler);
                 }
             }
 
             target.EntityHealthController.AddHealth(cachedValue, this);
+            StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, colorLabel, cachedValue);
             await base.Execute(statusEffectDataHandler);
+            return cachedValue;
         }
 
         public override Task Expire(StatusEffectDataHandler statusEffectDataHandler)

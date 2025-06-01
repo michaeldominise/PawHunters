@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -30,10 +31,16 @@ namespace PawHunters
                 return;
             if (data.TargetHealthStatus == SkillTargetData.HealthStatusType.Dead && target.IsAlive)
                 return;
+            if (data.CustomConditions.FirstOrDefault(x => !x.IsVaild(caster, target)))
+                return;
 
-            Debug.Log($"{caster.name}:{(bool)caster.TeamManager_GamePlayer} execute StatusEffect:'{data.Title}:{cachedValue}' to {target.name}:{(bool)target.TeamManager_GamePlayer}");
+            if (caster)
+                await data.WaitStopMoving(this);
             await data.PlayExecuteVisual(this);
-            await data.Execute(this);
+            var executeValue = await data.Execute(this);
+            if(caster)
+                Debug.Log($"{caster.name}:{(bool)caster.TeamManager_GamePlayer} execute StatusEffect:'{data.Title}:{executeValue}' to {target.name}:{(bool)target.TeamManager_GamePlayer}");
+
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StatusEffectExecuted, caster);
             await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.StatusEffectExecutedToTarget, this);
         }

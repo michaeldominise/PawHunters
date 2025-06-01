@@ -13,18 +13,32 @@ namespace PawHunters
 
         [SerializeField] EntityMainController entityMainController;
         [SerializeField] EntityUIHealthBar entityUIHealthBar;
+        [SerializeField] EntityUISheildBar entityUISheildBar;
+        [SerializeField] EntityUISpecialSkillBar entityUISpecialSkillBar;
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
 
         public EntityMainController EntityMainController => entityMainController;
 
         public void Init(EntityMainController entityMainController)
         {
-            gameObject.SetActive(true);
+            if(this.entityMainController)
+                this.entityMainController.CurrentState.UnregisterListener(PlayerMainController_OnStateUpdate);
             this.entityMainController = entityMainController;
+            this.entityMainController.CurrentState.RegisterListener(PlayerMainController_OnStateUpdate);
+
             entityUIHealthBar.Init(entityMainController);
+            entityUISheildBar.Init(entityMainController);
+            entityUISpecialSkillBar.Init(entityMainController);
             CurrentState.Value = State.Alive;
         }
 
+        private void PlayerMainController_OnStateUpdate(EntityMainController.State state)
+        {
+            if (state == EntityMainController.State.Dead)
+                Kill();
+        }
+
+        [Button]
         public void Kill()
         {
             if (CurrentState.Value == State.Dead)
@@ -35,7 +49,7 @@ namespace PawHunters
         IEnumerator _Kill()
         {
             CurrentState.Value = State.Dead;
-            yield return new WaitForSeconds(entityUIHealthBar.UpdateDuration);
+            yield return new WaitForSeconds(GlobalSettings.Instance.gameSettings.progressUpdateDuration);
             gameObject.SetActive(false);
         }
     }

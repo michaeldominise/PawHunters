@@ -45,9 +45,9 @@ namespace PawHunters
             var targetGroup = new List<EntityMainController>();
 
             if (targetGroupType.HasFlag(GroupType.Allies))
-                targetGroup.AddRange(caster.TeamManager_GamePlayer ? TeamManager_GamePlayer.Instance.EntityList : TeamManager_GameEnemy.Instance.EntityList);
+                targetGroup.AddRange(caster != null && caster.TeamManager_GamePlayer ? TeamManager_GamePlayer.Instance.EntityList : TeamManager_GameEnemy.Instance.EntityList);
             if (targetGroupType.HasFlag(GroupType.Opponent))
-                targetGroup.AddRange(caster.TeamManager_GamePlayer ? TeamManager_GameEnemy.Instance.EntityList : TeamManager_GamePlayer.Instance.EntityList);
+                targetGroup.AddRange(caster != null && caster.TeamManager_GamePlayer ? TeamManager_GameEnemy.Instance.EntityList : TeamManager_GamePlayer.Instance.EntityList);
             if (targetGroupType.HasFlag(GroupType.TriggerSource) && triggerSource != null)
                 targetGroup.Add(triggerSource.caster);
             if (targetGroupType.HasFlag(GroupType.Caster))
@@ -84,7 +84,7 @@ namespace PawHunters
                 _ => targetGroup,
             };
 
-            return targetGroup.GetRange(0, Mathf.Max(targetCount, targetGroup.Count));
+            return targetGroup.GetRange(0, Mathf.Min(targetCount, targetGroup.Count));
         }
 
         List<T> GetRandom<T>(List<T> list)

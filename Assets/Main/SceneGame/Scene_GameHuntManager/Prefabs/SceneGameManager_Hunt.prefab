@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityUIList: []
+  resetSpecialSkill: {fileID: 7754968525061356826, guid: 8f3de6a3dab0149d89fcc1d6ea2cc470, type: 3}
 --- !u!1 &9109293314656133205
 GameObject:
   m_ObjectHideFlags: 0

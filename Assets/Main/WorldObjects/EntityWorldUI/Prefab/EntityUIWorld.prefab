@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
   entityUIHealthBar: {fileID: 4072389006147695221}
+  entityUISheildBar: {fileID: 9167745983473540221}
+  entityUISpecialSkillBar: {fileID: 2462444744266218527}
 --- !u!114 &1915969984383589386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,12 +91,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 700885245715650057, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: entityUIWorld
+      value: 
+      objectReference: {fileID: 6115013086275639312}
+    - target: {fileID: 2766268520136452112, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766268520136452112, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3240302176869081848, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3240302176869081848, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778118785059709548, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778118785059709548, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3778118785059709548, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5621727315464976385, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
@@ -185,6 +211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6101312609649571435, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+      propertyPath: entityUIWorld
+      value: 
+      objectReference: {fileID: 6115013086275639312}
     - target: {fileID: 6365764283228963741, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -195,13 +225,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7803683552390894461, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
       propertyPath: m_Name
-      value: EntityUIHealthBar_Default
+      value: EntityUIProgressBar_Default
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+--- !u!114 &2462444744266218527 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6101312609649571435, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+  m_PrefabInstance: {fileID: 8538942596213754484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d005bb84fb34b42a6af37d471bacda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2645464558700809014 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5924196083419480386, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
@@ -216,5 +257,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b84a58c3c02e4ffd85d7d10c5642dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9167745983473540221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 700885245715650057, guid: 5d24141740d4b4f599a4e2299fcdc671, type: 3}
+  m_PrefabInstance: {fileID: 8538942596213754484}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e10e84c496b466095a18d2bff75268, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
