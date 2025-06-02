@@ -7,7 +7,8 @@ namespace PawHunters
     public class EntityUISpecialSkillBar : EntityUIProgressBar
     {
         protected override Color ProgressColor => GlobalSettings.Instance.colorTheme.specialSkillProgressColor;
-        protected override float SliderCurrentValue => entityMainController.BattleAttributes.specialSkill.Value;
+        protected override float CurrentValue => entityMainController.BattleAttributes.specialSkill.Value;
+        protected override float MaxValue => entityMainController.BattleAttributes.specialSkillMax.Value;
 
         public override void Init(EntityMainController entityMainController)
         {

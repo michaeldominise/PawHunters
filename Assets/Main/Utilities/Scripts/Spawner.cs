@@ -2,43 +2,46 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace PawHunters
 {
-    public class Spawner<T1> : MonoBehaviour where T1 : MonoBehaviour
+    public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     {
-        public event Action<T1> OnSpawned;
+        public event Action<T> OnSpawned;
 
         [SerializeField] protected Transform spawnParent;
-        [SerializeField] protected List<T1> spawnedList;
+
+        protected List<KeyValuePair<int, T>> spawnedList = new();
 
         public Transform SpawnParent => spawnParent;
 
         protected virtual Vector3 GetSpawnPoint() => Vector3.zero;
 
-        public virtual T1 Spawn(T1 prefab, Func<T1, bool> condition = null, Action<T1> init = null)
+        public virtual T Spawn(T prefab, Func<T, bool> condition = null, Action<T> init = null)
         {
-            var item = spawnedList.FirstOrDefault(x => x.GetInstanceID() == prefab.GetInstanceID()  && !x.gameObject.activeInHierarchy && (condition?.Invoke(x) ?? true));
+            var keyPairItem = spawnedList.FirstOrDefault(x => x.Key == prefab.GetInstanceID()  && !x.Value.isActiveAndEnabled && (condition?.Invoke(x.Value) ?? true));
+            var item = keyPairItem.Value;
             if (!item)
                 item = Instantiate(prefab);
             else
-                spawnedList.Remove(item);
+                spawnedList.Remove(keyPairItem);
 
             item.gameObject.SetActive(true);
             item.transform.localPosition = GetSpawnPoint();
             item.transform.rotation = Quaternion.identity;
             item.transform.SetParent(spawnParent);
-            spawnedList.Add(item);
+            spawnedList.Add(new(prefab.GetInstanceID(), item));
             init?.Invoke(item);
             OnSpawned?.Invoke(item);
             return item;
         }
 
-        public void Despawn(T1 spawnedItem, float setInactiveDelay = 0) => StartCoroutine(_Despawn(spawnedItem, setInactiveDelay));
-        IEnumerator _Despawn(T1 spawnedItem, float setInactiveDelay)
+        public void Despawn(T spawnedItem, float setInactiveDelay = 0) => StartCoroutine(_Despawn(spawnedItem, setInactiveDelay));
+        IEnumerator _Despawn(T spawnedItem, float setInactiveDelay)
         {
             spawnedItem.transform.SetParent(transform);
             yield return new WaitForSeconds(setInactiveDelay);
@@ -47,8 +50,8 @@ namespace PawHunters
 
         public virtual void Clear() => spawnedList.ForEach(x =>
         {
-            x.transform.SetParent(spawnParent);
-            x.gameObject.SetActive(false);
+            x.Value?.transform.SetParent(spawnParent);
+            x.Value?.gameObject.SetActive(false);
         });
     }
 }

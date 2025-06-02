@@ -99,13 +99,14 @@ MonoBehaviour:
       level: 0
       attribute:
         health: 100
-        attack: 30
+        attack: 20
         defense: 5
         speed: 3
         critChance: 0.1
         critDamage: 1.2
         counterChance: 0.1
         comboChance: 0.1
+        specialSkillMax: 1
 --- !u!1 &7802089245653404642
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,4 +198,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParent: {fileID: 6968166437406940189}
-  spawnedList: []

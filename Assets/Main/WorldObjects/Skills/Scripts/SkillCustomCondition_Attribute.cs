@@ -12,18 +12,11 @@ namespace PawHunters
 
         [SerializeField] float baseValueA;
         [SerializeField, TableList] List<StatusEffectData.AttributeModifiers> attributeModifierA;
+        [SerializeField] OperatorType operatorType;
         [SerializeField] float baseValueB;
         [SerializeField, TableList] List<StatusEffectData.AttributeModifiers> attributeModifierB;
-        [SerializeField] OperatorType operatorType;
 
-        public override bool IsVaild(EntityMainController caster, object triggerSource)
-        {
-            if (triggerSource is EntityMainController)
-                return IsVaild(caster, triggerSource as EntityMainController);
-            Debug.LogError($"{triggerSource}({triggerSource?.GetType().Name}) is not {nameof(EntityMainController)}");
-            return true;
-        }
-
+        public override bool IsVaild(EntityMainController caster, object triggerSource) => IsVaild(caster, caster);
         public override bool IsVaild(EntityMainController caster, StatusEffectDataHandler triggerSource) => IsVaild(caster, triggerSource.caster);
         public override bool IsVaild(EntityMainController caster, EntityMainController target)
         {

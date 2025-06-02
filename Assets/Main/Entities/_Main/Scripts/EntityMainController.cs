@@ -67,7 +67,8 @@ namespace PawHunters
             EntityStatusEffectController.Init(this);
 
             layerManager.SetSortingGroupOrder(EnvironmentManager.Instance.GroundOrderInLayer);
-
+            if (CurrentState.Value == State.Dead)
+                SetToIdle();
             CheckState();
         }
 

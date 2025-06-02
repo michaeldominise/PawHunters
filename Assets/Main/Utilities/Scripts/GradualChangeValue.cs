@@ -14,8 +14,10 @@ namespace PawHunters
             public float duration;
             public float progress;
             public AnimationCurve animationCurve = AnimationCurve.Linear(0, 0, 1, 1);
+            public Coroutine coroutine;
 
-            public float CurrentValue => Mathf.Lerp(startValue, endValue, progress);
+            public float CurrentValue => Mathf.LerpUnclamped(startValue, endValue, progress);
+            public float CurrentValueClamped => Mathf.Lerp(startValue, endValue, progress);
             public bool IsDone => progress == 1;
 
             public Status(float startValue, float endValue, float duration, AnimationCurve animationCurve)
@@ -26,9 +28,11 @@ namespace PawHunters
                 this.duration = duration;
                 this.animationCurve = animationCurve ?? this.animationCurve;
             }
+
+            public void Stop() => GameManager.Instance.StopCoroutine(coroutine);
         }
 
-        public static Coroutine Execute(float startValue, float endValue, float duration, Action<Status> onUpdate, AnimationCurve animationCurve = null)
+        public static Status Execute(float startValue, float endValue, float duration, Action<Status> onUpdate, AnimationCurve animationCurve = null)
         {
             if (!GameManager.Instance)
             {
@@ -36,16 +40,20 @@ namespace PawHunters
                 return null;
             }
 
-            return GameManager.Instance.StartCoroutine(_Execute(new(startValue, endValue, duration, animationCurve), onUpdate));
+            var status = new Status(startValue, endValue, duration, animationCurve);
+            status.coroutine = GameManager.Instance.StartCoroutine(_Execute(status, onUpdate));
+            return status;
         }
 
         static IEnumerator _Execute(Status status, Action<Status> onUpdate)
         {
-            while (status.startTime + status.duration > Time.time)
+            var time = 0f;
+            while (status.duration > time)
             {
-                status.progress = status.animationCurve.Evaluate((Time.time - status.startTime) / status.duration);
+                status.progress = status.animationCurve.Evaluate(time / status.duration);
                 onUpdate?.Invoke(status);
                 yield return null;
+                time += Time.deltaTime;
             }
 
             status.progress = 1;

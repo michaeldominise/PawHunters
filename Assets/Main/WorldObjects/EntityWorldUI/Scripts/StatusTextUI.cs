@@ -10,7 +10,8 @@ namespace PawHunters
         [SerializeField] TextMeshProUGUI label;
         [SerializeField] Image iconImage;
 
-        AnimationCurve animationCurve = GlobalSettings.Instance?.gameSettings.progressUpdateAnimationCurve ?? default;
+        AnimationCurve AnimationTextCurve = GlobalSettings.Instance?.gameSettings.progressUpdateAnimationCurve ?? default;
+        AnimationCurve AnimationTransformCurve = GlobalSettings.Instance?.gameSettings.bounceAnimationCurve ?? default;
         float UpdateDuration => GlobalSettings.Instance.gameSettings.progressUpdateDuration;
         float TargetYPosition => GlobalSettings.Instance.gameSettings.statusTextUITargetYPosition;
         float TargetScale => GlobalSettings.Instance.gameSettings.statusTextUITargetScale;
@@ -20,13 +21,14 @@ namespace PawHunters
 
         public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, float value, CommonIconSettings.Icon icon = CommonIconSettings.Icon.None)
         {
-            Init(worldPosition, randomAdditionalDistance, colorLabel);
-            GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressUpdate, animationCurve);
+            Init(worldPosition, randomAdditionalDistance, colorLabel, icon);
+            GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTextUpdate, AnimationTextCurve);
+            GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTransformUpdate, AnimationTransformCurve);
         }
 
         public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, CommonIconSettings.Icon icon = CommonIconSettings.Icon.None)
         {
-            Init(worldPosition, randomAdditionalDistance, colorLabel);
+            Init(worldPosition, randomAdditionalDistance, colorLabel, icon);
             label.text = text;
         }
 
@@ -44,11 +46,13 @@ namespace PawHunters
             Kill();
         }
 
-        protected virtual void OnProgressUpdate(GradualChangeValue.Status status)
+        protected virtual void OnProgressTextUpdate(GradualChangeValue.Status status)
+            => label.text = $"{(status.CurrentValue > 0 ? "+" : "")}{status.CurrentValue.Format()}";
+
+        protected virtual void OnProgressTransformUpdate(GradualChangeValue.Status status)
         {
-            label.text = $"{(status.CurrentValue > 0 ? "+" : "")}{status.CurrentValue.Format()}";
-            label.transform.localPosition = Mathf.Lerp(0, TargetYPosition, status.progress) * Vector3.up;
-            label.transform.localScale = Mathf.Lerp(0, TargetScale, status.progress) * Vector3.one;
+            label.transform.localPosition = Mathf.LerpUnclamped(0, TargetYPosition, status.progress) * Vector3.up;
+            label.transform.localScale = Mathf.LerpUnclamped(0, TargetScale, status.progress) * Vector3.one;
         }
 
         async void Kill()

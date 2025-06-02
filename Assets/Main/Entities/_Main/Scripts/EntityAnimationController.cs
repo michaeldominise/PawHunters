@@ -19,14 +19,14 @@ namespace PawHunters
 
         EntityMainController entityMainController;
 
-        private void Start()
+        public void Init(EntityMainController entityMainController)
         {
+            this.entityMainController = entityMainController;
+
             var behaviours = animator.GetBehaviours<EntityAnimationControllerSetState>();
             foreach (var behaviour in behaviours)
                 behaviour.Init(this);
         }
-
-        public void Init(EntityMainController entityMainController) => this.entityMainController = entityMainController;
 
         [Button]
         public void SetState(State state, float delay = 0)
@@ -40,6 +40,7 @@ namespace PawHunters
             if (CurrentState.Value == state)
                 yield break;
 
+            SetHead(0);
             yield return new WaitForSeconds(delay);
 
             animator.SetInteger("State", (int)state);

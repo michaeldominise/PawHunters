@@ -13,7 +13,7 @@ namespace PawHunters
 
         [SerializeField] EntityMainController entityMainController;
         [SerializeField] EntityUIHealthBar entityUIHealthBar;
-        [SerializeField] EntityUISheildBar entityUISheildBar;
+        [SerializeField] EntityUIShieldBar entityUIShieldBar;
         [SerializeField] EntityUISpecialSkillBar entityUISpecialSkillBar;
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
 
@@ -27,7 +27,7 @@ namespace PawHunters
             this.entityMainController.CurrentState.RegisterListener(PlayerMainController_OnStateUpdate);
 
             entityUIHealthBar.Init(entityMainController);
-            entityUISheildBar.Init(entityMainController);
+            entityUIShieldBar.Init(entityMainController);
             entityUISpecialSkillBar.Init(entityMainController);
             CurrentState.Value = State.Alive;
         }

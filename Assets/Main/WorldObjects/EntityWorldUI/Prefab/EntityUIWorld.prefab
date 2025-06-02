@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
   entityUIHealthBar: {fileID: 4072389006147695221}
-  entityUISheildBar: {fileID: 9167745983473540221}
+  entityUIShieldBar: {fileID: 9167745983473540221}
   entityUISpecialSkillBar: {fileID: 2462444744266218527}
 --- !u!114 &1915969984383589386
 MonoBehaviour:

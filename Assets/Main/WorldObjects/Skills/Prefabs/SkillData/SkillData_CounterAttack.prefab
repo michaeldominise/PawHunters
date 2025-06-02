@@ -49,15 +49,16 @@ MonoBehaviour:
   icon: {fileID: 0}
   elementType: 0
   tags: 0
+  showStatusTextUI: 1
   baseValue: 0
   modifierType: 1
   attributeModifiers:
-  - attributeData: 2
-    modifierType: 0
+  - modifierType: 0
+    attributeData: 2
     sourceType: 1
   executeTrigger: 1
   statusEffectExecuteVisual: {fileID: 0}
-  executeFinishDelay: 0.5
+  executeFinishDelay: 0.25
   targetHealthStatus: 1
   customConditions: []
   expirationTrigger: 1

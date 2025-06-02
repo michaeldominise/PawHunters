@@ -19,6 +19,9 @@ namespace PawHunters
         [SerializeField] float duration = 0.5f;
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
 
+        GradualChangeValue.Status animStatus;
+        AnimationCurve AnimationTransformCurve => GlobalSettings.Instance?.gameSettings.bounceAnimationCurve ?? default;
+
         public EntityMainController EntityMainController => entityMainController;
 
         public void Init(EntityMainController entityMainController)
@@ -52,7 +55,11 @@ namespace PawHunters
                 return;
 
             CurrentState.Value = state;
-            transform.DOScale(scaleStates[(int)CurrentState.Value], duration);
+
+            var originalScale = transform.localScale.x;
+            animStatus?.Stop();
+            animStatus = GradualChangeValue.Execute(0, 1, duration,
+                status => transform.localScale = Mathf.LerpUnclamped(originalScale, scaleStates[(int)CurrentState.Value], status.progress) * Vector3.one, AnimationTransformCurve);
         }
 
         internal void SetOrder(int i)

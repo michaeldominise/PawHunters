@@ -14,10 +14,16 @@ namespace PawHunters
 
         private void Awake() => Instance = this;
         public void Spawn(Vector3 worldPosition, Color colorLabel, float value, CommonIconSettings.Icon icon = CommonIconSettings.Icon.None)
-            => Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, value, icon));
+        {
+            if(value != 0)
+                Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, value, icon));
+        }
 
         public void Spawn(Vector3 worldPosition, Color colorLabel, string text, CommonIconSettings.Icon icon = CommonIconSettings.Icon.None)
-            => Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, text, icon));
+        {
+            if(!string.IsNullOrWhiteSpace(text))
+                Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, text, icon));
+        }
 
         public Sprite GetIcon(CommonIconSettings.Icon icon) => commonIconSettings.GetIcon(icon);
     }

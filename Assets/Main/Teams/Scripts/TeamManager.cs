@@ -56,7 +56,7 @@ namespace PawHunters
 
         public override void Clear()
         {
-            spawnedList.ForEach(x => x.transform.SetParent(transform));
+            spawnedList.ForEach(x => x.Value?.transform.SetParent(transform));
             base.Clear();
         }
     }

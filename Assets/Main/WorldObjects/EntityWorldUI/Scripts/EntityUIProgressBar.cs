@@ -13,26 +13,30 @@ namespace PawHunters
         protected AnimationCurve animationCurve = GlobalSettings.Instance?.gameSettings.progressUpdateAnimationCurve ?? default;
         protected float UpdateDuration => GlobalSettings.Instance.gameSettings.progressUpdateDuration;
         protected virtual Color ProgressColor => Color.white;
-        Coroutine updateCoroutine;
+        GradualChangeValue.Status updateStatus;
 
-        protected abstract float SliderCurrentValue { get; }
+        protected abstract float CurrentValue { get; }
+        protected abstract float MaxValue { get; }
 
         public virtual void Init(EntityMainController entityMainController)
         {
             this.entityMainController = entityMainController;
             sliderProgress.value = 0;
             sliderProgress.image.color = ProgressColor;
-            updateCoroutine = null;
+            updateStatus = null;
             Refresh();
         }
 
 
         protected void Refresh()
         {
-            if (updateCoroutine != null || !gameObject.activeInHierarchy)
+            if (!gameObject.activeInHierarchy)
                 return;
 
-            updateCoroutine = GradualChangeValue.Execute(sliderProgress.value, SliderCurrentValue, UpdateDuration, OnProgressUpdate, animationCurve);
+            sliderProgress.maxValue = MaxValue;
+
+            updateStatus?.Stop();
+            updateStatus = GradualChangeValue.Execute(sliderProgress.value, CurrentValue, UpdateDuration, OnProgressUpdate, animationCurve);
         }
 
         protected virtual void OnProgressUpdate(GradualChangeValue.Status status)
@@ -41,7 +45,7 @@ namespace PawHunters
                 SetLabel(status);
             sliderProgress.value = status.CurrentValue;
             if (status.IsDone)
-                updateCoroutine = null;
+                updateStatus = null;
         }
 
         protected virtual void SetLabel(GradualChangeValue.Status status) { }

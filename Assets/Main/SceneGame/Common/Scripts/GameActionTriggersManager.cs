@@ -15,6 +15,7 @@ namespace PawHunters
             EndRound = 1 << 2,
             StatusEffectExecuted = 1 << 3,
             StatusEffectExecutedToTarget = 1 << 4,
+            StopBattle = 1 << 5,
         }
 
 

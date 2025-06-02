@@ -50,7 +50,7 @@ namespace PawHunters
         [Button]
         public async Task Execute()
         {
-            Debug.Log($"System execute Skill:'{title}'");
+            Debug.Log($"[SkillData.Execute] System execute Skill:'{title}'");
 
             foreach (var skillTarget in skillTargets)
                 await skillTarget.Execute(null);

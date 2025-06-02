@@ -17,6 +17,7 @@ namespace PawHunters
             public float critDamage = 1.2f;
             public float counterChance = 0.1f;
             public float comboChance = 0.1f;
+            public float specialSkillMax;
         }
 
         public string masterID;

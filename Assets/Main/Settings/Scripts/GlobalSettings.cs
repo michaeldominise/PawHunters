@@ -27,6 +27,7 @@ namespace PawHunters
             public float statusTextUITargetScale;
             public float statusTextUILifeDuration;
             public float statusTextUISpawnerRandomAdditionalDistance;
+            public AnimationCurve bounceAnimationCurve;
         }
 
         public ColorTheme colorTheme;

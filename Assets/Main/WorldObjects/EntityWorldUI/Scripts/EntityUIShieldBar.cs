@@ -4,11 +4,12 @@ using UnityEngine.UI;
 
 namespace PawHunters
 {
-    public class EntityUISheildBar : EntityUIProgressBar
+    public class EntityUIShieldBar : EntityUIProgressBar
     {
         protected override Color ProgressColor => GlobalSettings.Instance.colorTheme.shieldProgressColor;
 
-        protected override float SliderCurrentValue => Mathf.Min(entityMainController.BattleAttributes.shield.Value / entityMainController.BattleAttributes.currentHealth.Value, 1);
+        protected override float CurrentValue => entityMainController.BattleAttributes.shield.Value;
+        protected override float MaxValue => entityMainController.BattleAttributes.maxHealth.Value;
 
         public override void Init(EntityMainController entityMainController)
         {
@@ -28,7 +29,11 @@ namespace PawHunters
         {
             if (entityMainController.BattleAttributes.shield.Value <= 0)
                 return;
-            label.text = Mathf.Lerp(0, entityMainController.BattleAttributes.shield.Value, status.CurrentValue).Format();
+
+            if (status.CurrentValue <= 0)
+                label.text = $"{entityMainController.BattleAttributes.currentHealth.Value.Format()}";
+            else
+                label.text = $"({status.CurrentValue.Format()})";
         }
     }
 }

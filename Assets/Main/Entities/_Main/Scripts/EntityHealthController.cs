@@ -13,10 +13,10 @@ namespace PawHunters
         EntityMainController entityMainController;
         BattleAttributes BattleAttributes => entityMainController.BattleAttributes;
 
-        public void Init(EntityMainController playerMainController)
+        public void Init(EntityMainController entityMainController)
         {
             CurrentState.Value = State.Alive;
-            this.entityMainController = playerMainController;
+            this.entityMainController = entityMainController;
         }
 
         [Button]
@@ -35,7 +35,7 @@ namespace PawHunters
         {
             var healthPercentage = BattleAttributes.HealthPercentage;
             BattleAttributes.maxHealth.Update(value, obj);
-            BattleAttributes.currentHealth.Update(BattleAttributes.maxHealth.Value * healthPercentage, obj);
+            BattleAttributes.currentHealth.Update(BattleAttributes.maxHealth.Value * healthPercentage - BattleAttributes.currentHealth.Value, obj);
         }
 
         [Button]

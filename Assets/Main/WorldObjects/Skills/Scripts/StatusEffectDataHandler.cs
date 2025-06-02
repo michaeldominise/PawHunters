@@ -38,8 +38,8 @@ namespace PawHunters
                 await data.WaitStopMoving(this);
             await data.PlayExecuteVisual(this);
             var executeValue = await data.Execute(this);
-            if(caster)
-                Debug.Log($"{caster.name}:{(bool)caster.TeamManager_GamePlayer} execute StatusEffect:'{data.Title}:{executeValue}' to {target.name}:{(bool)target.TeamManager_GamePlayer}");
+            var executeLog = caster ? $"{caster.name}:{(bool)caster.TeamManager_GamePlayer}" : "System";
+            Debug.Log($"[StatusEffectDataHandler.Execute] {executeLog} execute StatusEffect:'{data.Title}:{executeValue}' to {target.name}:{(bool)target.TeamManager_GamePlayer}");
 
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StatusEffectExecuted, caster);
             await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.StatusEffectExecutedToTarget, this);

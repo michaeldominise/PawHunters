@@ -18,8 +18,8 @@ namespace PawHunters
             public enum ModifierType { Add, Subtract, Divide, Multiply }
             public enum SourceType { Target, Caster }
 
-            [SerializeField] SkillAttributeData.AttributeType attributeData;
             [SerializeField] ModifierType modifierType;
+            [SerializeField] SkillAttributeData.AttributeType attributeData;
             [SerializeField] SourceType sourceType;
 
             public float GetValue(float referenceValue, EntityMainController caster, EntityMainController target)
@@ -41,6 +41,7 @@ namespace PawHunters
         [SerializeField, FoldoutGroup("Basic")] Sprite icon;
         [SerializeField, FoldoutGroup("Basic")] ElementType elementType;
         [SerializeField, FoldoutGroup("Basic")] StatusEffectTags tags;
+        [SerializeField, FoldoutGroup("Basic")] bool showStatusTextUI;
 
         [SerializeField, FoldoutGroup("Value and Computation")] float baseValue;
         [SerializeField, FoldoutGroup("Value and Computation")] ModifierType modifierType;
@@ -48,7 +49,7 @@ namespace PawHunters
 
         [SerializeField, FoldoutGroup("Execution")] GameActionTriggersManager.TriggerType executeTrigger = GameActionTriggersManager.TriggerType.Instant;
         [SerializeField, FoldoutGroup("Execution")] StatusEffectVisual statusEffectExecuteVisual;
-        [SerializeField, FoldoutGroup("Execution")] float executeFinishDelay = 0.5f;
+        [SerializeField, FoldoutGroup("Execution")] float executeFinishDelay = 0.25f;
         [SerializeField, FoldoutGroup("Execution")] SkillTargetData.HealthStatusType targetHealthStatus = SkillTargetData.HealthStatusType.Alive;
         [SerializeField, FoldoutGroup("Execution")] List<SkillCustomCondition> customConditions;
 
@@ -104,6 +105,14 @@ namespace PawHunters
         {
             if (statusEffectExpireVisual)
                 await statusEffectExpireVisual.Execute();
+        }
+
+        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, CommonIconSettings.Icon icon = CommonIconSettings.Icon.None)
+        {
+            if (!showStatusTextUI)
+                return;
+
+            StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, color, value, icon);
         }
     }
 }

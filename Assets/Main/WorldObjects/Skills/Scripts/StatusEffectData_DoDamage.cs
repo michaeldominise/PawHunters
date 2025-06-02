@@ -29,16 +29,16 @@ namespace PawHunters
                 if (!ignoreDefense)
                     cachedValue = Mathf.Min(cachedValue + Random.Range(0, target.BattleAttributes.defense.Value), 0);
 
+                ShowStatusTextUI(target, colorLabel, cachedValue);
                 if (!ignoreSheild)
                 {
+                    var shieldDamage = Mathf.Max(cachedValue, -target.BattleAttributes.shield.Value);
                     cachedValue = Mathf.Min(cachedValue + target.BattleAttributes.shield.Value, 0);
-                    var shieldDamage = Mathf.Max(cachedValue + target.BattleAttributes.shield.Value, 0);
                     target.BattleAttributes.shield.Update(shieldDamage, statusEffectDataHandler);
                 }
             }
 
             target.EntityHealthController.AddHealth(cachedValue, this);
-            StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, colorLabel, cachedValue);
             await base.Execute(statusEffectDataHandler);
             return cachedValue;
         }

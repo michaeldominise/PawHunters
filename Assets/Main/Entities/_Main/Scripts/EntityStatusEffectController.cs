@@ -33,7 +33,14 @@ namespace PawHunters
             if (statusEffectDataHandler.data.ExecuteTrigger == GameActionTriggersManager.TriggerType.Instant)
                 await statusEffectDataHandler.Execute();
             if (statusEffectDataHandler.data.ExpirationTrigger == GameActionTriggersManager.TriggerType.Instant)
-                await statusEffectDataHandler.Expire();
+                await ApplyExpiration(statusEffectDataHandler);
+        }
+        [Button]
+        public async Task ApplyExpiration(StatusEffectDataHandler statusEffectDataHandler)
+        {
+            await statusEffectDataHandler.Expire();
+            if (statusEffectDataHandler.expirationCountdown <= 0)
+                RemoveStatusEffect(statusEffectDataHandler);
         }
 
         [Button]
@@ -55,10 +62,7 @@ namespace PawHunters
             {
                 if (!statusEffect.data.ExpirationTrigger.HasFlag(triggerType))
                     continue;
-
-                await statusEffect.Expire();
-                if (statusEffect.expirationCountdown <= 0)
-                    RemoveStatusEffect(statusEffect);
+                await ApplyExpiration(statusEffect);
             }
         }
 

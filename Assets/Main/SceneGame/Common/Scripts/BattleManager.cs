@@ -112,6 +112,8 @@ namespace PawHunters
             entityUIList.Clear();
             RoundUIManager.Instance.UpdateUI(CurrentRound);
             EntityUIPortraitSpawner.Instance.Clear();
+
+            _ = GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StopBattle);
             _ = resetSpecialSkill.Execute();
 
             if (CurrentState.Value == State.JourneyFailed)

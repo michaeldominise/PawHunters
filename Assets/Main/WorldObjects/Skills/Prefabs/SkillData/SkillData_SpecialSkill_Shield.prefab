@@ -1,0 +1,263 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5563931548001323825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5078981846644556289}
+  - component: {fileID: 60904050300809216}
+  m_Layer: 0
+  m_Name: SkillTargetData_Caster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5078981846644556289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5563931548001323825}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1152319021490390681}
+  m_Father: {fileID: 1203930370509765833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &60904050300809216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5563931548001323825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492d83ca08d947bea4b2488b081b343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffects:
+  - {fileID: 2908861997990198625}
+  targetGroupType: 4
+  groupOrderType: 0
+  healthStatusType: 1
+  targetCount: 1
+  customConditions: []
+--- !u!1 &6187895121218135764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203930370509765833}
+  - component: {fileID: 7754968525061356826}
+  m_Layer: 0
+  m_Name: SkillData_SpecialSkill_Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203930370509765833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187895121218135764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4044790499631455540}
+  - {fileID: 5078981846644556289}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7754968525061356826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187895121218135764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68de5fc8cd9fa43ca826fbb94bee366e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Sheild
+  description: Add shield to the caster by 30% of it's max hp
+  icon: {fileID: 0}
+  skillTargets:
+  - {fileID: 5757460704594295366}
+  - {fileID: 60904050300809216}
+  runToTargetBeforeExecute: 0
+  trigger: 1
+  customConditions:
+  - {fileID: 3076009983235519575}
+  animationCastType: 0
+  playAttackAnimation: 0
+--- !u!1 &9089459483711471857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152319021490390681}
+  - component: {fileID: 2908861997990198625}
+  m_Layer: 0
+  m_Name: StatusEffectData_Sheild
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152319021490390681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089459483711471857}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5078981846644556289}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2908861997990198625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089459483711471857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d581988e30c1546418abc4a409813fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Shield
+  description: 
+  icon: {fileID: 0}
+  elementType: 0
+  tags: 0
+  showStatusTextUI: 1
+  baseValue: 0.3
+  modifierType: 0
+  attributeModifiers:
+  - modifierType: 3
+    attributeData: 0
+    sourceType: 0
+  executeTrigger: 1
+  statusEffectExecuteVisual: {fileID: 0}
+  executeFinishDelay: 0.25
+  targetHealthStatus: 1
+  customConditions: []
+  expirationTrigger: 1
+  expireAction: 0
+  expirationCount: 0
+  statusEffectExpireVisual: {fileID: 0}
+  expireFinishDelay: 0
+  targetAttribute: 7
+--- !u!1001 &3561593870167507328
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1203930370509765833}
+    m_Modifications:
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6117340595975903102, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+      propertyPath: m_Name
+      value: SpecialSkillTemplate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+--- !u!114 &3076009983235519575 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2007897388882458071, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+  m_PrefabInstance: {fileID: 3561593870167507328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be300333d9f844672b6ea34b7bf65fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &4044790499631455540 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 670096563772808372, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+  m_PrefabInstance: {fileID: 3561593870167507328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5757460704594295366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9118609196988234694, guid: d581399bdf3824ad6a8c6b052c6c8550, type: 3}
+  m_PrefabInstance: {fileID: 3561593870167507328}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492d83ca08d947bea4b2488b081b343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

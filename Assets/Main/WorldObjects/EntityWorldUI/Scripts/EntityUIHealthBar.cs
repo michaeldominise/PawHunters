@@ -8,7 +8,10 @@ namespace PawHunters
     {
         Gradient HealthColor => GlobalSettings.Instance.colorTheme.healthProgressColor;
 
-        protected override float SliderCurrentValue => entityMainController.BattleAttributes.HealthPercentage;
+        protected override float CurrentValue => entityMainController.BattleAttributes.currentHealth.Value;
+        protected override float MaxValue => entityMainController.BattleAttributes.maxHealth.Value;
+
+        private void OnEnable() => BattleManager.Instance.CurrentState.RegisterListener(Refresh);
 
         public override void Init(EntityMainController entityMainController)
         {
@@ -34,7 +37,7 @@ namespace PawHunters
         {
             if (entityMainController.BattleAttributes.shield.Value > 0)
                 return;
-            label.text = Mathf.Lerp(0, entityMainController.BattleAttributes.maxHealth.Value, status.CurrentValue).Format();
+            label.text = status.CurrentValue.Format();
         }
     }
 }
