@@ -23,7 +23,7 @@ namespace PawHunters
 
         public virtual T Spawn(T prefab, Func<T, bool> condition = null, Action<T> init = null)
         {
-            var keyPairItem = spawnedList.FirstOrDefault(x => x.Key == prefab.GetInstanceID()  && !x.Value.isActiveAndEnabled && (condition?.Invoke(x.Value) ?? true));
+            var keyPairItem = spawnedList.FirstOrDefault(x => x.Key == prefab.GetInstanceID()  && !x.Value.gameObject.activeSelf && (condition?.Invoke(x.Value) ?? true));
             var item = keyPairItem.Value;
             if (!item)
                 item = Instantiate(prefab);

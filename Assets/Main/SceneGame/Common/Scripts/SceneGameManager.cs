@@ -10,19 +10,29 @@ namespace PawHunters
     {
         public static SceneGameManager Instance { get; private set; }
 
-        [SerializeField] LevelData levelData;
-        [SerializeField] SaveableTeamData teamData;
-        [ShowInInspector, ReadOnly] public int CurrentJourney { get; private set; } = -1;
+        [SerializeField] protected GameSettings_Battle gameSettings_Battle;
+        [SerializeField] protected LevelData levelData;
+        [SerializeField] protected SaveableTeamData teamData;
+
+        [ShowInInspector, ReadOnly] int CurrentJourneyIndex { get; set; } = -1;
+        public event Action<int> OnCurrentJouneyUpdate;
 
         public LevelData LevelData => levelData;
+        public GameSettings_Battle GameSettings_Battle => gameSettings_Battle;
 
         private void Awake() => Instance = this;
-        protected virtual IEnumerator Start()
+        IEnumerator Start()
         {
             yield return null;
             yield return null;
+            Init();
+        }
+
+        protected virtual void Init()
+        {
             EnvironmentManager.Instance.Init(levelData.environmentItem);
             TeamManager_GamePlayer.Instance.Init(teamData);
+            JourneyUIManager.Instance.Init(levelData);
             NextJourney();
         }
 
@@ -33,11 +43,15 @@ namespace PawHunters
             if (TeamManager_GameEnemy.Instance.IsAlive)
                 TeamManager_GameEnemy.Instance.Kill();
             EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
-            CurrentJourney++;
-            if (levelData.journeys.Count == CurrentJourney)
+            CurrentJourneyIndex++;
+
+            if (levelData.journeys.Count == CurrentJourneyIndex)
                 JourneyComplete();
             else
-                levelData.journeys[CurrentJourney].Init();
+            {
+                levelData.journeys[CurrentJourneyIndex].Init();
+                OnCurrentJouneyUpdate?.Invoke(CurrentJourneyIndex);
+            }
         }
 
         [Button]

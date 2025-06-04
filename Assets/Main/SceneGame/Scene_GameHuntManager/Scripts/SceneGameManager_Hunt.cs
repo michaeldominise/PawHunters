@@ -6,5 +6,9 @@ namespace PawHunters
 {
     public class SceneGameManager_Hunt : SceneGameManager
     {
+        protected override void Init()
+        {
+            base.Init();
+        }
     }
 }

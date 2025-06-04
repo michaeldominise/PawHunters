@@ -107,7 +107,7 @@ namespace PawHunters
                 await statusEffectExpireVisual.Execute();
         }
 
-        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, CommonIconSettings.Icon icon = CommonIconSettings.Icon.None)
+        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, GameSettings_Battle.Type icon = GameSettings_Battle.Type.None)
         {
             if (!showStatusTextUI)
                 return;

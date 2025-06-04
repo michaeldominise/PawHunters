@@ -9,7 +9,7 @@ namespace PawHunters
 {
     public class BattleManager : MonoBehaviour
     {
-        public enum State { None, StartRound, ExecuteInstantSkils, EndRound, JourneyFailed, NextJourney }
+        public enum State { None, Execute, StartRound, ExecuteInstantSkils, EndRound, JourneyFailed, NextJourney }
 
         public static BattleManager Instance { get; private set; }
 
@@ -34,16 +34,15 @@ namespace PawHunters
             foreach (var entity in TeamManager_GameEnemy.AliveEntityList)
                 entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnEnemy(entity));
 
+            CurrentState.Value = State.Execute;
             StartRound();
         }
 
         async void StartRound()
         {
-            CurrentState.Value = State.StartRound;
             CurrentRound++;
-
-            RoundUIManager.Instance.UpdateUI(CurrentRound);
             RearrangeEntities();
+            CurrentState.Value = State.StartRound;
 
             await Task.Delay(500);
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StartRound);
@@ -110,8 +109,6 @@ namespace PawHunters
         {
             CurrentRound = 0;
             entityUIList.Clear();
-            RoundUIManager.Instance.UpdateUI(CurrentRound);
-            EntityUIPortraitSpawner.Instance.Clear();
 
             _ = GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StopBattle);
             _ = resetSpecialSkill.Execute();

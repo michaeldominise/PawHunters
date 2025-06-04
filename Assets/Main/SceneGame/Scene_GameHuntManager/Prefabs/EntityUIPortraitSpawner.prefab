@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &195897295918531573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParent: {fileID: 195897295918531573}
-  spawnedList: []
   prefabPlayer: {fileID: 3544071688332818279, guid: 11e6fef34db4c4ff9b2af191e6aefb4f, type: 3}
   prefabEnemy: {fileID: 7105148715250682269, guid: 6219d352a1e6f42f7bdddd36d0dc3ea9, type: 3}
   preSpawnCount: 3

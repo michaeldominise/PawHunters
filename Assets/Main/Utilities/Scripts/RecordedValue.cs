@@ -37,6 +37,12 @@ namespace PawHunters
 
         protected abstract T SetValue();
 
+        public virtual T Reset(T value = default)
+        {
+            dataList.Clear();
+            return Update(value);
+        }
+
         public virtual T Update(T value, object obj = null, Func<T, T> condition = null)
         {
             value = condition == null ? value : condition.Invoke(Value);

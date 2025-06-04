@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7221cf1e2e7df4c79909149a7cc9dd49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSettings_Battle: {fileID: 11400000, guid: 202c2be5e3b7440c182ab7ed0c1a671b, type: 2}
   levelData: {fileID: 11400000, guid: ba1292996b7f343b8b2e5d2a709ffa7d, type: 2}
   teamData:
     teamName: 
@@ -107,6 +108,30 @@ MonoBehaviour:
         counterChance: 0.1
         comboChance: 0.1
         specialSkillMax: 1
+    - masterID: 
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
+    - masterID: 
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
 --- !u!1 &7802089245653404642
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,9 +20,36 @@ namespace PawHunters
 
         private void Awake() => Instance = this;
 
+        private IEnumerator Start()
+        {
+            yield return null;
+            BattleManager.Instance.CurrentState.RegisterListener(BattleManager_CurrentStateUpdate);
+        }
+
+        private void OnDestroy() => BattleManager.Instance.CurrentState.UnregisterListener(BattleManager_CurrentStateUpdate);
+
+        private void BattleManager_CurrentStateUpdate(BattleManager.State state)
+        {
+            switch (state)
+            {
+                case BattleManager.State.Execute:
+                    Show(MaxRound > 0);
+                    break;
+                case BattleManager.State.StartRound:
+                    UpdateUI(BattleManager.Instance.CurrentRound);
+                    break;
+                case BattleManager.State.None:
+                    Show(false);
+                    break;
+            }
+        }
+
+        [Button]
+        public void Show(bool value) => container.SetActive(value);
+
+        [Button]
         public void UpdateUI(int currentRound)
         {
-            container.SetActive(currentRound > 0 && MaxRound > 0);
             if (currentRound == 0)
                 return;
             roundLabel.text = $"Round {currentRound}/{MaxRound}";

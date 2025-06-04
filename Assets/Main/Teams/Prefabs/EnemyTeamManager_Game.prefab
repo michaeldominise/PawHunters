@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParent: {fileID: 2260869497902021793}
-  spawnedList: []
   teamData:
     teamName: 
     characters: []
@@ -55,7 +54,7 @@ MonoBehaviour:
   - {fileID: 8134222878837761947}
   - {fileID: 6126343527379344836}
   - {fileID: 403047677833993757}
-  offset: {x: 5, y: 0, z: 1}
+  offset: {x: 5, y: 0, z: 0}
 --- !u!1 &2200218932746502470
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +115,7 @@ Transform:
   m_GameObject: {fileID: 2415481302436583991}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 1, y: 0.5, z: 0}
+  m_LocalPosition: {x: 1, y: 0.5, z: 0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -161,7 +160,7 @@ Transform:
   m_GameObject: {fileID: 3387009007408756513}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 1, y: -0.5, z: 0}
+  m_LocalPosition: {x: 1, y: -0.5, z: -0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

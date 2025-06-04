@@ -16,13 +16,13 @@ namespace PawHunters
         {
             var target = statusEffectDataHandler.target;
             var cachedValue = statusEffectDataHandler.cachedValue;
-            var colorLabel = GlobalSettings.Instance.colorTheme.damageColor;
+            var colorLabel = GameSettings_Battle.Instance.colorTheme.damageColor;
 
             if (cachedValue < 0)
             {
                 if (!ignoreCrit && Random.Range(0, 1f) <= statusEffectDataHandler.caster.BattleAttributes.critChance.Value)
                 {
-                    colorLabel = GlobalSettings.Instance.colorTheme.criticalColor;
+                    colorLabel = GameSettings_Battle.Instance.colorTheme.criticalColor;
                     cachedValue *= statusEffectDataHandler.caster.BattleAttributes.critDamage.Value;
                 }
 

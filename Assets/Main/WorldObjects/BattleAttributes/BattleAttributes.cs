@@ -27,18 +27,17 @@ namespace PawHunters
 
         internal void Init(SaveableObjectAttributeData.Attribute attribute)
         {
-            maxHealth.Update(attribute.health);
-            currentHealth.Update(attribute.health);
-            attack.Update(attribute.attack);
-            defense.Update(attribute.defense);
-            speed.Update(attribute.speed);
-            critChance.Update(attribute.critChance);
-            critDamage.Update(attribute.critDamage);
-            specialSkillMax.Update(attribute.specialSkillMax);
-
-            shield.Update(0);
-            specialSkill.Update(0);
-            stunned.Update(0);
+            maxHealth.Reset(attribute.health);
+            currentHealth.Reset(attribute.health);
+            attack.Reset(attribute.attack);
+            defense.Reset(attribute.defense);
+            speed.Reset(attribute.speed);
+            critChance.Reset(attribute.critChance);
+            critDamage.Reset(attribute.critDamage);
+            specialSkillMax.Reset(attribute.specialSkillMax);
+            shield.Reset(0);
+            specialSkill.Reset(0);
+            stunned.Reset(0);
         }
     }
 }

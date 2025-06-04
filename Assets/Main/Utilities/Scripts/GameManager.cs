@@ -6,8 +6,8 @@ namespace PawHunters
     {
         public static GameManager Instance { get; private set; }
 
-        [SerializeField] GlobalSettings globalSettings;
-        public GlobalSettings GlobalSettings => globalSettings;
+        [SerializeField] GameSettings_Global gameSettings_Global;
+        public GameSettings_Global GameSettings_Global => gameSettings_Global;
 
         private void Awake() => Instance = this;
         private void Update() => SaveableData.Execute();

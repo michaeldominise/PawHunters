@@ -1,0 +1,64 @@
+using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace PawHunters
+{
+    public class StatusTextUI : MonoBehaviour
+    {
+        [SerializeField] TextMeshProUGUI label;
+        [SerializeField] Image iconImage;
+
+        AnimationCurve AnimationTextCurve = GameSettings_Battle.Instance?.constantValues.progressUpdateAnimationCurve ?? default;
+        AnimationCurve AnimationTransformCurve = GameSettings_Battle.Instance?.constantValues.bounceAnimationCurve ?? default;
+        float UpdateDuration => GameSettings_Battle.Instance.constantValues.progressUpdateDuration;
+        float TargetYPosition => GameSettings_Battle.Instance.constantValues.statusTextUITargetYPosition;
+        float TargetScale => GameSettings_Battle.Instance.constantValues.statusTextUITargetScale;
+        float LifeDuration => GameSettings_Battle.Instance.constantValues.statusTextUILifeDuration;
+        Camera WorldCamera => Camera.main;
+        RectTransform RectParent => transform.parent as RectTransform;
+
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, float value, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
+        {
+            Init(worldPosition, randomAdditionalDistance, colorLabel, type);
+            GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTextUpdate, AnimationTextCurve);
+            GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTransformUpdate, AnimationTransformCurve);
+        }
+
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
+        {
+            Init(worldPosition, randomAdditionalDistance, colorLabel, type);
+            label.text = text;
+        }
+
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
+        {
+            var viewportPoint = WorldCamera.WorldToViewportPoint(worldPosition);
+            var halfScreenSize = new Vector3(RectParent.rect.width, RectParent.rect.height) * 0.5f;
+            transform.localPosition = new Vector3(Mathf.LerpUnclamped(-halfScreenSize.x, halfScreenSize.x, viewportPoint.x), Mathf.LerpUnclamped(-halfScreenSize.y, halfScreenSize.y, viewportPoint.y)) + randomAdditionalDistance * (Vector3)Random.insideUnitCircle;
+
+            label.color = colorLabel;
+            var sprite = GameSettings_Battle.Instance.iconSprite.GetSprite(type);
+            iconImage.sprite = sprite;
+            iconImage.gameObject.SetActive(sprite);
+
+            Kill();
+        }
+
+        protected virtual void OnProgressTextUpdate(GradualChangeValue.Status status)
+            => label.text = $"{(status.CurrentValue > 0 ? "+" : "")}{status.CurrentValue.Format()}";
+
+        protected virtual void OnProgressTransformUpdate(GradualChangeValue.Status status)
+        {
+            label.transform.localPosition = Mathf.LerpUnclamped(0, TargetYPosition, status.progress) * Vector3.up;
+            label.transform.localScale = Mathf.LerpUnclamped(0, TargetScale, status.progress) * Vector3.one;
+        }
+
+        async void Kill()
+        {
+            await Task.Delay((int)(LifeDuration * 1000));
+            gameObject.SetActive(false);
+        }
+    }
+}

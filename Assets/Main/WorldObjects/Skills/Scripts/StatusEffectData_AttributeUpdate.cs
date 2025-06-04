@@ -21,15 +21,15 @@ namespace PawHunters
                         Debug.LogError($"This is prohibited to use. Use {nameof(StatusEffectData_DoDamage)}");
                     else
                         target.EntityHealthController.AddHealth(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, GlobalSettings.Instance.colorTheme.healColor, cachedValue);
+                    ShowStatusTextUI(target, GameSettings_Battle.Instance.colorTheme.healColor, cachedValue);
                     break;
                 case SkillAttributeData.AttributeType.MaxHealth:
                     target.EntityHealthController.AddMaxHealth(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, CommonIconSettings.Icon.Health);
+                    ShowStatusTextUI(target, Color.white, cachedValue, GameSettings_Battle.Type.Health);
                     break;
                 case SkillAttributeData.AttributeType.Attack:
                     target.BattleAttributes.attack.Update(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, CommonIconSettings.Icon.Attack);
+                    ShowStatusTextUI(target, Color.white, cachedValue, GameSettings_Battle.Type.Attack);
                     break;
                 case SkillAttributeData.AttributeType.Defense:
                     target.BattleAttributes.defense.Update(cachedValue, statusEffectDataHandler);
@@ -37,7 +37,7 @@ namespace PawHunters
                     break;
                 case SkillAttributeData.AttributeType.Speed:
                     target.BattleAttributes.speed.Update(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, CommonIconSettings.Icon.Speed);
+                    ShowStatusTextUI(target, Color.white, cachedValue, GameSettings_Battle.Type.Speed);
                     break;
                 case SkillAttributeData.AttributeType.CritChance:
                     target.BattleAttributes.critChance.Update(cachedValue, statusEffectDataHandler);
@@ -49,7 +49,7 @@ namespace PawHunters
                     break;
                 case SkillAttributeData.AttributeType.Shield:
                     target.EntityHealthController.AddSheild(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, CommonIconSettings.Icon.Shield);
+                    ShowStatusTextUI(target, Color.white, cachedValue, GameSettings_Battle.Type.Shield);
                     break;
                 case SkillAttributeData.AttributeType.SpecialSkill:
                     target.BattleAttributes.specialSkill.Update(cachedValue, statusEffectDataHandler);
