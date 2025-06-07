@@ -33,7 +33,7 @@ namespace PawHunters
             public Color journeyActiveColor_Default;
             public Color journeyActiveColor_Battle;
             public Color journeyActiveColor_Boss;
-            internal Color blockedColor;
+            public Color blockedColor;
 
             public override Color GetColor(Type enumType)
                 => enumType switch

@@ -23,13 +23,13 @@ namespace PawHunters
         {
             Init(worldPosition, randomAdditionalDistance, colorLabel, type);
             GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTextUpdate, AnimationTextCurve);
-            GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTransformUpdate, AnimationTransformCurve);
         }
 
         public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
         {
             Init(worldPosition, randomAdditionalDistance, colorLabel, type);
             label.text = text;
+            GradualChangeValue.Execute(0, 1, UpdateDuration, OnProgressTransformUpdate, AnimationTransformCurve);
         }
 
         public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
@@ -47,7 +47,10 @@ namespace PawHunters
         }
 
         protected virtual void OnProgressTextUpdate(GradualChangeValue.Status status)
-            => label.text = $"{(status.CurrentValue > 0 ? "+" : "")}{status.CurrentValue.Format()}";
+        { 
+            label.text = $"{(status.CurrentValue > 0 ? "+" : "")}{status.CurrentValue.Format()}";
+            OnProgressTransformUpdate(status);
+        }
 
         protected virtual void OnProgressTransformUpdate(GradualChangeValue.Status status)
         {

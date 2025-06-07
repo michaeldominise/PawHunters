@@ -33,7 +33,7 @@ namespace PawHunters
                     var totalDefense = target.BattleAttributes.defense.Value + statusEffectDataHandler.target.EntityStatusEffectController.GetEnhanceValue(statusEffectDataHandler.caster, StatusEffectData_Enhance.EnhanceType.Defense);
                     cachedValue = Mathf.Min(cachedValue + Random.Range(0, totalDefense), 0);
                     if(cachedValue == 0)
-                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.blockedColor, "Blocked");
+                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.blockedColor, "block");
                 }
 
                 ShowStatusTextUI(target, colorLabel, cachedValue);

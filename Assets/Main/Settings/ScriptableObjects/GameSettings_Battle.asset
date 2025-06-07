@@ -53,6 +53,7 @@ MonoBehaviour:
     journeyActiveColor_Default: {r: 0.05490196, g: 0.6509804, b: 0.99607843, a: 1}
     journeyActiveColor_Battle: {r: 0.8584906, g: 0.63915884, b: 0.16602883, a: 1}
     journeyActiveColor_Boss: {r: 0.735849, g: 0.21867211, b: 0.21867211, a: 1}
+    blockedColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
   iconSprite:
     shield: {fileID: 21300000, guid: 4b61e1cfe7fca455d9c6614abba0a3cf, type: 3}
     speed: {fileID: 21300000, guid: 82b91019cb2284e128ba1075a28fef05, type: 3}
