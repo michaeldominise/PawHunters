@@ -31,8 +31,9 @@ namespace PawHunters
         protected virtual void Init()
         {
             EnvironmentManager.Instance.Init(levelData.environmentItem);
-            TeamManager_GamePlayer.Instance.Init(teamData);
             JourneyUIManager.Instance.Init(levelData);
+            TeamManager_GamePlayer.Instance.Init(teamData);
+            EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
             NextJourney();
         }
 

@@ -41,8 +41,8 @@ namespace PawHunters
             var executeLog = caster ? $"{caster.name}:{(bool)caster.TeamManager_GamePlayer}" : "System";
             Debug.Log($"[StatusEffectDataHandler.Execute] {executeLog} execute StatusEffect:'{data.Title}:{executeValue}' to {target.name}:{(bool)target.TeamManager_GamePlayer}");
 
-            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StatusEffectExecuted, caster);
-            await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.StatusEffectExecutedToTarget, this);
+            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.ApplyCasterStatusEffect, caster);
+            await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.ApplyTargetStatusEffect, this);
         }
 
         public async Task<bool> Expire()

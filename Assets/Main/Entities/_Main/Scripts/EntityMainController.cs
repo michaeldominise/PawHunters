@@ -60,11 +60,11 @@ namespace PawHunters
             battleAttributes.Init(characterData.attribute);
             RegisterListener();
 
-            entitySkillsController.Init(this);
             entityHealthController.Init(this);
             entityMovementController.Init(this);
             entityAnimationController.Init(this);
             EntityStatusEffectController.Init(this);
+            entitySkillsController.Init(this);
 
             layerManager.SetSortingGroupOrder(EnvironmentManager.Instance.GroundOrderInLayer);
             if (CurrentState.Value == State.Dead)

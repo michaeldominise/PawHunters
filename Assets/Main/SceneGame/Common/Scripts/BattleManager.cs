@@ -10,7 +10,7 @@ namespace PawHunters
 {
     public class BattleManager : MonoBehaviour
     {
-        public enum State { None, StartBattle, StartRound, ExecuteInstantSkils, EndRound, JourneyFailed, NextJourney }
+        public enum State { None, InitiateBattle, BeginRound, ExecuteInstantSkils, FinishRound, JourneyFailed, NextJourney }
 
         public static BattleManager Instance { get; private set; }
 
@@ -36,26 +36,26 @@ namespace PawHunters
                 entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnEnemy(entity));
         }
 
-        public async void StartBattle()
+        public async void InitiateBattle()
         {
             Init();
-            CurrentState.Value = State.StartBattle;
-            await ExecuteSkills(GameActionTriggersManager.TriggerType.StartBattle);
-            StartRound();
+            CurrentState.Value = State.InitiateBattle;
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.InitiateBattle);
+            BeginRound();
         }
 
-        async void StartRound()
+        async void BeginRound()
         {
             CurrentRound++;
             RearrangeEntities();
-            CurrentState.Value = State.StartRound;
+            CurrentState.Value = State.BeginRound;
 
             await Task.Delay(500);
-            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StartRound);
+            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.BeginRound);
             if (CheckStopBattle())
                 return;
 
-            await ExecuteSkills(GameActionTriggersManager.TriggerType.StartRound);
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.BeginRound);
             if (CheckStopBattle())
                 return;
 
@@ -69,21 +69,21 @@ namespace PawHunters
             if (CheckStopBattle())
                 return;
 
-            EndRound();
+            FinishRound();
         }
 
-        async void EndRound()
+        async void FinishRound()
         {
-            CurrentState.Value = State.EndRound;
-            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.EndRound);
+            CurrentState.Value = State.FinishRound;
+            await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.FinishRound);
             if (CheckStopBattle())
                 return;
 
-            await ExecuteSkills(GameActionTriggersManager.TriggerType.EndRound);
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.FinishRound);
             if (CheckStopBattle())
                 return;
 
-            StartRound();
+            BeginRound();
         }
 
         async Task ExecuteSkills(GameActionTriggersManager.TriggerType trigger)
@@ -107,16 +107,16 @@ namespace PawHunters
             else
                 return false;
 
-            StopBattle();
+            EndBattle();
             return true;
         }
 
-        void StopBattle()
+        void EndBattle()
         {
             CurrentRound = 0;
             entityUIList.Clear();
 
-            _ = GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StopBattle);
+            _ = GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.EndBattle);
             _ = resetSkill.Execute();
 
             if (CurrentState.Value == State.JourneyFailed)

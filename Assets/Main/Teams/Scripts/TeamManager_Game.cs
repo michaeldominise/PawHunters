@@ -12,5 +12,16 @@ namespace PawHunters
 
         [Button]
         public void Kill() => AliveEntityList.ForEach(x => x.EntityHealthController.Kill());
+        public override void Init(SaveableTeamData teamData)
+        {
+            base.Init(teamData);
+            ExecuteSetupSkills();
+        }
+
+        public void ExecuteSetupSkills()
+        {
+            foreach (var entity in AliveEntityList)
+                _ = entity.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.SetupPhase);
+        }
     }
 }

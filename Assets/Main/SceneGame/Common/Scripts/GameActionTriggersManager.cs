@@ -12,12 +12,13 @@ namespace PawHunters
         {
             None,
             Instant = 1 << 0,
-            StartRound = 1 << 1,
-            EndRound = 1 << 2,
-            StatusEffectExecuted = 1 << 3,
-            StatusEffectExecutedToTarget = 1 << 4,
-            StartBattle = 1 << 5,
-            StopBattle = 1 << 6,
+            BeginRound = 1 << 1,
+            FinishRound = 1 << 2,
+            ApplyCasterStatusEffect = 1 << 3,
+            ApplyTargetStatusEffect = 1 << 4,
+            InitiateBattle = 1 << 5,
+            EndBattle = 1 << 6,
+            SetupPhase = 1 << 7,
         }
 
 

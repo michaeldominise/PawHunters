@@ -41,7 +41,7 @@ namespace PawHunters
         {
             switch(state)
             {
-                case BattleManager.State.StartBattle:
+                case BattleManager.State.InitiateBattle:
                     Show(false);
                     break;
                 case BattleManager.State.None:

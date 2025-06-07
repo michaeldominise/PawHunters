@@ -16,7 +16,7 @@ namespace PawHunters
         public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.IsAlive) != null;
 
         void Refresh() => Init(teamData);
-        public void Init(SaveableTeamData teamData)
+        public virtual void Init(SaveableTeamData teamData)
         {
             Clear();
             SaveableData.Initialize(ref this.teamData, teamData, Refresh);

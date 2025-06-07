@@ -67,7 +67,7 @@ namespace PawHunters
                 {
                     movement = (targetPositionX - cameraTransform.position.x) * Vector3.right;
                     CurrentState.Value = State.Idle;
-                    BattleManager.Instance.StartBattle();
+                    BattleManager.Instance.InitiateBattle();
                 }
             }
 
