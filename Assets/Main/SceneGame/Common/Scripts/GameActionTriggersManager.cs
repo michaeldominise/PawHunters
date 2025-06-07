@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PawHunters
 {
-    public class GameActionTriggersManager : MonoBehaviour
+    public class GameActionTriggersManager : SingletonMonoBehaviour<GameActionTriggersManager>
     {
         [Flags]
         public enum TriggerType
@@ -21,12 +21,7 @@ namespace PawHunters
             SetupPhase = 1 << 7,
         }
 
-
-        public static GameActionTriggersManager Instance { get; private set; }
-
         List<Func<TriggerType, EntityMainController, Task>> onTriggerList = new();
-
-        private void Awake() => Instance = this;
 
         public async Task ExecuteOnTrigger(TriggerType triggerType, EntityMainController triggerSource = null)
         {

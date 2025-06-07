@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 
 namespace PawHunters
 {
-    public class InitialUI : MonoBehaviour
+    public class InitialUI : SingletonMonoBehaviour<InitialUI>
     {
-        public static InitialUI Instance { get; private set; }
-
         [SerializeField] CanvasGroup overlay;
         [SerializeField] CanvasGroup title;
 
@@ -16,7 +14,6 @@ namespace PawHunters
         float TitleFadeOutDelayDuration => GameSettings_Battle.Instance.constantValues.titleFadeOutDelayDuration;
         float TitleFadeOutDuration => GameSettings_Battle.Instance.constantValues.titleFadeOutDuration;
 
-        void Awake() => Instance = this;
         private void Start()
         {
             overlay.alpha = 1;

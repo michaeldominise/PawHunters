@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PawHunters
 {
     [CreateAssetMenu(fileName = "LevelData", menuName = "GameData/LevelData")]
-    public class LevelData : ScriptableObject
+    public class StageData : ScriptableObject
     {
         public string title;
         public int maxRound = -1;

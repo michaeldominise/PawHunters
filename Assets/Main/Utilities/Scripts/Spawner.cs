@@ -2,10 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
+using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace PawHunters
 {
@@ -40,11 +38,10 @@ namespace PawHunters
             return item;
         }
 
-        public void Despawn(T spawnedItem, float setInactiveDelay = 0) => StartCoroutine(_Despawn(spawnedItem, setInactiveDelay));
-        IEnumerator _Despawn(T spawnedItem, float setInactiveDelay)
+        public async void Despawn(T spawnedItem, float setInactiveDelay = 0)
         {
             spawnedItem.transform.SetParent(transform);
-            yield return new WaitForSeconds(setInactiveDelay);
+            await Task.Delay((int)(setInactiveDelay * 1000));
             spawnedItem.gameObject.SetActive(false);
         }
 

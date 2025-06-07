@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings_Battle: {fileID: 11400000, guid: 202c2be5e3b7440c182ab7ed0c1a671b, type: 2}
-  levelData: {fileID: 11400000, guid: ba1292996b7f343b8b2e5d2a709ffa7d, type: 2}
+  stageData: {fileID: 11400000, guid: ba1292996b7f343b8b2e5d2a709ffa7d, type: 2}
   teamData:
     teamName: 
     characters:
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityUIList: []
-  resetSpecialSkill: {fileID: 7754968525061356826, guid: 8f3de6a3dab0149d89fcc1d6ea2cc470, type: 3}
+  resetSkill: {fileID: 7754968525061356826, guid: 8f3de6a3dab0149d89fcc1d6ea2cc470, type: 3}
 --- !u!1 &9109293314656133205
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ namespace PawHunters
         [SerializeField] HorizontalLayoutGroup journeyLayoutGroup;
         [SerializeField] Slider slider;
 
-        LevelData levelData;
+        StageData stageData;
         List<JourneyUIItem> itemList = new();
 
         void Awake() => Instance = this;
@@ -54,15 +54,15 @@ namespace PawHunters
         public void Show(bool value) => container.SetActive(value);
 
         [Button]
-        public void Init(LevelData levelData)
+        public void Init(StageData stageData)
         {
             Clear();
             Show(true);
 
-            this.levelData = levelData;
-            for (int i = 0; i < levelData.journeys.Count; i++)
-                itemList.Add(Spawn(prefab, init: item => item.Init(levelData.journeys[i], i)));
-            slider.maxValue = levelData.journeys.Count - 1;
+            this.stageData = stageData;
+            for (int i = 0; i < stageData.journeys.Count; i++)
+                itemList.Add(Spawn(prefab, init: item => item.Init(stageData.journeys[i], i)));
+            slider.maxValue = stageData.journeys.Count - 1;
             slider.image.color = GameSettings_Battle.Instance.colorTheme.journeyFillColor;
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(titleLayoutGroup.transform as RectTransform);
@@ -73,7 +73,7 @@ namespace PawHunters
         public void SetIndex(int index)
         {
             index = Mathf.Clamp(index, 0, itemList.Count);
-            label.text = $"{levelData.title} - {index + 1}/{itemList.Count}";
+            label.text = $"{stageData.title} - {index + 1}/{itemList.Count}";
 
             spawnParent.transform.DOLocalMove(index * journeyLayoutGroup.spacing * Vector3.left, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration);
             DOTween.To(() => slider.value, value => slider.value = value, index, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration); ;

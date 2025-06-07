@@ -18,7 +18,7 @@ namespace PawHunters
         [ShowInInspector, ReadOnly] public int CurrentRound { get; set; }
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
 
-        int MaxRound => SceneGameManager.Instance.LevelData.maxRound;
+        int MaxRound => SceneGameManager.Instance.StageData.maxRound;
         TeamManager_GamePlayer TeamManager_GamePlayer => TeamManager_GamePlayer.Instance;
         TeamManager_GameEnemy TeamManager_GameEnemy => TeamManager_GameEnemy.Instance;
 

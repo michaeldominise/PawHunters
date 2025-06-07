@@ -6,21 +6,18 @@ using UnityEngine;
 
 namespace PawHunters
 {
-    public class SceneGameManager : MonoBehaviour
+    public class SceneGameManager : SingletonMonoBehaviour<SceneGameManager>
     {
-        public static SceneGameManager Instance { get; private set; }
-
         [SerializeField] protected GameSettings_Battle gameSettings_Battle;
-        [SerializeField] protected LevelData levelData;
+        [SerializeField] protected StageData stageData;
         [SerializeField] protected SaveableTeamData teamData;
 
         [ShowInInspector, ReadOnly] int CurrentJourneyIndex { get; set; } = -1;
         public event Action<int> OnCurrentJouneyUpdate;
 
-        public LevelData LevelData => levelData;
+        public StageData StageData => stageData;
         public GameSettings_Battle GameSettings_Battle => gameSettings_Battle;
 
-        private void Awake() => Instance = this;
         IEnumerator Start()
         {
             yield return null;
@@ -30,8 +27,8 @@ namespace PawHunters
 
         protected virtual void Init()
         {
-            EnvironmentManager.Instance.Init(levelData.environmentItem);
-            JourneyUIManager.Instance.Init(levelData);
+            EnvironmentManager.Instance.Init(stageData.environmentItem);
+            JourneyUIManager.Instance.Init(stageData);
             TeamManager_GamePlayer.Instance.Init(teamData);
             EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
             InitialUI.Instance.Init();
@@ -48,12 +45,12 @@ namespace PawHunters
                 TeamManager_GameEnemy.Instance.Kill();
             CurrentJourneyIndex++;
 
-            if (levelData.journeys.Count == CurrentJourneyIndex)
+            if (stageData.journeys.Count == CurrentJourneyIndex)
                 JourneyComplete();
             else
             {
                 EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
-                levelData.journeys[CurrentJourneyIndex].Init();
+                stageData.journeys[CurrentJourneyIndex].Init();
                 OnCurrentJouneyUpdate?.Invoke(CurrentJourneyIndex);
             }
         }

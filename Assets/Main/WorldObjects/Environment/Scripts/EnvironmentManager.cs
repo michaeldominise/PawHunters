@@ -6,10 +6,8 @@ using UnityEngine;
 
 namespace PawHunters
 {
-    public class EnvironmentManager : MonoBehaviour
+    public class EnvironmentManager : SingletonMonoBehaviour<EnvironmentManager>
     {
-        public static EnvironmentManager Instance { get; private set; }
-
         public enum State { Idle, Walking, Running }
 
         [Serializable]
@@ -40,8 +38,6 @@ namespace PawHunters
             public static float Right => Instance.GroundMiddleRightPosition.x - 0.5f;
             public static float Bottom => Instance.GroundBottomCenterPosition.y;
         }
-
-        void Awake() => Instance = this;
 
         [Button]
         public void SetState(State state) => CurrentState.Value = state;

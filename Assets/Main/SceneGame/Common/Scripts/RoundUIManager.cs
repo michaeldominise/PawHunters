@@ -9,16 +9,12 @@ using UnityEngine;
 
 namespace PawHunters
 {
-    public class RoundUIManager : MonoBehaviour
+    public class RoundUIManager : SingletonMonoBehaviour<RoundUIManager>
     {
-        public static RoundUIManager Instance { get; private set; }
-
         [SerializeField] GameObject container;
         [SerializeField] TextMeshProUGUI roundLabel;
 
-        int MaxRound => SceneGameManager.Instance.LevelData.maxRound;
-
-        private void Awake() => Instance = this;
+        int MaxRound => SceneGameManager.Instance.StageData.maxRound;
 
         private IEnumerator Start()
         {

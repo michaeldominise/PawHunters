@@ -3,17 +3,13 @@ using UnityEngine;
 
 namespace PawHunters
 {
-    public class JourneyButtons : MonoBehaviour
+    public class JourneyButtons : SingletonMonoBehaviour<JourneyButtons>
     {
-        public static JourneyButtons Instance { get; private set; }
-
         [SerializeField] CanvasGroup canvasGroup;
         [SerializeField] ConditionalButton yesButton;
         [SerializeField] ConditionalButton noButton;
 
         Action<ConditionalButton.ButtonType> onClick;
-
-        private void Awake() => Instance = this;
 
         public void Init(Action<ConditionalButton.ButtonType> onClick, string buttonLabel, bool addNoButton = false)
         {
