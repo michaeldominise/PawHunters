@@ -32,7 +32,7 @@ namespace PawHunters
         {
             switch (state)
             {
-                case BattleManager.State.Execute:
+                case BattleManager.State.StartBattle:
                     Show(MaxRound > 0);
                     break;
                 case BattleManager.State.StartRound:

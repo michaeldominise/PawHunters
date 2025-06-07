@@ -31,7 +31,7 @@ namespace PawHunters
                 return;
             if (data.TargetHealthStatus == SkillTargetData.HealthStatusType.Dead && target.IsAlive)
                 return;
-            if (data.CustomConditions.FirstOrDefault(x => !x.IsVaild(caster, target)))
+            if (data.ExecuteCustomCondition.FirstOrDefault(x => !x.IsVaild(caster, target)))
                 return;
 
             if (caster)
@@ -47,6 +47,9 @@ namespace PawHunters
 
         public async Task<bool> Expire()
         {
+            if (data.ExpireCustomCondition.FirstOrDefault(x => !x.IsVaild(caster, target)))
+                return expirationCountdown <= 0;
+
             expirationCountdown--;
             if (expirationCountdown > 0)
                 await data.PlayExpireCountdownVisual(this);

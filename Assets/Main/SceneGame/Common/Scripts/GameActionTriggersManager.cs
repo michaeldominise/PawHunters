@@ -10,12 +10,14 @@ namespace PawHunters
         [Flags]
         public enum TriggerType
         {
+            None,
             Instant = 1 << 0,
             StartRound = 1 << 1,
             EndRound = 1 << 2,
             StatusEffectExecuted = 1 << 3,
             StatusEffectExecutedToTarget = 1 << 4,
-            StopBattle = 1 << 5,
+            StartBattle = 1 << 5,
+            StopBattle = 1 << 6,
         }
 
 

@@ -391,6 +391,7 @@ MonoBehaviour:
       critDamage: 1.2
       counterChance: 0.1
       comboChance: 0.1
+      specialSkillMax: 0
   element: 0
   avatarSprite: {fileID: -1828946549344447192, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
   teamManager: {fileID: 0}
@@ -446,6 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillList:
   - {fileID: 7754968525061356826, guid: 5af3adc5f6d884eaf9d4c3334b4c54bf, type: 3}
+  - {fileID: 7754968525061356826, guid: 9aa677678429f4c4983fbc3071ac05b7, type: 3}
 --- !u!1 &2911963365007586375
 GameObject:
   m_ObjectHideFlags: 0

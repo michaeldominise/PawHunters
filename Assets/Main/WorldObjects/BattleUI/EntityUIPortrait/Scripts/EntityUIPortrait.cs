@@ -43,7 +43,7 @@ namespace PawHunters
         [Button]
         public void CheckState()
         {
-            if (entityMainController.CurrentState.Value != EntityMainController.State.Attacking)
+            if (BattleManager.Instance.CurrentState.Value != BattleManager.State.ExecuteInstantSkils || entityMainController.CurrentState.Value != EntityMainController.State.Attacking)
                 SetState(State.Idle);
             else
                 SetState(State.Attacking);

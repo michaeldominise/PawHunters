@@ -20,6 +20,8 @@ namespace PawHunters
 
             if (cachedValue < 0)
             {
+                cachedValue *= statusEffectDataHandler.caster.EntityStatusEffectController.GetEnhanceValue(statusEffectDataHandler.target, StatusEffectData_Enhance.EnhanceType.Damage);
+
                 if (!ignoreCrit && Random.Range(0, 1f) <= statusEffectDataHandler.caster.BattleAttributes.critChance.Value)
                 {
                     colorLabel = GameSettings_Battle.Instance.colorTheme.criticalColor;
@@ -27,7 +29,12 @@ namespace PawHunters
                 }
 
                 if (!ignoreDefense)
-                    cachedValue = Mathf.Min(cachedValue + Random.Range(0, target.BattleAttributes.defense.Value), 0);
+                {
+                    var totalDefense = target.BattleAttributes.defense.Value + statusEffectDataHandler.target.EntityStatusEffectController.GetEnhanceValue(statusEffectDataHandler.caster, StatusEffectData_Enhance.EnhanceType.Defense);
+                    cachedValue = Mathf.Min(cachedValue + Random.Range(0, totalDefense), 0);
+                    if(cachedValue == 0)
+                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.blockedColor, "Blocked");
+                }
 
                 ShowStatusTextUI(target, colorLabel, cachedValue);
                 if (!ignoreSheild)

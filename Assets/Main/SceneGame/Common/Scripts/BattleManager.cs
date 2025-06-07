@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PawHunters
 {
     public class BattleManager : MonoBehaviour
     {
-        public enum State { None, Execute, StartRound, ExecuteInstantSkils, EndRound, JourneyFailed, NextJourney }
+        public enum State { None, StartBattle, StartRound, ExecuteInstantSkils, EndRound, JourneyFailed, NextJourney }
 
         public static BattleManager Instance { get; private set; }
 
         [SerializeField] List<EntityUIPortrait> entityUIList;
-        [SerializeField] SkillData resetSpecialSkill;
+        [SerializeField, FormerlySerializedAs("resetSpecialSkill")] SkillData resetSkill;
 
         [ShowInInspector, ReadOnly] public int CurrentRound { get; set; }
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
@@ -27,14 +28,19 @@ namespace PawHunters
 
         private void Awake() => Instance = this;
 
-        public void Execute()
+        void Init()
         {
             foreach (var entity in TeamManager_GamePlayer.AliveEntityList)
                 entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnPlayer(entity));
             foreach (var entity in TeamManager_GameEnemy.AliveEntityList)
                 entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnEnemy(entity));
+        }
 
-            CurrentState.Value = State.Execute;
+        public async void StartBattle()
+        {
+            Init();
+            CurrentState.Value = State.StartBattle;
+            await ExecuteSkills(GameActionTriggersManager.TriggerType.StartBattle);
             StartRound();
         }
 
@@ -111,7 +117,7 @@ namespace PawHunters
             entityUIList.Clear();
 
             _ = GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.StopBattle);
-            _ = resetSpecialSkill.Execute();
+            _ = resetSkill.Execute();
 
             if (CurrentState.Value == State.JourneyFailed)
                 SceneGameManager.Instance.JourneyFailed();

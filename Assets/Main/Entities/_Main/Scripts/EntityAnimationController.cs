@@ -8,7 +8,7 @@ namespace PawHunters
 {
     public class EntityAnimationController : MonoBehaviour
     {
-        public enum State { Idle, Walking, Running, Attacking, Hurt, AttackDone = 9, Dead = 10 }
+        public enum State { Idle, Walking, Running, BasicAttack, SpecialSkillAttack, SpecialSkillCast, Hurt = 8, AttackDone = 9, Dead = 10 }
          
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
         [SerializeField] Animator animator;

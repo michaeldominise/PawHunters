@@ -20,7 +20,11 @@ namespace PawHunters
                     if (cachedValue < 0)
                         Debug.LogError($"This is prohibited to use. Use {nameof(StatusEffectData_DoDamage)}");
                     else
+                    {
+                        cachedValue *= statusEffectDataHandler.caster.EntityStatusEffectController.GetEnhanceValue(statusEffectDataHandler.target, StatusEffectData_Enhance.EnhanceType.Heal);
+                        cachedValue *= statusEffectDataHandler.target.EntityStatusEffectController.GetEnhanceValue(statusEffectDataHandler.caster, StatusEffectData_Enhance.EnhanceType.Recovery);
                         target.EntityHealthController.AddHealth(cachedValue, statusEffectDataHandler);
+                    }
                     ShowStatusTextUI(target, GameSettings_Battle.Instance.colorTheme.healColor, cachedValue);
                     break;
                 case SkillAttributeData.AttributeType.MaxHealth:

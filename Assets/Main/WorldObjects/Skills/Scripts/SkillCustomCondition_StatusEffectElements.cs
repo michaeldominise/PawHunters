@@ -7,10 +7,10 @@ namespace PawHunters
 {
     public class SkillCustomCondition_StatusEffectElements : SkillCustomCondition
     {
-        public enum FlagConditionType { HasFlag, NotHaveFlag }
+        public enum FlagConditionType { Include, Exclude }
 
-        [SerializeField] protected ElementType elements;
         [SerializeField] protected FlagConditionType flagConditionType;
+        [SerializeField] protected ElementType elementFilters;
 
         public override bool IsVaild(EntityMainController caster, object triggerSource)
         {
@@ -21,9 +21,12 @@ namespace PawHunters
         }
 
         public override bool IsVaild(EntityMainController caster, StatusEffectDataHandler triggerSource)
-            => triggerSource.data.Element.HasFlag(elements) ^ flagConditionType == FlagConditionType.NotHaveFlag;
+            => triggerSource.data.Element.HasFlag(elementFilters) ^ flagConditionType == FlagConditionType.Exclude;
 
         public override bool IsVaild(EntityMainController caster, EntityMainController target)
-            => target.Element.HasFlag(flagConditionType) ^ flagConditionType == FlagConditionType.NotHaveFlag;
+        {
+            Debug.LogError($"{target}({target?.GetType().Name}) is not {nameof(StatusEffectDataHandler)}");
+            return true;
+        }
     }
 }

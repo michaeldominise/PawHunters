@@ -108,30 +108,6 @@ MonoBehaviour:
         counterChance: 0.1
         comboChance: 0.1
         specialSkillMax: 1
-    - masterID: 
-      level: 0
-      attribute:
-        health: 100
-        attack: 10
-        defense: 2
-        speed: 3
-        critChance: 0.1
-        critDamage: 1.2
-        counterChance: 0.1
-        comboChance: 0.1
-        specialSkillMax: 0
-    - masterID: 
-      level: 0
-      attribute:
-        health: 100
-        attack: 10
-        defense: 2
-        speed: 3
-        critChance: 0.1
-        critDamage: 1.2
-        counterChance: 0.1
-        comboChance: 0.1
-        specialSkillMax: 0
 --- !u!1 &7802089245653404642
 GameObject:
   m_ObjectHideFlags: 0

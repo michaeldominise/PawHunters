@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &692211541133860485
+--- !u!1 &2588432872810694905
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,114 +8,66 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5892987903533418483}
-  - component: {fileID: 5752838740499357331}
+  - component: {fileID: 3263002579974806890}
+  - component: {fileID: 877263692854902610}
   m_Layer: 0
-  m_Name: StatusEffectData
+  m_Name: StatusEffectData_ResetShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5892987903533418483
+--- !u!4 &3263002579974806890
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692211541133860485}
+  m_GameObject: {fileID: 2588432872810694905}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1222193199847053492}
+  m_Father: {fileID: 6648097949891356573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5752838740499357331
+--- !u!114 &877263692854902610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 692211541133860485}
+  m_GameObject: {fileID: 2588432872810694905}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d581988e30c1546418abc4a409813fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Add Special Skill
+  title: Reset Shield
   description: 
   icon: {fileID: 0}
   elementType: 0
   tags: 0
   showStatusTextUI: 0
-  baseValue: 0.25
-  modifierType: 0
-  attributeModifiers: []
+  baseValue: 0
+  valueModifiers:
+  - modifierType: 0
+    attributeData: 7
+    sourceType: 0
+  modifierType: 1
   executeTrigger: 1
   statusEffectExecuteVisual: {fileID: 0}
   executeFinishDelay: 0
   targetHealthStatus: 1
-  customConditions: []
+  executeCustomConditions: []
   expirationTrigger: 1
   expireAction: 0
   expirationCount: 0
   statusEffectExpireVisual: {fileID: 0}
   expireFinishDelay: 0
-  targetAttribute: 8
---- !u!1 &3013112964061770568
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1222193199847053492}
-  - component: {fileID: 5757460704594295366}
-  m_Layer: 0
-  m_Name: SkillTargetData_Caster
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1222193199847053492
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3013112964061770568}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5892987903533418483}
-  m_Father: {fileID: 1203930370509765833}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5757460704594295366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3013112964061770568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d492d83ca08d947bea4b2488b081b343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statusEffects:
-  - {fileID: 5752838740499357331}
-  targetGroupType: 4
-  groupOrderType: 0
-  healthStatusType: 1
-  targetCount: 1
-  customConditions: []
+  expireCustomConditions: []
+  targetAttribute: 7
 --- !u!1 &4401550728580501793
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,9 +77,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6343122934910548997}
-  - component: {fileID: 2549772209375805188}
+  - component: {fileID: 7968522257424751180}
   m_Layer: 0
-  m_Name: StatusEffectData
+  m_Name: StatusEffectData_ResetSpecialSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +100,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6648097949891356573}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2549772209375805188
+--- !u!114 &7968522257424751180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,34 +109,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 4401550728580501793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83b8f08f2c7044e199b7b65b0756867a, type: 3}
+  m_Script: {fileID: 11500000, guid: d581988e30c1546418abc4a409813fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Basic Attack
+  title: Reset Special Skill
   description: 
   icon: {fileID: 0}
   elementType: 0
-  tags: 1
-  showStatusTextUI: 1
+  tags: 0
+  showStatusTextUI: 0
   baseValue: 0
-  modifierType: 1
-  attributeModifiers:
+  valueModifiers:
   - modifierType: 0
-    attributeData: 2
-    sourceType: 1
+    attributeData: 8
+    sourceType: 0
+  modifierType: 1
   executeTrigger: 1
   statusEffectExecuteVisual: {fileID: 0}
-  executeFinishDelay: 0.25
+  executeFinishDelay: 0
   targetHealthStatus: 1
-  customConditions: []
+  executeCustomConditions: []
   expirationTrigger: 1
   expireAction: 0
   expirationCount: 0
   statusEffectExpireVisual: {fileID: 0}
   expireFinishDelay: 0
-  ignoreCrit: 0
-  ignoreDefense: 0
-  ignoreSheild: 0
+  expireCustomConditions: []
+  targetAttribute: 8
 --- !u!1 &6187895121218135764
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +147,7 @@ GameObject:
   - component: {fileID: 1203930370509765833}
   - component: {fileID: 7754968525061356826}
   m_Layer: 0
-  m_Name: SkillData_BasicAttack_ShortRange
+  m_Name: SkillData_ResetToDefaultAttributes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -216,7 +167,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6648097949891356573}
-  - {fileID: 1222193199847053492}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7754968525061356826
@@ -231,17 +181,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68de5fc8cd9fa43ca826fbb94bee366e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: Basic Attack
-  description: Deal attack damage to the first enemy target
+  title: Reset Special Skill
+  description: Reset the special skill meter and sheild to 0
   icon: {fileID: 0}
   skillTargets:
   - {fileID: 4411864041380861982}
-  - {fileID: 5757460704594295366}
-  runToTargetBeforeExecute: 0
+  runToFirstTarget: {fileID: 0}
   trigger: 1
   customConditions: []
-  animationCastType: 1
-  playAttackAnimation: 1
+  playExecuteAnimation: 0
 --- !u!1 &8358170826795819579
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +201,7 @@ GameObject:
   - component: {fileID: 6648097949891356573}
   - component: {fileID: 4411864041380861982}
   m_Layer: 0
-  m_Name: SkillTargetData_Enemy
+  m_Name: SkillTargetData_All
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,6 +221,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6343122934910548997}
+  - {fileID: 3263002579974806890}
   m_Father: {fileID: 1203930370509765833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4411864041380861982
@@ -288,9 +237,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffects:
-  - {fileID: 2549772209375805188}
-  targetGroupType: 2
+  - {fileID: 7968522257424751180}
+  - {fileID: 877263692854902610}
+  targetGroupType: 3
   groupOrderType: 0
   healthStatusType: 1
-  targetCount: 1
+  targetCount: 100
   customConditions: []

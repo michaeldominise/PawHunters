@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PawHunters
 {
@@ -44,20 +45,21 @@ namespace PawHunters
         [SerializeField, FoldoutGroup("Basic")] bool showStatusTextUI;
 
         [SerializeField, FoldoutGroup("Value and Computation")] float baseValue;
+        [SerializeField, FoldoutGroup("Value and Computation"), TableList, FormerlySerializedAs("attributeModifiers")] List<AttributeModifiers> valueModifiers;
         [SerializeField, FoldoutGroup("Value and Computation")] ModifierType modifierType;
-        [SerializeField, FoldoutGroup("Value and Computation"), TableList] List<AttributeModifiers> attributeModifiers;
 
         [SerializeField, FoldoutGroup("Execution")] GameActionTriggersManager.TriggerType executeTrigger = GameActionTriggersManager.TriggerType.Instant;
         [SerializeField, FoldoutGroup("Execution")] StatusEffectVisual statusEffectExecuteVisual;
         [SerializeField, FoldoutGroup("Execution")] float executeFinishDelay = 0.25f;
         [SerializeField, FoldoutGroup("Execution")] SkillTargetData.HealthStatusType targetHealthStatus = SkillTargetData.HealthStatusType.Alive;
-        [SerializeField, FoldoutGroup("Execution")] List<SkillCustomCondition> customConditions;
+        [SerializeField, FoldoutGroup("Execution"), FormerlySerializedAs("customConditions")] List<SkillCustomCondition> executeCustomConditions;
 
         [SerializeField, FoldoutGroup("Expiration")] GameActionTriggersManager.TriggerType expirationTrigger = GameActionTriggersManager.TriggerType.Instant;
         [SerializeField, FoldoutGroup("Expiration")] ExpireActionType expireAction;
         [SerializeField, FoldoutGroup("Expiration")] int expirationCount = 0;
         [SerializeField, FoldoutGroup("Expiration")] StatusEffectVisual statusEffectExpireVisual;
         [SerializeField, FoldoutGroup("Expiration")] float expireFinishDelay = 0f;
+        [SerializeField, FoldoutGroup("Expiration")] List<SkillCustomCondition> expireCustomConditions;
 
         public string Title => title;
         public string Description => description;
@@ -68,15 +70,16 @@ namespace PawHunters
         public GameActionTriggersManager.TriggerType ExecuteTrigger => executeTrigger;
         public int ExpirationCount => expirationCount;
         public SkillTargetData.HealthStatusType TargetHealthStatus => targetHealthStatus;
-        public List<SkillCustomCondition> CustomConditions => customConditions;
+        public List<SkillCustomCondition> ExecuteCustomCondition => executeCustomConditions;
 
         public GameActionTriggersManager.TriggerType ExpirationTrigger => expirationTrigger;
         public ExpireActionType ExpireAction => expireAction;
+        public List<SkillCustomCondition> ExpireCustomCondition => expireCustomConditions;
 
         public float GetValue(EntityMainController caster, EntityMainController target)
         {
             var value = baseValue;
-            foreach (var attributeModifier in attributeModifiers)
+            foreach (var attributeModifier in valueModifiers)
                 value = attributeModifier.GetValue(value, caster, target);
             return modifierType == ModifierType.Add ? value : -value;
         }

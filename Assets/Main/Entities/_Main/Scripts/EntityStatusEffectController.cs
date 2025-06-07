@@ -73,6 +73,20 @@ namespace PawHunters
             StatusEffectSpawner.Instance.Despawn(statusEffect.data);
         }
 
+        public float GetEnhanceValue(EntityMainController target, StatusEffectData_Enhance.EnhanceType enhanceType)
+        {
+            var value = 1f;
+            foreach (var statusEffect in statusEffects)
+            {
+                var statusEffect_Enhanced = statusEffect.data as StatusEffectData_Enhance;
+                if (!statusEffect_Enhanced)
+                    continue;
+
+                value += statusEffect_Enhanced.CanEnhanceValue(target, enhanceType) ? statusEffect.cachedValue : 0;
+            }
+            return value;
+        }
+
         [Button]
         public void Clear()
         {

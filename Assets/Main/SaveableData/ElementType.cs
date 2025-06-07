@@ -23,5 +23,6 @@ namespace PawHunters
         Psychic = 1 << 15,
         Rock = 1 << 16,
         Steel = 1 << 17,
+        All = 1 << 32 - 1,
     }
 }
