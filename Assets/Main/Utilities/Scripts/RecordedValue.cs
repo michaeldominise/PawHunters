@@ -82,11 +82,34 @@ namespace PawHunters
             if (value < 0)
             {
                 foreach (var data in dataList)
-                    data.Value = Mathf.Max(data.Value - value, 0);
+                {
+                    var sheildValue = Mathf.Max(data.Value + value, 0);
+                    value = data.Value + value;
+                    data.Value = sheildValue;
+                    if (value >= 0)
+                        break;
+                }
                 return OnRefreshValue();
             }
             else
                 return base.Update(value, obj, condition);
         }
+    }
+
+    [Serializable]
+    public class RecordedFloatClamped : RecordedFloat
+    {
+        Func<float> minGetter;
+        Func<float> maxGetter;
+
+        public float Reset(Func<float> minGetter, Func<float> maxGetter, float value = 0)
+        {
+            this.minGetter = minGetter;
+            this.maxGetter = maxGetter;
+            return base.Reset(value);
+        }
+
+        public override float Update(float value, object obj = null, Func<float, float> condition = null)
+            => base.Update(Mathf.Clamp(value, (minGetter?.Invoke() ?? 0) - Value, (maxGetter?.Invoke() ?? 0) - Value ), obj, condition);
     }
 }

@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffects:
-  - {fileID: 7968522257424751180}
   - {fileID: 877263692854902610}
   targetGroupType: 3
   groupOrderType: 0

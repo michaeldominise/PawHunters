@@ -29,4 +29,4 @@ MonoBehaviour:
         critDamage: 1.2
         counterChance: 0.1
         comboChance: 0.1
-        specialSkillMax: 0
+        specialSkillMax: 1

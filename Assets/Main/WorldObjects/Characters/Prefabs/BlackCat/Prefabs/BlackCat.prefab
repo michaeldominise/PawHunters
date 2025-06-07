@@ -447,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillList:
   - {fileID: 7754968525061356826, guid: 5af3adc5f6d884eaf9d4c3334b4c54bf, type: 3}
-  - {fileID: 7754968525061356826, guid: 9aa677678429f4c4983fbc3071ac05b7, type: 3}
+  - {fileID: 7754968525061356826, guid: 0cce0d4a1e08a4e7ab8615a73cec3292, type: 3}
 --- !u!1 &2911963365007586375
 GameObject:
   m_ObjectHideFlags: 0

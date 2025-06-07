@@ -11,9 +11,9 @@ namespace PawHunters
         public RecordedFloat attack = new();
         public RecordedFloat defense = new();
         public RecordedFloat speed = new();
-        public RecordedFloat shield = new();
+        public RecordedSheild shield = new();
         public RecordedFloat specialSkillMax = new();
-        public RecordedFloat specialSkill = new();
+        public RecordedFloatClamped specialSkill = new();
         public RecordedFloat critChance = new();
         public RecordedFloat critDamage = new();
         public RecordedFloat counterChance = new();
@@ -35,8 +35,8 @@ namespace PawHunters
             critChance.Reset(attribute.critChance);
             critDamage.Reset(attribute.critDamage);
             specialSkillMax.Reset(attribute.specialSkillMax);
+            specialSkill.Reset(() => 0f, () => attribute.specialSkillMax);
             shield.Reset(0);
-            specialSkill.Reset(0);
             stunned.Reset(0);
         }
     }
