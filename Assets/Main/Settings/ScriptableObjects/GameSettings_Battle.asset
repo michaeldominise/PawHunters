@@ -63,6 +63,10 @@ MonoBehaviour:
     journeyBattle: {fileID: 21300000, guid: d554f988b1cd447259a56aa28114458d, type: 3}
     journeyBoss: {fileID: 21300000, guid: 55f23ee5d43cd4512b2ff1a6d69501c3, type: 3}
   constantValues:
+    overlayFadeOutDelayDuration: 1
+    overlayFadeOutDuration: 0.5
+    titleFadeOutDelayDuration: 3
+    titleFadeOutDuration: 2
     progressUpdateDuration: 0.25
     progressUpdateAnimationCurve:
       serializedVersion: 2

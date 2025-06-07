@@ -34,35 +34,34 @@ namespace PawHunters
             JourneyUIManager.Instance.Init(levelData);
             TeamManager_GamePlayer.Instance.Init(teamData);
             EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
-            NextJourney();
+            InitialUI.Instance.Init();
+            NextJourney(true);
         }
 
         [Button]
-        public async virtual void NextJourney()
+        public async virtual void NextJourney(bool isInstant = false)
         {
-            await Task.Delay(500);
+            if(!isInstant)
+                await Task.Delay(500);
+
             if (TeamManager_GameEnemy.Instance.IsAlive)
                 TeamManager_GameEnemy.Instance.Kill();
-            EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
             CurrentJourneyIndex++;
 
             if (levelData.journeys.Count == CurrentJourneyIndex)
                 JourneyComplete();
             else
             {
+                EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
                 levelData.journeys[CurrentJourneyIndex].Init();
                 OnCurrentJouneyUpdate?.Invoke(CurrentJourneyIndex);
             }
         }
 
         [Button]
-        public virtual void JourneyFailed()
-        {
-        }
+        public virtual void JourneyFailed() => DefeatUI.Instance.Show(true);
 
         [Button]
-        public virtual void JourneyComplete()
-        {
-        }
+        public virtual void JourneyComplete() => VictoryUI.Instance.Show(true);
     }
 }

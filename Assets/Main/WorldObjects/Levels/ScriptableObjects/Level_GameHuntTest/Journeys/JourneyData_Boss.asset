@@ -22,7 +22,7 @@ MonoBehaviour:
       level: 0
       attribute:
         health: 100
-        attack: 10
+        attack: 20
         defense: 2
         speed: 3
         critChance: 0.1

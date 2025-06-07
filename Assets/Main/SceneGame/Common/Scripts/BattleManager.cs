@@ -8,11 +8,9 @@ using UnityEngine.Serialization;
 
 namespace PawHunters
 {
-    public class BattleManager : MonoBehaviour
+    public class BattleManager : SingletonMonoBehaviour<BattleManager>
     {
         public enum State { None, InitiateBattle, BeginRound, ExecuteInstantSkils, FinishRound, JourneyFailed, NextJourney }
-
-        public static BattleManager Instance { get; private set; }
 
         [SerializeField] List<EntityUIPortrait> entityUIList;
         [SerializeField, FormerlySerializedAs("resetSpecialSkill")] SkillData resetSkill;
@@ -25,8 +23,6 @@ namespace PawHunters
         TeamManager_GameEnemy TeamManager_GameEnemy => TeamManager_GameEnemy.Instance;
 
         public event Action<int> OnRoundCountUpdate;
-
-        private void Awake() => Instance = this;
 
         void Init()
         {

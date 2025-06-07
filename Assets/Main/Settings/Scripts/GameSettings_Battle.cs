@@ -73,6 +73,11 @@ namespace PawHunters
         [System.Serializable]
         public class ConstantValues
         {
+            public float overlayFadeOutDelayDuration;
+            public float overlayFadeOutDuration;
+            public float titleFadeOutDelayDuration;
+            public float titleFadeOutDuration;
+
             public float progressUpdateDuration;
             public AnimationCurve progressUpdateAnimationCurve;
             public float statusTextUITargetYPosition;

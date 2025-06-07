@@ -64,6 +64,7 @@ namespace PawHunters
                 itemList.Add(Spawn(prefab, init: item => item.Init(levelData.journeys[i], i)));
             slider.maxValue = levelData.journeys.Count - 1;
             slider.image.color = GameSettings_Battle.Instance.colorTheme.journeyFillColor;
+
             LayoutRebuilder.ForceRebuildLayoutImmediate(titleLayoutGroup.transform as RectTransform);
             LayoutRebuilder.ForceRebuildLayoutImmediate(journeyLayoutGroup.transform as RectTransform);
         }

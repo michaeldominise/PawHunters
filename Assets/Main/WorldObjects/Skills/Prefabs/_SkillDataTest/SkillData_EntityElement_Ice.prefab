@@ -211,6 +211,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5847922496910651485, guid: 72254695c69834f10a4cc55b43f0c662, type: 3}
+      propertyPath: executeFinishDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847922496910651485, guid: 72254695c69834f10a4cc55b43f0c662, type: 3}
       propertyPath: enhanceCustomConditions.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -390,6 +394,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5847922496910651485, guid: 72254695c69834f10a4cc55b43f0c662, type: 3}
       propertyPath: expirationTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5847922496910651485, guid: 72254695c69834f10a4cc55b43f0c662, type: 3}
+      propertyPath: executeFinishDelay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5847922496910651485, guid: 72254695c69834f10a4cc55b43f0c662, type: 3}
