@@ -46,7 +46,9 @@ namespace PawHunters
         public EntityMovementController EntityMovementController => entityMovementController;
         public EntityAnimationController EntityAnimationController => entityAnimationController;
         public EntityStatusEffectController EntityStatusEffectController => entityStatusEffectController;
+        public TeamManager_Game TeamManager_Game => teamManager as TeamManager_Game;
         public TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
+        public TeamManager_GameEnemy TeamManager_GameEnemy => teamManager as TeamManager_GameEnemy;
         public AnchorGroup Anchor => anchor;
         public bool IsAlive => CurrentState.Value != State.Dead;
 
@@ -81,8 +83,8 @@ namespace PawHunters
             entitySkillsController.CurrentState.RegisterListener(CheckState);
             entityHealthController.CurrentState.RegisterListener(CheckState);
 
-            if (TeamManager_GamePlayer)
-                EnvironmentManager.Instance.CurrentState.RegisterListener(CheckState);
+            if (TeamManager_Game)
+                TeamManager_Game.CurrentState.RegisterListener(CheckState);
         }
 
         public void CheckState()
@@ -94,7 +96,7 @@ namespace PawHunters
                 SetToDead();
             else if (EntitySkillsController.CurrentState.Value == EntitySkillsController.State.Attacking)
                 SetToAttacking();
-            else if (TeamManager_GamePlayer && EnvironmentManager.Instance.CurrentState.Value != EnvironmentManager.State.Idle)
+            else if (TeamManager_Game && TeamManager_Game.CurrentState.Value != StateSpeed.State.Idle)
                 SetToMoving();
             else
                 SetToIdle();
@@ -108,13 +110,13 @@ namespace PawHunters
 
         void SetToMoving()
         {
-            switch (EnvironmentManager.Instance.CurrentState.Value)
+            switch (TeamManager_Game.CurrentState.Value)
             {
-                case EnvironmentManager.State.Walking:
+                case StateSpeed.State.Walking:
                     CurrentState.Value = State.Walking;
                     EntityAnimationController.SetState(EntityAnimationController.State.Walking,  UnityEngine.Random.Range(0, 0.25f));
                     break;
-                case EnvironmentManager.State.Running:
+                case StateSpeed.State.Running:
                     CurrentState.Value = State.Running;
                     EntityAnimationController.SetState(EntityAnimationController.State.Running,  UnityEngine.Random.Range(0, 0.25f));
                     break;

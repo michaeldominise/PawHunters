@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PawHunters
@@ -87,12 +89,25 @@ namespace PawHunters
             public float statusTextUISpawnerRandomAdditionalDistance;
             public AnimationCurve bounceAnimationCurve;
             public float journeyTransitionDuration;
+
             public float environmentOverlayFadeDuration;
             public float environmentOverlayFadeOpacity;
+            public List<StateSpeed> movementStateSpeedList = new();
+
+            public float GetSpeed(StateSpeed.State state) => movementStateSpeedList.FirstOrDefault(x => state == x.state)?.speed ?? 0;
         }
 
         public ColorTheme_Battle colorTheme;
         public IconSprite_Battle iconSprite;
         public ConstantValues constantValues;
+    }
+
+    [System.Serializable]
+    public class StateSpeed
+    {
+        public enum State { Idle, Walking, Running }
+
+        public State state;
+        public float speed;
     }
 }

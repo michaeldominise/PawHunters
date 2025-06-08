@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using System;
 
 namespace PawHunters
 {
@@ -10,13 +11,14 @@ namespace PawHunters
     {
         public static TeamManager_GameEnemy Instance { get; private set; }
 
+        public override float Speed => -base.Speed;
+
         void Awake() => Instance = this;
 
         [Button]
         public void SpawnEnemy(SaveableTeamData teamData)
         {
-            spawnParent.transform.position = EnvironmentManager.Instance.GroundMiddleCenterPosition + offset;
-            EnvironmentManager.Instance.SetState(EnvironmentManager.State.Running);
+            spawnParent.transform.position = TeamManager_GamePlayer.Instance.SpawnParent.transform.position + offset;
             Init(teamData);
         }
     }

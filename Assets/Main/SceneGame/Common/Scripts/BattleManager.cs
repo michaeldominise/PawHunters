@@ -24,14 +24,6 @@ namespace PawHunters
 
         public event Action<int> OnRoundCountUpdate;
 
-        void Init()
-        {
-            foreach (var entity in TeamManager_GamePlayer.AliveEntityList)
-                entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnPlayer(entity));
-            foreach (var entity in TeamManager_GameEnemy.AliveEntityList)
-                entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnEnemy(entity));
-        }
-
         public async void InitiateBattle()
         {
             Init();
@@ -39,6 +31,14 @@ namespace PawHunters
             await ExecuteSkills(GameActionTriggersManager.TriggerType.InitiateBattle);
             await Task.Delay(500);
             BeginRound();
+        }
+
+        void Init()
+        {
+            foreach (var entity in TeamManager_GamePlayer.AliveEntityList)
+                entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnPlayer(entity));
+            foreach (var entity in TeamManager_GameEnemy.AliveEntityList)
+                entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnEnemy(entity));
         }
 
         async void BeginRound()

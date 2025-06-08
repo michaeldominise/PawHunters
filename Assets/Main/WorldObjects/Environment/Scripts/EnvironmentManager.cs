@@ -8,23 +8,10 @@ namespace PawHunters
 {
     public class EnvironmentManager : SingletonMonoBehaviour<EnvironmentManager>
     {
-        public enum State { Idle, Walking, Running }
-
-        [Serializable]
-        public class StateSpeed
-        {
-            public State state;
-            public float speed;
-        }
-
         [SerializeField] Transform cameraTransform;
         [SerializeField] EnvironmentItem environmentItem;
-        [SerializeField] List<StateSpeed> stateSpeedList = new();
-        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
-        public event Action OnMove;
 
         public EnvironmentItem EnvironmentItem => environmentItem;
-        public float Speed => stateSpeedList.FirstOrDefault(x => CurrentState.Value == x.state)?.speed ?? 0;
         public int GroundOrderInLayer => environmentItem.GroundOrderInLayer;
         public Vector3 GroundTopCenterPosition => environmentItem.GroundTopCenterPosition;
         public Vector3 GroundMiddleCenterPosition => environmentItem.GroundMiddleCenterPosition;
@@ -40,36 +27,13 @@ namespace PawHunters
             public static float Bottom => Instance.GroundBottomCenterPosition.y;
         }
 
-        [Button]
-        public void SetState(State state) => CurrentState.Value = state;
         public void Init(EnvironmentItem environmentItem)
         {
             this.environmentItem = Instantiate(environmentItem, cameraTransform);
             this.environmentItem.transform.localPosition = Vector3.forward * 10;
             this.environmentItem.Init();
-            SetState(State.Walking);
         }
 
-        void Update() => Move();
-        void Move()
-        {
-            var speed = Speed;
-            if (speed == 0)
-                return;
-            var movement = speed * Time.deltaTime * Vector3.right;
-            if (CurrentState.Value == State.Running && TeamManager_GameEnemy.Instance.IsAlive)
-            {
-                var targetPositionX = TeamManager_GameEnemy.Instance.SpawnParent.position.x + TeamManager_GamePlayer.Instance.offset.x;
-                if (targetPositionX - cameraTransform.position.x < movement.x)
-                {
-                    movement = (targetPositionX - cameraTransform.position.x) * Vector3.right;
-                    CurrentState.Value = State.Idle;
-                    BattleManager.Instance.InitiateBattle();
-                }
-            }
-
-            cameraTransform.Translate(movement);
-            OnMove?.Invoke();
-        }
+        public void Move(Vector3 worldPosition) => cameraTransform.position = worldPosition;
     }
 }

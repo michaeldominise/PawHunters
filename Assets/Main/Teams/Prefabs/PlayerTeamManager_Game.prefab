@@ -133,7 +133,7 @@ MonoBehaviour:
   - {fileID: 4906769701895701549}
   - {fileID: 1453192005283194253}
   - {fileID: 2977340371771450188}
-  offset: {x: -0.75, y: 0, z: -0.001}
+  offset: {x: 0.75, y: 0, z: -9}
 --- !u!1 &2603569521789811439
 GameObject:
   m_ObjectHideFlags: 0

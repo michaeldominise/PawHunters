@@ -13,14 +13,19 @@ namespace PawHunters
         public static TeamManager_GamePlayer Instance { get; private set; }
 
         void Awake() => Instance = this;
-        private IEnumerator Start()
+
+        public override void Init(SaveableTeamData teamData)
         {
-            yield return new WaitUntil(() => EnvironmentManager.Instance);
-            EnvironmentManager.Instance.OnMove += OnMove;
+            base.Init(teamData);
+            SetState(StateSpeed.State.Walking);
         }
 
-        private void OnDestroy() => EnvironmentManager.Instance.OnMove -= OnMove;
-        private void OnMove() => spawnParent.transform.position = EnvironmentManager.Instance.GroundMiddleCenterPosition + offset;
+        public override void Move(Vector3 worldPosiion)
+        {
+            base.Move(worldPosiion);
+            EnvironmentManager.Instance.Move(worldPosiion + offset);
+        }
+
         protected override void CurrentState_OnStateUpdate(EntityMainController entity)
         {
             if (entity.IsAlive)
@@ -28,7 +33,7 @@ namespace PawHunters
 
             base.CurrentState_OnStateUpdate(entity);
             if (!IsAlive)
-                EnvironmentManager.Instance.SetState(EnvironmentManager.State.Idle);
+                SetState(StateSpeed.State.Idle);
         }
     }
 }

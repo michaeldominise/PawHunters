@@ -30,7 +30,6 @@ namespace PawHunters
             EnvironmentManager.Instance.Init(stageData.environmentItem);
             JourneyUIManager.Instance.Init(stageData);
             TeamManager_GamePlayer.Instance.Init(teamData);
-            EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
             InitialUI.Instance.Init();
             NextJourney(true);
         }
@@ -49,7 +48,8 @@ namespace PawHunters
                 JourneyComplete();
             else
             {
-                EnvironmentManager.Instance.SetState(EnvironmentManager.State.Walking);
+                TeamManager_GamePlayer.Instance.SetState(StateSpeed.State.Walking);
+                await Task.Delay(1000);
                 stageData.journeys[CurrentJourneyIndex].Init();
                 OnCurrentJouneyUpdate?.Invoke(CurrentJourneyIndex);
             }

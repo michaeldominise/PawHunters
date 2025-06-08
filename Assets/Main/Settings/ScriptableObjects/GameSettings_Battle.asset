@@ -142,4 +142,11 @@ MonoBehaviour:
       m_RotationOrder: 4
     journeyTransitionDuration: 1
     environmentOverlayFadeDuration: 0.15
-    environmentOverlayFadeOpacity: 0.5
+    environmentOverlayFadeOpacity: 0.8
+    movementStateSpeedList:
+    - state: 0
+      speed: 0
+    - state: 1
+      speed: 1
+    - state: 2
+      speed: 4

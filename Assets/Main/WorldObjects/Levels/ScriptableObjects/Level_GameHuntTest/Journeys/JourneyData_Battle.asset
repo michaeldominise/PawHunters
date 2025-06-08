@@ -15,6 +15,7 @@ MonoBehaviour:
   description: 
   buttonLabel: Battle
   type: 1
+  transitionToBattleType: 0
   teamData:
     teamName: 
     characters:
