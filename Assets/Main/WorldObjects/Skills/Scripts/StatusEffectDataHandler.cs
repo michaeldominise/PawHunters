@@ -34,12 +34,13 @@ namespace PawHunters
             if (data.ExecuteCustomCondition.FirstOrDefault(x => !x.IsVaild(caster, target)))
                 return;
 
-            if (caster)
-                await data.WaitStopMoving(this);
-            await data.PlayExecuteVisual(this);
+            await data.PlayExecuteVisual(SkillVisualEffect.State.Start, this);
             var executeValue = await data.Execute(this);
+
             var executeLog = caster ? $"{caster.name}:{(bool)caster.TeamManager_GamePlayer}" : "System";
             Debug.Log($"[StatusEffectDataHandler.Execute] {executeLog} execute StatusEffect:'{data.Title}:{executeValue}' to {target.name}:{(bool)target.TeamManager_GamePlayer}");
+
+            await data.PlayExecuteVisual(SkillVisualEffect.State.End, this);
 
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.ApplyCasterStatusEffect, caster);
             await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.ApplyTargetStatusEffect, this);
@@ -52,11 +53,12 @@ namespace PawHunters
 
             expirationCountdown--;
             if (expirationCountdown > 0)
-                await data.PlayExpireCountdownVisual(this);
+                await data.PlayExpireCountdownVisual(SkillVisualEffect.State.All, this);
             else
             {
-                await data.PlayExpireDoneVisual(this);
+                await data.PlayExpireDoneVisual(SkillVisualEffect.State.Start, this);
                 await data.Expire(this);
+                await data.PlayExpireDoneVisual(SkillVisualEffect.State.End, this);
             }
             return expirationCountdown <= 0;
         }

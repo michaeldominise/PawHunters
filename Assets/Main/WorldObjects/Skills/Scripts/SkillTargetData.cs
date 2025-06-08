@@ -30,14 +30,19 @@ namespace PawHunters
         [SerializeField] GroupOrderType groupOrderType;
         [SerializeField] HealthStatusType healthStatusType = HealthStatusType.Alive;
         [SerializeField] int targetCount = 1;
+        [SerializeField] SkillVisualEffect[] executeSkillVFX;
         [SerializeField] List<SkillCustomCondition> customConditions;
 
         public async Task Execute(EntityMainController caster, StatusEffectDataHandler triggerSource = null)
         {
             var targets = GetTargetEntities(caster, triggerSource);
+            await SkillVisualEffect.PlayVisual(SkillVisualEffect.State.Start, executeSkillVFX, caster, targets.ToArray());
+
             foreach (var target in targets)
                 foreach (var statusEffect in statusEffects)
                     await target.EntityStatusEffectController.ApplyStatusEffect(statusEffect, caster);
+
+            await SkillVisualEffect.PlayVisual(SkillVisualEffect.State.End, executeSkillVFX, caster, targets.ToArray());
         }
 
         public List<EntityMainController> GetTargetEntities(EntityMainController caster, StatusEffectDataHandler triggerSource = null)

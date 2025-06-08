@@ -23,6 +23,7 @@ namespace PawHunters
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
         public event Action OnMove;
 
+        public EnvironmentItem EnvironmentItem => environmentItem;
         public float Speed => stateSpeedList.FirstOrDefault(x => CurrentState.Value == x.state)?.speed ?? 0;
         public int GroundOrderInLayer => environmentItem.GroundOrderInLayer;
         public Vector3 GroundTopCenterPosition => environmentItem.GroundTopCenterPosition;

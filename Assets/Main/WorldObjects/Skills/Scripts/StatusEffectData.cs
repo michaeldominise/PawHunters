@@ -49,7 +49,7 @@ namespace PawHunters
         [SerializeField, FoldoutGroup("Value and Computation")] ModifierType modifierType;
 
         [SerializeField, FoldoutGroup("Execution")] GameActionTriggersManager.TriggerType executeTrigger = GameActionTriggersManager.TriggerType.Instant;
-        [SerializeField, FoldoutGroup("Execution")] StatusEffectVisual statusEffectExecuteVisual;
+        [SerializeField, FoldoutGroup("Execution")] SkillVisualEffect[] executeSkillVFXs;
         [SerializeField, FoldoutGroup("Execution")] float executeFinishDelay = 0.25f;
         [SerializeField, FoldoutGroup("Execution")] SkillTargetData.HealthStatusType targetHealthStatus = SkillTargetData.HealthStatusType.Alive;
         [SerializeField, FoldoutGroup("Execution"), FormerlySerializedAs("customConditions")] List<SkillCustomCondition> executeCustomConditions;
@@ -57,7 +57,8 @@ namespace PawHunters
         [SerializeField, FoldoutGroup("Expiration")] GameActionTriggersManager.TriggerType expirationTrigger = GameActionTriggersManager.TriggerType.Instant;
         [SerializeField, FoldoutGroup("Expiration")] ExpireActionType expireAction;
         [SerializeField, FoldoutGroup("Expiration")] int expirationCount = 0;
-        [SerializeField, FoldoutGroup("Expiration")] StatusEffectVisual statusEffectExpireVisual;
+        [SerializeField, FoldoutGroup("Expiration")] SkillVisualEffect[] expireCountdownSkillVFX;
+        [SerializeField, FoldoutGroup("Expiration")] SkillVisualEffect[] expireSkillVFXs;
         [SerializeField, FoldoutGroup("Expiration")] float expireFinishDelay = 0f;
         [SerializeField, FoldoutGroup("Expiration")] List<SkillCustomCondition> expireCustomConditions;
 
@@ -96,19 +97,16 @@ namespace PawHunters
             return 0;
         }
 
-        public virtual async Task PlayExecuteVisual(StatusEffectDataHandler statusEffectDataHandler)
-        {
-            if (statusEffectExecuteVisual)
-                await statusEffectExecuteVisual.Execute();
-        }
+        public virtual async Task PlayExecuteVisual(SkillVisualEffect.State state, StatusEffectDataHandler statusEffectDataHandler)
+            => await SkillVisualEffect.PlayVisual(state, executeSkillVFXs, statusEffectDataHandler);
 
         public virtual async Task Expire(StatusEffectDataHandler statusEffectDataHandler) => await Task.Delay((int)(expireFinishDelay * 1000));
-        public virtual async Task PlayExpireCountdownVisual(StatusEffectDataHandler statusEffectDataHandler) => await Task.Yield();
-        public virtual async Task PlayExpireDoneVisual(StatusEffectDataHandler statusEffectDataHandler)
-        {
-            if (statusEffectExpireVisual)
-                await statusEffectExpireVisual.Execute();
-        }
+
+        public virtual async Task PlayExpireCountdownVisual(SkillVisualEffect.State state, StatusEffectDataHandler statusEffectDataHandler)
+            => await SkillVisualEffect.PlayVisual(state, expireCountdownSkillVFX, statusEffectDataHandler);
+
+        public virtual async Task PlayExpireDoneVisual(SkillVisualEffect.State state, StatusEffectDataHandler statusEffectDataHandler)
+            => await SkillVisualEffect.PlayVisual(state, expireSkillVFXs, statusEffectDataHandler);
 
         protected void ShowStatusTextUI(EntityMainController target, Color color, float value, GameSettings_Battle.Type icon = GameSettings_Battle.Type.None)
         {

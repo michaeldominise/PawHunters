@@ -37,6 +37,7 @@ namespace PawHunters
             Init();
             CurrentState.Value = State.InitiateBattle;
             await ExecuteSkills(GameActionTriggersManager.TriggerType.InitiateBattle);
+            await Task.Delay(500);
             BeginRound();
         }
 
@@ -46,7 +47,6 @@ namespace PawHunters
             RearrangeEntities();
             CurrentState.Value = State.BeginRound;
 
-            await Task.Delay(500);
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.BeginRound);
             if (CheckStopBattle())
                 return;

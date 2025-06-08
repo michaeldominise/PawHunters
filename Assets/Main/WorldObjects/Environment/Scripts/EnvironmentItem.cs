@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace PawHunters
     public class EnvironmentItem : MonoBehaviour
     {
         [SerializeField] SpriteRenderer[] layers;
+        [SerializeField] SpriteRenderer overlayLayer;
         [SerializeField] Transform groundTopCenter;
         [SerializeField] Transform groundMiddleCenter;
         [SerializeField] Transform groundMiddleLeft;
@@ -27,5 +29,10 @@ namespace PawHunters
             groundMiddleRight.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.right).x, groundMiddleLeft.position.y, groundMiddleLeft.position.z);
         }
 
+        public void ShowOverlay(Color targetColor, float opacityValue, float duration)
+        {
+            var startAlpha = overlayLayer.color.a;
+            DOTween.To(() => startAlpha, value => overlayLayer.color = new Color(targetColor.r, targetColor.g, targetColor.b, value), opacityValue, duration);
+        }
     }
 }

@@ -34,6 +34,7 @@ namespace PawHunters
             public Color journeyActiveColor_Battle;
             public Color journeyActiveColor_Boss;
             public Color blockedColor;
+            public ElementColorTheme elementColorOverlay;
 
             public override Color GetColor(Type enumType)
                 => enumType switch
@@ -86,6 +87,8 @@ namespace PawHunters
             public float statusTextUISpawnerRandomAdditionalDistance;
             public AnimationCurve bounceAnimationCurve;
             public float journeyTransitionDuration;
+            public float environmentOverlayFadeDuration;
+            public float environmentOverlayFadeOpacity;
         }
 
         public ColorTheme_Battle colorTheme;
