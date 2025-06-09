@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c976bcae75b9244209e8a4cac700a14c, type: 3}
   m_Name: JourneyData_Battle
   m_EditorClassIdentifier: 
-  description: 
+  title: Wild Black Cat
+  description: "You wandered into the tall grasslands\u2014peaceful at first, until
+    a [title] pounced from the brush!"
   buttonLabel: Battle
   type: 1
   transitionToBattleType: 0

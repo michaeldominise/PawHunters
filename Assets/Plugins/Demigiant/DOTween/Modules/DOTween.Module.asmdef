@@ -1,11 +1,7 @@
 {
-    "name": "PawHunters.Main",
-    "rootNamespace": "LabHaven.PawHunters",
-    "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:085fe1f7b5614456f9fbfaa7f80121b0"
-    ],
+    "name": "DOTween.Module",
+    "rootNamespace": "DG.Tweening",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

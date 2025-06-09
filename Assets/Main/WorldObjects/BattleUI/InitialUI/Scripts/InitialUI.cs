@@ -23,8 +23,8 @@ namespace LabHaven.PawHunters
         public async void Init()
         {
             await Task.Yield();
-            DOTween.To(() => 1f, value => overlay.alpha = value, 0f, OverlayFadeOutDuration).SetDelay(OverlayFadeOutDelayDuration);
-            DOTween.To(() => 1f, value => title.alpha = value, 0f, TitleFadeOutDuration).SetDelay(TitleFadeOutDelayDuration);
+            overlay.DOFade(0f, OverlayFadeOutDuration).SetDelay(OverlayFadeOutDelayDuration);
+            title.DOFade(0f, TitleFadeOutDuration).SetDelay(TitleFadeOutDelayDuration);
         }
     }
 }

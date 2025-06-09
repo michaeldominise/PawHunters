@@ -6,8 +6,9 @@ namespace LabHaven.PawHunters
     {
         public enum Type { Default, Battle, Boss }
 
+        public string title;
         [TextArea]
-        public string description;
+        public string overrideDescription;
         public string buttonLabel = "Next";
         public Type type;
 

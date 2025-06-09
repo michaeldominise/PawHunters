@@ -29,10 +29,6 @@ namespace LabHaven.PawHunters
             groundMiddleRight.position = new Vector3(Camera.main.ViewportToWorldPoint(Vector3.right).x, groundMiddleLeft.position.y, groundMiddleLeft.position.z);
         }
 
-        public void ShowOverlay(Color targetColor, float opacityValue, float duration)
-        {
-            var startAlpha = overlayLayer.color.a;
-            DOTween.To(() => startAlpha, value => overlayLayer.color = new Color(targetColor.r, targetColor.g, targetColor.b, value), opacityValue, duration);
-        }
+        public void ShowOverlay(Color targetColor, float opacityValue, float duration) => overlayLayer.DOColor(new Color(targetColor.r, targetColor.g, targetColor.b, opacityValue), duration);
     }
 }

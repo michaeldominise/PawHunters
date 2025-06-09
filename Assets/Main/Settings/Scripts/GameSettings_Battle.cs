@@ -5,7 +5,7 @@ using UnityEngine;
 namespace LabHaven.PawHunters
 {
     [CreateAssetMenu(fileName = "GameSettings_Battle", menuName = "GameData/Settings/GameSettings_Battle")]
-    public class GameSettings_Battle : GameSettings<GameSettings_Battle.Type>
+    public class GameSettings_Battle : GameSettings
     {
         public static GameSettings_Battle Instance => SceneGameManager.Instance?.GameSettings_Battle;
 
@@ -36,16 +36,10 @@ namespace LabHaven.PawHunters
             public Color journeyActiveColor_Battle;
             public Color journeyActiveColor_Boss;
             public Color blockedColor;
+            public Color journeyLogBattleColor;
+            public Color journeyLogRewardColor;
+            public Color journeyLogBossColor;
             public ElementColorTheme elementColorOverlay;
-
-            public override Color GetColor(Type enumType)
-                => enumType switch
-                {
-                    Type.JourneyDefault => throw new System.NotImplementedException(),
-                    Type.JourneyBattle => throw new System.NotImplementedException(),
-                    Type.JourneyBoss => throw new System.NotImplementedException(),
-                    _ => Color.clear,
-                };
         }
 
         [System.Serializable]
@@ -59,7 +53,7 @@ namespace LabHaven.PawHunters
             public Sprite journeyBattle;
             public Sprite journeyBoss;
 
-            public override Sprite GetSprite(Type enumType)
+            public Sprite GetSprite(Type enumType)
                 => enumType switch
                 {
                     Type.Shield => shield,
@@ -93,6 +87,8 @@ namespace LabHaven.PawHunters
             public float environmentOverlayFadeDuration;
             public float environmentOverlayFadeOpacity;
             public List<StateSpeed> movementStateSpeedList = new();
+
+            public float journeyLogsTransitionDuration;
 
             public float GetSpeed(StateSpeed.State state) => movementStateSpeedList.FirstOrDefault(x => state == x.state)?.speed ?? 0;
         }

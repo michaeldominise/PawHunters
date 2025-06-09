@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c976bcae75b9244209e8a4cac700a14c, type: 3}
   m_Name: JourneyData_Boss
   m_EditorClassIdentifier: 
-  description: 
+  title: Wild Cat Alpha
+  description: "Fog rolled in as a chilling growl echoed through the reeds...\nThe
+    [title] appeared\u2014scarred, fierce, and massive!\nYou braces for the toughest
+    battle yet."
   buttonLabel: Battle
   type: 2
   transitionToBattleType: 1

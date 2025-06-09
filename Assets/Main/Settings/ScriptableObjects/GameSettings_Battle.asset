@@ -54,6 +54,9 @@ MonoBehaviour:
     journeyActiveColor_Battle: {r: 0.8584906, g: 0.63915884, b: 0.16602883, a: 1}
     journeyActiveColor_Boss: {r: 0.735849, g: 0.21867211, b: 0.21867211, a: 1}
     blockedColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
+    journeyLogBattleColor: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
+    journeyLogRewardColor: {r: 1, g: 0.84313726, b: 0, a: 1}
+    journeyLogBossColor: {r: 0.56365037, g: 0.2980392, b: 1, a: 1}
     elementColorOverlay:
       Normal: {r: 0.3, g: 0.3, b: 0.3, a: 1}
       Water: {r: 0.065625004, g: 0.13125, b: 0.3, a: 1}
@@ -150,3 +153,4 @@ MonoBehaviour:
       speed: 1
     - state: 2
       speed: 4
+    journeyLogsTransitionDuration: 0.5
