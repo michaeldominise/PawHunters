@@ -40,5 +40,14 @@ namespace LabHaven.PawHunters
 
             CurrentState.Value = State.AttackDone;
         }
+
+        public void AddSkill(SkillData skillData)
+        {
+            var index = skillList.FindIndex(x => !string.IsNullOrWhiteSpace(x.familyName) && x.familyName == skillData.familyName);
+            if (index < 0)
+                skillList.Add(skillData);
+            else
+                skillList[index] = skillData;
+        }
     }
 }

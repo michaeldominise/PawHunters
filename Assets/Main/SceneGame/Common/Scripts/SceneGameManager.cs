@@ -35,7 +35,7 @@ namespace LabHaven.PawHunters
             NextJourney();
         }
 
-        public virtual void EndJourney() => stageData.journeys[CurrentJourneyIndex].End(NextJourney);
+        public virtual void EndJourney() => stageData.journeys[CurrentJourneyIndex].End();
 
         [Button]
         public async virtual void NextJourney()
@@ -49,7 +49,7 @@ namespace LabHaven.PawHunters
             else
             {
                 TeamManager_GamePlayer.Instance.SetState(StateSpeed.State.Walking);
-                await Task.Delay(1000);
+                await Task.Delay(500);
                 stageData.journeys[CurrentJourneyIndex].Init();
                 OnCurrentJouneyUpdate?.Invoke(CurrentJourneyIndex);
             }

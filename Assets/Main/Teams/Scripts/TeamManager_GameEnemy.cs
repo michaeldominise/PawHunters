@@ -11,7 +11,7 @@ namespace LabHaven.PawHunters
     {
         public static TeamManager_GameEnemy Instance { get; private set; }
 
-        public override float Speed => -base.Speed;
+        public override float MovementSpeed => -base.MovementSpeed;
 
         void Awake() => Instance = this;
 

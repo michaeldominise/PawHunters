@@ -48,15 +48,17 @@ MonoBehaviour:
     criticalColor: {r: 1, g: 0.23373935, b: 0.1745283, a: 1}
     damageColor: {r: 1, g: 1, b: 1, a: 1}
     healColor: {r: 0.26366144, g: 0.745283, b: 0.29555687, a: 1}
+    blockedColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
     journeyFillColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
     journeyInactiveColor: {r: 0.34117648, g: 0.27058825, b: 0.3647059, a: 1}
     journeyActiveColor_Default: {r: 0.05490196, g: 0.6509804, b: 0.99607843, a: 1}
     journeyActiveColor_Battle: {r: 0.8584906, g: 0.63915884, b: 0.16602883, a: 1}
     journeyActiveColor_Boss: {r: 0.735849, g: 0.21867211, b: 0.21867211, a: 1}
-    blockedColor: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 1}
     journeyLogBattleColor: {r: 1, g: 0.29803923, b: 0.29803923, a: 1}
-    journeyLogRewardColor: {r: 1, g: 0.84313726, b: 0, a: 1}
     journeyLogBossColor: {r: 0.56365037, g: 0.2980392, b: 1, a: 1}
+    journeyLogNegativeColor: {r: 0.754717, g: 0.45921135, b: 0.31683874, a: 1}
+    journeyLogPositiveColor: {r: 0.43147027, g: 0.9056604, b: 0.48102283, a: 1}
+    journeyLogRewardColor: {r: 1, g: 0.84313726, b: 0, a: 1}
     elementColorOverlay:
       Normal: {r: 0.3, g: 0.3, b: 0.3, a: 1}
       Water: {r: 0.065625004, g: 0.13125, b: 0.3, a: 1}
@@ -82,7 +84,7 @@ MonoBehaviour:
     speed: {fileID: 21300000, guid: 82b91019cb2284e128ba1075a28fef05, type: 3}
     health: {fileID: 21300000, guid: beccf0b66067e420aad1ece36e277e76, type: 3}
     attack: {fileID: 21300000, guid: 33f48daaf0ff84f638e1aae083091c1d, type: 3}
-    journeyDefault: {fileID: 21300000, guid: b8865ff949a6e42b3bc91e969516477e, type: 3}
+    journeyDefault: {fileID: 21300000, guid: b5e5610cbab99442fa2f206472fe764c, type: 3}
     journeyBattle: {fileID: 21300000, guid: d554f988b1cd447259a56aa28114458d, type: 3}
     journeyBoss: {fileID: 21300000, guid: 55f23ee5d43cd4512b2ff1a6d69501c3, type: 3}
   constantValues:

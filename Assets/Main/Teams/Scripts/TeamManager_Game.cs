@@ -5,22 +5,25 @@ using System.Linq;
 using DG.Tweening;
 using System;
 using UnityEngine.Serialization;
+using System.Threading.Tasks;
 
 namespace LabHaven.PawHunters
 {
     public class TeamManager_Game : TeamManager
     {
         public Vector3 offset;
+        [SerializeField] EntityMainController_Team entityMainController_Team;
         [ShowInInspector, ReadOnly] public StateController<StateSpeed.State> CurrentState { get; private set; } = new();
 
+        public EntityMainController_Team EntityMainController_Team => entityMainController_Team;
+        public virtual float MovementSpeed => GameSettings_Battle.Instance.constantValues.GetSpeed(CurrentState.Value);
         public event Action OnMove;
-
-        public virtual float Speed => GameSettings_Battle.Instance.constantValues.GetSpeed(CurrentState.Value);
 
         public override void Init(SaveableTeamData teamData)
         {
             base.Init(teamData);
-            ExecuteSetupSkills();
+            EntityMainController_Team.Init(this);
+            _ = ExecuteSkills(GameActionTriggersManager.TriggerType.SetupPhase);
         }
 
         [Button]
@@ -29,7 +32,7 @@ namespace LabHaven.PawHunters
         { 
             if (CurrentState.Value == StateSpeed.State.Idle)
                 return;
-            Move(spawnParent.transform.position + Speed * Time.deltaTime * Vector3.right);
+            Move(spawnParent.transform.position + MovementSpeed * Time.deltaTime * Vector3.right);
         }
 
         public virtual void Move(Vector3 worldPosition)
@@ -38,13 +41,24 @@ namespace LabHaven.PawHunters
             OnMove?.Invoke();
         }
 
-        public void ExecuteSetupSkills()
-        {
-            foreach (var entity in AliveEntityList)
-                _ = entity.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.SetupPhase);
-        }
-
         [Button]
         public void Kill() => AliveEntityList.ForEach(x => x.EntityHealthController.Kill());
+
+
+        public async Task ExecuteSkills(GameActionTriggersManager.TriggerType trigger, object srouceTrigger = null, Func<bool> condition = null)
+        {
+            if (!IsAlive)
+                return;
+
+            await entityMainController_Team.EntitySkillsController.Execute(trigger, srouceTrigger);
+            if (!(condition?.Invoke() ?? true))
+                return;
+            foreach (var entity in AliveEntityList)
+            {
+                await entity.EntitySkillsController.Execute(trigger, srouceTrigger);
+                if (!(condition?.Invoke() ?? true))
+                    return;
+            }
+        }
     }
 }

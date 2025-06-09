@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
@@ -11,13 +12,14 @@ namespace LabHaven.PawHunters
         [SerializeField, TableList] List<StatusEffectDataHandler> statusEffects;
         EntityMainController entityMainController;
 
-        private void OnEnable()
+        private IEnumerator Start()
         {
+            yield return null;
             GameActionTriggersManager.Instance.Register(TrigerExecute);
             GameActionTriggersManager.Instance.Register(TriggerExpire);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             GameActionTriggersManager.Instance.Unegister(TrigerExecute);
             GameActionTriggersManager.Instance.Unegister(TriggerExpire);

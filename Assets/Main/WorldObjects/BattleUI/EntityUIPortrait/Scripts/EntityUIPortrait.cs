@@ -35,6 +35,7 @@ namespace LabHaven.PawHunters
             this.entityMainController = entityMainController;
             this.entityMainController.CurrentState.RegisterListener(CheckState);
 
+            orderLabel.text = "";
             avatar.sprite = entityMainController.AvatarSprite;
             SetState(State.Idle, true);
             CheckState();
@@ -56,6 +57,7 @@ namespace LabHaven.PawHunters
 
             CurrentState.Value = state;
 
+            print($"[EntityUIPortrait.SetState] {entityMainController.name}:{state}");
             var originalScale = transform.localScale.x;
             animStatus?.Stop();
             animStatus = GradualChangeValue.Execute(0, 1, duration,

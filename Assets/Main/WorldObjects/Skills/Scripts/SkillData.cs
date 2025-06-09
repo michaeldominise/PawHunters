@@ -10,6 +10,7 @@ namespace LabHaven.PawHunters
     public class SkillData : MonoBehaviour
     {
         public string title;
+        public string familyName;
         [TextArea] public string description;
         public Sprite icon;
         public GameActionTriggersManager.TriggerType trigger = GameActionTriggersManager.TriggerType.Instant;

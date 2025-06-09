@@ -76,7 +76,7 @@ namespace LabHaven.PawHunters
             label.text = $"{stageData.title} - {index + 1}/{itemList.Count}";
 
             spawnParent.transform.DOLocalMove(index * journeyLayoutGroup.spacing * Vector3.left, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration);
-            slider.DOValue(index, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration);
+            slider.DOValue(index, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration / 4);
 
             for (var i = 0; i < itemList.Count; i++)
                 itemList[i].SetState(i <= index ? JourneyUIItem.State.Active : JourneyUIItem.State.Inactive);

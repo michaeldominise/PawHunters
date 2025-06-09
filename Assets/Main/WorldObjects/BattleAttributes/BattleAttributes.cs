@@ -39,5 +39,20 @@ namespace LabHaven.PawHunters
             shield.Reset(0);
             stunned.Reset(0);
         }
+
+        public void Reset()
+        {
+            maxHealth.Reset(0);
+            currentHealth.Reset(0);
+            attack.Reset(0);
+            defense.Reset(0);
+            speed.Reset(0);
+            critChance.Reset(0);
+            critDamage.Reset(0);
+            specialSkillMax.Reset(0);
+            specialSkill.Reset(0);
+            shield.Reset(0);
+            stunned.Reset(0);
+        }
     }
 }

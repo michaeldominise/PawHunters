@@ -34,7 +34,7 @@ namespace LabHaven.PawHunters
         }
 
         public GameSettings_Battle.Type GetIconType()
-            => journeyData.type switch
+            => journeyData.JourneyType switch
             {
                 JourneyData.Type.Battle => GameSettings_Battle.Type.JourneyBattle,
                 JourneyData.Type.Boss => GameSettings_Battle.Type.JourneyBoss,
@@ -42,7 +42,7 @@ namespace LabHaven.PawHunters
             };
 
         public Color GetColor()
-            => journeyData.type switch
+            => journeyData.JourneyType switch
             {
                 JourneyData.Type.Battle => GameSettings_Battle.Instance.colorTheme.journeyActiveColor_Battle,
                 JourneyData.Type.Boss => GameSettings_Battle.Instance.colorTheme.journeyActiveColor_Boss,

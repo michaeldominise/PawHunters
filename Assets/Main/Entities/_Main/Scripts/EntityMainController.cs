@@ -20,26 +20,25 @@ namespace LabHaven.PawHunters
             public Transform weapon;
         }
 
-        [SerializeField] SaveableCharacterData characterData;
-        [SerializeField] ElementType element;
-        [SerializeField] Sprite avatarSprite;
-        [SerializeField] TeamManager teamManager;
-        [SerializeField] Transform model;
-        [SerializeField] LayerManager layerManager;
-        [SerializeField] EntitySkillsController entitySkillsController;
-        [SerializeField] EntityHealthController entityHealthController;
-        [SerializeField] EntityMovementController entityMovementController;
-        [SerializeField] EntityAnimationController entityAnimationController;
-        [SerializeField] EntityStatusEffectController entityStatusEffectController;
-        [SerializeField] AnchorGroup anchor;
-        [SerializeField] BattleAttributes battleAttributes;
+        [SerializeField] protected SaveableCharacterData characterData;
+        [SerializeField] protected ElementType element;
+        [SerializeField] protected Sprite avatarSprite;
+        [SerializeField] protected TeamManager teamManager;
+        [SerializeField] protected Transform model;
+        [SerializeField] protected LayerManager layerManager;
+        [SerializeField] protected EntitySkillsController entitySkillsController;
+        [SerializeField] protected EntityHealthController entityHealthController;
+        [SerializeField] protected EntityMovementController entityMovementController;
+        [SerializeField] protected EntityAnimationController entityAnimationController;
+        [SerializeField] protected EntityStatusEffectController entityStatusEffectController;
+        [SerializeField] protected AnchorGroup anchor;
+        [SerializeField] protected BattleAttributes battleAttributes;
 
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new(State.None);
 
         public SaveableCharacterData CharacterData => characterData;
         public ElementType Element => element;
         public Sprite AvatarSprite => avatarSprite;
-        public BattleAttributes BattleAttributes => battleAttributes;
         public Transform Model => model;
         public EntitySkillsController EntitySkillsController => entitySkillsController;
         public EntityHealthController EntityHealthController => entityHealthController;
@@ -50,13 +49,15 @@ namespace LabHaven.PawHunters
         public TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
         public TeamManager_GameEnemy TeamManager_GameEnemy => teamManager as TeamManager_GameEnemy;
         public AnchorGroup Anchor => anchor;
-        public bool IsAlive => CurrentState.Value != State.Dead;
+
+        public virtual BattleAttributes BattleAttributes => battleAttributes;
+        public virtual bool IsAlive => CurrentState.Value != State.Dead;
 
         void Refresh() => Init(teamManager, characterData);
-        public void Init(TeamManager teamManager, SaveableCharacterData characterData)
+        public virtual void Init(TeamManager teamManager, SaveableCharacterData characterData)
         {
             this.teamManager = teamManager;
-            gameObject.name = $"{gameObject.name.TrimEnd(':')}:{(TeamManager_GamePlayer ? "Player" : "Enemy")}";
+            gameObject.name = $"{gameObject.name.Split(':')[0]}:{(TeamManager_GamePlayer ? "Player" : "Enemy")}";
 
             SaveableData.Initialize(ref this.characterData, characterData, Refresh);
             battleAttributes.Init(characterData.attribute);

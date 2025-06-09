@@ -12,11 +12,11 @@ namespace LabHaven.PawHunters
     {
         public enum State { None, InitiateBattle, BeginRound, ExecuteInstantSkils, FinishRound, JourneyFailed, NextJourney }
 
-        [SerializeField] List<EntityUIPortrait> entityUIList;
         [SerializeField, FormerlySerializedAs("resetSpecialSkill")] SkillData resetSkill;
 
         [ShowInInspector, ReadOnly] public int CurrentRound { get; set; }
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
+        List<KeyValuePair<EntityMainController, EntityUIPortrait>> entityUIList = new();
 
         int MaxRound => SceneGameManager.Instance.StageData.maxRound;
         TeamManager_GamePlayer TeamManager_GamePlayer => TeamManager_GamePlayer.Instance;
@@ -27,24 +27,31 @@ namespace LabHaven.PawHunters
         public async void InitiateBattle()
         {
             Init();
+            RearrangeEntities();
             CurrentState.Value = State.InitiateBattle;
             await ExecuteSkills(GameActionTriggersManager.TriggerType.InitiateBattle);
             await Task.Delay(500);
-            BeginRound();
+            BeginRound(false);
         }
 
         void Init()
         {
+            entityUIList.Add(new(TeamManager_GamePlayer.EntityMainController_Team, null));
+            entityUIList.Add(new(TeamManager_GameEnemy.EntityMainController_Team, null));
             foreach (var entity in TeamManager_GamePlayer.AliveEntityList)
-                entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnPlayer(entity));
+                entityUIList.Add(new(entity, EntityUIPortraitSpawner.Instance.SpawnPlayer(entity)));
             foreach (var entity in TeamManager_GameEnemy.AliveEntityList)
-                entityUIList.Add(EntityUIPortraitSpawner.Instance.SpawnEnemy(entity));
+                entityUIList.Add(new(entity, EntityUIPortraitSpawner.Instance.SpawnEnemy(entity)));
+
+            TeamManager_GamePlayer.EntityMainController_Team.Init(TeamManager_GamePlayer);
+            TeamManager_GameEnemy.EntityMainController_Team.Init(TeamManager_GameEnemy);
         }
 
-        async void BeginRound()
+        async void BeginRound(bool rearrange = true)
         {
             CurrentRound++;
-            RearrangeEntities();
+            if(rearrange)
+                RearrangeEntities();
             CurrentState.Value = State.BeginRound;
 
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.BeginRound);
@@ -86,7 +93,7 @@ namespace LabHaven.PawHunters
         {
             foreach (var entity in entityUIList)
             {
-                await entity.EntityMainController.EntitySkillsController.Execute(trigger);
+                await entity.Key.EntitySkillsController.Execute(trigger);
                 if (CheckStopBattle())
                     return;
             }
@@ -125,9 +132,10 @@ namespace LabHaven.PawHunters
 
         void RearrangeEntities()
         {
-            entityUIList = entityUIList.OrderBy(x => x.EntityMainController.BattleAttributes.speed.Value).ToList();
+            entityUIList = entityUIList.OrderBy(x => x.Key is EntityMainController_Team ? 0 : 1).ThenBy(x => x.Key.BattleAttributes.speed.Value).ToList();
             for (int i = 0; i < entityUIList.Count; i++)
-                entityUIList[i].SetOrder(i);
+                if(entityUIList[i].Value)
+                    entityUIList[i].Value.SetOrder(i - 2);
         }
     }
 }

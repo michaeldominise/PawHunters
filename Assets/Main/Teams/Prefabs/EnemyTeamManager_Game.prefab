@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1089589173513898145}
   - component: {fileID: 7703394419014246015}
+  - component: {fileID: 948133218686175775}
+  - component: {fileID: 7642725665870187201}
   m_Layer: 0
   m_Name: EnemyTeamManager_Game
   m_TagString: Untagged
@@ -30,6 +32,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8976978357321589795}
   - {fileID: 2260869497902021793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,6 +58,62 @@ MonoBehaviour:
   - {fileID: 6126343527379344836}
   - {fileID: 403047677833993757}
   offset: {x: 5, y: 0, z: 0}
+  entityMainController_Team: {fileID: 948133218686175775}
+--- !u!114 &948133218686175775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503381876487698133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e118ea92f1e4bc698ebe5882a18006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterData:
+    masterID: 
+    level: 0
+    attribute:
+      health: 100
+      attack: 10
+      defense: 2
+      speed: 3
+      critChance: 0.1
+      critDamage: 1.2
+      counterChance: 0.1
+      comboChance: 0.1
+      specialSkillMax: 0
+  element: 0
+  avatarSprite: {fileID: 0}
+  teamManager: {fileID: 0}
+  model: {fileID: 0}
+  layerManager: {fileID: 0}
+  entitySkillsController: {fileID: 7642725665870187201}
+  entityHealthController: {fileID: 0}
+  entityMovementController: {fileID: 0}
+  entityAnimationController: {fileID: 0}
+  entityStatusEffectController: {fileID: 3399535082034819387}
+  anchor:
+    worldUI: {fileID: 0}
+    statusTextUI: {fileID: 0}
+    body: {fileID: 0}
+    weapon: {fileID: 0}
+  battleAttributes: {}
+  teamBattleAttributes: {}
+--- !u!114 &7642725665870187201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503381876487698133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7598600f8641b4cfcac2f1c016f82ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillList: []
 --- !u!1 &2200218932746502470
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +193,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
+--- !u!1 &2990602249827943153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8976978357321589795}
+  - component: {fileID: 3399535082034819387}
+  m_Layer: 0
+  m_Name: EntityStatusEffectController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8976978357321589795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990602249827943153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1089589173513898145}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3399535082034819387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2990602249827943153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2121c061479546f08a468e3b2daad6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffects: []
 --- !u!1 &3387009007408756513
 GameObject:
   m_ObjectHideFlags: 0

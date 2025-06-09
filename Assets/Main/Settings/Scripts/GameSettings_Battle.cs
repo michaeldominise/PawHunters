@@ -27,18 +27,24 @@ namespace LabHaven.PawHunters
             public Gradient healthProgressColor;
             public Color shieldProgressColor;
             public Color specialSkillProgressColor;
+
             public Color criticalColor;
             public Color damageColor;
             public Color healColor;
+            public Color blockedColor;
+
             public Color journeyFillColor;
             public Color journeyInactiveColor;
             public Color journeyActiveColor_Default;
             public Color journeyActiveColor_Battle;
             public Color journeyActiveColor_Boss;
-            public Color blockedColor;
+
             public Color journeyLogBattleColor;
-            public Color journeyLogRewardColor;
             public Color journeyLogBossColor;
+            public Color journeyLogNegativeColor;
+            public Color journeyLogPositiveColor;
+            public Color journeyLogRewardColor;
+
             public ElementColorTheme elementColorOverlay;
         }
 

@@ -22,6 +22,8 @@ namespace LabHaven.PawHunters
 
         string[] battleDescriptions;
         string[] bossDescriptions;
+        string[] positiveDescriptions;
+        string[] negativeDescriptions;
 
         void Awake() => Instance = this;
 
@@ -36,13 +38,15 @@ namespace LabHaven.PawHunters
         {
             battleDescriptions = SceneGameManager.Instance.StageData.battleDescriptions.text.Split('\n');
             bossDescriptions = SceneGameManager.Instance.StageData.bossDescriptions.text.Split('\n');
+            positiveDescriptions = SceneGameManager.Instance.StageData.positiveDescriptions.text.Split('\n');
+            negativeDescriptions = SceneGameManager.Instance.StageData.negativeDescriptions.text.Split('\n');
         }
 
         private void OnDestroy() => SceneGameManager.Instance.OnCurrentJouneyUpdate -= OnCurrentJouneyUpdate;
         void OnCurrentJouneyUpdate(int index) => Spawn(SceneGameManager.Instance.CurrentJourney, index);
 
         [Button]
-        public void Spawn(JourneyData journeyData, int index) => Spawn(journeyData.type, journeyData.title, GetDescription(journeyData), $"Day {index + 1}");
+        public void Spawn(JourneyData journeyData, int index) => Spawn(journeyData.JourneyType, journeyData.Title, GetDescription(journeyData), $"Day {index + 1}");
 
         [Button]
         public async void Spawn(JourneyData.Type journeyType, string title, string description, string day = "")
@@ -56,16 +60,15 @@ namespace LabHaven.PawHunters
 
         public string GetDescription(JourneyData journeyData)
         {
-            if (!string.IsNullOrWhiteSpace(journeyData.overrideDescription))
-                return journeyData.overrideDescription;
-            else
-                return journeyData.type switch
-                {
-                    JourneyData.Type.Default => journeyData.overrideDescription,
-                    JourneyData.Type.Battle => battleDescriptions[Random.Range(0, battleDescriptions.Length)],
-                    JourneyData.Type.Boss => bossDescriptions[Random.Range(0, battleDescriptions.Length)],
-                    _ => journeyData.overrideDescription,
-                };
+            var description = journeyData.JourneyType switch
+            {
+                JourneyData.Type.Battle => battleDescriptions[Random.Range(0, battleDescriptions.Length)],
+                JourneyData.Type.Boss => bossDescriptions[Random.Range(0, battleDescriptions.Length)],
+                JourneyData.Type.Negative => negativeDescriptions[Random.Range(0, battleDescriptions.Length)],
+                _ => positiveDescriptions[Random.Range(0, battleDescriptions.Length)],
+            };
+
+            return $"{description}{(string.IsNullOrWhiteSpace(description) ? "" : "\n")}{journeyData.AdditionalDescription}";
         }
 
         public override void Clear()

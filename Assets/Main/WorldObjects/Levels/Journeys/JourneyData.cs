@@ -6,26 +6,24 @@ namespace LabHaven.PawHunters
 {
     public abstract class JourneyData : ScriptableObject
     {
-        public enum Type { Default, Battle, Boss }
+        public enum Type { Default, Battle, Boss, Positive, Negative, Reward }
 
-        public string title;
-        [TextArea]
-        public string overrideDescription;
-        public string buttonLabel = "Next";
-        public Type type;
-
+        public abstract Type JourneyType { get; }
+        public virtual string ButtonLabel => "Next";
+        public virtual string Title { get; }
+        public virtual string AdditionalDescription { get; }
         public virtual float TargetDistance => 2;
+        public virtual Vector3 TargetPosition => Vector3.zero;
 
-        public abstract void Init();
-        public abstract void Execute();
-        public virtual void End(Action onFinish) => onFinish?.Invoke();
-
+        public virtual void Init() => Execute();
+        public virtual void Execute() => OnTransitionFinished();
+        public virtual void OnTransitionFinished() => JourneyButtons.Instance.Init(response => End(), ButtonLabel);
+        public virtual void End() => SceneGameManager.Instance.NextJourney();
 
         public virtual void PlayTransition(TeamManager_Game movingTeam, Vector3 targetPosition)
         {
-
             movingTeam.SetState(StateSpeed.State.Running);
-            var movingTeamSpeed = movingTeam.Speed;
+            var movingTeamSpeed = movingTeam.MovementSpeed;
             movingTeam.OnMove += OnMove;
 
             void OnMove()
@@ -39,7 +37,5 @@ namespace LabHaven.PawHunters
                 OnTransitionFinished();
             }
         }
-
-        public virtual void OnTransitionFinished() => SceneGameManager.Instance.NextJourney();
     }
 }

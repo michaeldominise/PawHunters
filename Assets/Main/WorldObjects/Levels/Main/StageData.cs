@@ -13,5 +13,7 @@ namespace LabHaven.PawHunters
 
         public TextAsset battleDescriptions;
         public TextAsset bossDescriptions;
+        public TextAsset negativeDescriptions;
+        public TextAsset positiveDescriptions;
     }
 }

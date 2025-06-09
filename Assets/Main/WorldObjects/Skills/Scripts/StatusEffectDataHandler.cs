@@ -43,7 +43,8 @@ namespace LabHaven.PawHunters
             await data.PlayExecuteVisual(SkillVisualEffect.State.End, this);
 
             await GameActionTriggersManager.Instance.ExecuteOnTrigger(GameActionTriggersManager.TriggerType.ApplyCasterStatusEffect, caster);
-            await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.ApplyTargetStatusEffect, this);
+            if(caster != target)
+                await target.EntitySkillsController.Execute(GameActionTriggersManager.TriggerType.ApplyTargetStatusEffect, this);
         }
 
         public async Task<bool> Expire()

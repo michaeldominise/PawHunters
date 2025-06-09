@@ -22,7 +22,9 @@ namespace LabHaven.PawHunters
             {
                 JourneyData.Type.Battle => GameSettings_Battle.Instance.colorTheme.journeyLogBattleColor,
                 JourneyData.Type.Boss => GameSettings_Battle.Instance.colorTheme.journeyLogBossColor,
-                _ => GameSettings_Battle.Instance.colorTheme.journeyLogRewardColor,
+                JourneyData.Type.Negative => GameSettings_Battle.Instance.colorTheme.journeyLogNegativeColor,
+                JourneyData.Type.Reward => GameSettings_Battle.Instance.colorTheme.journeyLogRewardColor,
+                _ => GameSettings_Battle.Instance.colorTheme.journeyLogPositiveColor,
             };
     }
 }
