@@ -36,13 +36,18 @@ namespace LabHaven.PawHunters
                         StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.blockedColor, "block");
                 }
 
-                ShowStatusTextUI(target, colorLabel, cachedValue);
-                if (!ignoreSheild)
+                if (!ignoreSheild && target.BattleAttributes.shield.Value > 0)
                 {
                     var shieldDamage = Mathf.Max(cachedValue, -target.BattleAttributes.shield.Value);
-                    cachedValue = Mathf.Min(cachedValue + target.BattleAttributes.shield.Value, 0);
+                    if (target.BattleAttributes.shield.Value + cachedValue < 1)
+                    {
+                        shieldDamage = -target.BattleAttributes.shield.Value;
+                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.shieldProgressColor, "break");
+                        cachedValue = 0;
+                    }
                     target.BattleAttributes.shield.Update(shieldDamage, statusEffectDataHandler);
                 }
+                ShowStatusTextUI(target, colorLabel, cachedValue);
             }
 
             target.EntityHealthController.AddHealth(cachedValue, this);

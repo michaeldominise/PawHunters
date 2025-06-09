@@ -116,8 +116,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6648097949891356573}
   - {fileID: 1222193199847053492}
+  - {fileID: 6648097949891356573}
   - {fileID: 7039099822980563547}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,10 +136,10 @@ MonoBehaviour:
   title: Basic Attack
   description: Deal attack damage to the first enemy target
   icon: {fileID: 0}
-  skillTargets:
-  - {fileID: 4411864041380861982}
-  - {fileID: 5757460704594295366}
   trigger: 1
+  skillTargets:
+  - {fileID: 5757460704594295366}
+  - {fileID: 4411864041380861982}
   customConditions: []
 --- !u!1 &8358170826795819579
 GameObject:

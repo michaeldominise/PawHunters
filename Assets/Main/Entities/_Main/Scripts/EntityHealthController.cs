@@ -27,7 +27,7 @@ namespace LabHaven.PawHunters
             if (value < 0)
                 entityMainController.EntityAnimationController.SetState(EntityAnimationController.State.Hurt);
             BattleAttributes.currentHealth.Update(value, obj, currentValue => Math.Clamp(value, -BattleAttributes.currentHealth.Value, BattleAttributes.maxHealth.Value - currentValue));
-            CurrentState.Value = BattleAttributes.currentHealth.Value > 0 ? State.Alive : State.Dead;
+            CurrentState.Value = BattleAttributes.currentHealth.Value < 1 ? State.Dead : State.Alive;
         }
 
         [Button]
