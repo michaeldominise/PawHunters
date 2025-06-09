@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using DG.Tweening;
 using System;
 using UnityEngine.Serialization;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class TeamManager_Game : TeamManager
     {

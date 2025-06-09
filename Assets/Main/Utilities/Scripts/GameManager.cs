@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class GameManager : SingletonMonoBehaviour<GameManager>
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public abstract class EntityUIProgressBar : MonoBehaviour
     {

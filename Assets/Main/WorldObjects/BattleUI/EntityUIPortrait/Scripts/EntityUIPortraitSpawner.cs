@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class EntityUIPortraitSpawner : Spawner<EntityUIPortrait>
     {

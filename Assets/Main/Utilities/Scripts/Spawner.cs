@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     {

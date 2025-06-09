@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class EntityHealthController : MonoBehaviour
     {

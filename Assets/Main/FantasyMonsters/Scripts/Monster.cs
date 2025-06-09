@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.FantasyMonsters.Common.Scripts.Tweens;
-using PawHunters;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

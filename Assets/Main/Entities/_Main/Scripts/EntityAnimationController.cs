@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class EntityAnimationController : MonoBehaviour
     {

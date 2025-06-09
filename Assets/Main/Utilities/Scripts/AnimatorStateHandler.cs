@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class AnimatorStateHandler<Data> : StateMachineBehaviour
     {

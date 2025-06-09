@@ -5,7 +5,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [Serializable]
     public abstract class RecordedValue<T>

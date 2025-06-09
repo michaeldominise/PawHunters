@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 using System.Threading.Tasks;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class InitialUI : SingletonMonoBehaviour<InitialUI>
     {

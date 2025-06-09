@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [CreateAssetMenu(fileName = "GameSettings_Global", menuName = "GameData/Settings/GameSettings_Global")]
     public class GameSettings_Global : GameSettings<GameSettings_Global.Type>

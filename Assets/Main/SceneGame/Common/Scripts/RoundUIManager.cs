@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class RoundUIManager : SingletonMonoBehaviour<RoundUIManager>
     {

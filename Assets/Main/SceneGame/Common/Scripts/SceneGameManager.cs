@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class SceneGameManager : SingletonMonoBehaviour<SceneGameManager>
     {

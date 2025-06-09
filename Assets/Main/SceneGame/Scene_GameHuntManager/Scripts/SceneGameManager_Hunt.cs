@@ -1,8 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class SceneGameManager_Hunt : SceneGameManager
     {

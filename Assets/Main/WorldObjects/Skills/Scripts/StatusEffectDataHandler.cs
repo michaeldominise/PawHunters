@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [Serializable]
     public class StatusEffectDataHandler

@@ -1,9 +1,9 @@
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class JourneyUIItem : MonoBehaviour
     {

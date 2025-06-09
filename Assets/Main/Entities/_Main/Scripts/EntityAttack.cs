@@ -1,8 +1,8 @@
-using Assets.FantasyMonsters.Common.Scripts;
+﻿using Assets.FantasyMonsters.Common.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [RequireComponent(typeof(Monster))]
     public class EntityAtack : MonoBehaviour

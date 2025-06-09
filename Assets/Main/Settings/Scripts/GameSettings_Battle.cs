@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [CreateAssetMenu(fileName = "GameSettings_Battle", menuName = "GameData/Settings/GameSettings_Battle")]
     public class GameSettings_Battle : GameSettings<GameSettings_Battle.Type>

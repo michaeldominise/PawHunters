@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections;
 using Assets.FantasyMonsters.Common.Scripts;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class EntityMainController : MonoBehaviour
     {

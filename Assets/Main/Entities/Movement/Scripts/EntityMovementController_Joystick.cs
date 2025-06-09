@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class EntityMovementController_Joystick : EntityMovementController
     {

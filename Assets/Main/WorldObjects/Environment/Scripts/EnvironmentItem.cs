@@ -1,8 +1,8 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class EnvironmentItem : MonoBehaviour
     {

@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class JourneyButtons : SingletonMonoBehaviour<JourneyButtons>
     {

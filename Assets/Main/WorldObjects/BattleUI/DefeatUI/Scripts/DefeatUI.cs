@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class DefeatUI : SingletonMonoBehaviour<DefeatUI>
     {

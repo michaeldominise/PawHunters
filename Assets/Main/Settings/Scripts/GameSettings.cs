@@ -1,6 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [CreateAssetMenu(fileName = "GlobalSettings", menuName = "GameData/Settings/GlobalSettings")]
     public abstract class GameSettings<EnumType> : ScriptableObject where EnumType : System.Enum

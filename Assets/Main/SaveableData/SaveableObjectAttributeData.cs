@@ -1,7 +1,7 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [System.Serializable]
     public class SaveableObjectAttributeData : SaveableData

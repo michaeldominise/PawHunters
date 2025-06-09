@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     [RequireComponent(typeof(Button))]
     public class ConditionalButton : MonoBehaviour

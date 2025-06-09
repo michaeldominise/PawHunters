@@ -1,11 +1,11 @@
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using System;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class TeamManager_GameEnemy : TeamManager_Game
     {

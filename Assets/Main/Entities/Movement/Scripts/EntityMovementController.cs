@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Assets.FantasyMonsters.Common.Scripts;
 using DG.Tweening;
@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public abstract class EntityMovementController : MonoBehaviour
     {

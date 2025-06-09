@@ -1,7 +1,7 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
-namespace PawHunters
+namespace LabHaven.PawHunters
 {
     public class TeamManger_EntityParent : MonoBehaviour
     {
