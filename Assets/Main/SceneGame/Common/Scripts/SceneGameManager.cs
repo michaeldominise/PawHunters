@@ -16,6 +16,7 @@ namespace LabHaven.PawHunters
         public event Action<int> OnCurrentJouneyUpdate;
 
         public StageData StageData => stageData;
+        public JourneyData CurrentJourney => stageData.journeys[CurrentJourneyIndex];
         public GameSettings_Battle GameSettings_Battle => gameSettings_Battle;
 
         IEnumerator Start()
@@ -31,15 +32,14 @@ namespace LabHaven.PawHunters
             JourneyUIManager.Instance.Init(stageData);
             TeamManager_GamePlayer.Instance.Init(teamData);
             InitialUI.Instance.Init();
-            NextJourney(true);
+            NextJourney();
         }
 
-        [Button]
-        public async virtual void NextJourney(bool isInstant = false)
-        {
-            if(!isInstant)
-                await Task.Delay(500);
+        public virtual void EndJourney() => stageData.journeys[CurrentJourneyIndex].End(NextJourney);
 
+        [Button]
+        public async virtual void NextJourney()
+        {
             if (TeamManager_GameEnemy.Instance.IsAlive)
                 TeamManager_GameEnemy.Instance.Kill();
             CurrentJourneyIndex++;

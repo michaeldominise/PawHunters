@@ -39,7 +39,7 @@ namespace LabHaven.PawHunters
         }
 
         private void OnDestroy() => SceneGameManager.Instance.OnCurrentJouneyUpdate -= OnCurrentJouneyUpdate;
-        void OnCurrentJouneyUpdate(int index) => Spawn(SceneGameManager.Instance.StageData.journeys[index], index);
+        void OnCurrentJouneyUpdate(int index) => Spawn(SceneGameManager.Instance.CurrentJourney, index);
 
         [Button]
         public void Spawn(JourneyData journeyData, int index) => Spawn(journeyData.type, journeyData.title, GetDescription(journeyData), $"Day {index + 1}");

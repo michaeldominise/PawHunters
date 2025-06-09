@@ -19,3 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0e835fa8a76024b35976f644b1e59f04, type: 2}
   - {fileID: 11400000, guid: 0e835fa8a76024b35976f644b1e59f04, type: 2}
   - {fileID: 11400000, guid: 3756942b6cd4747acafde241682ad929, type: 2}
+  battleDescriptions: {fileID: 4900000, guid: 6761892b4c684485c8e9b7374b4262a4, type: 3}
+  bossDescriptions: {fileID: 4900000, guid: c8c33f54e23604b06b6071d300bd11fb, type: 3}

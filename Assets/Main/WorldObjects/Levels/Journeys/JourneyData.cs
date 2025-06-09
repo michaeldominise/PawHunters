@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace LabHaven.PawHunters
@@ -16,6 +18,8 @@ namespace LabHaven.PawHunters
 
         public abstract void Init();
         public abstract void Execute();
+        public virtual void End(Action onFinish) => onFinish?.Invoke();
+
 
         public virtual void PlayTransition(TeamManager_Game movingTeam, Vector3 targetPosition)
         {

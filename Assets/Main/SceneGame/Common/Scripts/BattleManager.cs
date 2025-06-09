@@ -118,7 +118,7 @@ namespace LabHaven.PawHunters
             if (CurrentState.Value == State.JourneyFailed)
                 SceneGameManager.Instance.JourneyFailed();
             else
-                SceneGameManager.Instance.NextJourney();
+                SceneGameManager.Instance.EndJourney();
 
             CurrentState.Value = State.None;
         }
