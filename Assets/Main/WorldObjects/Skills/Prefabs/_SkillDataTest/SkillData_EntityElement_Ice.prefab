@@ -80,14 +80,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Ice Resistance
+  familyName: 
   description: Increase resistance to ice by 50%
   icon: {fileID: 0}
+  rarity: 1
+  trigger: 32
   skillTargets:
   - {fileID: 4411864041380861982}
-  runToFirstTarget: {fileID: 0}
-  trigger: 32
   customConditions: []
-  playExecuteAnimation: 0
 --- !u!1 &8358170826795819579
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   groupOrderType: 0
   healthStatusType: 1
   targetCount: 1
+  executeSkillVFX: []
   customConditions: []
 --- !u!1001 &842212995699515273
 PrefabInstance:

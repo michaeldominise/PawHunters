@@ -20,7 +20,6 @@ namespace LabHaven.PawHunters
         [SerializeField] Slider slider;
 
         StageData stageData;
-        List<JourneyUIItem> itemList = new();
 
         void Awake() => Instance = this;
 
@@ -61,7 +60,7 @@ namespace LabHaven.PawHunters
 
             this.stageData = stageData;
             for (int i = 0; i < stageData.journeys.Count; i++)
-                itemList.Add(Spawn(prefab, init: item => item.Init(stageData.journeys[i], i)));
+                Spawn(prefab, init: item => item.Init(stageData.journeys[i], i));
             slider.maxValue = stageData.journeys.Count - 1;
             slider.image.color = GameSettings_Battle.Instance.colorTheme.journeyFillColor;
 
@@ -72,21 +71,21 @@ namespace LabHaven.PawHunters
         [Button]
         public void SetIndex(int index)
         {
-            index = Mathf.Clamp(index, 0, itemList.Count);
-            label.text = $"{stageData.title} - {index + 1}/{itemList.Count}";
+            index = Mathf.Clamp(index, 0, activeList.Count);
+            label.text = $"{stageData.title} - {index + 1}/{activeList.Count}";
 
             spawnParent.transform.DOLocalMove(index * journeyLayoutGroup.spacing * Vector3.left, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration);
             slider.DOValue(index, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration / 4);
 
-            for (var i = 0; i < itemList.Count; i++)
-                itemList[i].SetState(i <= index ? JourneyUIItem.State.Active : JourneyUIItem.State.Inactive);
+            for (var i = 0; i < activeList.Count; i++)
+                activeList[i].SetState(i <= index ? JourneyUIItem.State.Active : JourneyUIItem.State.Inactive);
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(titleLayoutGroup.transform as RectTransform);
         }
 
         public override void Clear()
         {
-            itemList.Clear();
+            activeList.Clear();
             base.Clear();
         }
     }

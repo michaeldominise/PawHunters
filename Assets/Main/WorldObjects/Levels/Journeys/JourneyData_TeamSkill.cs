@@ -3,26 +3,33 @@ using UnityEngine;
 
 namespace LabHaven.PawHunters
 {
-    [CreateAssetMenu(fileName = "JourneyData_TeamAddSkill", menuName = "GameData/JourneyData/TeamAddSkill")]
-    public class JourneyData_TeamSkill : JourneyData
+    [CreateAssetMenu(fileName = "JourneyData_TeamSkill", menuName = "GameData/JourneyData/TeamSkill")]
+    public abstract class JourneyData_TeamSkill : JourneyData
     {
-        public enum BehaviourType { Execute, AddToSkillList }
-
-        [SerializeField] SkillData skillData;
-        [SerializeField] BehaviourType behaviourType;
-        [SerializeField] bool isPositive = true;
-
-        public override Type JourneyType => isPositive ? Type.Positive : Type.Negative;
-        public override string Title => skillData.description;
-        public override string AdditionalDescription => "[title]";
-
-        public override void Execute()
+        protected void AddSkill(SkillData skillData)
         {
-            if(behaviourType == BehaviourType.Execute)
-                _ = skillData.Execute(GameActionTriggersManager.TriggerType.Instant, TeamManager_GamePlayer.Instance.EntityMainController_Team);
+            TeamManager_GamePlayer.Instance.EntityMainController_Team.EntitySkillsController.AddSkill(skillData);
+            JourneyButtons.Instance.Init(response => base.End(), ButtonLabel);
+        }
+
+        protected string GetTitle(SkillData skillData)
+        {
+            if (skillData.rarity == RarityType.None)
+                return skillData.description;
+            else if(skillData.trigger.HasFlag(GameActionTriggersManager.TriggerType.SetupPhase))
+                return skillData.description;
             else
-                TeamManager_GamePlayer.Instance.EntityMainController_Team.EntitySkillsController.AddSkill(skillData);
-            OnTransitionFinished();
+                return skillData.title;
+        }
+
+        protected string GetDescription(SkillData skillData)
+        {
+            if (skillData.rarity == RarityType.None)
+                return $"You are unfortunate. [title]";
+            else if (skillData.trigger.HasFlag(GameActionTriggersManager.TriggerType.SetupPhase))
+                return $"[title]";
+            else
+                return $"You learned {skillData.rarity} skill [title].";
         }
     }
 }

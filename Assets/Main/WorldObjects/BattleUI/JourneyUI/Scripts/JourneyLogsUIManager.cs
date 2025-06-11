@@ -18,7 +18,6 @@ namespace LabHaven.PawHunters
         [SerializeField] ScrollRect scrollRect;
 
         float JourneyLogsTransitionDuration => GameSettings_Battle.Instance.constantValues.journeyLogsTransitionDuration;
-        List<JourneyLogItem> itemList = new();
 
         string[] battleDescriptions;
         string[] bossDescriptions;
@@ -52,28 +51,30 @@ namespace LabHaven.PawHunters
         public async void Spawn(JourneyData.Type journeyType, string title, string description, string day = "")
         {
             var item = Spawn(prefab, init: item => item.Init(journeyType, title, description, day));
-            itemList.Add(item);
-            LayoutRebuilder.ForceRebuildLayoutImmediate(layoutGroup.transform as RectTransform);
-            await Task.Yield();
+            await Task.Delay(100);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(spawnParent as RectTransform);
             scrollRect.DOVerticalNormalizedPos(0, JourneyLogsTransitionDuration).SetEase(Ease.OutQuad);
         }
 
-        public string GetDescription(JourneyData journeyData)
-        {
-            var description = journeyData.JourneyType switch
+        public string GetDescription(JourneyData.Type journeyType)
+            => journeyType switch
             {
+                JourneyData.Type.Default => string.Empty,
                 JourneyData.Type.Battle => battleDescriptions[Random.Range(0, battleDescriptions.Length)],
                 JourneyData.Type.Boss => bossDescriptions[Random.Range(0, battleDescriptions.Length)],
                 JourneyData.Type.Negative => negativeDescriptions[Random.Range(0, battleDescriptions.Length)],
                 _ => positiveDescriptions[Random.Range(0, battleDescriptions.Length)],
             };
 
-            return $"{description}{(string.IsNullOrWhiteSpace(description) ? "" : "\n")}{journeyData.AdditionalDescription}";
+        public string GetDescription(JourneyData journeyData)
+        {
+            var description = GetDescription(journeyData.JourneyType);
+            return $"{description}{(string.IsNullOrWhiteSpace(description) ? string.Empty : "\n")}{journeyData.AdditionalDescription}";
         }
 
         public override void Clear()
         {
-            itemList.Clear();
+            activeList.Clear();
             base.Clear();
         }
     }

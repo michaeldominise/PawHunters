@@ -13,6 +13,7 @@ namespace LabHaven.PawHunters
         public string familyName;
         [TextArea] public string description;
         public Sprite icon;
+        public RarityType rarity = RarityType.Common;
         public GameActionTriggersManager.TriggerType trigger = GameActionTriggersManager.TriggerType.Instant;
         public List<SkillTargetData> skillTargets;
         public List<SkillCustomCondition> customConditions;

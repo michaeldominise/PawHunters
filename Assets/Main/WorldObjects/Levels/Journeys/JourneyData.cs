@@ -15,12 +15,10 @@ namespace LabHaven.PawHunters
         public virtual float TargetDistance => 2;
         public virtual Vector3 TargetPosition => Vector3.zero;
 
-        public virtual void Init() => Execute();
-        public virtual void Execute() => OnTransitionFinished();
-        public virtual void OnTransitionFinished() => JourneyButtons.Instance.Init(response => End(), ButtonLabel);
+        public virtual void Execute() => JourneyButtons.Instance.Init(response => End(), ButtonLabel);
         public virtual void End() => SceneGameManager.Instance.NextJourney();
 
-        public virtual void PlayTransition(TeamManager_Game movingTeam, Vector3 targetPosition)
+        public virtual void PlayTransition(TeamManager_Game movingTeam, Vector3 targetPosition, Action onTransitionFinished)
         {
             movingTeam.SetState(StateSpeed.State.Running);
             var movingTeamSpeed = movingTeam.MovementSpeed;
@@ -34,7 +32,7 @@ namespace LabHaven.PawHunters
                 movingTeam.OnMove -= OnMove;
                 movingTeam.SetState(StateSpeed.State.Idle);
                 movingTeam.Move(targetPosition - TargetDistance * Mathf.Sign(movingTeamSpeed) * Vector3.right);
-                OnTransitionFinished();
+                onTransitionFinished?.Invoke();
             }
         }
     }

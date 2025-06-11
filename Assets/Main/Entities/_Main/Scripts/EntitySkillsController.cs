@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
 
 namespace LabHaven.PawHunters
 {
@@ -41,10 +39,12 @@ namespace LabHaven.PawHunters
             CurrentState.Value = State.AttackDone;
         }
 
-        public void AddSkill(SkillData skillData)
+        public void AddSkill(SkillData skillData, bool executeIfSetupPhase = true)
         {
             var index = skillList.FindIndex(x => !string.IsNullOrWhiteSpace(x.familyName) && x.familyName == skillData.familyName);
-            if (index < 0)
+            if (executeIfSetupPhase && skillData.trigger.HasFlag(GameActionTriggersManager.TriggerType.SetupPhase))
+                _ = skillData.Execute(GameActionTriggersManager.TriggerType.SetupPhase, entityMainController);
+            else if (index < 0)
                 skillList.Add(skillData);
             else
                 skillList[index] = skillData;

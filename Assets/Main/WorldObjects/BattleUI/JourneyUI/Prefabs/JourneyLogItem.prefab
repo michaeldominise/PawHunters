@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 1661374334338737354}
   - component: {fileID: 136649375638404688}
   - component: {fileID: 2697842174466555522}
+  - component: {fileID: 4781987962310190333}
   m_Layer: 5
   m_Name: JourneyLogItem
   m_TagString: Untagged
@@ -495,6 +496,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   day: {fileID: 8183856679786586515}
   description: {fileID: 852398516266274173}
+  canvasGroup: {fileID: 4781987962310190333}
+--- !u!225 &4781987962310190333
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846394263825522659}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8358232668366585365
 GameObject:
   m_ObjectHideFlags: 0

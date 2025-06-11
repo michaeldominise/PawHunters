@@ -14,6 +14,7 @@ namespace LabHaven.PawHunters
         [SerializeField] protected Transform spawnParent;
 
         protected List<KeyValuePair<int, T>> spawnedList = new();
+        protected List<T> activeList = new();
 
         public Transform SpawnParent => spawnParent;
 
@@ -33,6 +34,7 @@ namespace LabHaven.PawHunters
             item.transform.rotation = Quaternion.identity;
             item.transform.SetParent(spawnParent);
             spawnedList.Add(new(prefab.GetInstanceID(), item));
+            activeList.Add(item);
             init?.Invoke(item);
             OnSpawned?.Invoke(item);
             return item;
@@ -40,15 +42,20 @@ namespace LabHaven.PawHunters
 
         public async void Despawn(T spawnedItem, float setInactiveDelay = 0)
         {
+            activeList.Remove(spawnedItem);
             spawnedItem.transform.SetParent(transform);
             await Task.Delay((int)(setInactiveDelay * 1000));
             spawnedItem.gameObject.SetActive(false);
         }
 
-        public virtual void Clear() => spawnedList.ForEach(x =>
+        public virtual void Clear()
         {
-            x.Value?.transform.SetParent(spawnParent);
-            x.Value?.gameObject.SetActive(false);
-        });
+            activeList.Clear();
+            spawnedList.ForEach(x =>
+            {
+                x.Value?.transform.SetParent(spawnParent);
+                x.Value?.gameObject.SetActive(false);
+            });
+        }
     }
 }

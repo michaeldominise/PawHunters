@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Threading.Tasks;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,12 +10,16 @@ namespace LabHaven.PawHunters
     {
         [SerializeField] TextMeshProUGUI day;
         [SerializeField] TextMeshProUGUI description;
+        [SerializeField] CanvasGroup canvasGroup;
 
-        public void Init(JourneyData.Type journeyType, string title, string description, string day = "")
+        public async void Init(JourneyData.Type journeyType, string title, string description, string day = "")
         {
             this.day.gameObject.SetActive(!string.IsNullOrEmpty(day));
             this.day.text = day;
             this.description.text = description.Replace("[title]", $"<color=#{ColorUtility.ToHtmlStringRGB(GetColor(journeyType))}>{title}</color>");
+            canvasGroup.alpha = 0;
+            await Task.Delay(100);
+            canvasGroup.alpha = 1;
         }
 
         public Color GetColor(JourneyData.Type journeyType)

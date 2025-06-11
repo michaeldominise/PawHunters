@@ -105,12 +105,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Sheild
+  familyName: 
   description: Increase attack by 30% and add sheild by 10% of max health
   icon: {fileID: 0}
+  rarity: 1
+  trigger: 1
   skillTargets:
   - {fileID: 5757460704594295366}
   - {fileID: 60904050300809216}
-  trigger: 1
   customConditions:
   - {fileID: 3076009983235519575}
 --- !u!1 &7753174735630911845

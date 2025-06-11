@@ -24,6 +24,8 @@ namespace LabHaven.PawHunters
             icon.sprite = GameSettings_Battle.Instance.iconSprite.GetSprite(GetIconType());
             textNum.text = $"{index + 1}";
             SetState(state);
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
 
         [Button]

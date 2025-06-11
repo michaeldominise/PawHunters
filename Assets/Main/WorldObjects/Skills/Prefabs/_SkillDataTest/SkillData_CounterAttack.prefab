@@ -80,11 +80,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Counter Attack
+  familyName: 
   description: A chance to counter when hit by a basic attack
   icon: {fileID: 0}
+  rarity: 1
+  trigger: 16
   skillTargets:
   - {fileID: 4411864041380861982}
-  trigger: 16
   customConditions:
   - {fileID: 7216353333477649020}
   - {fileID: 892066354897139537}

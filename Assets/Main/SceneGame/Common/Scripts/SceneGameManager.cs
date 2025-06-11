@@ -13,6 +13,7 @@ namespace LabHaven.PawHunters
         [SerializeField] protected SaveableTeamData teamData;
 
         [ShowInInspector, ReadOnly] int CurrentJourneyIndex { get; set; } = -1;
+        [ShowInInspector, ReadOnly] public bool IsLastJourney => StageData.journeys.Count == CurrentJourneyIndex + 1;
         public event Action<int> OnCurrentJouneyUpdate;
 
         public StageData StageData => stageData;
@@ -38,7 +39,7 @@ namespace LabHaven.PawHunters
         public virtual void EndJourney() => stageData.journeys[CurrentJourneyIndex].End();
 
         [Button]
-        public async virtual void NextJourney()
+        public virtual void NextJourney()
         {
             if (TeamManager_GameEnemy.Instance.IsAlive)
                 TeamManager_GameEnemy.Instance.Kill();
@@ -49,8 +50,7 @@ namespace LabHaven.PawHunters
             else
             {
                 TeamManager_GamePlayer.Instance.SetState(StateSpeed.State.Walking);
-                await Task.Delay(500);
-                stageData.journeys[CurrentJourneyIndex].Init();
+                stageData.journeys[CurrentJourneyIndex].Execute();
                 OnCurrentJouneyUpdate?.Invoke(CurrentJourneyIndex);
             }
         }

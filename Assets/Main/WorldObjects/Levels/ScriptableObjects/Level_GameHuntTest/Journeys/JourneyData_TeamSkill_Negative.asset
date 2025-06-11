@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c092498a3bd48b39cd50183a0d6ff2, type: 3}
+  m_Script: {fileID: 11500000, guid: b7cc2837ff87e439e984c606cd8a3d7b, type: 3}
   m_Name: JourneyData_TeamSkill_Negative
   m_EditorClassIdentifier: 
   skillData: {fileID: 7754968525061356826, guid: 3086f114b6bff4a859312e491ad6cec1, type: 3}

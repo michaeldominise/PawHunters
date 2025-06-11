@@ -51,6 +51,7 @@ MonoBehaviour:
   groupOrderType: 0
   healthStatusType: 1
   targetCount: 1
+  executeSkillVFX: []
   customConditions: []
 --- !u!1 &6187895121218135764
 GameObject:
@@ -99,17 +100,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Sheild
+  familyName: 
   description: Add shield to the caster by 30% of it's max hp
   icon: {fileID: 0}
+  rarity: 1
+  trigger: 1
   skillTargets:
   - {fileID: 5757460704594295366}
   - {fileID: 60904050300809216}
-  runToTargetBeforeExecute: 0
-  trigger: 1
   customConditions:
   - {fileID: 3076009983235519575}
-  animationCastType: 0
-  playAttackAnimation: 0
 --- !u!1 &9089459483711471857
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,21 +161,23 @@ MonoBehaviour:
   tags: 0
   showStatusTextUI: 1
   baseValue: 0.3
-  modifierType: 0
-  attributeModifiers:
+  valueModifiers:
   - modifierType: 3
     attributeData: 0
     sourceType: 0
+  modifierType: 0
   executeTrigger: 1
-  statusEffectExecuteVisual: {fileID: 0}
+  executeSkillVFXs: []
   executeFinishDelay: 0.25
   targetHealthStatus: 1
-  customConditions: []
+  executeCustomConditions: []
   expirationTrigger: 1
   expireAction: 0
   expirationCount: 0
-  statusEffectExpireVisual: {fileID: 0}
+  expireCountdownSkillVFX: []
+  expireSkillVFXs: []
   expireFinishDelay: 0
+  expireCustomConditions: []
   targetAttribute: 7
 --- !u!1001 &3561593870167507328
 PrefabInstance:

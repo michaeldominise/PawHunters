@@ -12,6 +12,7 @@ namespace LabHaven.PawHunters
         public class ColorTheme_Global : ColorTheme
         {
             public ElementColorTheme elementColorTheme;
+            public RarityColorTheme rarityColorTheme;
         }
 
         [System.Serializable]

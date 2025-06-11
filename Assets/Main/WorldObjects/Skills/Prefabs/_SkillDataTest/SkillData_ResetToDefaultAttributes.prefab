@@ -57,14 +57,15 @@ MonoBehaviour:
     sourceType: 0
   modifierType: 1
   executeTrigger: 1
-  statusEffectExecuteVisual: {fileID: 0}
+  executeSkillVFXs: []
   executeFinishDelay: 0
   targetHealthStatus: 1
   executeCustomConditions: []
   expirationTrigger: 1
   expireAction: 0
   expirationCount: 0
-  statusEffectExpireVisual: {fileID: 0}
+  expireCountdownSkillVFX: []
+  expireSkillVFXs: []
   expireFinishDelay: 0
   expireCustomConditions: []
   targetAttribute: 7
@@ -125,14 +126,15 @@ MonoBehaviour:
     sourceType: 0
   modifierType: 1
   executeTrigger: 1
-  statusEffectExecuteVisual: {fileID: 0}
+  executeSkillVFXs: []
   executeFinishDelay: 0
   targetHealthStatus: 1
   executeCustomConditions: []
   expirationTrigger: 1
   expireAction: 0
   expirationCount: 0
-  statusEffectExpireVisual: {fileID: 0}
+  expireCountdownSkillVFX: []
+  expireSkillVFXs: []
   expireFinishDelay: 0
   expireCustomConditions: []
   targetAttribute: 8
@@ -182,14 +184,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: Reset Special Skill
+  familyName: 
   description: Reset the special skill meter and sheild to 0
   icon: {fileID: 0}
+  rarity: 1
+  trigger: 1
   skillTargets:
   - {fileID: 4411864041380861982}
-  runToFirstTarget: {fileID: 0}
-  trigger: 1
   customConditions: []
-  playExecuteAnimation: 0
 --- !u!1 &8358170826795819579
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,4 +244,5 @@ MonoBehaviour:
   groupOrderType: 0
   healthStatusType: 1
   targetCount: 100
+  executeSkillVFX: []
   customConditions: []
