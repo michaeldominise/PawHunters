@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d34b54ff8a20447cc87149c879390d45, type: 3}
-  m_Name: JourneyData_ExpBonus
+  m_Script: {fileID: 11500000, guid: a169eae377ab6489d811da514ec81a01, type: 3}
+  m_Name: MasterIDManager
   m_EditorClassIdentifier: 
-  exp: 120
+  skillDataOverview: {fileID: 11400000, guid: 512fb605fa9f54f72b7869b9c3177a21, type: 2}

@@ -35,5 +35,7 @@ namespace LabHaven.PawHunters
             teamBattleAttributes.attack.Update(teamBattleAttributes.attack.Value / entityList.Count);
             teamBattleAttributes.speed.Update(teamBattleAttributes.speed.Value / entityList.Count);
         }
+
+        public void AddSkill(SkillData skillData) => entitySkillsController.AddSkill(skillData);
     }
 }

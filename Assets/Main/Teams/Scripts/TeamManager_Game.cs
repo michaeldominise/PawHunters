@@ -60,5 +60,7 @@ namespace LabHaven.PawHunters
                     return;
             }
         }
+
+        public void AddSkill(SkillData skillData) => entityMainController_Team.AddSkill(skillData);
     }
 }

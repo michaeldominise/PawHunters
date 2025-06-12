@@ -94,14 +94,14 @@ namespace LabHaven.PawHunters
 
         List<T> GetRandom<T>(List<T> list)
         {
-            var newList = new List<T>(list.Count);
+            var listCopy = new List<T>(list);
             for (var x = 0; x < list.Count; x++)
             {
-                var rnd = Random.Range(0, list.Count);
-                newList[x] = list[rnd];
-                list.RemoveAt(rnd);
+                var rnd = Random.Range(0, listCopy.Count);
+                list[x] = listCopy[rnd];
+                listCopy.RemoveAt(rnd);
             }
-            return newList;
+            return list;
         }
     }
 }

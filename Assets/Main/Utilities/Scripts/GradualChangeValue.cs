@@ -8,6 +8,8 @@ namespace LabHaven.PawHunters
     {
         public class Status
         {
+
+
             public float startTime;
             public float startValue;
             public float endValue;

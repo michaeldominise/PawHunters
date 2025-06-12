@@ -45,6 +45,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     shieldProgressColor: {r: 0.3443396, g: 0.95987695, b: 1, a: 1}
     specialSkillProgressColor: {r: 1, g: 0.63529414, b: 0.25882354, a: 1}
+    expProgressColor: {r: 0.47843137, g: 0.22352941, b: 0.8627451, a: 1}
     criticalColor: {r: 1, g: 0.23373935, b: 0.1745283, a: 1}
     damageColor: {r: 1, g: 1, b: 1, a: 1}
     healColor: {r: 0.26366144, g: 0.745283, b: 0.29555687, a: 1}
@@ -93,6 +94,7 @@ MonoBehaviour:
     titleFadeOutDelayDuration: 3
     titleFadeOutDuration: 2
     progressUpdateDuration: 0.25
+    progressUpdateDurationSlow: 3
     progressUpdateAnimationCurve:
       serializedVersion: 2
       m_Curve:
@@ -156,3 +158,4 @@ MonoBehaviour:
     - state: 2
       speed: 4
     journeyLogsTransitionDuration: 0.5
+    expMaxValue: 100

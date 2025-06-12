@@ -10,5 +10,7 @@ namespace LabHaven.PawHunters
         public override Type JourneyType => Type.Positive;
         public override string Title => $"You gained {exp} exp!";
         public override string AdditionalDescription => "[title]";
+
+        public override void Execute() => ExpUIManager.Instance.AddExp(exp, base.Execute);
     }
 }

@@ -8,11 +8,11 @@ namespace LabHaven.PawHunters
     {
         protected void AddSkill(SkillData skillData)
         {
-            TeamManager_GamePlayer.Instance.EntityMainController_Team.EntitySkillsController.AddSkill(skillData);
+            TeamManager_GamePlayer.Instance.AddSkill(skillData);
             JourneyButtons.Instance.Init(response => base.End(), ButtonLabel);
         }
 
-        protected string GetTitle(SkillData skillData)
+        public static string GetTitle(SkillData skillData)
         {
             if (skillData.rarity == RarityType.None)
                 return skillData.description;
@@ -22,7 +22,7 @@ namespace LabHaven.PawHunters
                 return skillData.title;
         }
 
-        protected string GetDescription(SkillData skillData)
+        public static string GetDescription(SkillData skillData)
         {
             if (skillData.rarity == RarityType.None)
                 return $"You are unfortunate. [title]";

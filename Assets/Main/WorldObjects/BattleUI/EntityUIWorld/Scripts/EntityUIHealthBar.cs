@@ -37,7 +37,7 @@ namespace LabHaven.PawHunters
         {
             if (entityMainController.BattleAttributes.shield.Value > 0)
                 return;
-            label.text = status.CurrentValue.Format();
+            label.text = GetOverflowValue(status.CurrentValue).Format();
         }
     }
 }

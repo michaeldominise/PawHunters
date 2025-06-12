@@ -31,9 +31,9 @@ namespace LabHaven.PawHunters
                 return;
 
             if (status.CurrentValue <= 0)
-                label.text = $"{entityMainController.BattleAttributes.currentHealth.Value.Format()}";
+                label.text = $"{GetOverflowValue(entityMainController.BattleAttributes.currentHealth.Value).Format()}";
             else
-                label.text = $"({status.CurrentValue.Format()})";
+                label.text = $"({GetOverflowValue(status.CurrentValue).Format()})";
         }
     }
 }

@@ -27,6 +27,7 @@ namespace LabHaven.PawHunters
             public Gradient healthProgressColor;
             public Color shieldProgressColor;
             public Color specialSkillProgressColor;
+            public Color expProgressColor;
 
             public Color criticalColor;
             public Color damageColor;
@@ -82,6 +83,7 @@ namespace LabHaven.PawHunters
             public float titleFadeOutDuration;
 
             public float progressUpdateDuration;
+            public float progressUpdateDurationSlow;
             public AnimationCurve progressUpdateAnimationCurve;
             public float statusTextUITargetYPosition;
             public float statusTextUITargetScale;
@@ -95,6 +97,7 @@ namespace LabHaven.PawHunters
             public List<StateSpeed> movementStateSpeedList = new();
 
             public float journeyLogsTransitionDuration;
+            public float expMaxValue;
 
             public float GetSpeed(StateSpeed.State state) => movementStateSpeedList.FirstOrDefault(x => state == x.state)?.speed ?? 0;
         }
