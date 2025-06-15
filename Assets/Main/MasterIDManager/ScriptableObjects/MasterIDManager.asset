@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: MasterIDManager
   m_EditorClassIdentifier: 
   skillDataOverview: {fileID: 11400000, guid: 512fb605fa9f54f72b7869b9c3177a21, type: 2}
+  stageDataOverview: {fileID: 11400000, guid: 6c9443251caaf4dbbabd25cbf4343832, type: 2}
+  skillDataOverview_TeamSkill: {fileID: 11400000, guid: b8e2ab4a5a67e477899b9d8aad311892, type: 2}
+  entityOverview: {fileID: 11400000, guid: bab9637a4fee94fcfa5304c692e9fdf6, type: 2}

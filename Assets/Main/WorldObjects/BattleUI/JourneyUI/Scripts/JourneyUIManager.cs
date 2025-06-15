@@ -59,9 +59,9 @@ namespace LabHaven.PawHunters
             Show(true);
 
             this.stageData = stageData;
-            for (int i = 0; i < stageData.journeys.Count; i++)
-                Spawn(prefab, init: item => item.Init(stageData.journeys[i], i));
-            slider.maxValue = stageData.journeys.Count - 1;
+            for (int i = 0; i < stageData.data.journeys.Count; i++)
+                Spawn(prefab, init: item => item.Init(stageData.data.journeys[i].Asset, i));
+            slider.maxValue = stageData.data.journeys.Count - 1;
             slider.image.color = GameSettings_Battle.Instance.colorTheme.journeyFillColor;
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(titleLayoutGroup.transform as RectTransform);

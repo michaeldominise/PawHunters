@@ -8,7 +8,6 @@ namespace LabHaven.PawHunters
     public class TeamManager : Spawner<EntityMainController>
     {
         [SerializeField] SaveableTeamData teamData;
-        [SerializeField] EntityMainController prefab;
         [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
 
         public List<EntityMainController> EntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController)?.Select(x => x.entityMainController).ToList();
@@ -22,7 +21,7 @@ namespace LabHaven.PawHunters
             SaveableData.Initialize(ref this.teamData, teamData, Refresh);
 
             for (var x = 0; x < teamData.characters.Count; x++)
-                Spawn(prefab, init: entity => EntityInit(x, entity, teamData.characters[x]));
+                Spawn(teamData.characters[x].GetPrefab(), init: entity => EntityInit(x, entity, teamData.characters[x]));
         }
 
         public virtual EntityMainController EntityInit(int index, EntityMainController entity, SaveableCharacterData saveableCharacterData)

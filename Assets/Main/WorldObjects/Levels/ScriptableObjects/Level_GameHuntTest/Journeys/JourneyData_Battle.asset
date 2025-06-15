@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c976bcae75b9244209e8a4cac700a14c, type: 3}
   m_Name: JourneyData_Battle
   m_EditorClassIdentifier: 
-  title: Wild Black Cat
-  description: "You wandered into the tall grasslands\u2014peaceful at first, until
-    a [title] pounced from the brush!"
-  buttonLabel: Battle
-  type: 1
   transitionToBattleType: 0
   teamData:
-    teamName: 
+    teamName: Wild Black Cat
     characters:
-    - masterID: 
+    - masterID: Character.BlackCat
       level: 0
       attribute:
         health: 100
@@ -33,3 +28,6 @@ MonoBehaviour:
         counterChance: 0.1
         comboChance: 0.1
         specialSkillMax: 0
+      skillDataMasterIdList:
+      - SkillData_BasicAttack_ShortRange
+      - SkillData_SpecialSkill_EnhanceAttackWithShield

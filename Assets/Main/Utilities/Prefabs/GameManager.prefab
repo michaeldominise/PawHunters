@@ -46,3 +46,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSettings_Global: {fileID: 11400000, guid: 6d035d9b2a6884c41b3cef4b2c53082f, type: 2}
   masterIDManager: {fileID: 11400000, guid: 67c1044374a664e6e9373f975a16b085, type: 2}
+  appValues:
+    stageData:
+      masterID: StageData.Stage_GameHuntTest
+      assetReference:
+        m_AssetGUID: ba1292996b7f343b8b2e5d2a709ffa7d
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+    playerTeamData:
+      teamName: 
+      characters:
+      - masterID: EntityMainController.BlackCat
+        level: 0
+        attribute:
+          health: 100
+          attack: 30
+          defense: 2
+          speed: 3
+          critChance: 0.1
+          critDamage: 1.2
+          counterChance: 0.1
+          comboChance: 0.1
+          specialSkillMax: 0
+        skillDataMasterIdList:
+        - SkillData_BasicAttack_ShortRange
+        - SkillData_SpecialSkill_EnhanceAttackWithShield

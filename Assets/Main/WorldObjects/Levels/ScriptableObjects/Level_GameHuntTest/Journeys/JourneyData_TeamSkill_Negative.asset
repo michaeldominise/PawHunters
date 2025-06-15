@@ -13,5 +13,3 @@ MonoBehaviour:
   m_Name: JourneyData_TeamSkill_Negative
   m_EditorClassIdentifier: 
   skillData: {fileID: 7754968525061356826, guid: 3086f114b6bff4a859312e491ad6cec1, type: 3}
-  behaviourType: 0
-  isPositive: 0

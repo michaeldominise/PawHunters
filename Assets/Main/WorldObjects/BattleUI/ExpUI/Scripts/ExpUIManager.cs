@@ -39,7 +39,7 @@ namespace LabHaven.PawHunters
             {
                 var newLevel = (int)(CurrentValue / MaxValue);
                 if (newLevel > level)
-                    SkillSelectionUIManager.Instance.Init(SkillDataSelected, SkillDataOverview.Instance.skillDataCommonList);
+                    SkillSelectionUIManager.Instance.Init(SkillDataSelected, SceneGameManager_Hunt.Instance_Hunt.TeamSkills.ToArray());
                 else
                     onFinish?.Invoke();
                 level = newLevel;

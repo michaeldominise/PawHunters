@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5309d8fd46f2f41f2b8f5a69fe944753, type: 3}
+  m_Name: StageDataOverview
+  m_EditorClassIdentifier: 
+  dataList:
+  - masterID: Stage_GameHuntTest
+    assetReference:
+      m_AssetGUID: ba1292996b7f343b8b2e5d2a709ffa7d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  folderPaths: []
+  folderAssets: []

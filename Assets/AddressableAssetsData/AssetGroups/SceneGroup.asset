@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SceneGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: SceneGroup
+  m_GUID: feebe0b4341d04d29a20aaf6633fd8a6
+  m_SerializeEntries:
+  - m_GUID: 0ae92e07d5540454ebcb373202d791a4
+    m_Address: Assets/Main/Scenes/Scene_GameHunt.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: efc60a1b3c275497a9da388692400d99, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 152e86741e3fb43c99b4b80ee926c5e5, type: 2}
+    - {fileID: 11400000, guid: d2cacf688e1354e14b38a0fed9ab8fe4, type: 2}

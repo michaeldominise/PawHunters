@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -42,5 +43,16 @@ namespace LabHaven.PawHunters
             oldData = newData;
             return newData;
         }
+
+        public virtual List<IAssetReferenceMasterID> GetAssetReference() => new();
+
+        public virtual async Task LoadAssets()
+        {
+            var loadTask = GetAssetReference().Select(x => x.Load());
+            if (loadTask.Count() > 0)
+                await Task.WhenAll(loadTask);
+        }
+
+        public void UnloadAssets() => GetAssetReference().ForEach(x => x.Unload());
     }
 }

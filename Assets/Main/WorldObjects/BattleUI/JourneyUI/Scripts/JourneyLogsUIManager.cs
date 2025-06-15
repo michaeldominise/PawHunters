@@ -30,15 +30,14 @@ namespace LabHaven.PawHunters
         {
             yield return null;
             SceneGameManager.Instance.OnCurrentJouneyUpdate += OnCurrentJouneyUpdate;
-            Init();
         }
 
-        void Init()
+        public void Init()
         {
-            battleDescriptions = SceneGameManager.Instance.StageData.battleDescriptions.text.Split('\n');
-            bossDescriptions = SceneGameManager.Instance.StageData.bossDescriptions.text.Split('\n');
-            positiveDescriptions = SceneGameManager.Instance.StageData.positiveDescriptions.text.Split('\n');
-            negativeDescriptions = SceneGameManager.Instance.StageData.negativeDescriptions.text.Split('\n');
+            battleDescriptions = SceneGameManager.Instance.StageData.data.battleDescriptions.Asset.text.Split('\n');
+            bossDescriptions = SceneGameManager.Instance.StageData.data.bossDescriptions.Asset.text.Split('\n');
+            positiveDescriptions = SceneGameManager.Instance.StageData.data.positiveDescriptions.Asset.text.Split('\n');
+            negativeDescriptions = SceneGameManager.Instance.StageData.data.negativeDescriptions.Asset.text.Split('\n');
         }
 
         private void OnDestroy() => SceneGameManager.Instance.OnCurrentJouneyUpdate -= OnCurrentJouneyUpdate;

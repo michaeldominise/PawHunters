@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 1678612865106565805}
   - component: {fileID: 104963303046481497}
   m_Layer: 0
-  m_Name: BlackCat
+  m_Name: Character.BlackCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
       counterChance: 0.1
       comboChance: 0.1
       specialSkillMax: 0
+    skillMasterIdList: []
   element: 0
   avatarSprite: {fileID: -1828946549344447192, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
   teamManager: {fileID: 0}
@@ -445,9 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7598600f8641b4cfcac2f1c016f82ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillList:
-  - {fileID: 7754968525061356826, guid: 5af3adc5f6d884eaf9d4c3334b4c54bf, type: 3}
-  - {fileID: 7754968525061356826, guid: 0cce0d4a1e08a4e7ab8615a73cec3292, type: 3}
+  skillList: []
 --- !u!1 &2911963365007586375
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c2d14855613b4afd9aa0cd139a3b335, type: 3}
+  m_Name: EntityOverview
+  m_EditorClassIdentifier: 
+  dataList:
+  - masterID: Character.BlackCat
+    assetReference:
+      m_AssetGUID: 1f6b63c409740465eb96b1736f9a860f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  folderPaths:
+  - Assets/Main/WorldObjects/Characters
+  folderAssets:
+  - {fileID: 102900000, guid: 680dfcf078bca4f78b88060308c20310, type: 3}

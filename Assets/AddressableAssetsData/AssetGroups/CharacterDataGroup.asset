@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CharacterDataGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: CharacterDataGroup
+  m_GUID: 8109748337db441c7a54ed86446f3961
+  m_SerializeEntries:
+  - m_GUID: 1f6b63c409740465eb96b1736f9a860f
+    m_Address: Assets/Main/WorldObjects/Characters/Prefabs/BlackCat/Prefabs/BlackCat.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: efc60a1b3c275497a9da388692400d99, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: cf9d74671546045589b25699aaf5e0ca, type: 2}
+    - {fileID: 11400000, guid: 4b89a04b45b4e4a99b796937486c3321, type: 2}

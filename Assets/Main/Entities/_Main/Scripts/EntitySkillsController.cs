@@ -22,6 +22,12 @@ namespace LabHaven.PawHunters
             this.entityMainController = entityMainController;
         }
 
+        void InitSkills()
+        {
+            skillList.Clear();
+            skillList.AddRange(entityMainController.CharacterData.SkillDataList);
+        }
+
         public async Task Execute(GameActionTriggersManager.TriggerType trigger, object srouceTrigger = null)
         {
             if (!entityMainController.IsAlive)

@@ -1,4 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -6,9 +9,29 @@ namespace LabHaven.PawHunters
 {
     public class SceneGameManager_Hunt : SceneGameManager
     {
-        protected override void Init()
+        public static SceneGameManager_Hunt Instance_Hunt { get; private set; }
+
+        public List<AssetReferenceMasterID<SkillData>> TeamSkillsAssetReference => SkillDataOverview_TeamSkill.Instance.dataList;
+        public List<SkillData> TeamSkills => SkillDataOverview_TeamSkill.Instance.dataList.Select(x => x.Asset).ToList();
+
+        protected override void Awake()
         {
-            base.Init();
+            Instance_Hunt = this;
+            base.Awake(); 
+        }
+
+        protected override async Task Init()
+        {
+            var loadTask = TeamSkillsAssetReference.Select(x => x.Load());
+            if (loadTask.Count() > 0)
+                await Task.WhenAll(loadTask);
+            await base.Init();
+        }
+
+        protected override void OnDestroy()
+        {
+            TeamSkillsAssetReference.ForEach(x => x.Unload());
+            base.OnDestroy();
         }
     }
 }

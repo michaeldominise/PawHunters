@@ -1,0 +1,41 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace LabHaven.PawHunters
+{
+    public partial class GameManager
+    {
+        [ShowInInspector, HideReferenceObjectPicker]
+        static List<AssetReferenceMasterIDProfiler> ActiveAssetReferences = new();
+
+        [SerializeField]
+        public class AssetReferenceMasterIDProfiler
+        {
+            [ShowInInspector, ReadOnly] public string MasterID => iAssetReference.MasterID;
+            [ShowInInspector, ReadOnly] public int UsageCount => iAssetReference.UsageCount;
+            [ShowInInspector, ReadOnly] public Object Asset { get; set; }
+
+            public IAssetReferenceMasterID iAssetReference;
+
+            public AssetReferenceMasterIDProfiler(IAssetReferenceMasterID iAssetReference, Object asset)
+            {
+                Asset = asset;
+                this.iAssetReference = iAssetReference;
+            }
+        }
+
+        public static void AddAssetReferences(IAssetReferenceMasterID iAssetReference, Object asset) => ActiveAssetReferences.Add(new(iAssetReference, asset));
+        public static void RemoveAssetReferences(IAssetReferenceMasterID iAssetReference) => ActiveAssetReferences.Remove(ActiveAssetReferences.FirstOrDefault(x => x.iAssetReference == iAssetReference));
+
+        private void OnDestroy() => UnloadActiveAssets();
+        [Button]
+        private void UnloadActiveAssets()
+        {
+            while(ActiveAssetReferences.Count > 0)
+                ActiveAssetReferences[0].iAssetReference.Unload();
+            ActiveAssetReferences.Clear();
+        }
+    }
+}

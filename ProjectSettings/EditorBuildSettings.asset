@@ -5,11 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Main/Scenes/Scene_GameHunt.unity
     guid: 0ae92e07d5540454ebcb373202d791a4
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 968abf2ba0ba94191991ea087bbbf966, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: c7fa071f557234a658582f93ff1d382b, type: 2}
+    com.unity.addressableassets: {fileID: 11400000, guid: 21f286b3a0e194842a53bde92414d0aa, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 560c4d93d1d1246a6b17c114fc0f38b2, type: 3}
   m_UseUCBPForAssetBundles: 0

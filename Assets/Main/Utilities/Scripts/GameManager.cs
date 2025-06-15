@@ -2,7 +2,7 @@
 
 namespace LabHaven.PawHunters
 {
-    public class GameManager : SingletonMonoBehaviour<GameManager>
+    public partial class GameManager : SingletonMonoBehaviour<GameManager>
     {
         [SerializeField] GameSettings_Global gameSettings_Global;
         [SerializeField] MasterIDManager masterIDManager;

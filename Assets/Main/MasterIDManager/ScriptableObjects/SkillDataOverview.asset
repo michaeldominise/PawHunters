@@ -12,7 +12,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7e707dd344e546fc9b1bf6f3f193fab, type: 3}
   m_Name: SkillDataOverview
   m_EditorClassIdentifier: 
-  skillDataCommonList:
-  - {fileID: 7754968525061356826, guid: fb6dd4752a28348f6aaf376c782791d2, type: 3}
-  - {fileID: 7754968525061356826, guid: fb6dd4752a28348f6aaf376c782791d2, type: 3}
-  - {fileID: 7754968525061356826, guid: 3086f114b6bff4a859312e491ad6cec1, type: 3}
+  dataList:
+  - masterID: SkillData_BasicAttack_ShortRange
+    assetReference:
+      m_AssetGUID: 5af3adc5f6d884eaf9d4c3334b4c54bf
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - masterID: SkillData_CounterAttack
+    assetReference:
+      m_AssetGUID: 50addbe73c46a424696b736eb79cb736
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - masterID: SkillData_EntityElement_Ice
+    assetReference:
+      m_AssetGUID: 9aa677678429f4c4983fbc3071ac05b7
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - masterID: SkillData_ResetToDefaultAttributes
+    assetReference:
+      m_AssetGUID: 8f3de6a3dab0149d89fcc1d6ea2cc470
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - masterID: SkillData_SpecialSkill_EnhanceAttackWithShield
+    assetReference:
+      m_AssetGUID: 0cce0d4a1e08a4e7ab8615a73cec3292
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  - masterID: SkillData_SpecialSkill_Shield
+    assetReference:
+      m_AssetGUID: 69aff1dede4e649948bf43babaef56c9
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+  folderPaths:
+  - Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/_Test
+  - Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/CharacterSkills
+  folderAssets:
+  - {fileID: 102900000, guid: f4b470452a6754e81b6a4f8719968c3e, type: 3}
+  - {fileID: 102900000, guid: fe53bb4e94cbd4f6f91bdbe1f2a5f530, type: 3}

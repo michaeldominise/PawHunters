@@ -8,5 +8,8 @@ namespace LabHaven.PawHunters
         public static MasterIDManager Instance => GameManager.Instance.MasterIDManager;
 
         public SkillDataOverview skillDataOverview;
+        public StageDataOverview stageDataOverview;
+        public SkillDataOverview_TeamSkill skillDataOverview_TeamSkill;
+        public EntityOverview entityOverview;
     }
 }

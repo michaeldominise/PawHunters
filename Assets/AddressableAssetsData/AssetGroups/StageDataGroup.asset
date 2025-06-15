@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: StageDataGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: StageDataGroup
+  m_GUID: b3838f6057399445b9bbe6802e6bad09
+  m_SerializeEntries:
+  - m_GUID: 02f6bb04f67fc4856888054eeaec3b50
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/GoldenWaste/Descriptions/negative.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e835fa8a76024b35976f644b1e59f04
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Journeys/JourneyData_Battle.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c26c4fa0a55543f082549fd657f9a43
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Journeys/JourneyData_TeamSkill_Negative.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5683f05ea332b43d9ba295dcd0e9f2e4
+    m_Address: Assets/Main/WorldObjects/Environment/Prefabs/EnvironmentItem_Desert.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6761892b4c684485c8e9b7374b4262a4
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/GoldenWaste/Descriptions/battle.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89547044fc43b4158913258dc46f4af3
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Journeys/JourneyData_ExpBonus.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cd14cf5c2925443aae35327597e8648
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Journeys/JourneyData_Boss.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba1292996b7f343b8b2e5d2a709ffa7d
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Stage_GameHuntTest.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c75810eec0b2042f191db9a45ed0aacd
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Journeys/JourneyData_TeamSkill_Positive.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8c33f54e23604b06b6071d300bd11fb
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/GoldenWaste/Descriptions/boss.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d4be81abb576c47c0941b6e826171538
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/Level_GameHuntTest/Journeys/JourneyData_TeamSkillSelection.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1764cb0403c24a539e9a8c9322fd63b
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/GoldenWaste/Descriptions/positive.txt
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: efc60a1b3c275497a9da388692400d99, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 175cc6512463c4d59a064934a43d5619, type: 2}
+    - {fileID: 11400000, guid: 7fa0c3ebfc1074b7bac4642eaf1fed6a, type: 2}

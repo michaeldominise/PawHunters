@@ -35,5 +35,8 @@ namespace LabHaven.PawHunters
                 onTransitionFinished?.Invoke();
             }
         }
+
+        public virtual async Task LoadAssets() => await Task.Yield();
+        public virtual void UnloadAssets() { }
     }
 }
