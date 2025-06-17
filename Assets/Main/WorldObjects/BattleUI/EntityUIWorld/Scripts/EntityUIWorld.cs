@@ -49,7 +49,7 @@ namespace LabHaven.PawHunters
         IEnumerator _Kill()
         {
             CurrentState.Value = State.Dead;
-            yield return new WaitForSeconds(GameSettings_Battle.Instance.constantValues.progressUpdateDuration);
+            yield return new WaitForSeconds(AppSettings_Battle.Instance.constantValues.progressUpdateDuration);
             gameObject.SetActive(false);
         }
     }

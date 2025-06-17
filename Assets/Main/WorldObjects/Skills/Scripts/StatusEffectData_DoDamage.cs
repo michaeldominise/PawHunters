@@ -16,7 +16,7 @@ namespace LabHaven.PawHunters
         {
             var target = statusEffectDataHandler.target;
             var cachedValue = statusEffectDataHandler.cachedValue;
-            var colorLabel = GameSettings_Battle.Instance.colorTheme.damageColor;
+            var colorLabel = AppSettings_Battle.Instance.colorTheme.damageColor;
 
             if (cachedValue < 0)
             {
@@ -24,7 +24,7 @@ namespace LabHaven.PawHunters
 
                 if (!ignoreCrit && Random.Range(0, 1f) <= statusEffectDataHandler.caster.BattleAttributes.critChance.Value)
                 {
-                    colorLabel = GameSettings_Battle.Instance.colorTheme.criticalColor;
+                    colorLabel = AppSettings_Battle.Instance.colorTheme.criticalColor;
                     cachedValue *= statusEffectDataHandler.caster.BattleAttributes.critDamage.Value;
                 }
 
@@ -33,7 +33,7 @@ namespace LabHaven.PawHunters
                     var totalDefense = target.BattleAttributes.defense.Value + statusEffectDataHandler.target.EntityStatusEffectController.GetEnhanceValue(statusEffectDataHandler.caster, StatusEffectData_Enhance.EnhanceType.Defense);
                     cachedValue = Mathf.Min(cachedValue + Random.Range(0, totalDefense), 0);
                     if(cachedValue == 0)
-                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.blockedColor, "block");
+                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, AppSettings_Battle.Instance.colorTheme.blockedColor, "block");
                 }
 
                 if (!ignoreSheild && target.BattleAttributes.shield.Value > 0)
@@ -42,7 +42,7 @@ namespace LabHaven.PawHunters
                     if (target.BattleAttributes.shield.Value + cachedValue < 1)
                     {
                         shieldDamage = -target.BattleAttributes.shield.Value;
-                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, GameSettings_Battle.Instance.colorTheme.shieldProgressColor, "break");
+                        StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, AppSettings_Battle.Instance.colorTheme.shieldProgressColor, "break");
                         cachedValue = 0;
                     }
                     target.BattleAttributes.shield.Update(shieldDamage, statusEffectDataHandler);

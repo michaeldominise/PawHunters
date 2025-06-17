@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Main/Scenes/Scene_GameHunt.unity
-    guid: 0ae92e07d5540454ebcb373202d791a4
+  - enabled: 1
+    path: Assets/Main/Scenes/Scene_Start.unity
+    guid: b8e25ea57e2a84e3f8036b11d7296c93
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 968abf2ba0ba94191991ea087bbbf966, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: c7fa071f557234a658582f93ff1d382b, type: 2}

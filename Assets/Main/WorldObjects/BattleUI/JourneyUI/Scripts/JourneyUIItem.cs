@@ -14,14 +14,14 @@ namespace LabHaven.PawHunters
         [SerializeField] TextMeshProUGUI textNum;
 
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
-        Color JourneyInactiveColor => GameSettings_Battle.Instance.colorTheme.journeyInactiveColor;
+        Color JourneyInactiveColor => AppSettings_Battle.Instance.colorTheme.journeyInactiveColor;
         Color JourneyActiveColor => GetColor();
         JourneyData journeyData;
 
         public void Init(JourneyData journeyData, int index, State state = State.Inactive)
         {
             this.journeyData = journeyData;
-            icon.sprite = GameSettings_Battle.Instance.iconSprite.GetSprite(GetIconType());
+            icon.sprite = AppSettings_Battle.Instance.iconSprite.GetSprite(GetIconType());
             textNum.text = $"{index + 1}";
             SetState(state);
 
@@ -35,20 +35,20 @@ namespace LabHaven.PawHunters
             CurrentState.Value = state;
         }
 
-        public GameSettings_Battle.Type GetIconType()
+        public AppSettings_Battle.Type GetIconType()
             => journeyData.JourneyType switch
             {
-                JourneyData.Type.Battle => GameSettings_Battle.Type.JourneyBattle,
-                JourneyData.Type.Boss => GameSettings_Battle.Type.JourneyBoss,
-                _ => GameSettings_Battle.Type.JourneyDefault,
+                JourneyData.Type.Battle => AppSettings_Battle.Type.JourneyBattle,
+                JourneyData.Type.Boss => AppSettings_Battle.Type.JourneyBoss,
+                _ => AppSettings_Battle.Type.JourneyDefault,
             };
 
         public Color GetColor()
             => journeyData.JourneyType switch
             {
-                JourneyData.Type.Battle => GameSettings_Battle.Instance.colorTheme.journeyActiveColor_Battle,
-                JourneyData.Type.Boss => GameSettings_Battle.Instance.colorTheme.journeyActiveColor_Boss,
-                _ => GameSettings_Battle.Instance.colorTheme.journeyActiveColor_Default,
+                JourneyData.Type.Battle => AppSettings_Battle.Instance.colorTheme.journeyActiveColor_Battle,
+                JourneyData.Type.Boss => AppSettings_Battle.Instance.colorTheme.journeyActiveColor_Boss,
+                _ => AppSettings_Battle.Instance.colorTheme.journeyActiveColor_Default,
             };
     }
 }

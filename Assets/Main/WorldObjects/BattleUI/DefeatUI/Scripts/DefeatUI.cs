@@ -9,10 +9,6 @@ namespace LabHaven.PawHunters
 
         public void Show(bool value) => container.SetActive(value);
 
-        public void OnClaimClicked()
-        {
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.name);
-        }
+        public void OnClaimClicked() => AppManager.Instance.Reload();
     }
 }

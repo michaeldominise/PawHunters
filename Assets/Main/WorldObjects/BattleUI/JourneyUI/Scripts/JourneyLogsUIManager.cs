@@ -17,7 +17,7 @@ namespace LabHaven.PawHunters
         [SerializeField] RectTransform layoutGroup;
         [SerializeField] ScrollRect scrollRect;
 
-        float JourneyLogsTransitionDuration => GameSettings_Battle.Instance.constantValues.journeyLogsTransitionDuration;
+        float JourneyLogsTransitionDuration => AppSettings_Battle.Instance.constantValues.journeyLogsTransitionDuration;
 
         string[] battleDescriptions;
         string[] bossDescriptions;

@@ -12,8 +12,8 @@ namespace LabHaven.PawHunters
         [SerializeField] protected Slider sliderProgress;
         [SerializeField] OverflowType sliderOverflow;
 
-        protected virtual AnimationCurve AnimationCurve => GameSettings_Battle.Instance.constantValues.progressUpdateAnimationCurve;
-        protected virtual float UpdateDuration => GameSettings_Battle.Instance.constantValues.progressUpdateDuration;
+        protected virtual AnimationCurve AnimationCurve => AppSettings_Battle.Instance.constantValues.progressUpdateAnimationCurve;
+        protected virtual float UpdateDuration => AppSettings_Battle.Instance.constantValues.progressUpdateDuration;
         protected virtual Color ProgressColor => Color.white;
         GradualChangeValue.Status updateStatus;
 

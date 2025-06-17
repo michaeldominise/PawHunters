@@ -392,12 +392,12 @@ MonoBehaviour:
       counterChance: 0.1
       comboChance: 0.1
       specialSkillMax: 0
-    skillMasterIdList: []
+    skillDataMasterIdList: []
   element: 0
   avatarSprite: {fileID: -1828946549344447192, guid: b3c3504d5ac8f084182381c9176806cd, type: 3}
   teamManager: {fileID: 0}
   model: {fileID: 7382414992683298494}
-  layerManager: {fileID: 3996665792535199064}
+  sortingGroup: {fileID: 3465364248552244061}
   entitySkillsController: {fileID: 104963303046481497}
   entityHealthController: {fileID: 5458500271463625463}
   entityMovementController: {fileID: 1678612865106565805}

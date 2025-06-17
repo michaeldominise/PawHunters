@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace LabHaven.PawHunters
 {
-    public partial class GameManager
+    public partial class AppManager
     {
         public AppValues appValues;
 

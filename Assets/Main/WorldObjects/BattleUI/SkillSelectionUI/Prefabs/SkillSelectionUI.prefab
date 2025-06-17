@@ -795,6 +795,7 @@ MonoBehaviour:
   container: {fileID: 3913787923355982553}
   toggleGroup: {fileID: 6484143381035750727}
   continueButton: {fileID: 623031255319908643}
+  maxSkillCount: 3
 --- !u!1 &8297585338679322923
 GameObject:
   m_ObjectHideFlags: 0

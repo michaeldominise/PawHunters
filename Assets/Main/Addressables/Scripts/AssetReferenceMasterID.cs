@@ -86,7 +86,7 @@ namespace LabHaven.PawHunters
                 return null;
 
             if (UsageCount == 1)
-                GameManager.AddAssetReferences(this, Asset);
+                AppManager.AddAssetReferences(this, Asset);
             return Asset;
         }
 
@@ -96,7 +96,7 @@ namespace LabHaven.PawHunters
                 return;
             UsageCount--;
             Asset = null;
-            GameManager.RemoveAssetReferences(this);
+            AppManager.RemoveAssetReferences(this);
             assetReference.ReleaseAsset();
         }
     }

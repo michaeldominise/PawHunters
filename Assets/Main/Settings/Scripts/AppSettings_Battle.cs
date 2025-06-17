@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace LabHaven.PawHunters
 {
-    [CreateAssetMenu(fileName = "GameSettings_Battle", menuName = "GameData/Settings/GameSettings_Battle")]
-    public class GameSettings_Battle : GameSettings
+    [CreateAssetMenu(fileName = "AppSettings_Battle", menuName = "GameData/Settings/AppSettings_Battle")]
+    public class AppSettings_Battle : AppSettings
     {
-        public static GameSettings_Battle Instance => SceneGameManager.Instance?.GameSettings_Battle;
+        public static AppSettings_Battle Instance => SceneGameManager.Instance?.AppSettings_Battle;
 
         public enum Type
         {

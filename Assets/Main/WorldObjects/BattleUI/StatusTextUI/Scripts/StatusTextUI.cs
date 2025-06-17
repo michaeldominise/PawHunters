@@ -10,36 +10,36 @@ namespace LabHaven.PawHunters
         [SerializeField] TextMeshProUGUI label;
         [SerializeField] Image iconImage;
 
-        AnimationCurve AnimationTextCurve = GameSettings_Battle.Instance?.constantValues.progressUpdateAnimationCurve ?? default;
-        AnimationCurve AnimationTransformCurve = GameSettings_Battle.Instance?.constantValues.bounceAnimationCurve ?? default;
-        float UpdateDuration => GameSettings_Battle.Instance.constantValues.progressUpdateDuration;
-        float TargetYPosition => GameSettings_Battle.Instance.constantValues.statusTextUITargetYPosition;
-        float TargetScale => GameSettings_Battle.Instance.constantValues.statusTextUITargetScale;
-        float LifeDuration => GameSettings_Battle.Instance.constantValues.statusTextUILifeDuration;
+        AnimationCurve AnimationTextCurve = AppSettings_Battle.Instance?.constantValues.progressUpdateAnimationCurve ?? default;
+        AnimationCurve AnimationTransformCurve = AppSettings_Battle.Instance?.constantValues.bounceAnimationCurve ?? default;
+        float UpdateDuration => AppSettings_Battle.Instance.constantValues.progressUpdateDuration;
+        float TargetYPosition => AppSettings_Battle.Instance.constantValues.statusTextUITargetYPosition;
+        float TargetScale => AppSettings_Battle.Instance.constantValues.statusTextUITargetScale;
+        float LifeDuration => AppSettings_Battle.Instance.constantValues.statusTextUILifeDuration;
         Camera WorldCamera => Camera.main;
         RectTransform RectParent => transform.parent as RectTransform;
 
-        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, float value, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, float value, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
         {
             Init(worldPosition, randomAdditionalDistance, colorLabel, type);
             GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTextUpdate, AnimationTextCurve);
         }
 
-        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
         {
             Init(worldPosition, randomAdditionalDistance, colorLabel, type);
             label.text = text;
             GradualChangeValue.Execute(0, 1, UpdateDuration, OnProgressTransformUpdate, AnimationTransformCurve);
         }
 
-        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, GameSettings_Battle.Type type = GameSettings_Battle.Type.None)
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
         {
             var viewportPoint = WorldCamera.WorldToViewportPoint(worldPosition);
             var halfScreenSize = new Vector3(RectParent.rect.width, RectParent.rect.height) * 0.5f;
             transform.localPosition = new Vector3(Mathf.LerpUnclamped(-halfScreenSize.x, halfScreenSize.x, viewportPoint.x), Mathf.LerpUnclamped(-halfScreenSize.y, halfScreenSize.y, viewportPoint.y)) + randomAdditionalDistance * (Vector3)Random.insideUnitCircle;
 
             label.color = colorLabel;
-            var sprite = GameSettings_Battle.Instance.iconSprite.GetSprite(type);
+            var sprite = AppSettings_Battle.Instance.iconSprite.GetSprite(type);
             iconImage.sprite = sprite;
             iconImage.gameObject.SetActive(sprite);
 

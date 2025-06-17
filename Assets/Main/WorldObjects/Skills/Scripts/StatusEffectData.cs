@@ -108,7 +108,7 @@ namespace LabHaven.PawHunters
         public virtual async Task PlayExpireDoneVisual(SkillVisualEffect.State state, StatusEffectDataHandler statusEffectDataHandler)
             => await SkillVisualEffect.PlayVisual(state, expireSkillVFXs, statusEffectDataHandler);
 
-        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, GameSettings_Battle.Type icon = GameSettings_Battle.Type.None)
+        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, AppSettings_Battle.Type icon = AppSettings_Battle.Type.None)
         {
             if (!showStatusTextUI)
                 return;

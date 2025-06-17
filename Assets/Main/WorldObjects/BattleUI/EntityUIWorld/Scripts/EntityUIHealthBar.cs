@@ -6,7 +6,7 @@ namespace LabHaven.PawHunters
 {
     public class EntityUIHealthBar : EntityUIProgressBar
     {
-        Gradient HealthColor => GameSettings_Battle.Instance.colorTheme.healthProgressColor;
+        Gradient HealthColor => AppSettings_Battle.Instance.colorTheme.healthProgressColor;
 
         protected override float CurrentValue => entityMainController.BattleAttributes.currentHealth.Value;
         protected override float MaxValue => entityMainController.BattleAttributes.maxHealth.Value;

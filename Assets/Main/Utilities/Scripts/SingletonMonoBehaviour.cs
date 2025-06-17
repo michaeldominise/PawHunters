@@ -6,15 +6,17 @@ namespace LabHaven.PawHunters
     {
         public static T Instance { get; private set; }
 
-        protected virtual void Awake()
+        protected virtual void Awake() => SetupInstance();
+        protected virtual bool SetupInstance()
         {
-            if(Instance)
+            if (Instance)
             {
                 gameObject.SetActive(false);
-                return;
+                return false;
             }
 
             Instance = (T)this;
+            return true;
         }
     }
 }

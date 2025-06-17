@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace LabHaven.PawHunters
 {
-    public static class NumberFormatter
+    public static class NumberFormatterExtension
     {
         public static string Format(this float number)
         {
@@ -16,6 +17,19 @@ namespace LabHaven.PawHunters
                 return (number / 1_000).ToString("0.#") + "K";
             else
                 return number.ToString("0");
+        }
+    }
+
+    public static class ByteExtension
+    {
+        public enum SizeUnits
+        {
+            Byte, KB, MB, GB, TB, PB, EB, ZB, YB
+        }
+
+        public static string ToSize(this long value, SizeUnits unit)
+        {
+            return (value / (double)Math.Pow(1024, (long)unit)).ToString("0.00");
         }
     }
 }

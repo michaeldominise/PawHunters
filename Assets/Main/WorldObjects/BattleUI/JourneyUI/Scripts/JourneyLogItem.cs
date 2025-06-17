@@ -25,11 +25,11 @@ namespace LabHaven.PawHunters
         public Color GetColor(JourneyData.Type journeyType)
             => journeyType switch
             {
-                JourneyData.Type.Battle => GameSettings_Battle.Instance.colorTheme.journeyLogBattleColor,
-                JourneyData.Type.Boss => GameSettings_Battle.Instance.colorTheme.journeyLogBossColor,
-                JourneyData.Type.Negative => GameSettings_Battle.Instance.colorTheme.journeyLogNegativeColor,
-                JourneyData.Type.Reward => GameSettings_Battle.Instance.colorTheme.journeyLogRewardColor,
-                _ => GameSettings_Battle.Instance.colorTheme.journeyLogPositiveColor,
+                JourneyData.Type.Battle => AppSettings_Battle.Instance.colorTheme.journeyLogBattleColor,
+                JourneyData.Type.Boss => AppSettings_Battle.Instance.colorTheme.journeyLogBossColor,
+                JourneyData.Type.Negative => AppSettings_Battle.Instance.colorTheme.journeyLogNegativeColor,
+                JourneyData.Type.Reward => AppSettings_Battle.Instance.colorTheme.journeyLogRewardColor,
+                _ => AppSettings_Battle.Instance.colorTheme.journeyLogPositiveColor,
             };
     }
 }

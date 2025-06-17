@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using Assets.FantasyMonsters.Common.Scripts;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
 namespace LabHaven.PawHunters
 {

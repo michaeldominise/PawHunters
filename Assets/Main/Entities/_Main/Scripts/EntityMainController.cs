@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
-using Assets.FantasyMonsters.Common.Scripts;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.Rendering;
 
 namespace LabHaven.PawHunters
 {
@@ -25,7 +23,7 @@ namespace LabHaven.PawHunters
         [SerializeField] protected Sprite avatarSprite;
         [SerializeField] protected TeamManager teamManager;
         [SerializeField] protected Transform model;
-        [SerializeField] protected LayerManager layerManager;
+        [SerializeField] protected SortingGroup sortingGroup;
         [SerializeField] protected EntitySkillsController entitySkillsController;
         [SerializeField] protected EntityHealthController entityHealthController;
         [SerializeField] protected EntityMovementController entityMovementController;
@@ -69,7 +67,7 @@ namespace LabHaven.PawHunters
             EntityStatusEffectController.Init(this);
             entitySkillsController.Init(this);
 
-            layerManager.SetSortingGroupOrder(EnvironmentManager.Instance.GroundOrderInLayer);
+            sortingGroup.sortingOrder = EnvironmentManager.Instance.GroundOrderInLayer;
             if (CurrentState.Value == State.Dead)
                 SetToIdle();
             CheckState();

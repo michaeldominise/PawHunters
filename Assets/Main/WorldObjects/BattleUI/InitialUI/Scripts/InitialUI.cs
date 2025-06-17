@@ -9,10 +9,10 @@ namespace LabHaven.PawHunters
         [SerializeField] CanvasGroup overlay;
         [SerializeField] CanvasGroup title;
 
-        float OverlayFadeOutDelayDuration => GameSettings_Battle.Instance.constantValues.overlayFadeOutDelayDuration;
-        float OverlayFadeOutDuration => GameSettings_Battle.Instance.constantValues.overlayFadeOutDuration;
-        float TitleFadeOutDelayDuration => GameSettings_Battle.Instance.constantValues.titleFadeOutDelayDuration;
-        float TitleFadeOutDuration => GameSettings_Battle.Instance.constantValues.titleFadeOutDuration;
+        float OverlayFadeOutDelayDuration => AppSettings_Battle.Instance.constantValues.overlayFadeOutDelayDuration;
+        float OverlayFadeOutDuration => AppSettings_Battle.Instance.constantValues.overlayFadeOutDuration;
+        float TitleFadeOutDelayDuration => AppSettings_Battle.Instance.constantValues.titleFadeOutDelayDuration;
+        float TitleFadeOutDuration => AppSettings_Battle.Instance.constantValues.titleFadeOutDuration;
 
         private void Start()
         {

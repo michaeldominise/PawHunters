@@ -19,7 +19,7 @@ namespace LabHaven.PawHunters
 
         public bool IsSelected => toggle.isOn;
 
-        Color RarityColor => GameSettings_Global.Instance.colorTheme.rarityColorTheme.GetColor(skillData.rarity);
+        Color RarityColor => AppSettings_Global.Instance.colorTheme.rarityColorTheme.GetColor(skillData.rarity);
 
         private void Start() => toggle.onValueChanged.AddListener(OnToggleClick);
 

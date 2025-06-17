@@ -6,7 +6,7 @@ namespace LabHaven.PawHunters
 {
     public class EntityUISpecialSkillBar : EntityUIProgressBar
     {
-        protected override Color ProgressColor => GameSettings_Battle.Instance.colorTheme.specialSkillProgressColor;
+        protected override Color ProgressColor => AppSettings_Battle.Instance.colorTheme.specialSkillProgressColor;
         protected override float CurrentValue => entityMainController.BattleAttributes.specialSkill.Value;
         protected override float MaxValue => entityMainController.BattleAttributes.specialSkillMax.Value;
 

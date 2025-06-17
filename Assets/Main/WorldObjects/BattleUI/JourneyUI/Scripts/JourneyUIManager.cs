@@ -62,7 +62,7 @@ namespace LabHaven.PawHunters
             for (int i = 0; i < stageData.data.journeys.Count; i++)
                 Spawn(prefab, init: item => item.Init(stageData.data.journeys[i].Asset, i));
             slider.maxValue = stageData.data.journeys.Count - 1;
-            slider.image.color = GameSettings_Battle.Instance.colorTheme.journeyFillColor;
+            slider.image.color = AppSettings_Battle.Instance.colorTheme.journeyFillColor;
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(titleLayoutGroup.transform as RectTransform);
             LayoutRebuilder.ForceRebuildLayoutImmediate(journeyLayoutGroup.transform as RectTransform);
@@ -74,8 +74,8 @@ namespace LabHaven.PawHunters
             index = Mathf.Clamp(index, 0, activeList.Count);
             label.text = $"{stageData.title} - {index + 1}/{activeList.Count}";
 
-            spawnParent.transform.DOLocalMove(index * journeyLayoutGroup.spacing * Vector3.left, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration);
-            slider.DOValue(index, GameSettings_Battle.Instance.constantValues.journeyTransitionDuration / 4);
+            spawnParent.transform.DOLocalMove(index * journeyLayoutGroup.spacing * Vector3.left, AppSettings_Battle.Instance.constantValues.journeyTransitionDuration);
+            slider.DOValue(index, AppSettings_Battle.Instance.constantValues.journeyTransitionDuration / 4);
 
             for (var i = 0; i < activeList.Count; i++)
                 activeList[i].SetState(i <= index ? JourneyUIItem.State.Active : JourneyUIItem.State.Inactive);

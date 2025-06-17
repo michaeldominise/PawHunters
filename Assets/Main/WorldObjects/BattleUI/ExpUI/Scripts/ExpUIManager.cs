@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,16 +13,17 @@ namespace LabHaven.PawHunters
         [SerializeField] float level;
         [SerializeField] float currentValue;
 
-        protected override float UpdateDuration => GameSettings_Battle.Instance.constantValues.progressUpdateDurationSlow;
-        protected override Color ProgressColor => GameSettings_Battle.Instance.colorTheme.expProgressColor;
+        protected override float UpdateDuration => AppSettings_Battle.Instance.constantValues.progressUpdateDurationSlow;
+        protected override Color ProgressColor => AppSettings_Battle.Instance.colorTheme.expProgressColor;
         protected override float CurrentValue => currentValue;
-        protected override float MaxValue => GameSettings_Battle.Instance.constantValues.expMaxValue;
+        protected override float MaxValue => AppSettings_Battle.Instance.constantValues.expMaxValue;
 
         Action onFinish;
 
         private void Awake() => Instance = this;
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return null;
             Refresh();
         }
 

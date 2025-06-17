@@ -14,7 +14,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: SharedAssets
   m_GUID: 723488a33bf224513b0cfd0f7a49ddfc
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 512fb605fa9f54f72b7869b9c3177a21
+    m_Address: Assets/Main/MasterIDManager/ScriptableObjects/SkillDataOverview.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67c1044374a664e6e9373f975a16b085
+    m_Address: Assets/Main/MasterIDManager/ScriptableObjects/MasterIDManager.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c9443251caaf4dbbabd25cbf4343832
+    m_Address: Assets/Main/MasterIDManager/ScriptableObjects/StageDataOverview.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d035d9b2a6884c41b3cef4b2c53082f
+    m_Address: Assets/Main/Settings/ScriptableObjects/GameSettings_Global.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76ce60a32a1f04eb29e5a49804d050c4
+    m_Address: Assets/Main/Utilities/Prefabs/GameManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8e2ab4a5a67e477899b9d8aad311892
+    m_Address: Assets/Main/MasterIDManager/ScriptableObjects/SkillDataOverview_TeamSkill.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bab9637a4fee94fcfa5304c692e9fdf6
+    m_Address: Assets/Main/MasterIDManager/ScriptableObjects/EntityOverview.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca9f5fa95ffab41fb9a615ab714db018
+    m_Address: Packages/com.unity.inputsystem/InputSystem/Plugins/PlayerInput/DefaultInputActions.inputactions
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: efc60a1b3c275497a9da388692400d99, type: 2}
   m_SchemaSet:

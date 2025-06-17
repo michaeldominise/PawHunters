@@ -20,7 +20,7 @@ namespace LabHaven.PawHunters
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
 
         GradualChangeValue.Status animStatus;
-        AnimationCurve AnimationTransformCurve => GameSettings_Battle.Instance?.constantValues.bounceAnimationCurve ?? default;
+        AnimationCurve AnimationTransformCurve => AppSettings_Battle.Instance?.constantValues.bounceAnimationCurve ?? default;
 
         public EntityMainController EntityMainController => entityMainController;
 

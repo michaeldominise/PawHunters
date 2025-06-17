@@ -6,7 +6,7 @@ namespace LabHaven.PawHunters
 {
     public class EntityUIShieldBar : EntityUIProgressBar
     {
-        protected override Color ProgressColor => GameSettings_Battle.Instance.colorTheme.shieldProgressColor;
+        protected override Color ProgressColor => AppSettings_Battle.Instance.colorTheme.shieldProgressColor;
 
         protected override float CurrentValue => entityMainController.BattleAttributes.shield.Value;
         protected override float MaxValue => entityMainController.BattleAttributes.maxHealth.Value;

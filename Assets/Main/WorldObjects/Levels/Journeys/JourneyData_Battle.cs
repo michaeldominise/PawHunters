@@ -35,8 +35,10 @@ namespace LabHaven.PawHunters
         {
             TeamManager_GamePlayer.Instance.SetState(StateSpeed.State.Walking);
             JourneyLogsUIManager.Instance.Spawn(JourneyType, Title, $"[title] was defeated!");
-            if(!SceneGameManager.Instance.IsLastJourney)
+            if (!SceneGameManager.Instance.IsLastJourney)
                 JourneyButtons.Instance.Init(response => base.End(), base.ButtonLabel);
+            else
+                base.End();
         }
 
         public override async Task LoadAssets() => await teamData.LoadAssets();

@@ -20,6 +20,7 @@ namespace LabHaven.PawHunters
         {
             CurrentState.Value = State.None;
             this.entityMainController = entityMainController;
+            InitSkills();
         }
 
         void InitSkills()

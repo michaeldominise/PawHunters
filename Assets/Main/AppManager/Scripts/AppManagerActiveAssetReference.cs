@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace LabHaven.PawHunters
 {
-    public partial class GameManager
+    public partial class AppManager
     {
         [ShowInInspector, HideReferenceObjectPicker]
         static List<AssetReferenceMasterIDProfiler> ActiveAssetReferences = new();

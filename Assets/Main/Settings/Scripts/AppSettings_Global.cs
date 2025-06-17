@@ -2,10 +2,10 @@
 
 namespace LabHaven.PawHunters
 {
-    [CreateAssetMenu(fileName = "GameSettings_Global", menuName = "GameData/Settings/GameSettings_Global")]
-    public class GameSettings_Global : GameSettings
+    [CreateAssetMenu(fileName = "AppSettings_Global", menuName = "GameData/Settings/AppSettings_Global")]
+    public class AppSettings_Global : AppSettings
     {
-        public static GameSettings_Global Instance => GameManager.Instance?.GameSettings_Global;
+        public static AppSettings_Global Instance => AppManager.Instance?.AppSettings_Global;
 
 
         [System.Serializable]

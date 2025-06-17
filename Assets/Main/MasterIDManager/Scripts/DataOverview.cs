@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using UnityEditor.AddressableAssets;
 using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.AddressableAssets.Settings;
-using UnityEngine.AddressableAssets;
 #endif
 using UnityEngine;
 

@@ -11,13 +11,13 @@ namespace LabHaven.PawHunters
     {
         [SerializeField] ElementType elementType;
 
-        float FadeDuration => GameSettings_Battle.Instance.constantValues.environmentOverlayFadeDuration;
-        float FadeOpacity => GameSettings_Battle.Instance.constantValues.environmentOverlayFadeOpacity;
+        float FadeDuration => AppSettings_Battle.Instance.constantValues.environmentOverlayFadeDuration;
+        float FadeOpacity => AppSettings_Battle.Instance.constantValues.environmentOverlayFadeOpacity;
 
         public override async Task PlayStart(EntityMainController caster, params EntityMainController[] targets)
-            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(GameSettings_Battle.Instance.colorTheme.elementColorOverlay.GetColor(elementType), FadeOpacity, FadeDuration);
+            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(AppSettings_Battle.Instance.colorTheme.elementColorOverlay.GetColor(elementType), FadeOpacity, FadeDuration);
 
         public override async Task PlayEnd(EntityMainController caster, params EntityMainController[] targets)
-            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(GameSettings_Battle.Instance.colorTheme.elementColorOverlay.GetColor(elementType), 0, FadeDuration);
+            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(AppSettings_Battle.Instance.colorTheme.elementColorOverlay.GetColor(elementType), 0, FadeDuration);
     }
 }

@@ -8,16 +8,16 @@ namespace LabHaven.PawHunters
 {
     public class SceneGameManager : SingletonMonoBehaviour<SceneGameManager>
     {
-        [SerializeField] protected GameSettings_Battle gameSettings_Battle;
+        [SerializeField] protected AppSettings_Battle appSettings_Battle;
 
         [ShowInInspector, ReadOnly] int CurrentJourneyIndex { get; set; } = -1;
         [ShowInInspector, ReadOnly] public bool IsLastJourney => StageData?.data.journeys.Count == CurrentJourneyIndex + 1;
         public event Action<int> OnCurrentJouneyUpdate;
 
-        public SaveableTeamData PlayerTeamData => GameManager.Instance?.appValues.playerTeamData;
-        public StageData StageData => GameManager.Instance?.appValues.stageData.Asset;
+        public SaveableTeamData PlayerTeamData => AppManager.Instance?.appValues.playerTeamData;
+        public StageData StageData => AppManager.Instance?.appValues.stageData.Asset;
         public JourneyData CurrentJourney => StageData.data.journeys[CurrentJourneyIndex].Asset;
-        public GameSettings_Battle GameSettings_Battle => gameSettings_Battle;
+        public AppSettings_Battle AppSettings_Battle => appSettings_Battle;
 
         IEnumerator Start()
         {
@@ -28,7 +28,7 @@ namespace LabHaven.PawHunters
 
         protected async virtual Task Init()
         {
-            await GameManager.Instance.appValues.stageData.Load();
+            await AppManager.Instance.appValues.stageData.Load();
             await StageData.data.LoadAssets(StageData.AssetType.all);
             await PlayerTeamData.LoadAssets();
             EnvironmentManager.Instance.Init(StageData.data.environmentItem.Asset);
@@ -69,7 +69,7 @@ namespace LabHaven.PawHunters
             if (StageData == null)
                 return;
             StageData.data.UnloadAssets(StageData.AssetType.all);
-            GameManager.Instance.appValues.stageData.Unload();
+            AppManager.Instance.appValues.stageData.Unload();
         }
     }
 }

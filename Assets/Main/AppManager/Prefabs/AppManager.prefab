@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 701416504646977519}
   - component: {fileID: 7426813836742201680}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: AppManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cffdde64fee3d4015829793cd249beee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSettings_Global: {fileID: 11400000, guid: 6d035d9b2a6884c41b3cef4b2c53082f, type: 2}
+  appSettings_Global: {fileID: 11400000, guid: 6d035d9b2a6884c41b3cef4b2c53082f, type: 2}
   masterIDManager: {fileID: 11400000, guid: 67c1044374a664e6e9373f975a16b085, type: 2}
   appValues:
     stageData:
@@ -58,7 +58,7 @@ MonoBehaviour:
     playerTeamData:
       teamName: 
       characters:
-      - masterID: EntityMainController.BlackCat
+      - masterID: Character.BlackCat
         level: 0
         attribute:
           health: 100

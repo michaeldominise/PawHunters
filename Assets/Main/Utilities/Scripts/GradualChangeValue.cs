@@ -31,19 +31,19 @@ namespace LabHaven.PawHunters
                 this.animationCurve = animationCurve ?? this.animationCurve;
             }
 
-            public void Stop() => GameManager.Instance.StopCoroutine(coroutine);
+            public void Stop() => AppManager.Instance.StopCoroutine(coroutine);
         }
 
         public static Status Execute(float startValue, float endValue, float duration, Action<Status> onUpdate, AnimationCurve animationCurve = null)
         {
-            if (!GameManager.Instance)
+            if (!AppManager.Instance)
             {
-                Debug.LogWarning($"{nameof(GameManager)} does not exist in the scene!");
+                Debug.LogWarning($"{nameof(AppManager)} does not exist in the scene!");
                 return null;
             }
 
             var status = new Status(startValue, endValue, duration, animationCurve);
-            status.coroutine = GameManager.Instance.StartCoroutine(_Execute(status, onUpdate));
+            status.coroutine = AppManager.Instance.StartCoroutine(_Execute(status, onUpdate));
             return status;
         }
 
