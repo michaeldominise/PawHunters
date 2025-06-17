@@ -47,8 +47,8 @@ namespace LabHaven.PawHunters
             var aliveEntityList = AliveEntityList;
             if (aliveEntityList == null || aliveEntityList.Count == 0)
                 return;
-            aliveEntityList.Insert(0, aliveEntityList.Last());
-            aliveEntityList.RemoveAt(aliveEntityList.Count - 1);
+            aliveEntityList.Add(aliveEntityList.First());
+            aliveEntityList.RemoveAt(0);
             for (var x = 0; x < teamManger_EntityParents.Count; x++)
                 teamManger_EntityParents[x].Init(aliveEntityList.Count > x ? aliveEntityList[x] : null);
         }
