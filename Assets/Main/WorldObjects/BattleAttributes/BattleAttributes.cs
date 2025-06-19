@@ -23,9 +23,9 @@ namespace LabHaven.PawHunters
         public float HealthPercentage => maxHealth.Value == 0 ? 0 : currentHealth.Value / maxHealth.Value;
 
         public BattleAttributes() { }
-        public BattleAttributes(SaveableObjectAttributeData.Attribute attribute) => Init(attribute);
+        public BattleAttributes(SaveableCharacterData.Attribute attribute) => Init(attribute);
 
-        internal void Init(SaveableObjectAttributeData.Attribute attribute)
+        internal void Init(SaveableCharacterData.Attribute attribute)
         {
             maxHealth.Reset(attribute.health);
             currentHealth.Reset(attribute.health);

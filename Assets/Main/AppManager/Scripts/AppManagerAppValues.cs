@@ -5,13 +5,11 @@ namespace LabHaven.PawHunters
 {
     public partial class AppManager
     {
-        public AppValues appValues;
+        public AppData appData;
 
         [System.Serializable]
-        public class AppValues
+        public class AppData
         {
-            public AssetReferenceMasterID<StageData> stageData;
-            public SaveableTeamData playerTeamData;
         }
     }
 }

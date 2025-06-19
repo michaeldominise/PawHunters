@@ -1,0 +1,140 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0949a0fdc143946f8991cd6d167b10d0, type: 3}
+  m_Name: Stage_GameHuntTest
+  m_EditorClassIdentifier: 
+  title: ChapterTest 1
+  maxRound: 30
+  data:
+    environmentItem:
+      masterID: EnvironmentItem_GoldenWaste 1
+      assetReference:
+        m_AssetGUID: 5683f05ea332b43d9ba295dcd0e9f2e4
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+    environmentItem2:
+      masterID: EnvironmentItem_GoldenWaste 2
+      assetReference:
+        m_AssetGUID: d8378a36fef9844e9879a9de9b4f1381
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+    journeys:
+      dataList:
+      - masterID: JourneyData.JourneyData_TeamSkillSelection
+        assetReference:
+          m_AssetGUID: d4be81abb576c47c0941b6e826171538
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_Battle
+        assetReference:
+          m_AssetGUID: 0e835fa8a76024b35976f644b1e59f04
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_ExpBonus
+        assetReference:
+          m_AssetGUID: 89547044fc43b4158913258dc46f4af3
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_TeamSkillSelection
+        assetReference:
+          m_AssetGUID: d4be81abb576c47c0941b6e826171538
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_TeamSkill_Negative
+        assetReference:
+          m_AssetGUID: 3c26c4fa0a55543f082549fd657f9a43
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_Battle
+        assetReference:
+          m_AssetGUID: 0e835fa8a76024b35976f644b1e59f04
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_TeamSkill_Positive
+        assetReference:
+          m_AssetGUID: c75810eec0b2042f191db9a45ed0aacd
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_ExpBonus
+        assetReference:
+          m_AssetGUID: 89547044fc43b4158913258dc46f4af3
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      - masterID: JourneyData.JourneyData_Boss
+        assetReference:
+          m_AssetGUID: 8cd14cf5c2925443aae35327597e8648
+          m_SubObjectName: 
+          m_SubObjectType: 
+          m_SubObjectGUID: 
+          m_EditorAssetChanged: 0
+      assetList:
+      - {fileID: 11400000, guid: d4be81abb576c47c0941b6e826171538, type: 2}
+      - {fileID: 11400000, guid: 0e835fa8a76024b35976f644b1e59f04, type: 2}
+      - {fileID: 11400000, guid: 89547044fc43b4158913258dc46f4af3, type: 2}
+      - {fileID: 11400000, guid: d4be81abb576c47c0941b6e826171538, type: 2}
+      - {fileID: 11400000, guid: 3c26c4fa0a55543f082549fd657f9a43, type: 2}
+      - {fileID: 11400000, guid: 0e835fa8a76024b35976f644b1e59f04, type: 2}
+      - {fileID: 11400000, guid: c75810eec0b2042f191db9a45ed0aacd, type: 2}
+      - {fileID: 11400000, guid: 89547044fc43b4158913258dc46f4af3, type: 2}
+      - {fileID: 11400000, guid: 8cd14cf5c2925443aae35327597e8648, type: 2}
+    battleDescriptions:
+      masterID: battle
+      assetReference:
+        m_AssetGUID: 6761892b4c684485c8e9b7374b4262a4
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+    bossDescriptions:
+      masterID: TextAsset.boss
+      assetReference:
+        m_AssetGUID: c8c33f54e23604b06b6071d300bd11fb
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+    negativeDescriptions:
+      masterID: TextAsset.negative
+      assetReference:
+        m_AssetGUID: 02f6bb04f67fc4856888054eeaec3b50
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0
+    positiveDescriptions:
+      masterID: TextAsset.positive
+      assetReference:
+        m_AssetGUID: e1764cb0403c24a539e9a8c9322fd63b
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_SubObjectGUID: 
+        m_EditorAssetChanged: 0

@@ -13,49 +13,47 @@ MonoBehaviour:
   m_Name: AppSettings_Global
   m_EditorClassIdentifier: 
   colorTheme:
-    healthProgressColor:
-      serializedVersion: 2
-      key0: {r: 0.6320754, g: 0.17590779, b: 0.17590779, a: 1}
-      key1: {r: 0.6792453, g: 0.6435845, b: 0.2787469, a: 1}
-      key2: {r: 0.2772339, g: 0.6603774, b: 0.30293253, a: 0}
-      key3: {r: 0.27058828, g: 0.9137255, b: 0.312351, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
-      key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 16384
-      ctime1: 32768
-      ctime2: 49151
-      ctime3: 49151
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
-      ctime7: 0
-      atime0: 0
-      atime1: 65535
-      atime2: 0
-      atime3: 0
-      atime4: 0
-      atime5: 0
-      atime6: 0
-      atime7: 0
-      m_Mode: 0
-      m_ColorSpace: 0
-      m_NumColorKeys: 3
-      m_NumAlphaKeys: 2
-    shieldProgressColor: {r: 0.3443396, g: 0.95987695, b: 1, a: 1}
-    specialSkillProgressColor: {r: 1, g: 0.63529414, b: 0.25882354, a: 1}
-    criticalColor: {r: 1, g: 0.23373935, b: 0.1745283, a: 1}
-    damageColor: {r: 1, g: 1, b: 1, a: 1}
-    healColor: {r: 0.26366144, g: 0.745283, b: 0.29555687, a: 1}
-    journeyFillColor: {r: 0, g: 0, b: 0, a: 0}
-    journeyInactiveColor: {r: 0.34117648, g: 0.27058825, b: 0.3647059, a: 1}
-    journeyActiveColor_Default: {r: 0, g: 0, b: 0, a: 0}
-    journeyActiveColor_Battle: {r: 0, g: 0, b: 0, a: 0}
-    journeyActiveColor_Boss: {r: 0, g: 0, b: 0, a: 0}
-  gameSettings:
-    progressUpdateDuration: 0.25
-    progressUpdateAnimationCurve:
+    elementColorTheme:
+      Normal: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+      Water: {r: 0.2, g: 0.4, b: 0.9, a: 1}
+      Fire: {r: 1, g: 0.3, b: 0, a: 1}
+      Electric: {r: 1, g: 1, b: 0.2, a: 1}
+      Dark: {r: 0.2, g: 0.2, b: 0.3, a: 1}
+      Fighter: {r: 0.8, g: 0.1, b: 0.1, a: 1}
+      Bug: {r: 0.5, g: 0.7, b: 0.2, a: 1}
+      Dragon: {r: 0.4, g: 0.2, b: 0.9, a: 1}
+      Fairy: {r: 1, g: 0.7, b: 0.9, a: 1}
+      Flying: {r: 0.6, g: 0.8, b: 1, a: 1}
+      Ghost: {r: 0.4, g: 0.3, b: 0.6, a: 1}
+      Grass: {r: 0.2, g: 0.8, b: 0.2, a: 1}
+      Ground: {r: 0.7, g: 0.5, b: 0.2, a: 1}
+      Ice: {r: 0.6, g: 0.9, b: 1, a: 1}
+      Poison: {r: 0.6, g: 0.2, b: 0.6, a: 1}
+      Psychic: {r: 1, g: 0.2, b: 0.6, a: 1}
+      Rock: {r: 0.6, g: 0.5, b: 0.3, a: 1}
+      Steel: {r: 0.7, g: 0.7, b: 0.8, a: 1}
+      Default: {r: 1, g: 1, b: 1, a: 1}
+    rarityColorTheme:
+      common: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+      uncommon: {r: 0.3, g: 0.8, b: 0.3, a: 1}
+      rare: {r: 0.2, g: 0.4, b: 0.9, a: 1}
+      epic: {r: 0.6, g: 0.2, b: 0.8, a: 1}
+      elite: {r: 0.9, g: 0.4, b: 0.2, a: 1}
+      mythic: {r: 1, g: 0.2, b: 0.7, a: 1}
+      legendary: {r: 1, g: 0.84, b: 0, a: 1}
+      Default: {r: 1, g: 1, b: 1, a: 1}
+    tabSelectedText: {r: 0.9882353, g: 0.9647059, b: 0.8, a: 1}
+    tabNotSelectedText: {r: 1, g: 1, b: 1, a: 0.5529412}
+  constantValues:
+    movementStateSpeedList:
+    - state: 0
+      speed: 0
+    - state: 1
+      speed: 1
+    - state: 2
+      speed: 4
+  uIAnimationValues:
+    genericAnimationCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -79,31 +77,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    statusTextUITargetYPosition: 26
-    statusTextUITargetScale: 1.6
-    statusTextUILifeDuration: 0.5
-    statusTextUISpawnerRandomAdditionalDistance: 26
-    bounceAnimationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: -5.488319
-        outSlope: -5.488319
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.037500024
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+    effectDuration: 0.25
+    scaleNormal: 1
+    scaleUp: 1.25
+    scaleDown: 0.75

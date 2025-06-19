@@ -365,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlay: {fileID: 2900055164452099721}
   title: {fileID: 6235159380838334431}
+  titleLabel: {fileID: 2719416657048440655}
 --- !u!1 &8136303376203766423
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +513,7 @@ GameObject:
   - component: {fileID: 5703861388437851876}
   - component: {fileID: 6235159380838334431}
   m_Layer: 5
-  m_Name: Title
+  m_Name: StageTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

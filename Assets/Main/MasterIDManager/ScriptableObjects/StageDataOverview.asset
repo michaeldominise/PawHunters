@@ -20,5 +20,12 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - masterID: StageHunt1_GoldenWaste
+    assetReference:
+      m_AssetGUID: 008d44c56e21e44a4aa657036853ad51
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   folderPaths: []
   folderAssets: []

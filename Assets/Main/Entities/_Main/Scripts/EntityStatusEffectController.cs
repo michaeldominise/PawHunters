@@ -14,6 +14,8 @@ namespace LabHaven.PawHunters
 
         private IEnumerator Start()
         {
+            if (!GameActionTriggersManager.Instance)
+                yield break;
             yield return null;
             GameActionTriggersManager.Instance.Register(TrigerExecute);
             GameActionTriggersManager.Instance.Register(TriggerExpire);
@@ -21,6 +23,8 @@ namespace LabHaven.PawHunters
 
         private void OnDestroy()
         {
+            if (!GameActionTriggersManager.Instance)
+                return;
             GameActionTriggersManager.Instance.Unegister(TrigerExecute);
             GameActionTriggersManager.Instance.Unegister(TriggerExpire);
         }

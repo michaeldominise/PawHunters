@@ -94,12 +94,9 @@ namespace LabHaven.PawHunters
 
             public float environmentOverlayFadeDuration;
             public float environmentOverlayFadeOpacity;
-            public List<StateSpeed> movementStateSpeedList = new();
 
             public float journeyLogsTransitionDuration;
             public float expMaxValue;
-
-            public float GetSpeed(StateSpeed.State state) => movementStateSpeedList.FirstOrDefault(x => state == x.state)?.speed ?? 0;
         }
 
         public ColorTheme_Battle colorTheme;

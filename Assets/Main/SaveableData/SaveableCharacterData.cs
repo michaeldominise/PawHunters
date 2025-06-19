@@ -1,14 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 
 namespace LabHaven.PawHunters
 {
-    [System.Serializable]
-    public class SaveableObjectAttributeData : SaveableData
+    [Serializable]
+    public class SaveableCharacterData : SaveableData<SaveableCharacterData.AssetType>
     {
-        [System.Serializable]
+        [Flags]
+        public enum AssetType
+        {
+            none,
+            character = 1 << 0,
+            skills = 1 << 0,
+            all = (1 << 30) - 1
+        }
+
+        [Serializable]
         public class Attribute
         {
             public int health = 100;
@@ -25,24 +35,22 @@ namespace LabHaven.PawHunters
         public string masterID;
         public int level;
         public Attribute attribute;
-    }
 
-    [System.Serializable]
-    public class SaveableCharacterData : SaveableObjectAttributeData
-    {
+        [SerializeField] List<string> skillDataMasterIdList;
+
         public AssetReferenceMasterID<EntityMainController> PrefabAssetReference => EntityOverview.Instance.GetAsset(masterID);
         public EntityMainController GetPrefab() => PrefabAssetReference.Asset;
 
-        [SerializeField] List<string> skillDataMasterIdList;
         IEnumerable<AssetReferenceMasterID<SkillData>> SkillDataAssetReferenceList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x));
-        public IEnumerable<SkillData> SkillDataList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x).Asset);
+        public IEnumerable<SkillData> SkillDataList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x).Asset).Where(x => x != null);
 
-        public override List<IAssetReferenceMasterID> GetAssetReference()
+        public override List<IAssetReferenceMasterID> GetAssetReference(AssetType assetType)
         {
             var list = new List<IAssetReferenceMasterID>();
-            if (PrefabAssetReference != null)
+            if(assetType.HasFlag(AssetType.character))
                 list.Add(PrefabAssetReference);
-            list.AddRange(SkillDataAssetReferenceList);
+            if(assetType.HasFlag(AssetType.skills))
+                list.AddRange(SkillDataAssetReferenceList);
             return list;
         }
     }

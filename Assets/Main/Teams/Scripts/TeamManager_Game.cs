@@ -16,7 +16,7 @@ namespace LabHaven.PawHunters
         [ShowInInspector, ReadOnly] public StateController<StateSpeed.State> CurrentState { get; private set; } = new();
 
         public EntityMainController_Team EntityMainController_Team => entityMainController_Team;
-        public virtual float MovementSpeed => AppSettings_Battle.Instance.constantValues.GetSpeed(CurrentState.Value);
+        public virtual float MovementSpeed => AppSettings_Global.Instance.constantValues.GetSpeed(CurrentState.Value);
         public event Action OnMove;
 
         public override void Init(SaveableTeamData teamData)

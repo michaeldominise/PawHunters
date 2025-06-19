@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace LabHaven.PawHunters
 {
-    [Serializable]
     public abstract class SaveableData
     {
         static List<Action> OnExecuteUpdateList = new();
@@ -43,16 +42,19 @@ namespace LabHaven.PawHunters
             oldData = newData;
             return newData;
         }
+    }
 
-        public virtual List<IAssetReferenceMasterID> GetAssetReference() => new();
+    public abstract class SaveableData<AssetType> : SaveableData where AssetType : Enum
+    {
+        public virtual List<IAssetReferenceMasterID> GetAssetReference(AssetType assetType) => new();
 
-        public virtual async Task LoadAssets()
+        public virtual async Task LoadAssets(AssetType assetType)
         {
-            var loadTask = GetAssetReference().Select(x => x.Load());
+            var loadTask = GetAssetReference(assetType).Select(x => x.Load());
             if (loadTask.Count() > 0)
                 await Task.WhenAll(loadTask);
         }
 
-        public void UnloadAssets() => GetAssetReference().ForEach(x => x.Unload());
+        public void UnloadAssets(AssetType assetType) => GetAssetReference(assetType).ForEach(x => x.Unload());
     }
 }

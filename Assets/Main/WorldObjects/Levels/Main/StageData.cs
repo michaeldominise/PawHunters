@@ -14,8 +14,9 @@ namespace LabHaven.PawHunters
         {
             none,
             environmentItem = 1 << 0,
-            journeys = 1 << 0,
-            descriptions = 1 << 0,
+            environmentItem2 = 1 << 1,
+            journeys = 1 << 2,
+            descriptions = 1 << 3,
             all = (1 << 30) - 1
         }
 
@@ -28,6 +29,7 @@ namespace LabHaven.PawHunters
         public class AddressableData : AddressableData<AssetType>
         {
             public AssetReferenceMasterID<EnvironmentItem> environmentItem;
+            public AssetReferenceMasterID<EnvironmentItem> environmentItem2;
             public ListAssetReferenceMasterID<JourneyData> journeys;
             public AssetReferenceMasterID<TextAsset> battleDescriptions;
             public AssetReferenceMasterID<TextAsset> bossDescriptions;
@@ -39,6 +41,8 @@ namespace LabHaven.PawHunters
                 var list = new List<IAssetReferenceMasterID>();
                 if (assetType.HasFlag(AssetType.environmentItem))
                     list.Add(environmentItem);
+                if (assetType.HasFlag(AssetType.environmentItem2))
+                    list.Add(environmentItem2);
                 if (assetType.HasFlag(AssetType.journeys))
                     list.AddRange(journeys);
                 if (assetType.HasFlag(AssetType.descriptions))

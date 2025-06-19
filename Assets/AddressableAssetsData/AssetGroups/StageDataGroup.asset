@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: StageDataGroup
   m_GUID: b3838f6057399445b9bbe6802e6bad09
   m_SerializeEntries:
+  - m_GUID: 008d44c56e21e44a4aa657036853ad51
+    m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/StageHunt/GoldenWaste/StageHunt1_GoldenWaste.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 02f6bb04f67fc4856888054eeaec3b50
     m_Address: Assets/Main/WorldObjects/Levels/ScriptableObjects/GoldenWaste/Descriptions/negative.txt
     m_ReadOnly: 0
