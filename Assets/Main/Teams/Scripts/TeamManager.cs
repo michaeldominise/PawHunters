@@ -5,10 +5,12 @@ using UnityEngine;
 
 namespace LabHaven.PawHunters
 {
-    public class TeamManager : Spawner<EntityMainController>
+    public abstract class TeamManager : Spawner<EntityMainController>
     {
         [SerializeField] SaveableTeamData teamData;
         [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
+
+        protected abstract int LayerSortingOrder { get; }
 
         public List<EntityMainController> EntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController)?.Select(x => x.entityMainController).ToList();
         public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.IsAlive)?.Select(x => x.entityMainController).ToList();
@@ -27,6 +29,7 @@ namespace LabHaven.PawHunters
         public virtual EntityMainController EntityInit(int index, EntityMainController entity, SaveableCharacterData saveableCharacterData)
         {
             entity.Init(this, saveableCharacterData);
+            entity.SetSortingOderLayer(LayerSortingOrder);
             teamManger_EntityParents[index].Init(entity);
             entity.CurrentState.RegisterListener(state => CurrentState_OnStateUpdate(entity));
             return entity;

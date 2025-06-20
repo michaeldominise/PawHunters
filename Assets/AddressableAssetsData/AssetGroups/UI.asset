@@ -20,8 +20,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc87a0be74b1a4ac19b73019fb78497d
+    m_Address: Assets/Main/UI/Animation/Clips/Bounce.anim
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d70f485aa27dc43f79a8fd168f58435c
     m_Address: Assets/Main/UI/Fonts/Alata-Regular SDF.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e9a848a6a1d5d4c559945b585ae25938
+    m_Address: Assets/Main/UI/Animation/Clips/LogoBounce.controller
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

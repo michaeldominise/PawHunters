@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcbfdc1e3bce74ef59060fe9de080155
+    m_Address: Assets/Main/UI/Sprites/CommonSprites/Logo.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c5530d2a597ba4737a9c42ea22a6d78b
     m_Address: Assets/Layer Lab/GUI Pro-FantasyRPG/ResourcesData/Sprites/Component/Slider/Slider_Level_Slider_BgLight.png
     m_ReadOnly: 0

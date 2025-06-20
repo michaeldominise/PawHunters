@@ -17,6 +17,7 @@ namespace LabHaven.PawHunters
             public RarityColorTheme rarityColorTheme;
             public Color tabSelectedText;
             public Color tabNotSelectedText;
+            public Color tabNotSelectedText_PlayerTeam;
         }
 
         [System.Serializable]

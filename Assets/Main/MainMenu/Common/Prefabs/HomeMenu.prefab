@@ -68,7 +68,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 1
+  m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!114 &3057809400624554039
@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9bfebbeddf04d9a915aa3dce79fc13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backHandlerMode: 2
   canUnselect: 0
   itemList:
   - {fileID: 5541923607185062570}
@@ -118,7 +119,7 @@ MonoBehaviour:
   - {fileID: 7268597286750840019}
   - {fileID: 8547864469691306859}
   - {fileID: 7247132938961005007}
-  selectedItem: {fileID: 5802784662401511183}
+  defaultSelectedItem: {fileID: 5802784662401511183}
 --- !u!1001 &942831744098948642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -673,6 +674,10 @@ PrefabInstance:
       propertyPath: m_Group
       value: 
       objectReference: {fileID: 6584717590282621080}
+    - target: {fileID: 8914172924074181961, guid: 3f21b2a53b7ce43369aa00448b58b7e6, type: 3}
+      propertyPath: backHandlerMode
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8162503336874741204, guid: 3f21b2a53b7ce43369aa00448b58b7e6, type: 3}
     m_RemovedGameObjects: []

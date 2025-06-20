@@ -13,6 +13,7 @@ namespace LabHaven.PawHunters
         public enum State { None, Selected, NotSelected }
 
         [ShowInInspector, HideReferenceObjectPicker, ReadOnly] StateController<State> CurrentState { get; set; } = new(State.None);
+
         [SerializeField] Button button;
         [SerializeField] UnityEvent onSelect;
         [SerializeField] UnityEvent onDeselect;

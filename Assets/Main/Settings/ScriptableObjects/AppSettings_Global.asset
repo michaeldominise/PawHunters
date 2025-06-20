@@ -44,6 +44,7 @@ MonoBehaviour:
       Default: {r: 1, g: 1, b: 1, a: 1}
     tabSelectedText: {r: 0.9882353, g: 0.9647059, b: 0.8, a: 1}
     tabNotSelectedText: {r: 1, g: 1, b: 1, a: 0.5529412}
+    tabNotSelectedText_PlayerTeam: {r: 0.7058824, g: 0.60784316, b: 0.7921569, a: 1}
   constantValues:
     movementStateSpeedList:
     - state: 0

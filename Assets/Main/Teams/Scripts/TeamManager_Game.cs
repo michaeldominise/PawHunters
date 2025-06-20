@@ -15,8 +15,11 @@ namespace LabHaven.PawHunters
         [SerializeField] EntityMainController_Team entityMainController_Team;
         [ShowInInspector, ReadOnly] public StateController<StateSpeed.State> CurrentState { get; private set; } = new();
 
+        protected override int LayerSortingOrder => EnvironmentManager.Instance.GroundOrderInLayer;
         public EntityMainController_Team EntityMainController_Team => entityMainController_Team;
         public virtual float MovementSpeed => AppSettings_Global.Instance.constantValues.GetSpeed(CurrentState.Value);
+
+
         public event Action OnMove;
 
         public override void Init(SaveableTeamData teamData)

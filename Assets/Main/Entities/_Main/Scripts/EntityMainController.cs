@@ -67,11 +67,12 @@ namespace LabHaven.PawHunters
             EntityStatusEffectController.Init(this);
             entitySkillsController.Init(this);
 
-            sortingGroup.sortingOrder = EnvironmentManager.Instance.GroundOrderInLayer;
             if (CurrentState.Value == State.Dead)
                 SetToIdle();
             CheckState();
         }
+
+        public void SetSortingOderLayer(int sortingOrder) => sortingGroup.sortingOrder = sortingOrder;
 
         private void RegisterListener()
         {
@@ -113,11 +114,11 @@ namespace LabHaven.PawHunters
             {
                 case StateSpeed.State.Walking:
                     CurrentState.Value = State.Walking;
-                    EntityAnimationController.SetState(EntityAnimationController.State.Walking,  UnityEngine.Random.Range(0, 0.25f));
+                    EntityAnimationController.SetState(EntityAnimationController.State.Walking, UnityEngine.Random.Range(0, 0.25f));
                     break;
                 case StateSpeed.State.Running:
                     CurrentState.Value = State.Running;
-                    EntityAnimationController.SetState(EntityAnimationController.State.Running,  UnityEngine.Random.Range(0, 0.25f));
+                    EntityAnimationController.SetState(EntityAnimationController.State.Running, UnityEngine.Random.Range(0, 0.25f));
                     break;
                 default:
                     break;

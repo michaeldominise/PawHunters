@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,23 +8,43 @@ namespace LabHaven.PawHunters
 {
     public class MenuHandler : MonoBehaviour
     {
+        [SerializeField] BackNavigationHandler.BackHandlerMode backHandlerMode = BackNavigationHandler.BackHandlerMode.Execute;
         [SerializeField] bool canUnselect;
         [SerializeField] List<MenuItem> itemList;
-        [SerializeField] MenuItem selectedItem;
+        [SerializeField] MenuItem defaultSelectedItem;
+        [ShowInInspector, ReadOnly] MenuItem CurrentSelectedItem { get; set; }
 
         public IEnumerator Start()
         {
             yield return null;
             Init();
+            yield return null;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
+            yield return null;
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
 
-        public void Init() => itemList.ForEach(x => x.Init(OnSelect, x == selectedItem));
+        public void Init() => itemList.ForEach(x => x.Init(OnSelect, x == defaultSelectedItem));
 
-        public void OnSelect(MenuItem item)
+        public void OnSelect(MenuItem item) => OnSelect(item, backHandlerMode);
+        void OnSelect(MenuItem item, BackNavigationHandler.BackHandlerMode backHandlerMode)
         {
-            selectedItem = canUnselect && item == selectedItem ? null : item;
-            itemList.ForEach(x => x.SetState(x == selectedItem ? MenuItem.State.Selected : MenuItem.State.NotSelected));
-            LayoutRebuilder.MarkLayoutForRebuild(transform as RectTransform);
+            if (item == CurrentSelectedItem)
+            {
+                if (canUnselect)
+                    item = null;
+                else
+                    return;
+            }
+
+            var lastSelectedItem = CurrentSelectedItem;
+            CurrentSelectedItem = item;
+            itemList.ForEach(x => x.SetState(x == CurrentSelectedItem ? MenuItem.State.Selected : MenuItem.State.NotSelected));
+            BackNavigationHandler.Add(this, () =>
+            {
+                var selectedItem = backHandlerMode == BackNavigationHandler.BackHandlerMode.Execute ? lastSelectedItem : defaultSelectedItem;
+                OnSelect(selectedItem, BackNavigationHandler.BackHandlerMode.DoNothing);
+            }, backHandlerMode);
         }
     }
 }
