@@ -11,7 +11,7 @@ namespace LabHavenInteractive.PawHunters
         public enum TransitionToBattleType { PlayerRunToEnemy, EnemyRunToPlayer }
 
         [SerializeField] TransitionToBattleType transitionToBattleType;
-        [SerializeField] SaveableTeamData teamData;
+        [SerializeField] SaveableTeamData_CharacterData teamData;
 
         public override Type JourneyType => Type.Battle;
         public override string ButtonLabel => "Battle";

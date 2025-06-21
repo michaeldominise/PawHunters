@@ -32,6 +32,7 @@ namespace LabHavenInteractive.PawHunters
             public float specialSkillMax;
         }
 
+        public string instanceID;
         public string masterID;
         public int level;
         public Attribute attribute;

@@ -16,7 +16,7 @@ namespace LabHavenInteractive.PawHunters
 
         protected abstract AssetReferenceMasterID<StageData> StageDataAssetReference { get; }
         public StageData StageData => StageDataAssetReference.Asset;
-        public SaveableTeamData PlayerTeamData => AppManager.Instance?.userData.playerTeamData;
+        public SaveableTeamData PlayerTeamData => AppManager.Instance?.userData.teamCollection.SelectedTeamData;
         public JourneyData CurrentJourney => StageData.data.journeys[CurrentJourneyIndex].Asset;
         public AppSettings_Battle AppSettings_Battle => appSettings_Battle;
 

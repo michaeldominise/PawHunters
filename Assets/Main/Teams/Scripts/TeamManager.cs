@@ -22,8 +22,8 @@ namespace LabHavenInteractive.PawHunters
             Clear();
             SaveableData.Initialize(ref this.teamData, teamData, Refresh);
 
-            for (var x = 0; x < teamData.characters.Count; x++)
-                Spawn(teamData.characters[x].GetPrefab(), init: entity => EntityInit(x, entity, teamData.characters[x]));
+            for (var x = 0; x < teamData.Characters.Count; x++)
+                Spawn(teamData.Characters[x].GetPrefab(), init: entity => EntityInit(x, entity, teamData.Characters[x]));
         }
 
         public virtual EntityMainController EntityInit(int index, EntityMainController entity, SaveableCharacterData saveableCharacterData)

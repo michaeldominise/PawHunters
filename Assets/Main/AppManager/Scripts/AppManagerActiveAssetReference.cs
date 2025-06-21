@@ -7,7 +7,7 @@ namespace LabHavenInteractive.PawHunters
 {
     public partial class AppManager
     {
-        [ShowInInspector, HideReferenceObjectPicker]
+        [ShowInInspector, HideReferenceObjectPicker, BoxGroup("Active Asset References", ShowLabel = false)]
         static List<AssetReferenceMasterIDProfiler> ActiveAssetReferences = new();
 
         [SerializeField]
@@ -30,7 +30,7 @@ namespace LabHavenInteractive.PawHunters
         public static void RemoveAssetReferences(IAssetReferenceMasterID iAssetReference) => ActiveAssetReferences.Remove(ActiveAssetReferences.FirstOrDefault(x => x.iAssetReference == iAssetReference));
 
         private void OnDestroy() => UnloadActiveAssets();
-        [Button]
+        [Button, BoxGroup("Active Asset References", ShowLabel = false)]
         private void UnloadActiveAssets()
         {
             while(ActiveAssetReferences.Count > 0)

@@ -16,7 +16,88 @@ MonoBehaviour:
   teamData:
     teamName: Wild Black Cat
     characters:
-    - masterID: Character.BlackCat
+    - instanceID: 0
+      masterID: Character.BlackCat
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
+      skillDataMasterIdList:
+      - SkillData_BasicAttack_ShortRange
+      - SkillData_SpecialSkill_EnhanceAttackWithShield
+    - instanceID: 1
+      masterID: Character.BlackCat
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
+      skillDataMasterIdList:
+      - SkillData_BasicAttack_ShortRange
+      - SkillData_SpecialSkill_EnhanceAttackWithShield
+    - instanceID: 2
+      masterID: Character.BlackCat
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
+      skillDataMasterIdList:
+      - SkillData_BasicAttack_ShortRange
+      - SkillData_SpecialSkill_EnhanceAttackWithShield
+    - instanceID: 3
+      masterID: Character.BlackCat
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
+      skillDataMasterIdList:
+      - SkillData_BasicAttack_ShortRange
+      - SkillData_SpecialSkill_EnhanceAttackWithShield
+    - instanceID: 4
+      masterID: Character.BlackCat
+      level: 0
+      attribute:
+        health: 100
+        attack: 10
+        defense: 2
+        speed: 3
+        critChance: 0.1
+        critDamage: 1.2
+        counterChance: 0.1
+        comboChance: 0.1
+        specialSkillMax: 0
+      skillDataMasterIdList:
+      - SkillData_BasicAttack_ShortRange
+      - SkillData_SpecialSkill_EnhanceAttackWithShield
+    - instanceID: 5
+      masterID: Character.BlackCat
       level: 0
       attribute:
         health: 100

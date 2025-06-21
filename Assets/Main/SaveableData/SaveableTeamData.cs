@@ -6,16 +6,15 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    [Serializable]
-    public class SaveableTeamData : SaveableData<SaveableCharacterData.AssetType>
+    public abstract class SaveableTeamData : SaveableData<SaveableCharacterData.AssetType>
     {
-        public string teamName; 
-        public List<SaveableCharacterData> characters;
+        public string teamName;
+        public abstract List<SaveableCharacterData> Characters { get; }
 
         public override List<IAssetReferenceMasterID> GetAssetReference(SaveableCharacterData.AssetType assetType)
         {
             var list = new List<IAssetReferenceMasterID>();
-            characters.ForEach(x => list.AddRange(x.GetAssetReference(assetType)));
+            Characters.ForEach(x => list.AddRange(x.GetAssetReference(assetType)));
             return list;
         }
     }

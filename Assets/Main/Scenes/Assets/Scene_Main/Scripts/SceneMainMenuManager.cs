@@ -13,7 +13,7 @@ namespace LabHavenInteractive.PawHunters
 {
     public class SceneMainMenuManager : SingletonMonoBehaviour<SceneMainMenuManager>
     {
-        public SaveableTeamData PlayerTeamData => AppManager.Instance?.userData.playerTeamData;
+        public SaveableTeamData PlayerTeamData => AppManager.Instance?.userData.teamCollection.SelectedTeamData;
         public StageData StageData => StageDataAssetReference.Asset;
         protected AssetReferenceMasterID<StageData> StageDataAssetReference => AppManager.Instance.userData.battleData.huntStageData;
 
