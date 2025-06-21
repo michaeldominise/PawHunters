@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public abstract class DataOverview<T> : ScriptableObject, IRefresh where T : Object
     {

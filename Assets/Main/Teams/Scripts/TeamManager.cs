@@ -3,7 +3,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public abstract class TeamManager : Spawner<EntityMainController>
     {

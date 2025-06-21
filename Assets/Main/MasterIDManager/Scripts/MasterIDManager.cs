@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "MasterIDManager", menuName = "GameData/Overviews/MasterIDManager")]
     public class MasterIDManager : ScriptableObject

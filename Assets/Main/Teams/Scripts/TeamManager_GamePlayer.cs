@@ -6,7 +6,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class TeamManager_GamePlayer : TeamManager_Game
     {

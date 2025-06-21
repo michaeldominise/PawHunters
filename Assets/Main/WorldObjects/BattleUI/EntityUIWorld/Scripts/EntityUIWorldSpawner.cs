@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class EntityUIWorldSpawner : Spawner<EntityUIWorld>
     {

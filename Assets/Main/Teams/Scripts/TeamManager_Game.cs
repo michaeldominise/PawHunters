@@ -7,7 +7,7 @@ using System;
 using UnityEngine.Serialization;
 using System.Threading.Tasks;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class TeamManager_Game : TeamManager
     {

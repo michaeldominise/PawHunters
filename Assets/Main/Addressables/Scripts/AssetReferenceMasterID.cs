@@ -8,7 +8,7 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 #endif
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [System.Serializable]
     [InlineProperty]

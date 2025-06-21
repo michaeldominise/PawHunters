@@ -9,7 +9,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class SceneMainMenuManager : SingletonMonoBehaviour<SceneMainMenuManager>
     {

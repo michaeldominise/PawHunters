@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
 	[RequireComponent(typeof(SpriteRenderer))]
     public class ParallaxSpriteRenderer : MonoBehaviour

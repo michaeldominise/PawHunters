@@ -5,7 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using System;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class TeamManager_GameEnemy : TeamManager_Game
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [Serializable]
     public class StateController<State> where State : Enum

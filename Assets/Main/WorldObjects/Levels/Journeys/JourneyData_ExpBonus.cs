@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "JourneyData_ExpBonus", menuName = "GameData/JourneyData/ExpBonus")]
     public class JourneyData_ExpBonus : JourneyData

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public abstract class AppSettings : ScriptableObject
     {

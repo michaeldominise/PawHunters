@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "StageDataOverview", menuName = "GameData/Overviews/StageDataOverview")]
     public class StageDataOverview : DataOverview<StageData>

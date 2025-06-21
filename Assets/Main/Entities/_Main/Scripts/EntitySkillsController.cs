@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class EntitySkillsController : MonoBehaviour
     {

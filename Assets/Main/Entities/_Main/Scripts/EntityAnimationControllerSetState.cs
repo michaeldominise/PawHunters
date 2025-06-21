@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class EntityAnimationControllerSetState : AnimatorStateHandler<EntityAnimationController>
     {

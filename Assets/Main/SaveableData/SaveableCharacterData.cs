@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [Serializable]
     public class SaveableCharacterData : SaveableData<SaveableCharacterData.AssetType>

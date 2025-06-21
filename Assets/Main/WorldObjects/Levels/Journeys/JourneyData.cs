@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public abstract class JourneyData : ScriptableObject
     {

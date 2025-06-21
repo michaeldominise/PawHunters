@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "JourneyData_TeamSkill_Selection", menuName = "GameData/JourneyData/TeamSkill_Selection")]
     public class JourneyData_TeamSkill_Selection : JourneyData_TeamSkill

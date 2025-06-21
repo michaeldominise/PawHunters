@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public static class NumberFormatterExtension
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [System.Serializable]
     public class AssetReferenceScene : AssetReference

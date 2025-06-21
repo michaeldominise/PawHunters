@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "LevelData", menuName = "GameData/LevelData")]
     public class StageData : ScriptableObject

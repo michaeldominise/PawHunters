@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class SkillCustomCondition_StatusEffectElements : SkillCustomCondition
     {

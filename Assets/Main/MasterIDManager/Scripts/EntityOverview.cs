@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "EntityOverview", menuName = "GameData/Overviews/EntityOverview")]
     public class EntityOverview : DataOverview<EntityMainController>

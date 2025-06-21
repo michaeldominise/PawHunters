@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public partial class AppManager
     {

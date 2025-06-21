@@ -4,7 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class EnvironmentManager : SingletonMonoBehaviour<EnvironmentManager>
     {

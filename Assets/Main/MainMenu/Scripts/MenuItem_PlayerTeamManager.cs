@@ -5,7 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using TMPro;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class MenuItem_PlayerTeamManager : MenuItem
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class SceneTransitionLoader : SingletonMonoBehaviour<SceneTransitionLoader>
     {

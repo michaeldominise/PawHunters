@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "AppSettings_Global", menuName = "GameData/Settings/AppSettings_Global")]
     public class AppSettings_Global : AppSettings

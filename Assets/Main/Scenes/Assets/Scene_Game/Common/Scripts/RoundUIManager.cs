@@ -7,7 +7,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class RoundUIManager : SingletonMonoBehaviour<RoundUIManager>
     {

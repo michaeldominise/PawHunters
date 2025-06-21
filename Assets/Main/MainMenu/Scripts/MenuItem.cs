@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine.Events;
 using Sirenix.OdinInspector;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     [RequireComponent(typeof(Button))]
     public class MenuItem : MonoBehaviour

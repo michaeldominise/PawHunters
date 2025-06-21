@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class TeamManager_Selection : TeamManager
     {

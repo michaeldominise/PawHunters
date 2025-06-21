@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class AnimationUI : MonoBehaviour
     {

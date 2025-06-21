@@ -3,7 +3,7 @@ using DG.Tweening;
 using System.Threading.Tasks;
 using TMPro;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class InitialUI : SingletonMonoBehaviour<InitialUI>
     {

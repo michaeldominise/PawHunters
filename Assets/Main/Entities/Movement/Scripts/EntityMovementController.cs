@@ -4,7 +4,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public abstract class EntityMovementController : MonoBehaviour
     {
