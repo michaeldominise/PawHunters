@@ -14,7 +14,7 @@ namespace LabHavenInteractive.PawHunters
         {
             none,
             character = 1 << 0,
-            skills = 1 << 0,
+            skills = 1 << 1,
             all = (1 << 30) - 1
         }
 

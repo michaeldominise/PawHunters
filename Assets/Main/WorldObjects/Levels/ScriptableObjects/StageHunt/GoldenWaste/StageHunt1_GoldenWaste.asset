@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0949a0fdc143946f8991cd6d167b10d0, type: 3}
   m_Name: StageHunt1_GoldenWaste
   m_EditorClassIdentifier: 
-  title: 1 GoldenWaste
+  title: 1. GoldenWaste
   maxRound: 30
   data:
     environmentItem:

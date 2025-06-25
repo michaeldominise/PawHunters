@@ -71,14 +71,19 @@ namespace LabHavenInteractive.PawHunters
         public async Task Load() => await LoadAsset();
         public async Task<T> LoadAsset()
         {
-            UsageCount++;
             if (Asset)
+            {
+                UsageCount++;
                 return Asset;
+            }
 
             var operation = assetReference.IsDone ? assetReference.LoadAssetAsync<Object>() : assetReference.OperationHandle;
             await operation.Task;
 
-            if (operation.Result is T)
+            UsageCount++;
+            if (!assetReference.IsDone)
+                return null;
+            else if (operation.Result is T)
                 Asset = operation.Result as T;
             else if (operation.Result is GameObject)
                 Asset = (operation.Result as GameObject).GetComponent<T>();
@@ -90,11 +95,15 @@ namespace LabHavenInteractive.PawHunters
             return Asset;
         }
 
-        public void Unload()
+        public async void Unload()
         {
-            if (UsageCount == 0)
-                return;
             UsageCount--;
+#if UNITY_EDITOR
+            if(EditorApplication.isPlayingOrWillChangePlaymode)
+#endif
+                await Task.Yield();
+            if (UsageCount != 0)
+                return;
             Asset = null;
             AppManager.RemoveAssetReferences(this);
             assetReference.ReleaseAsset();

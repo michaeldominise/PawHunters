@@ -6,7 +6,7 @@ namespace LabHavenInteractive.PawHunters
     [System.Serializable]
     public class Collection<T> : SaveableData where T : SaveableData
     {
-        public List<T> items;
+        public List<T> items = new();
     }
 
     [System.Serializable]

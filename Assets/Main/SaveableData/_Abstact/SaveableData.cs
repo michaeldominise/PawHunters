@@ -51,8 +51,7 @@ namespace LabHavenInteractive.PawHunters
         public virtual async Task LoadAssets(AssetType assetType)
         {
             var loadTask = GetAssetReference(assetType).Select(x => x.Load());
-            if (loadTask.Count() > 0)
-                await Task.WhenAll(loadTask);
+            await Task.WhenAll(loadTask);
         }
 
         public void UnloadAssets(AssetType assetType) => GetAssetReference(assetType).ForEach(x => x.Unload());

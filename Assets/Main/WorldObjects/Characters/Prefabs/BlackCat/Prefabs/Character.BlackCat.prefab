@@ -304,7 +304,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2764976406971579630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e7850929f3a324984a5875e3615cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: a38df209b2dc848c5a77313c47a5b136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SortingGroup: {fileID: 3465364248552244061}
@@ -342,6 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData:
+    instanceID: 
     masterID: 
     level: 0
     attribute:
@@ -371,6 +372,7 @@ MonoBehaviour:
     body: {fileID: 2561364886908875041}
     weapon: {fileID: 1561862648249497568}
   battleAttributes: {}
+  layerManager: {fileID: 3996665792535199064}
 --- !u!114 &5458500271463625463
 MonoBehaviour:
   m_ObjectHideFlags: 0

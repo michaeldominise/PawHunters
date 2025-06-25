@@ -29,6 +29,7 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] protected EntityMovementController entityMovementController;
         [SerializeField] protected EntityAnimationController entityAnimationController;
         [SerializeField] protected EntityStatusEffectController entityStatusEffectController;
+        [SerializeField] protected LayerManager layerManager;
         [SerializeField] protected AnchorGroup anchor;
         [SerializeField] protected BattleAttributes battleAttributes;
 
@@ -46,6 +47,7 @@ namespace LabHavenInteractive.PawHunters
         public TeamManager_Game TeamManager_Game => teamManager as TeamManager_Game;
         public TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
         public TeamManager_GameEnemy TeamManager_GameEnemy => teamManager as TeamManager_GameEnemy;
+        public LayerManager LayerManager => layerManager;
         public AnchorGroup Anchor => anchor;
 
         public virtual BattleAttributes BattleAttributes => battleAttributes;

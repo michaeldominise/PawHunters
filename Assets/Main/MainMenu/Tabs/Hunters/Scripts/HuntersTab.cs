@@ -1,19 +1,17 @@
+using System.Collections;
 using UnityEngine;
 
-namespace LabHaven.PawHunters
+namespace LabHavenInteractive.PawHunters
 {
     public class HuntersTab : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
+        [SerializeField] ScrollRectPoolHandler_Hunters scrollRectPoolHandler_Hunters;
 
-        // Update is called once per frame
-        void Update()
+        private IEnumerator Start()
         {
-        
+            yield return null;
+            yield return null;
+            scrollRectPoolHandler_Hunters.Init(Bag.Instance.hunterCollection);   
         }
     }
 }

@@ -185,6 +185,790 @@ MonoBehaviour:
           skillDataMasterIdList:
           - SkillData_BasicAttack_ShortRange
           - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 1
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 2
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 3
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 4
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 5
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 6
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 7
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 8
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 9
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 10
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 11
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 12
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 13
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 14
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 15
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 16
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 17
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 18
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 19
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 20
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 21
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 22
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 23
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 24
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 25
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 26
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 27
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 28
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 29
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 30
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 31
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 32
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 33
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 34
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 35
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 36
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 37
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 38
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 39
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 40
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 41
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 42
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 43
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 44
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 45
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 46
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 47
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 48
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
+        - instanceID: 49
+          masterID: Character.BlackCat
+          level: 0
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList:
+          - SkillData_BasicAttack_ShortRange
+          - SkillData_SpecialSkill_EnhanceAttackWithShield
 --- !u!114 &6552250165178000997
 MonoBehaviour:
   m_ObjectHideFlags: 0

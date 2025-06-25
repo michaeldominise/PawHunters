@@ -25,14 +25,12 @@ namespace LabHavenInteractive.PawHunters
             var keyPairItem = spawnedList.FirstOrDefault(x => x.Key == prefab.GetInstanceID()  && !x.Value.gameObject.activeSelf && (condition?.Invoke(x.Value) ?? true));
             var item = keyPairItem.Value;
             if (!item)
-                item = Instantiate(prefab);
+                item = Instantiate(prefab, spawnParent);
             else
                 spawnedList.Remove(keyPairItem);
 
             item.gameObject.SetActive(true);
             item.transform.localPosition = GetSpawnPoint();
-            item.transform.rotation = Quaternion.identity;
-            item.transform.SetParent(spawnParent);
             spawnedList.Add(new(prefab.GetInstanceID(), item));
             activeList.Add(item);
             init?.Invoke(item);
