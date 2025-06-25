@@ -41,7 +41,16 @@ MonoBehaviour:
       elite: {r: 0.9, g: 0.4, b: 0.2, a: 1}
       mythic: {r: 1, g: 0.2, b: 0.7, a: 1}
       legendary: {r: 1, g: 0.84, b: 0, a: 1}
-      Default: {r: 1, g: 1, b: 1, a: 1}
+      Default: {r: 0.8, g: 0.8, b: 0.8, a: 1}
+    rarityColorTheme_Background:
+      common: {r: 0.23, g: 0.23, b: 0.23, a: 1}
+      uncommon: {r: 0.08568628, g: 0.23, b: 0.08568628, a: 1}
+      rare: {r: 0.050999995, g: 0.102000035, b: 0.23, a: 1}
+      epic: {r: 0.17249997, g: 0.0575, b: 0.23, a: 1}
+      elite: {r: 0.23, g: 0.102, b: 0.050999995, a: 1}
+      mythic: {r: 0.23, g: 0.045999996, b: 0.16054903, a: 1}
+      legendary: {r: 0.23, g: 0.19301963, b: 0, a: 1}
+      Default: {r: 0.17, g: 0.17, b: 0.17, a: 1}
     tabSelectedText: {r: 0.9882353, g: 0.9647059, b: 0.8, a: 1}
     tabNotSelectedText: {r: 1, g: 1, b: 1, a: 0.5529412}
     tabNotSelectedText_PlayerTeam: {r: 0.7058824, g: 0.60784316, b: 0.7921569, a: 1}

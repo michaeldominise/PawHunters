@@ -11,6 +11,7 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] TextMeshProUGUI day;
         [SerializeField] TextMeshProUGUI description;
         [SerializeField] CanvasGroup canvasGroup;
+        [SerializeField] AnimationUI bounceTransition;
 
         public async void Init(JourneyData.Type journeyType, string title, string description, string day = "")
         {
@@ -20,6 +21,9 @@ namespace LabHavenInteractive.PawHunters
             canvasGroup.alpha = 0;
             await Task.Delay(100);
             canvasGroup.alpha = 1;
+            transform.localScale = Vector3.zero;
+            await Task.Delay(100);
+            bounceTransition.ScaleNormal();
         }
 
         public Color GetColor(JourneyData.Type journeyType)

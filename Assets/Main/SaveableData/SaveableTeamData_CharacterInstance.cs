@@ -9,7 +9,7 @@ namespace LabHavenInteractive.PawHunters
     [Serializable]
     public class SaveableTeamData_CharacterInstance : SaveableTeamData
     {
-        [SerializeField] List<SaveableCharacterInstanceData> characters;
+        [SerializeField] List<SaveableCharacterInstanceReference> characters;
 
         public override List<SaveableCharacterData> Characters => characters.Select(x => x.SaveableData).ToList();
     }

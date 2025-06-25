@@ -431,6 +431,8 @@ MonoBehaviour:
   minDistanceToLoad: 600
   intialItemCount: 25
   isEndless: 0
+  filterType: 0
+  orderType: 1
 --- !u!1 &7239357544393253482
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,8 @@ namespace LabHavenInteractive.PawHunters
         [ShowInInspector, ReadOnly] int AdditionalItemCount { get; set; }
         [ShowInInspector, ReadOnly] int MaxItemLimit => data.items.Count;
         [ShowInInspector, ReadOnly] int TotalItemCount => spawnedList.Count + AdditionalItemCount;
-        [ShowInInspector, ReadOnly] Collection<T2> data = new();
+        [ShowInInspector, ReadOnly] protected List<T2> SortedDataList { get; set; }
+        [ShowInInspector, ReadOnly] protected Collection<T2> data = new();
 
         RectTransform TargetRect => prefab.transform as RectTransform;
         HorizontalLayoutGroup HorizontalLayoutGroup => layoutGroup as HorizontalLayoutGroup;
@@ -142,19 +143,27 @@ namespace LabHavenInteractive.PawHunters
         public void Init(Collection<T2> data)
         {
             SaveableData.Initialize(ref this.data, data, RefreshInit);
+            SetSortedList();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
+        }
 
+        protected virtual void SetSortedList() => SetSortedList(data.items);
+        protected virtual void SetSortedList(List<T2> dataList)
+        {
+            SortedDataList = dataList;
             Clear();
             for (var x = 0; x < intialItemCount; x++)
                 Spawn(prefab, init: item =>
                 {
                     if (x < MaxItemLimit)
-                        item.Init(x, data.items[x]);
+                    {
+                        item.Init(AdditionalItemCount + x, SortedDataList[(AdditionalItemCount + x) % MaxItemLimit]);
+                        item.transform.SetSiblingIndex(emptySlots.Count + x);
+                    }
                     else
                         item.gameObject.SetActive(false);
                 });
-
             Refresh();
-            LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
         }
 
         private void OnScrollRectValueChange(Vector2 value) => Refresh();
@@ -197,22 +206,19 @@ namespace LabHavenInteractive.PawHunters
                 {
                     AdditionalItemCount += isNext ? 1 : -1;
 
+                    var dataIndex = isNext ? (TotalItemCount - 1) % MaxItemLimit : AdditionalItemCount;
                     var item = activeList[childIndex];
+                    item.Init(dataIndex, SortedDataList[dataIndex]);
+                    activeList.RemoveAt(childIndex);
                     if (isNext)
                     {
-                        var dataIndex = (activeList.Count + AdditionalItemCount) % MaxItemLimit;
-                        activeList.RemoveAt(0);
                         activeList.Add(item);
                         item.transform.SetAsLastSibling();
-                        item.Init(dataIndex, data.items[dataIndex]);
                     }
                     else
                     {
-                        var dataIndex = AdditionalItemCount % MaxItemLimit;
-                        activeList.RemoveAt(childIndex);
                         activeList.Insert(0, item);
                         item.transform.SetSiblingIndex(emptySlots.Count);
-                        item.Init(dataIndex, data.items[dataIndex]);
                     }
 
                     if (columnRowCount > itemCount)
@@ -220,7 +226,6 @@ namespace LabHavenInteractive.PawHunters
 
                     if (TotalItemCount % columnRowCount == (isNext ? 1 : 0))
                     {
-                        var itemRect = item.transform as RectTransform;
                         var fillerSize = filler.sizeDelta;
                         var sizeChange = isVertical ? (cellGroupSize * Vector2.up) : (cellGroupSize * Vector2.right);
                         filler.sizeDelta = (isNext ? sizeChange : -sizeChange) + fillerSize;

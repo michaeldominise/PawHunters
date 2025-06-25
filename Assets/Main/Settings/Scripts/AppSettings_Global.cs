@@ -15,6 +15,7 @@ namespace LabHavenInteractive.PawHunters
         {
             public ElementColorTheme elementColorTheme;
             public RarityColorTheme rarityColorTheme;
+            public RarityColorTheme rarityColorTheme_Background;
             public Color tabSelectedText;
             public Color tabNotSelectedText;
             public Color tabNotSelectedText_PlayerTeam;
