@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0b678bf80f841ba8380aea2faac4a9, type: 3}
+  m_Name: AddressableEnvironmentSettings
+  m_EditorClassIdentifier: 
+  profile: 1
+  buildEnvironment: 0
+  environments:
+  - environmentType: 0
+    id: 330d2fbe-6021-4a37-bf98-ebb8cc7a583b
+    buckets:
+    - buildTarget: 19
+      id: 92f0a94d-5655-4c2a-a6c8-efcfadec4475
+    - buildTarget: 2
+      id: 5dd92073-b288-480b-97de-21daf5f4fd2d
+    - buildTarget: 9
+      id: 46b3f05a-03e5-4846-a8bf-6f6efccd5de2
+    - buildTarget: 20
+      id: 67573e0d-00c5-430f-8346-1f40a2d5c603
+    - buildTarget: 13
+      id: dc84496e-dda9-4afd-bbf8-19aba170bf7b
+  - environmentType: 1
+    id: 32e89467-1fee-4f14-9ecd-793f50ad84c7
+    buckets:
+    - buildTarget: 19
+      id: e6dc9e4e-fb32-4574-9d0c-a4ee9ee8a5fe
+    - buildTarget: 2
+      id: d7200e88-079a-4ad3-959e-bc34c3072f33
+    - buildTarget: 9
+      id: 6e7025ad-eca8-4a46-b15a-0a1e879209da
+    - buildTarget: 20
+      id: f7240bb7-1527-4475-82f1-928f7aba0d86
+    - buildTarget: 13
+      id: 16b413f5-5e86-4dcc-b023-a7c64971d408
+  - environmentType: 2
+    id: b43eec15-270a-498a-9595-88ed963552af
+    buckets:
+    - buildTarget: 19
+      id: b61654ab-8954-4424-a22e-b30b87d1181a
+    - buildTarget: 2
+      id: 5a7dab9f-cb53-4f81-875d-4ba51d55734e
+    - buildTarget: 9
+      id: 88b44333-1f63-4508-afd5-d36db6b0bfcd
+    - buildTarget: 20
+      id: a7f4ef92-c389-4b08-9849-c96e58b47847
+    - buildTarget: 13
+      id: 6f64f999-fcfc-447f-87f2-10ab15f8b2cb
+  useOverrideLoadPath: 0
+  overrideLoadPath: 

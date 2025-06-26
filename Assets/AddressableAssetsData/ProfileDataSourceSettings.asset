@@ -27,12 +27,7 @@ MonoBehaviour:
       m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
     - m_Suffix: LoadPath
       m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
-  environments:
-  - id: e0308995-487b-40be-ae13-7f3a6c5884d3
-    projectId: 75cf860d-0c1d-4969-9958-6970e923eba6
-    projectGenesisId: 75cf860d-0c1d-4969-9958-6970e923eba6
-    name: production
-    isDefault: 1
+  environments: []
   currentEnvironment:
     id: 
     projectId: 

@@ -1,0 +1,47 @@
+using System.Linq;
+using UnityEditor;
+using UnityEngine;
+
+namespace LabHavenInteractive.PawHunters
+{
+    public partial class AddressableEnvironmentSettings
+    {
+        static AddressableEnvironmentSettings _Instance;
+        public static AddressableEnvironmentSettings Instance
+        {
+            get
+            {
+                _Instance ??= Resources.Load<AddressableEnvironmentSettings>("AddressableEnvironmentSettings");
+                return _Instance;
+            }
+        }
+
+        public static string ProjectId => CloudProjectSettings.projectId;
+        public static string BuildEnvironmentString => BuildEnvironment.ToString();
+        public static EnvironmentData.EnvironmentType BuildEnvironment => Instance.buildEnvironment;
+        public static EnvironmentData CurrentEnvironment => Instance.environments.FirstOrDefault(x => x.environmentType == BuildEnvironment);
+        public static EnvironmentData.BucketData CurrentBucket => CurrentEnvironment.buckets.FirstOrDefault(x => x.buildTarget == EditorUserBuildSettings.activeBuildTarget);
+
+        public static string LocalBuildPath => $"[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]";
+        public static string LocalLoadPath => "{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]";
+
+        public static string RemoteBuildPath => $"CCDBuildData/{CurrentEnvironment.id}/{CurrentBucket.id}/latest";
+        public static string RemoteLoadPath => $"https://{ProjectId}.client-api.unity3dusercontent.com/client_api/v1/environments/{BuildEnvironmentString}/buckets/{CurrentBucket.id}/release_by_badge/latest/entry_by_path/content/?path=";
+
+        public static string OverrideLoadPath => Instance.overrideLoadPath;
+
+        public static string BuildPath => Instance.profile switch
+        {
+            ProfileType.Remote => RemoteBuildPath,
+            _ => LocalBuildPath,
+        };
+
+        public static string LoadPath => Instance.useOverrideLoadPath
+            ? OverrideLoadPath
+            : Instance.profile switch
+            {
+                ProfileType.Remote => RemoteLoadPath,
+                _ => LocalLoadPath,
+            };
+    }
+}

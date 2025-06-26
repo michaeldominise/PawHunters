@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 723488a33bf224513b0cfd0f7a49ddfc
   m_currentHash:
     serializedVersion: 2
-    Hash: 23834be1119b42119c208f0918f52a29
+    Hash: b0bd28a630145b8f3b0b8a5a74bb67dd
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -77,10 +77,14 @@ MonoBehaviour:
       m_Id: 633fadb6084ad4e0aa7f93baa68510b4
       m_ProfileName: Default
       m_Values:
+      - m_Id: 077717d26fc644ff39bd165e2394b6f8
+        m_Value: '[LabHavenInteractive.PawHunters.AddressableEnvironmentSettings.BuildPath]'
       - m_Id: 093bdcad37b374d4bb55382951e3c1fd
-        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+        m_Value: 'ServerData/[BuildTarget]'
+      - m_Id: 1ff639fa6993b412eb7662365c810ff6
+        m_Value: '[LabHavenInteractive.PawHunters.AddressableEnvironmentSettings.LoadPath]'
       - m_Id: 6ad594e6bdd7047f2bfb90d5aca26d08
-        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+        m_Value: <undefined>
       - m_Id: b420bcb054d864fb88c5fa9a9453768d
         m_Value: 'ServerData/[BuildTarget]'
       - m_Id: d56bc157a1a6a47b0acd430b76b7445b
@@ -88,8 +92,14 @@ MonoBehaviour:
       - m_Id: e078513339bea43f193980a71446f3f9
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
     m_ProfileEntryNames:
+    - m_Id: 077717d26fc644ff39bd165e2394b6f8
+      m_Name: App.BuildPath
+      m_InlineUsage: 0
     - m_Id: 093bdcad37b374d4bb55382951e3c1fd
       m_Name: Local.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 1ff639fa6993b412eb7662365c810ff6
+      m_Name: App.LoadPath
       m_InlineUsage: 0
     - m_Id: 6ad594e6bdd7047f2bfb90d5aca26d08
       m_Name: Local.LoadPath
