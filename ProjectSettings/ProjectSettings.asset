@@ -929,10 +929,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 75cf860d-0c1d-4969-9958-6970e923eba6
+  cloudProjectId: 76b1f987-707d-4b50-bcef-77ac48893381
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: PawHunter
+  projectName: PawHunters
   organizationId: unity_7hqkizssfas9vq
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

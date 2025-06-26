@@ -12,21 +12,21 @@ namespace LabHavenInteractive.PawHunters
 
         [MenuItem(MenuSetToDev)] static void SetToDev() => SetEnvironment(EnvironmentData.EnvironmentType.Dev);
         [MenuItem(MenuSetToQA)] static void SetToQA() => SetEnvironment(EnvironmentData.EnvironmentType.QA);
-        [MenuItem(MenuSetToProd)] static void SetToProd() => SetEnvironment(EnvironmentData.EnvironmentType.Prod);
+        [MenuItem(MenuSetToProd)] static void SetToProd() => SetEnvironment(EnvironmentData.EnvironmentType.Production);
 
         [MenuItem(MenuSetToDev, true)] static bool SetToDevValidate() => ValidateEnvironment(MenuSetToDev, EnvironmentData.EnvironmentType.Dev);
         [MenuItem(MenuSetToQA, true)] static bool SetToQAValidate() => ValidateEnvironment(MenuSetToQA, EnvironmentData.EnvironmentType.QA);
-        [MenuItem(MenuSetToProd, true)] static bool SetToProdValidate() => ValidateEnvironment(MenuSetToProd, EnvironmentData.EnvironmentType.Prod);
+        [MenuItem(MenuSetToProd, true)] static bool SetToProdValidate() => ValidateEnvironment(MenuSetToProd, EnvironmentData.EnvironmentType.Production);
 
         static bool ValidateEnvironment(string menuItemPath, EnvironmentData.EnvironmentType environmentType)
         {
-            Menu.SetChecked(menuItemPath, Instance.buildEnvironment == environmentType);
-            return Instance.buildEnvironment != environmentType;
+            Menu.SetChecked(menuItemPath, Instance.BuildEnvironment == environmentType);
+            return Instance.BuildEnvironment != environmentType;
         }
 
         static void SetEnvironment(EnvironmentData.EnvironmentType environmentType)
         {
-            Instance.buildEnvironment = environmentType;
+            Instance.BuildEnvironment = environmentType;
             EditorUtility.SetDirty(Instance);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
