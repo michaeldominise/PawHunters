@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -14,14 +15,25 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] Button button;
         [SerializeField] GameObject selectionBorder;
         [SerializeField] List<RarityUI> rarityUIList;
-        [ShowInInspector, ReadOnly] StateController<State> CurrentState { get; set; } = new(State.NotSelected);
-        EntityMainController asset;
+        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; set; } = new(State.NotSelected);
 
-        private void Start() => button.onClick.AddListener(OnClick);
+        public EntityMainController Asset { get; set; }
+        public Action<HunterPreviewItem> onClick;
+        public Action<HunterPreviewItem> onLoaded;
 
-        public void OnClick()
+        void Start() => button.onClick.AddListener(OnClick);
+        void OnClick()
         {
-            CurrentState.Value = CurrentState.Value == State.Selected ? State.NotSelected : State.Selected;
+            if (Asset == null)
+                return;
+            SetState(CurrentState.Value == State.Selected ? State.NotSelected : State.Selected);
+            onClick?.Invoke(this);
+        }
+
+        [Button]
+        public void SetState(State state)
+        {
+            CurrentState.Value = state;
             selectionBorder.SetActive(CurrentState.Value == State.Selected);
         }
 
@@ -37,15 +49,17 @@ namespace LabHavenInteractive.PawHunters
             if (!data.GetPrefab())
                 return;
 
-            asset = Instantiate(data.GetPrefab(), Vector3.zero, Quaternion.identity, assetParent);
-            asset.transform.localPosition = Vector3.zero;
-            asset.LayerManager.SetSpritesMaskInteraction(SpriteMaskInteraction.VisibleInsideMask);
+            Asset = Instantiate(data.GetPrefab(), Vector3.zero, Quaternion.identity, assetParent);
+            Asset.transform.localPosition = Vector3.zero;
+            Asset.Init(null, data);
+            Asset.LayerManager.SetSpritesMaskInteraction(SpriteMaskInteraction.VisibleInsideMask);
+            onLoaded?.Invoke(this);
         }
 
         protected override void Unload()
         {
-            if(asset)
-                Destroy(asset.gameObject);
+            if(Asset)
+                Destroy(Asset.gameObject);
             if(data != null)
                 data.UnloadAssets(assetType);
         }

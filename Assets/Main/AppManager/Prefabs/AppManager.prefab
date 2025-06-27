@@ -151,6 +151,10 @@ MonoBehaviour:
   appSettings_Global: {fileID: 11400000, guid: 6d035d9b2a6884c41b3cef4b2c53082f, type: 2}
   masterIDManager: {fileID: 11400000, guid: 67c1044374a664e6e9373f975a16b085, type: 2}
   userData:
+    instanceData:
+      instanceId: 1751039132615
+      dateCreatedString: 2025/06/27 23:45:32
+      dateOwnedString: 2025/06/27 23:45:32
     battleData:
       huntStageData:
         masterID: StageHunt1_GoldenWaste
@@ -161,19 +165,55 @@ MonoBehaviour:
           m_SubObjectGUID: 
           m_EditorAssetChanged: 0
     teamCollection:
+      instanceData:
+        instanceId: 1751039132616
+        dateCreatedString: 2025/06/27 23:45:32
+        dateOwnedString: 2025/06/27 23:45:32
       items:
-      - teamName: 
-        characters:
+      - instanceData:
+          instanceId: 1751039132617
+          dateCreatedString: 2025/06/27 23:45:32
+          dateOwnedString: 2025/06/27 23:45:32
+        teamName: Main Pact
+        characterInstanceList:
         - instanceId: 105
+        - instanceId: -1
+        - instanceId: -1
+      - instanceData:
+          instanceId: 1751060010178
+          dateCreatedString: 2025/06/28 05:33:29
+          dateOwnedString: 2025/06/28 05:33:29
+        teamName: Sub Pact 1
+        characterInstanceList:
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+      - instanceData:
+          instanceId: 1751060012492
+          dateCreatedString: 2025/06/28 05:33:32
+          dateOwnedString: 2025/06/28 05:33:32
+        teamName: Sub Pact 2
+        characterInstanceList:
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
       selectedIndex: 0
     bag:
+      instanceData:
+        instanceId: 1751039132618
+        dateCreatedString: 2025/06/27 23:45:32
+        dateOwnedString: 2025/06/27 23:45:32
       hunterCollection:
+        instanceData:
+          instanceId: 1751039132619
+          dateCreatedString: 2025/06/27 23:45:32
+          dateOwnedString: 2025/06/27 23:45:32
         items:
         - instanceData:
             instanceId: 105
-            dateCreated: 06/26/2025 04:10:36
-            dateOwned: 06/26/2025 04:10:36
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 160
           attribute:
             health: 100
@@ -188,9 +228,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 106
-            dateCreated: 06/26/2025 04:10:39
-            dateOwned: 06/26/2025 04:10:39
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 252
           attribute:
             health: 100
@@ -205,9 +245,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 107
-            dateCreated: 06/26/2025 04:10:48
-            dateOwned: 06/26/2025 04:10:48
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 125
           attribute:
             health: 100
@@ -222,9 +262,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 108
-            dateCreated: 06/26/2025 04:10:49
-            dateOwned: 06/26/2025 04:10:49
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 106
           attribute:
             health: 100
@@ -239,9 +279,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 109
-            dateCreated: 06/26/2025 04:10:50
-            dateOwned: 06/26/2025 04:10:50
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 49
           attribute:
             health: 100
@@ -256,9 +296,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 110
-            dateCreated: 06/26/2025 04:10:51
-            dateOwned: 06/26/2025 04:10:51
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 52
           attribute:
             health: 100
@@ -273,9 +313,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 111
-            dateCreated: 06/26/2025 04:10:51
-            dateOwned: 06/26/2025 04:10:51
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 10
           attribute:
             health: 100
@@ -290,9 +330,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 112
-            dateCreated: 06/26/2025 04:10:51
-            dateOwned: 06/26/2025 04:10:51
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 29
           attribute:
             health: 100
@@ -307,9 +347,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 113
-            dateCreated: 06/26/2025 04:10:51
-            dateOwned: 06/26/2025 04:10:51
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 195
           attribute:
             health: 100
@@ -324,9 +364,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 114
-            dateCreated: 06/26/2025 04:10:51
-            dateOwned: 06/26/2025 04:10:51
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 120
           attribute:
             health: 100
@@ -341,9 +381,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 115
-            dateCreated: 06/26/2025 04:10:52
-            dateOwned: 06/26/2025 04:10:52
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 169
           attribute:
             health: 100
@@ -358,9 +398,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 116
-            dateCreated: 06/26/2025 04:10:52
-            dateOwned: 06/26/2025 04:10:52
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 207
           attribute:
             health: 100
@@ -375,9 +415,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 117
-            dateCreated: 06/26/2025 04:10:52
-            dateOwned: 06/26/2025 04:10:52
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 93
           attribute:
             health: 100
@@ -392,9 +432,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 118
-            dateCreated: 06/26/2025 04:10:52
-            dateOwned: 06/26/2025 04:10:52
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 217
           attribute:
             health: 100
@@ -409,9 +449,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 119
-            dateCreated: 06/26/2025 04:10:53
-            dateOwned: 06/26/2025 04:10:53
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 236
           attribute:
             health: 100
@@ -426,9 +466,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 120
-            dateCreated: 06/26/2025 04:10:53
-            dateOwned: 06/26/2025 04:10:53
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 196
           attribute:
             health: 100
@@ -443,9 +483,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 121
-            dateCreated: 06/26/2025 04:10:53
-            dateOwned: 06/26/2025 04:10:53
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 69
           attribute:
             health: 100
@@ -460,9 +500,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 122
-            dateCreated: 06/26/2025 04:10:53
-            dateOwned: 06/26/2025 04:10:53
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 25
           attribute:
             health: 100
@@ -477,9 +517,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 123
-            dateCreated: 06/26/2025 04:10:54
-            dateOwned: 06/26/2025 04:10:54
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 245
           attribute:
             health: 100
@@ -494,9 +534,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 124
-            dateCreated: 06/26/2025 04:10:54
-            dateOwned: 06/26/2025 04:10:54
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 262
           attribute:
             health: 100
@@ -511,9 +551,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 125
-            dateCreated: 06/26/2025 04:10:54
-            dateOwned: 06/26/2025 04:10:54
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 5
           attribute:
             health: 100
@@ -528,9 +568,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 126
-            dateCreated: 06/26/2025 04:10:54
-            dateOwned: 06/26/2025 04:10:54
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 168
           attribute:
             health: 100
@@ -545,9 +585,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 127
-            dateCreated: 06/26/2025 04:10:54
-            dateOwned: 06/26/2025 04:10:54
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 274
           attribute:
             health: 100
@@ -562,9 +602,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 128
-            dateCreated: 06/26/2025 04:10:55
-            dateOwned: 06/26/2025 04:10:55
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 193
           attribute:
             health: 100
@@ -579,9 +619,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 129
-            dateCreated: 06/26/2025 04:10:55
-            dateOwned: 06/26/2025 04:10:55
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 47
           attribute:
             health: 100
@@ -596,9 +636,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 130
-            dateCreated: 06/26/2025 04:10:55
-            dateOwned: 06/26/2025 04:10:55
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 112
           attribute:
             health: 100
@@ -613,9 +653,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 131
-            dateCreated: 06/26/2025 04:10:55
-            dateOwned: 06/26/2025 04:10:55
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 174
           attribute:
             health: 100
@@ -630,9 +670,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 132
-            dateCreated: 06/26/2025 04:10:55
-            dateOwned: 06/26/2025 04:10:55
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 245
           attribute:
             health: 100
@@ -647,9 +687,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 133
-            dateCreated: 06/26/2025 04:10:56
-            dateOwned: 06/26/2025 04:10:56
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 202
           attribute:
             health: 100
@@ -664,9 +704,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 134
-            dateCreated: 06/26/2025 04:10:56
-            dateOwned: 06/26/2025 04:10:56
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 31
           attribute:
             health: 100
@@ -681,9 +721,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 135
-            dateCreated: 06/26/2025 04:10:56
-            dateOwned: 06/26/2025 04:10:56
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 76
           attribute:
             health: 100
@@ -698,9 +738,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 136
-            dateCreated: 06/26/2025 04:10:56
-            dateOwned: 06/26/2025 04:10:56
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 5
           attribute:
             health: 100
@@ -715,9 +755,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 137
-            dateCreated: 06/26/2025 04:10:57
-            dateOwned: 06/26/2025 04:10:57
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 157
           attribute:
             health: 100
@@ -732,9 +772,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 138
-            dateCreated: 06/26/2025 04:10:57
-            dateOwned: 06/26/2025 04:10:57
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 179
           attribute:
             health: 100
@@ -749,9 +789,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 139
-            dateCreated: 06/26/2025 04:10:57
-            dateOwned: 06/26/2025 04:10:57
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 26
           attribute:
             health: 100
@@ -766,9 +806,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 140
-            dateCreated: 06/26/2025 04:10:57
-            dateOwned: 06/26/2025 04:10:57
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 163
           attribute:
             health: 100
@@ -783,9 +823,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 141
-            dateCreated: 06/26/2025 04:10:58
-            dateOwned: 06/26/2025 04:10:58
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 79
           attribute:
             health: 100
@@ -800,9 +840,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 142
-            dateCreated: 06/26/2025 04:10:58
-            dateOwned: 06/26/2025 04:10:58
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 260
           attribute:
             health: 100
@@ -817,9 +857,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 143
-            dateCreated: 06/26/2025 04:10:58
-            dateOwned: 06/26/2025 04:10:58
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 35
           attribute:
             health: 100
@@ -834,9 +874,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 144
-            dateCreated: 06/26/2025 04:10:58
-            dateOwned: 06/26/2025 04:10:58
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 18
           attribute:
             health: 100
@@ -851,9 +891,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 145
-            dateCreated: 06/26/2025 04:10:58
-            dateOwned: 06/26/2025 04:10:58
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 256
           attribute:
             health: 100
@@ -868,9 +908,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 146
-            dateCreated: 06/26/2025 04:10:59
-            dateOwned: 06/26/2025 04:10:59
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 169
           attribute:
             health: 100
@@ -885,9 +925,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 147
-            dateCreated: 06/26/2025 04:10:59
-            dateOwned: 06/26/2025 04:10:59
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 74
           attribute:
             health: 100
@@ -902,9 +942,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 148
-            dateCreated: 06/26/2025 04:10:59
-            dateOwned: 06/26/2025 04:10:59
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 26
           attribute:
             health: 100
@@ -919,9 +959,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 149
-            dateCreated: 06/26/2025 04:11:00
-            dateOwned: 06/26/2025 04:11:00
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 12
           attribute:
             health: 100
@@ -936,9 +976,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 150
-            dateCreated: 06/26/2025 04:11:00
-            dateOwned: 06/26/2025 04:11:00
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 85
           attribute:
             health: 100
@@ -953,9 +993,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 151
-            dateCreated: 06/26/2025 04:11:00
-            dateOwned: 06/26/2025 04:11:00
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 142
           attribute:
             health: 100
@@ -970,9 +1010,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 152
-            dateCreated: 06/26/2025 04:11:01
-            dateOwned: 06/26/2025 04:11:01
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 144
           attribute:
             health: 100
@@ -987,9 +1027,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 153
-            dateCreated: 06/26/2025 04:11:01
-            dateOwned: 06/26/2025 04:11:01
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 31
           attribute:
             health: 100
@@ -1004,9 +1044,9 @@ MonoBehaviour:
           skillDataMasterIdList: []
         - instanceData:
             instanceId: 154
-            dateCreated: 06/26/2025 04:11:02
-            dateOwned: 06/26/2025 04:11:02
-          masterID: Character.BlackCat
+            dateCreatedString: 2025/06/27 23:45:32
+            dateOwnedString: 2025/06/27 23:45:32
+          masterId: Character.BlackCat
           level: 51
           attribute:
             health: 100

@@ -12,7 +12,13 @@ namespace LabHavenInteractive.PawHunters
     [System.Serializable]
     public class TeamCollection : Collection<SaveableTeamData_CharacterInstance>
     {
-        public int selectedIndex;
+        [SerializeField] int selectedIndex;
+
+        public int SelectedIndex
+        {
+            get => selectedIndex;
+            set => selectedIndex = (int)Mathf.Repeat(value, items.Count);
+        }
         public SaveableTeamData_CharacterInstance SelectedTeamData => items[Mathf.Clamp(selectedIndex, 0, items.Count)];
     }
 }

@@ -4,7 +4,7 @@ namespace LabHavenInteractive.PawHunters
 {
     public abstract class InstanceReference<T> where T : SaveableData
     {
-        public int instanceId;
+        public long instanceId = -1;
         public abstract T SaveableData { get; }
     }
 }

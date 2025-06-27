@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -13,5 +14,8 @@ namespace LabHavenInteractive.PawHunters
             yield return null;
             scrollRectPoolHandler_Hunters.Init(Bag.Instance.hunterCollection);   
         }
+
+        public void Init(Action<HunterPreviewItem> onItemLoaded) => scrollRectPoolHandler_Hunters.onItemLoaded = onItemLoaded;
+        public void Refresh() => scrollRectPoolHandler_Hunters.SetSortedList();
     }
 }

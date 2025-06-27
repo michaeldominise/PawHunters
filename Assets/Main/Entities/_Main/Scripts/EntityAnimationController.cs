@@ -31,6 +31,8 @@ namespace LabHavenInteractive.PawHunters
         [Button]
         public void SetState(State state, float delay = 0)
         {
+            if (!gameObject.activeInHierarchy)
+                return;
             StopAllCoroutines();
             StartCoroutine(_SetState(state, delay));
         }

@@ -14,7 +14,7 @@ namespace LabHavenInteractive.PawHunters
             if(this.data != null)
                 Unload();
             this.index = index;
-            SaveableData.Initialize(ref this.data, data, Refresh);
+            this.data = SaveableData.Initialize(ref this.data, data, Refresh);
             Load();
         }
 

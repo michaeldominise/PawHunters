@@ -164,14 +164,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fb8423cf1cd44aefac51172050fc40b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnParent: {fileID: 0}
-  teamData:
-    teamName: 
-    characters: []
+  spawnParent: {fileID: 872516641492573154}
   teamManger_EntityParents:
   - {fileID: 8254093158811477171}
   - {fileID: 5861758538924738700}
   - {fileID: 2765570848696231919}
+  layerSortingOrder: 5
 --- !u!114 &3061715514114338735
 MonoBehaviour:
   m_ObjectHideFlags: 0

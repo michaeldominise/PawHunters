@@ -119,9 +119,11 @@ namespace LabHavenInteractive.PawHunters
         void Preload()
         {
             for (var x = 0; x < intialItemCount; x++)
-                Spawn(prefab, init: item => item.name = $"{prefab.name} ({x})");
+                Spawn(prefab, init: item => InitItem(x, item));
             Clear();
         }
+
+        protected virtual void InitItem(int index, T1 item) => item.name = $"{prefab.name} ({index})";
 
         void ReclculateLayout()
         {
@@ -142,13 +144,13 @@ namespace LabHavenInteractive.PawHunters
         public void RefreshInit() => Init(data);
         public void Init(Collection<T2> data)
         {
-            SaveableData.Initialize(ref this.data, data, RefreshInit);
+            this.data = SaveableData.Initialize(ref this.data, data, RefreshInit);
             SetSortedList();
             LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
         }
 
-        protected virtual void SetSortedList() => SetSortedList(data.items);
-        protected virtual void SetSortedList(List<T2> dataList)
+        public virtual void SetSortedList() => SetSortedList(data.items);
+        public virtual void SetSortedList(List<T2> dataList)
         {
             SortedDataList = dataList;
             Clear();

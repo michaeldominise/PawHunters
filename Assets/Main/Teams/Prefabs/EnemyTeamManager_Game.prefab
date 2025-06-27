@@ -48,11 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f9c255053c64380acaa76a508a8994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnParent: {fileID: 2260869497902021793}
-  teamData:
-    teamName: 
-    characters: []
-  prefab: {fileID: 5681937273093125601, guid: 1f6b63c409740465eb96b1736f9a860f, type: 3}
+  spawnParent: {fileID: 1089589173513898145}
   teamManger_EntityParents:
   - {fileID: 8134222878837761947}
   - {fileID: 6126343527379344836}
@@ -72,7 +68,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterData:
-    masterID: 
+    instanceData:
+      instanceId: 1751047694631
+      dateCreatedString: 2025/06/28 02:08:14
+      dateOwnedString: 2025/06/28 02:08:14
+    masterId: Character.BlackCat
     level: 0
     attribute:
       health: 100
@@ -84,16 +84,18 @@ MonoBehaviour:
       counterChance: 0.1
       comboChance: 0.1
       specialSkillMax: 0
+    skillDataMasterIdList: []
   element: 0
   avatarSprite: {fileID: 0}
   teamManager: {fileID: 0}
   model: {fileID: 0}
-  layerManager: {fileID: 0}
+  sortingGroup: {fileID: 0}
   entitySkillsController: {fileID: 7642725665870187201}
   entityHealthController: {fileID: 0}
   entityMovementController: {fileID: 0}
   entityAnimationController: {fileID: 0}
   entityStatusEffectController: {fileID: 3399535082034819387}
+  layerManager: {fileID: 0}
   anchor:
     worldUI: {fileID: 0}
     statusTextUI: {fileID: 0}

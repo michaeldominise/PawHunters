@@ -32,15 +32,16 @@ namespace LabHavenInteractive.PawHunters
             public float specialSkillMax;
         }
 
-        public InstanceData instanceData;
-        public string masterID = "Character.BlackCat";
+        [SerializeField] string masterId = "Character.BlackCat";
+        public string MasterID => masterId;
+
         public int level;
         public Attribute attribute;
 
         [SerializeField] List<string> skillDataMasterIdList;
 
         public RarityType Rarity => level.LevelToRarity();
-        public AssetReferenceMasterID<EntityMainController> PrefabAssetReference => EntityOverview.Instance.GetAsset(masterID);
+        public AssetReferenceMasterID<EntityMainController> PrefabAssetReference => EntityOverview.Instance.GetAsset(MasterID);
         public EntityMainController GetPrefab() => PrefabAssetReference.Asset;
 
         IEnumerable<AssetReferenceMasterID<SkillData>> SkillDataAssetReferenceList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x));

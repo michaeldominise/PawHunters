@@ -7,7 +7,7 @@ namespace LabHavenInteractive.PawHunters
 {
     public abstract class TeamManager : Spawner<EntityMainController>
     {
-        [SerializeField] SaveableTeamData teamData;
+        [SerializeField] protected SaveableTeamData teamData;
         [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
 
         protected abstract int LayerSortingOrder { get; }
@@ -16,14 +16,18 @@ namespace LabHavenInteractive.PawHunters
         public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.IsAlive)?.Select(x => x.entityMainController).ToList();
         public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.IsAlive) != null;
 
-        void Refresh() => Init(teamData);
+        protected virtual void Refresh() => Init(teamData);
         public virtual void Init(SaveableTeamData teamData)
         {
             Clear();
-            SaveableData.Initialize(ref this.teamData, teamData, Refresh);
+            this.teamData = SaveableData.Initialize(ref this.teamData, teamData, Refresh);
 
             for (var x = 0; x < teamData.Characters.Count; x++)
+            {
+                if (teamData.Characters[x] == null)
+                    continue;
                 Spawn(teamData.Characters[x].GetPrefab(), init: entity => EntityInit(x, entity, teamData.Characters[x]));
+            }
         }
 
         public virtual EntityMainController EntityInit(int index, EntityMainController entity, SaveableCharacterData saveableCharacterData)
@@ -54,12 +58,6 @@ namespace LabHavenInteractive.PawHunters
             aliveEntityList.RemoveAt(0);
             for (var x = 0; x < teamManger_EntityParents.Count; x++)
                 teamManger_EntityParents[x].Init(aliveEntityList.Count > x ? aliveEntityList[x] : null);
-        }
-
-        public override void Clear()
-        {
-            spawnedList.ForEach(x => x.Value?.transform.SetParent(transform));
-            base.Clear();
         }
     }
 }

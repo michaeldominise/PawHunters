@@ -7,8 +7,11 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public abstract class SaveableData
+    public abstract class SaveableData : IInstanceData
     {
+        [SerializeField] InstanceData instanceData;
+        public InstanceData InstanceData => instanceData;
+
         static List<Action> OnExecuteUpdateList = new();
         public static void Execute()
         {
@@ -39,7 +42,6 @@ namespace LabHavenInteractive.PawHunters
         {
             oldData?.UnregisterOnValueChange(onValueChange);
             newData?.RegisterOnValueChange(onValueChange);
-            oldData = newData;
             return newData;
         }
     }
@@ -55,5 +57,10 @@ namespace LabHavenInteractive.PawHunters
         }
 
         public void UnloadAssets(AssetType assetType) => GetAssetReference(assetType).ForEach(x => x.Unload());
+    }
+
+    public interface IMasterId
+    {
+        public string MasterId { get; }
     }
 }

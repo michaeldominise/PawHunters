@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -13,18 +14,21 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] FilterType filterType;
         [SerializeField] OrderType orderType = OrderType.Decending;
 
+        public Action<HunterPreviewItem> onItemLoaded;
+        public Action<HunterPreviewItem> onItemClick;
+
+        public override void SetSortedList()
+            => SetSortedList(orderType == OrderType.Acending
+                ? data.items.OrderBy(x => GetFilterValue(x)).ToList()
+                : data.items.OrderByDescending(x => GetFilterValue(x)).ToList());
+
         [Button]
-        protected void SetSortedList(FilterType filterType, OrderType orderType)
+        public void SetSortedList(FilterType filterType, OrderType orderType)
         {
             this.filterType = filterType;
             this.orderType = orderType;
             SetSortedList();
         }
-
-        protected override void SetSortedList()
-            => SetSortedList(orderType == OrderType.Acending
-                ? data.items.OrderBy(x => GetFilterValue(x)).ToList()
-                : data.items.OrderByDescending(x => GetFilterValue(x)).ToList());
 
         public object GetFilterValue(SaveableCharacterData data)
         {
@@ -32,11 +36,18 @@ namespace LabHavenInteractive.PawHunters
             {
                 FilterType.Level => data.level,
                 FilterType.Rarity => data.Rarity,
-                FilterType.DateCreated => data.instanceData.dateCreatedString,
-                FilterType.DateOwned => data.instanceData.dateOwnedString,
+                FilterType.DateCreated => data.InstanceData.dateCreatedString,
+                FilterType.DateOwned => data.InstanceData.dateOwnedString,
                 _ => 0,
             };
             return value;
+        }
+
+        protected override void InitItem(int index, HunterPreviewItem item)
+        {
+            base.InitItem(index, item);
+            item.onClick = onItemClick;
+            item.onLoaded = onItemLoaded;
         }
     }
 }
