@@ -17,7 +17,7 @@ namespace LabHavenInteractive.PawHunters
         }
 
         public static string ProjectId => CloudProjectSettings.projectId;
-        public static string BuildEnvironmentString => CurrentBuildEnvironment.ToString();
+        public static string BuildEnvironmentString => CurrentBuildEnvironment.ToString().ToLower();
         public static EnvironmentData.EnvironmentType CurrentBuildEnvironment => Instance.BuildEnvironment;
         public static EnvironmentData CurrentEnvironment => Instance.environments.FirstOrDefault(x => x.environmentType == CurrentBuildEnvironment);
         public static EnvironmentData.BucketData CurrentBucket => CurrentEnvironment.buckets.FirstOrDefault(x => x.buildTarget == EditorUserBuildSettings.activeBuildTarget);
