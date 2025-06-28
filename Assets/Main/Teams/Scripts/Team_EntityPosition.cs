@@ -17,7 +17,8 @@ namespace LabHavenInteractive.PawHunters
             entityMainController.transform.localPosition = Vector3.zero;
             entityMainController.transform.localRotation = Quaternion.identity;
             entityMainController.transform.localScale = entityMainController.CharacterData.GetPrefab().transform.localScale;
-            entityMainController.transform.DOLocalJump(Vector3.zero, 0.2f, 1, 0.25f).SetDelay(Index * 0.05f);
+            entityMainController.transform.localPosition += Vector3.up * 0.2f;
+            entityMainController.transform.DOLocalMoveY(0, 0.25f).SetDelay(Index * 0.05f).SetEase(Ease.OutBack);
         }
     }
 }
