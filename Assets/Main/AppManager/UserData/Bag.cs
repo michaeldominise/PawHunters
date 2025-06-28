@@ -9,5 +9,6 @@ namespace LabHavenInteractive.PawHunters
         public static Bag Instance => UserData.Instance.bag;
 
         public Collection<SaveableCharacterData> hunterCollection;
+        public Collection<SaveableEquipmentData> equipmentCollection;
     }
 }

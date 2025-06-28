@@ -3,6 +3,20 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
+    [Serializable]
+    public class Attribute
+    {
+        public int health = 100;
+        public int attack = 10;
+        public int defense = 2;
+        public int speed = 3;
+        public float critChance = 0.1f;
+        public float critDamage = 1.2f;
+        public float counterChance = 0.1f;
+        public float comboChance = 0.1f;
+        public float specialSkillMax;
+    }
+
     [System.Serializable]
     public class BattleAttributes
     {
@@ -23,9 +37,9 @@ namespace LabHavenInteractive.PawHunters
         public float HealthPercentage => maxHealth.Value == 0 ? 0 : currentHealth.Value / maxHealth.Value;
 
         public BattleAttributes() { }
-        public BattleAttributes(SaveableCharacterData.Attribute attribute) => Init(attribute);
+        public BattleAttributes(Attribute attribute) => Init(attribute);
 
-        internal void Init(SaveableCharacterData.Attribute attribute)
+        internal void Init(Attribute attribute)
         {
             maxHealth.Reset(attribute.health);
             currentHealth.Reset(attribute.health);

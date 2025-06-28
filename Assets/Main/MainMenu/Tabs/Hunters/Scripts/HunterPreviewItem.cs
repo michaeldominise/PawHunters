@@ -10,7 +10,7 @@ namespace LabHavenInteractive.PawHunters
     {
         public enum State { Selected, NotSelected }
 
-        [SerializeField] SaveableCharacterData.AssetType assetType = SaveableCharacterData.AssetType.character;
+        [SerializeField] SaveableCharacterData.AssetType assetType = SaveableCharacterData.AssetType.Prefab;
         [SerializeField] Transform assetParent;
         [SerializeField] Button button;
         [SerializeField] GameObject selectionBorder;

@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 403047677833993757}
   offset: {x: 5, y: 0, z: 0}
   entityMainController_Team: {fileID: 948133218686175775}
+  executeSkillsOnInit: 1
 --- !u!114 &948133218686175775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +88,7 @@ MonoBehaviour:
     skillDataMasterIdList: []
   element: 0
   avatarSprite: {fileID: 0}
-  teamManager: {fileID: 0}
+  teamManager: {fileID: 7703394419014246015}
   model: {fileID: 0}
   sortingGroup: {fileID: 0}
   entitySkillsController: {fileID: 7642725665870187201}

@@ -1,25 +1,88 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace LabHavenInteractive.PawHunters
 {
     public class TeamManager_Selection : TeamManager
     {
         [SerializeField] int layerSortingOrder = 5;
+        [SerializeField] TMP_InputField teamNameInput;
+        [SerializeField] Button prevTeamButton;
+        [SerializeField] Button nextTeamButton;
+        [SerializeField] SaveableTeamData_CharacterInstance teamDataInstance;
 
         protected override int LayerSortingOrder => layerSortingOrder;
+        public SaveableTeamData_CharacterInstance TeamDataInstance => teamDataInstance;
+        TeamCollection teamCollection;
+        Action onUpdateDetails;
+
+        private void Start()
+        {
+            teamNameInput.onEndEdit.AddListener(TextNameInput_OnUpdate);
+            prevTeamButton.onClick.AddListener(PreviousTeam);
+            nextTeamButton.onClick.AddListener(NextTeam);
+        }
+
+        public void Init(TeamCollection teamCollection, Action onUpdateDetails)
+        {
+            this.teamCollection = teamCollection;
+            this.onUpdateDetails = onUpdateDetails;
+            ReselectTeam();
+        }
 
         protected override void Refresh() { }
 
         public void EntityUnload(EntityMainController entity)
         {
-            entity.CharacterData.UnloadAssets(SaveableCharacterData.AssetType.character);
+            entity.CharacterData.UnloadAssets(SaveableCharacterData.AssetType.Prefab);
             Despawn(entity);
         }
 
         public async void CharacterLoad(int index, SaveableCharacterData characterData)
         {
-            await characterData.LoadAssets(SaveableCharacterData.AssetType.character);
+            await characterData.LoadAssets(SaveableCharacterData.AssetType.Prefab);
             Spawn(characterData.GetPrefab(), init: entity => EntityInit(index, entity, characterData));
         }
+
+        public void ReselectTeam() => SetTeamIndex(teamCollection.SelectedIndex);
+        public void NextTeam() => SetTeamIndex(teamCollection.SelectedIndex + 1);
+        public void PreviousTeam() => SetTeamIndex(teamCollection.SelectedIndex - 1);
+        public void SetTeamIndex(int index)
+        {
+            TeamUnload();
+            teamCollection.SelectedIndex = index;
+            teamDataInstance = SaveableData.Initialize(ref teamDataInstance, teamCollection.SelectedTeamData, OnValueChange);
+            UpdateDetails();
+        }
+
+        public async void UpdateDetails()
+        {
+            teamNameInput.text = TeamDataInstance.teamName;
+            await teamDataInstance.LoadAssets(SaveableTeamData.AssetType.AllPrefabs);
+            Init(teamDataInstance);
+            onUpdateDetails?.Invoke();
+        }
+
+        public void TeamUnload()
+        {
+            Clear();
+            if (TeamDataInstance != null)
+                TeamDataInstance.UnloadAssets(SaveableTeamData.AssetType.AllPrefabs);
+        }
+
+        private void TextNameInput_OnUpdate(string teamName)
+        {
+            TeamDataInstance.teamName = teamName;
+            TeamDataInstance.SetDirty();
+        }
+
+        void OnValueChange()
+        {
+
+        }
+
+        private void OnDestroy() => TeamUnload();
     }
 }

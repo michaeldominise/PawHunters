@@ -41,8 +41,8 @@ namespace LabHavenInteractive.PawHunters
                 base.End();
         }
 
-        public override async Task LoadAssets() => await teamData.LoadAssets(SaveableCharacterData.AssetType.all);
-        public override void UnloadAssets() => teamData.UnloadAssets(SaveableCharacterData.AssetType.all);
+        public override async Task LoadAssets() => await teamData.LoadAssets(SaveableTeamData.AssetType.All);
+        public override void UnloadAssets() => teamData.UnloadAssets(SaveableTeamData.AssetType.All);
 
     }
 }

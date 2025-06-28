@@ -27,8 +27,22 @@ namespace LabHavenInteractive.PawHunters
         {
             base.Init(teamData);
             EntityMainController_Team.Init(this);
-            if(executeSkillsOnInit)
+            InitEquipments();
+
+            if (executeSkillsOnInit)
                 _ = ExecuteSkills(GameActionTriggersManager.TriggerType.SetupPhase);
+        }
+
+        void InitEquipments()
+        {
+            var skillList = new List<SkillData>();
+            teamData.Equipments.ForEach(x =>
+            {
+                if (x == null)
+                    return;
+                foreach (var skillData in x.SkillDataList)
+                    entityMainController_Team.EntitySkillsController.AddSkill(skillData);
+            });
         }
 
         [Button]

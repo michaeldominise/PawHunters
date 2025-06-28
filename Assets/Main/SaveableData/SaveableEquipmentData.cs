@@ -7,7 +7,7 @@ using UnityEngine;
 namespace LabHavenInteractive.PawHunters
 {
     [Serializable]
-    public class SaveableCharacterData : SaveableData<SaveableCharacterData.AssetType>
+    public class SaveableEquipmentData : SaveableData<SaveableEquipmentData.AssetType>
     {
         [Flags]
         public enum AssetType
@@ -16,6 +16,13 @@ namespace LabHavenInteractive.PawHunters
             Prefab = 1 << 0,
             Skills = 1 << 1,
             All = (1 << 30) - 1
+        }
+
+        [Flags]
+        public enum CategoryType
+        {
+            none,
+            weapon,
         }
 
         [SerializeField] string masterId = "Character.BlackCat";

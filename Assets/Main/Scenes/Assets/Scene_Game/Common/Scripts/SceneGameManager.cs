@@ -31,7 +31,7 @@ namespace LabHavenInteractive.PawHunters
         {
             await StageDataAssetReference.Load();
             await StageData.data.LoadAssets(StageData.AssetType.all);
-            await PlayerTeamData.LoadAssets(SaveableCharacterData.AssetType.all);
+            await PlayerTeamData.LoadAssets(SaveableTeamData.AssetType.All);
             EnvironmentManager.Instance.Init(StageData.data.environmentItem.Asset);
             JourneyUIManager.Instance.Init(StageData);
             TeamManager_GamePlayer.Instance.Init(PlayerTeamData);
@@ -71,7 +71,7 @@ namespace LabHavenInteractive.PawHunters
             if (StageData == null)
                 return;
             StageData.data.UnloadAssets(StageData.AssetType.all);
-            PlayerTeamData.UnloadAssets(SaveableCharacterData.AssetType.all);
+            PlayerTeamData.UnloadAssets(SaveableTeamData.AssetType.All);
             AppManager.Instance.userData.battleData.huntStageData.Unload();
         }
     }
