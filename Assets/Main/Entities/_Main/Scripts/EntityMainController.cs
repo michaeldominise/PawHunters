@@ -84,9 +84,6 @@ namespace LabHavenInteractive.PawHunters
 
             entitySkillsController.CurrentState.RegisterListener(CheckState);
             entityHealthController.CurrentState.RegisterListener(CheckState);
-
-            if (TeamManager_Game)
-                TeamManager_Game.CurrentState.RegisterListener(CheckState);
         }
 
         public void CheckState()

@@ -332,6 +332,10 @@ PrefabInstance:
       propertyPath: offset.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5107095069872096143, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
+      propertyPath: executeSkillsOnInit
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8864679463535306619, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

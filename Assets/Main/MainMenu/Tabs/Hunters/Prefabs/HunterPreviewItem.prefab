@@ -422,7 +422,7 @@ MonoBehaviour:
   type: 0
   graphics:
   - {fileID: 5806620108284417926}
-  alpha: 0.5
+  alpha: 0.7
 --- !u!1 &6555807162206172975
 GameObject:
   m_ObjectHideFlags: 0

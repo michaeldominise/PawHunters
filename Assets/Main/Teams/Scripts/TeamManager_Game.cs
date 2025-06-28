@@ -13,6 +13,7 @@ namespace LabHavenInteractive.PawHunters
     {
         public Vector3 offset;
         [SerializeField] EntityMainController_Team entityMainController_Team;
+        [SerializeField] bool executeSkillsOnInit = true;
         [ShowInInspector, ReadOnly] public StateController<StateSpeed.State> CurrentState { get; private set; } = new();
 
         protected override int LayerSortingOrder => EnvironmentManager.Instance.GroundOrderInLayer;
@@ -26,11 +27,17 @@ namespace LabHavenInteractive.PawHunters
         {
             base.Init(teamData);
             EntityMainController_Team.Init(this);
-            _ = ExecuteSkills(GameActionTriggersManager.TriggerType.SetupPhase);
+            if(executeSkillsOnInit)
+                _ = ExecuteSkills(GameActionTriggersManager.TriggerType.SetupPhase);
         }
 
         [Button]
-        public virtual void SetState(StateSpeed.State state) => CurrentState.Value = state;
+        public virtual void SetState(StateSpeed.State state)
+        {
+            CurrentState.Value = state;
+            activeList.ForEach(x => x.CheckState());
+        }
+
         void Update()
         { 
             if (CurrentState.Value == StateSpeed.State.Idle)

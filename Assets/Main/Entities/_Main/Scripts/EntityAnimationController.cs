@@ -28,10 +28,12 @@ namespace LabHavenInteractive.PawHunters
                 behaviour.Init(this);
         }
 
+        private void OnEnable() => SetState(CurrentState.Value, force: true);
+
         [Button]
-        public void SetState(State state, float delay = 0)
+        public void SetState(State state, float delay = 0, bool force = false)
         {
-            if (!gameObject.activeInHierarchy)
+            if (!gameObject.activeInHierarchy || (!force && CurrentState.Value == state))
                 return;
             StopAllCoroutines();
             StartCoroutine(_SetState(state, delay));
@@ -39,11 +41,9 @@ namespace LabHavenInteractive.PawHunters
 
         IEnumerator _SetState(State state, float delay = 0)
         {
-            if (CurrentState.Value == state)
-                yield break;
-
             SetHead(0);
-            yield return new WaitForSeconds(delay);
+            if(delay > 0)
+                yield return new WaitForSeconds(delay);
 
             animator.SetInteger("State", (int)state);
             CurrentState.Value = state;
