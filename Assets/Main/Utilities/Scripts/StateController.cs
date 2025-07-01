@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
@@ -57,5 +58,20 @@ namespace LabHavenInteractive.PawHunters
             OnStateUpdateVoid -= onValueChange;
             return this;
         }
+    }
+
+    [Serializable]
+    public class StateObjects<State> where State : Enum
+    {
+        [Serializable]
+        public class Data
+        {
+            public GameObject item;
+            public List<State> states;
+        }
+
+        public List<Data> dataList;
+
+        public void SetActive(State state) => dataList.ForEach(x => x.item.SetActive(x.states.FindIndex(x => x.Equals(state)) >= 0)); 
     }
 }

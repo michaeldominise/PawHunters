@@ -3,6 +3,11 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
+    public interface IAttribute
+    {
+        public Attribute Attribute { get; }
+    }
+
     [Serializable]
     public class Attribute
     {

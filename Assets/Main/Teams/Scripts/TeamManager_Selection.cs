@@ -12,9 +12,11 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] Button prevTeamButton;
         [SerializeField] Button nextTeamButton;
         [SerializeField] SaveableTeamData_CharacterInstance teamDataInstance;
+        [SerializeField] EquipmentSlotManager equipmentSlotManager;
 
-        protected override int LayerSortingOrder => layerSortingOrder;
         public SaveableTeamData_CharacterInstance TeamDataInstance => teamDataInstance;
+        public EquipmentSlotManager EquipmentSlotManager => equipmentSlotManager;
+        protected override int LayerSortingOrder => layerSortingOrder;
         TeamCollection teamCollection;
         Action onUpdateDetails;
 
@@ -29,6 +31,7 @@ namespace LabHavenInteractive.PawHunters
         {
             this.teamCollection = teamCollection;
             this.onUpdateDetails = onUpdateDetails;
+
             ReselectTeam();
         }
 
@@ -36,13 +39,13 @@ namespace LabHavenInteractive.PawHunters
 
         public void EntityUnload(EntityMainController entity)
         {
-            entity.CharacterData.UnloadAssets(SaveableCharacterData.AssetType.Prefab);
+            entity.Data.UnloadAssets(SaveableDataEntity.AssetType.Prefab);
             Despawn(entity);
         }
 
         public async void CharacterLoad(int index, SaveableCharacterData characterData)
         {
-            await characterData.LoadAssets(SaveableCharacterData.AssetType.Prefab);
+            await characterData.LoadAssets(SaveableDataEntity.AssetType.Prefab);
             Spawn(characterData.GetPrefab(), init: entity => EntityInit(index, entity, characterData));
         }
 
@@ -60,6 +63,8 @@ namespace LabHavenInteractive.PawHunters
         public async void UpdateDetails()
         {
             teamNameInput.text = TeamDataInstance.teamName;
+            equipmentSlotManager.Init(teamDataInstance);
+
             await teamDataInstance.LoadAssets(SaveableTeamData.AssetType.AllPrefabs);
             Init(teamDataInstance);
             onUpdateDetails?.Invoke();

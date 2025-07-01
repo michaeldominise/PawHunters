@@ -14,8 +14,8 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] FilterType filterType;
         [SerializeField] OrderType orderType = OrderType.Decending;
 
-        public Action<HunterPreviewItem> onItemLoaded;
-        public Action<HunterPreviewItem> onItemClick;
+        public Action<EntityPreviewItem<SaveableCharacterData>> onItemLoaded;
+        public Action<EntityPreviewItem<SaveableCharacterData>> onItemClick;
 
         public override void SetSortedList()
             => SetSortedList(orderType == OrderType.Acending

@@ -2,17 +2,15 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    [CreateAssetMenu(fileName = "EntityOverview", menuName = "GameData/Overviews/EntityOverview")]
-    public class EntityOverview : DataOverview<EntityMainController>
+    public abstract class EntityOverview<EntityMainControllerType> : DataOverview<EntityMainController>
+        where EntityMainControllerType : EntityMainController
     {
-        public static EntityOverview Instance => MasterIDManager.Instance.entityOverview;
-
         protected override bool IsValid(string guid)
         {
 #if UNITY_EDITOR
             var path = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
             var prefab = UnityEditor.AssetDatabase.LoadAssetAtPath<GameObject>(path);
-            return prefab != null && prefab.GetComponentInChildren<EntityMainController>(true) != null;
+            return prefab != null && prefab.GetComponentInChildren<EntityMainControllerType>(true) != null;
 #else
             return base.IsValid(guid);
 #endif

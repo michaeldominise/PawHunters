@@ -51,8 +51,8 @@ namespace LabHavenInteractive.PawHunters
             activeList.Clear();
             spawnedList.ForEach(x =>
             {
-                x.Value?.transform?.SetParent(spawnParent);
-                x.Value?.gameObject?.SetActive(false);
+                x.Value.transform.SetParent(spawnParent);
+                x.Value.gameObject.SetActive(false);
             });
         }
     }

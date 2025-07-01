@@ -12,6 +12,7 @@ namespace LabHavenInteractive.PawHunters
     {
         [SerializeField] TeamManager_Selection teamManager_Selection;
         [SerializeField] HuntersTab huntersTab;
+        [SerializeField] EquipmentsTab equipmentsTab;
         [SerializeField] GameObject tabs;
 
         public TeamCollection TeamCollection => UserData.Instance.teamCollection;
@@ -27,17 +28,30 @@ namespace LabHavenInteractive.PawHunters
         void Init()
         {
             huntersTab.Init(HunterPreviewItem_OnLoaded);
+            equipmentsTab.Init(EquipmentPreviewItem_OnLoaded);
             teamManager_Selection.Init(TeamCollection, huntersTab.Refresh);
             tabs.SetActive(true);
         }
 
-        private void HunterPreviewItem_OnLoaded(HunterPreviewItem item)
+        private void EquipmentPreviewItem_OnLoaded(EntityPreviewItem<SaveableEquipmentData> item)
         {
-            item.SetState(TeamDataInstance.characterInstanceList.FirstOrDefault(x => x.instanceId == item.Asset.CharacterData.InstanceData.instanceId) != null ? HunterPreviewItem.State.Selected : HunterPreviewItem.State.NotSelected);
+            item.SetState(TeamDataInstance.equipmentInstanceList.FirstOrDefault(x => x.instanceId == item.Asset.Data.InstanceData.instanceId) != null ? EquipmentPreviewItem.State.Selected : EquipmentPreviewItem.State.NotSelected);
+            item.onClick = EquipmentPreviewItem_OnClick;
+        }
+
+        private void HunterPreviewItem_OnLoaded(EntityPreviewItem<SaveableCharacterData> item)
+        {
+            item.SetState(TeamDataInstance.characterInstanceList.FirstOrDefault(x => x.instanceId == item.Asset.Data.InstanceData.instanceId) != null ? HunterPreviewItem.State.Selected : HunterPreviewItem.State.NotSelected);
             item.onClick = HunterPreviewItem_OnClick;
         }
 
-        private void HunterPreviewItem_OnClick(HunterPreviewItem item)
+        private void EquipmentPreviewItem_OnClick(EntityPreviewItem<SaveableEquipmentData> item)
+        {
+            if (!teamManager_Selection.EquipmentSlotManager.Equip(item.Data))
+                item.SetState(EntityPreviewItem<SaveableEquipmentData>.State.NotSelected);
+        }
+
+        private void HunterPreviewItem_OnClick(EntityPreviewItem<SaveableCharacterData> item)
         {
             if (item.CurrentState.Value == HunterPreviewItem.State.Selected)
             {
@@ -49,13 +63,13 @@ namespace LabHavenInteractive.PawHunters
                 }
                 else
                 {
-                    TeamDataInstance.characterInstanceList[slotIndex].instanceId = item.Asset.CharacterData.InstanceData.instanceId;
-                    teamManager_Selection.CharacterLoad(slotIndex, item.Asset.CharacterData);
+                    TeamDataInstance.characterInstanceList[slotIndex].instanceId = item.Asset.Data.InstanceData.instanceId;
+                    teamManager_Selection.CharacterLoad(slotIndex, item.Asset.Data as SaveableCharacterData);
                 }
             }
             else
             { 
-                var slotIndex = TeamDataInstance.characterInstanceList.FindIndex(x => x.instanceId == item.Asset.CharacterData.InstanceData.instanceId);
+                var slotIndex = TeamDataInstance.characterInstanceList.FindIndex(x => x.instanceId == item.Asset.Data.InstanceData.instanceId);
                 TeamDataInstance.characterInstanceList[slotIndex].instanceId = -1;
                 teamManager_Selection.EntityUnload(teamManager_Selection.AliveEntityList[slotIndex]);
             }

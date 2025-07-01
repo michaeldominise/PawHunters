@@ -15,4 +15,5 @@ MonoBehaviour:
   skillDataOverview: {fileID: 11400000, guid: 512fb605fa9f54f72b7869b9c3177a21, type: 2}
   stageDataOverview: {fileID: 11400000, guid: 6c9443251caaf4dbbabd25cbf4343832, type: 2}
   skillDataOverview_TeamSkill: {fileID: 11400000, guid: b8e2ab4a5a67e477899b9d8aad311892, type: 2}
-  entityOverview: {fileID: 11400000, guid: bab9637a4fee94fcfa5304c692e9fdf6, type: 2}
+  characterEntityOverview: {fileID: 11400000, guid: 0d4a5e206ea3e4b1a971e6296b680181, type: 2}
+  equipmentEntityOverview: {fileID: 11400000, guid: 90c89de4cfc21487193f4a7df638e475, type: 2}

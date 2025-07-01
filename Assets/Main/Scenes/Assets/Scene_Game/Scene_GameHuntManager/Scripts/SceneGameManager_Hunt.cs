@@ -14,7 +14,7 @@ namespace LabHavenInteractive.PawHunters
         public List<AssetReferenceMasterID<SkillData>> TeamSkillsAssetReference => SkillDataOverview_TeamSkill.Instance.dataList;
         public List<SkillData> TeamSkills => SkillDataOverview_TeamSkill.Instance.dataList.Select(x => x.Asset).ToList();
 
-        protected override AssetReferenceMasterID<StageData> StageDataAssetReference => AppManager.Instance.userData.battleData.huntStageData;
+        protected override AssetReferenceMasterID<StageData> StageDataAssetReference => AppManager.Instance?.userData.battleData.huntStageData;
 
         protected override void Awake()
         {

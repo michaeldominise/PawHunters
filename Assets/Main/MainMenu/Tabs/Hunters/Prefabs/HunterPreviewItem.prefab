@@ -234,6 +234,7 @@ MonoBehaviour:
   assetType: 1
   assetParent: {fileID: 3221168401274873546}
   button: {fileID: 5561185107493052173}
+  normalBorder: {fileID: 4015503670698868895}
   selectionBorder: {fileID: 6396603786713212224}
   rarityUIList:
   - {fileID: 4859197067199777268}
@@ -252,7 +253,7 @@ GameObject:
   - component: {fileID: 2279076395791594510}
   - component: {fileID: 7519178931705329060}
   m_Layer: 5
-  m_Name: LightBorder
+  m_Name: NormalBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,7 +423,7 @@ MonoBehaviour:
   type: 0
   graphics:
   - {fileID: 5806620108284417926}
-  alpha: 0.7
+  alpha: 1
 --- !u!1 &6555807162206172975
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +437,7 @@ GameObject:
   - component: {fileID: 5292986688553887655}
   - component: {fileID: 4859197067199777268}
   m_Layer: 5
-  m_Name: Banner
+  m_Name: Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

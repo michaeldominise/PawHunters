@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9826a62ab10ec427cb5cbb778ebcab8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollRectPoolHandler_Hunters: {fileID: 7730300347430825909}
+  scrollRectPoolHandler: {fileID: 7730300347430825909}
 --- !u!1 &4249735430813339351
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,8 +326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -32.5}
-  m_SizeDelta: {x: -20, y: -65}
+  m_AnchoredPosition: {x: 0, y: -37.5}
+  m_SizeDelta: {x: -20, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7385509255972943665
 CanvasRenderer:
@@ -469,8 +469,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 710, y: -0}
-  m_SizeDelta: {x: 1420, y: 0}
+  m_AnchoredPosition: {x: 431.38757, y: -0}
+  m_SizeDelta: {x: 862.77515, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3714568472435601841
 CanvasRenderer:

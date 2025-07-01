@@ -8,6 +8,8 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] int index;
         [ShowInInspector, ReadOnly] protected T data;
 
+        public T Data => data;
+
         public virtual void Refresh() => Init(index, data);
         public virtual void Init(int index, T data)
         {
@@ -18,9 +20,9 @@ namespace LabHavenInteractive.PawHunters
             Load();
         }
 
-        protected virtual void Load() { }
+        public virtual void Load() { }
 
-        protected virtual void Unload() { }
+        public virtual void Unload() { }
 
         private void OnDestroy() => Unload();
     }

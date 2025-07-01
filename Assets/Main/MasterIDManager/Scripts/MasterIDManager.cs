@@ -10,6 +10,7 @@ namespace LabHavenInteractive.PawHunters
         public SkillDataOverview skillDataOverview;
         public StageDataOverview stageDataOverview;
         public SkillDataOverview_TeamSkill skillDataOverview_TeamSkill;
-        public EntityOverview entityOverview;
+        public CharacterEntityOverview characterEntityOverview;
+        public EquipmentEntityOverview equipmentEntityOverview;
     }
 }

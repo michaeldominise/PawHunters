@@ -26,17 +26,22 @@ namespace LabHavenInteractive.PawHunters
             }
         }
 
-        public static void AddAssetReferences(IAssetReferenceMasterID iAssetReference, Object asset) => ActiveAssetReferences.Add(new(iAssetReference, asset));
+        public static void AddAssetReferences(IAssetReferenceMasterID iAssetReference, Object asset)
+        {
+            if (ActiveAssetReferences.Exists(x => x.iAssetReference == iAssetReference))
+                return;
+            ActiveAssetReferences.Add(new(iAssetReference, asset));
+        }
         public static void RemoveAssetReferences(IAssetReferenceMasterID iAssetReference) => ActiveAssetReferences.Remove(ActiveAssetReferences.FirstOrDefault(x => x.iAssetReference == iAssetReference));
 
         //private void OnDestroy() => UnloadActiveAssets();
         [Button, BoxGroup("Active Asset References", ShowLabel = false)]
         private void UnloadActiveAssets()
         {
-            while (ActiveAssetReferences.Count > 0)
+            foreach (var activeAssetReference in ActiveAssetReferences)
             {
-                ActiveAssetReferences[0].iAssetReference.UsageCount = 1;
-                ActiveAssetReferences[0].iAssetReference.Unload();
+                activeAssetReference.iAssetReference.UsageCount = 1;
+                activeAssetReference.iAssetReference.Unload();
             }
             ActiveAssetReferences.Clear();
         }

@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ff079672ba0a4c68a4743ce68d00d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnParent: {fileID: 8864679463535306619}
+  spawnParent: {fileID: 4688722160594464800}
   teamManger_EntityParents:
   - {fileID: 4906769701895701549}
   - {fileID: 1453192005283194253}
@@ -147,24 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67e118ea92f1e4bc698ebe5882a18006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterData:
-    instanceData:
-      instanceId: 1751048631048
-      dateCreatedString: 2025/06/28 02:23:50
-      dateOwnedString: 2025/06/28 02:23:50
-    masterId: Character.BlackCat
-    level: 0
-    attribute:
-      health: 100
-      attack: 10
-      defense: 2
-      speed: 3
-      critChance: 0.1
-      critDamage: 1.2
-      counterChance: 0.1
-      comboChance: 0.1
-      specialSkillMax: 0
-    skillDataMasterIdList: []
   element: 0
   avatarSprite: {fileID: 0}
   teamManager: {fileID: 5107095069872096143}

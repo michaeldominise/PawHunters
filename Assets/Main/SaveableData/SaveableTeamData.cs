@@ -30,17 +30,17 @@ namespace LabHavenInteractive.PawHunters
         public override List<IAssetReferenceMasterID> GetAssetReference(AssetType assetType)
         {
             var list = new List<IAssetReferenceMasterID>();
-            var characterAssetType = SaveableCharacterData.AssetType.None;
+            var characterAssetType = SaveableDataEntity.AssetType.None;
             if (assetType.HasFlag(AssetType.CharacterPrefab))
-                characterAssetType |= SaveableCharacterData.AssetType.Prefab;
+                characterAssetType |= SaveableDataEntity.AssetType.Prefab;
             if (assetType.HasFlag(AssetType.CharacterSkills))
-                characterAssetType |= SaveableCharacterData.AssetType.Skills;
+                characterAssetType |= SaveableDataEntity.AssetType.Skills;
 
-            var equipmentAssetType = SaveableEquipmentData.AssetType.None;
+            var equipmentAssetType = SaveableDataEntity.AssetType.None;
             if (assetType.HasFlag(AssetType.EquipmentPrefab))
-                equipmentAssetType |= SaveableEquipmentData.AssetType.Prefab;
+                equipmentAssetType |= SaveableDataEntity.AssetType.Prefab;
             if (assetType.HasFlag(AssetType.EquipmentSkills))
-                equipmentAssetType |= SaveableEquipmentData.AssetType.Skills;
+                equipmentAssetType |= SaveableDataEntity.AssetType.Skills;
 
             Characters.Where(x => x != null).ToList().ForEach(x => list.AddRange(x.GetAssetReference(characterAssetType)));
             Equipments.Where(x => x != null).ToList().ForEach(x => list.AddRange(x.GetAssetReference(equipmentAssetType)));

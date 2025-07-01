@@ -179,6 +179,14 @@ MonoBehaviour:
         - instanceId: 105
         - instanceId: -1
         - instanceId: -1
+        equipmentInstanceList:
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
       - instanceData:
           instanceId: 1751060010178
           dateCreatedString: 2025/06/28 05:33:29
@@ -188,12 +196,28 @@ MonoBehaviour:
         - instanceId: -1
         - instanceId: -1
         - instanceId: -1
+        equipmentInstanceList:
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
       - instanceData:
           instanceId: 1751060012492
           dateCreatedString: 2025/06/28 05:33:32
           dateOwnedString: 2025/06/28 05:33:32
         teamName: Sub Pact 2
         characterInstanceList:
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        equipmentInstanceList:
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
+        - instanceId: -1
         - instanceId: -1
         - instanceId: -1
         - instanceId: -1
@@ -1048,6 +1072,29 @@ MonoBehaviour:
             dateOwnedString: 2025/06/27 23:45:32
           masterId: Character.BlackCat
           level: 51
+          attribute:
+            health: 100
+            attack: 10
+            defense: 2
+            speed: 3
+            critChance: 0.1
+            critDamage: 1.2
+            counterChance: 0.1
+            comboChance: 0.1
+            specialSkillMax: 0
+          skillDataMasterIdList: []
+      equipmentCollection:
+        instanceData:
+          instanceId: 1751257450321
+          dateCreatedString: 2025/06/30 12:24:10
+          dateOwnedString: 2025/06/30 12:24:10
+        items:
+        - instanceData:
+            instanceId: 1751261798040
+            dateCreatedString: 2025/06/30 13:36:37
+            dateOwnedString: 2025/06/30 13:36:37
+          masterId: Equipment.Test
+          level: 6
           attribute:
             health: 100
             attack: 10

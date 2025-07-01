@@ -8,7 +8,7 @@ namespace LabHavenInteractive.PawHunters
     public abstract class TeamManager : Spawner<EntityMainController>
     {
         [SerializeField] protected SaveableTeamData teamData;
-        [SerializeField] List<TeamManger_EntityParent> teamManger_EntityParents;
+        [SerializeField] List<TeamManager_EntityParent> teamManger_EntityParents;
 
         protected abstract int LayerSortingOrder { get; }
 

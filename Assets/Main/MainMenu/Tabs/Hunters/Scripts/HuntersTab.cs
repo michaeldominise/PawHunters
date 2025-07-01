@@ -6,16 +6,16 @@ namespace LabHavenInteractive.PawHunters
 {
     public class HuntersTab : MonoBehaviour
     {
-        [SerializeField] ScrollRectPoolHandler_Hunters scrollRectPoolHandler_Hunters;
+        [SerializeField] ScrollRectPoolHandler_Hunters scrollRectPoolHandler;
 
         private IEnumerator Start()
         {
             yield return null;
             yield return null;
-            scrollRectPoolHandler_Hunters.Init(Bag.Instance.hunterCollection);   
+            scrollRectPoolHandler.Init(Bag.Instance.hunterCollection);   
         }
 
-        public void Init(Action<HunterPreviewItem> onItemLoaded) => scrollRectPoolHandler_Hunters.onItemLoaded = onItemLoaded;
-        public void Refresh() => scrollRectPoolHandler_Hunters.SetSortedList();
+        public void Init(Action<EntityPreviewItem<SaveableCharacterData>> onItemLoaded) => scrollRectPoolHandler.onItemLoaded = onItemLoaded;
+        public void Refresh() => scrollRectPoolHandler.SetSortedList();
     }
 }

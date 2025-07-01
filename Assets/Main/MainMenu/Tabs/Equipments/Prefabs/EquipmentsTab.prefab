@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -32.5}
-  m_SizeDelta: {x: -20, y: -65}
+  m_AnchoredPosition: {x: 0, y: -37.5}
+  m_SizeDelta: {x: -20, y: -75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6482097151170316919
 CanvasRenderer:
@@ -132,11 +132,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 325578216408391740}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb0ebf178b61442768df8d9b569628e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 4af7095e72461452c95ab5fc04d75997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParent: {fileID: 8413659261216480286}
-  prefab: {fileID: -531529747225003543, guid: a649df52baabf4ca4921306b3cf71ce3, type: 3}
+  prefab: {fileID: 7154379279911094253, guid: 198db4bd20c4842b590afc4bfb601cda, type: 3}
   scrollRect: {fileID: 4165458521175833787}
   layoutGroup: {fileID: 2034058899260871818}
   filler: {fileID: 5296695079758766306}
@@ -233,6 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4784511607639770032}
+  - component: {fileID: 362263906992347366}
   m_Layer: 5
   m_Name: EquipmentsTab
   m_TagString: Untagged
@@ -261,6 +262,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &362263906992347366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978265696445356932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b74e5ac7fef694bc8bca1f66e3056de6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollRectPoolHandler: {fileID: 6110289304523969267}
 --- !u!1 &2924706297291923536
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,10 +500,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6078654467674962061}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 427.83783, y: 0}
-  m_SizeDelta: {x: 855.67566, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6628399107552501548
 GameObject:
@@ -527,8 +541,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 427.83783, y: -0}
-  m_SizeDelta: {x: 855.67566, y: 0}
+  m_AnchoredPosition: {x: 439.99997, y: -0}
+  m_SizeDelta: {x: 879.99994, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &866763512416292087
 CanvasRenderer:
@@ -602,7 +616,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 250, y: 250}
+  m_CellSize: {x: 150, y: 150}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2

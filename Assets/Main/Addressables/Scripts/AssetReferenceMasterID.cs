@@ -74,6 +74,7 @@ namespace LabHavenInteractive.PawHunters
             if (Asset)
             {
                 UsageCount++;
+                AppManager.AddAssetReferences(this, Asset);
                 return Asset;
             }
 
@@ -90,8 +91,7 @@ namespace LabHavenInteractive.PawHunters
             else
                 return null;
 
-            if (UsageCount == 1)
-                AppManager.AddAssetReferences(this, Asset);
+            AppManager.AddAssetReferences(this, Asset);
             return Asset;
         }
 
