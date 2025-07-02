@@ -10,6 +10,7 @@ namespace LabHavenInteractive.PawHunters
     {
         public static ExpUIManager Instance { get; private set; }
 
+        [SerializeField] GameObject container;
         [SerializeField] float level;
         [SerializeField] float currentValue;
 
@@ -24,8 +25,11 @@ namespace LabHavenInteractive.PawHunters
         private IEnumerator Start()
         {
             yield return null;
+            BattleManager.Instance.CurrentState.RegisterListener(BattleManager_OnStateValueChange);
             Refresh();
         }
+
+        private void BattleManager_OnStateValueChange(BattleManager.State state) => container.SetActive(state == BattleManager.State.None);
 
         public void AddExp(int value, Action onFinish = null)
         {

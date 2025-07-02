@@ -15,11 +15,6 @@ MonoBehaviour:
   m_GroupName: SharedAssets
   m_GUID: 723488a33bf224513b0cfd0f7a49ddfc
   m_SerializeEntries:
-  - m_GUID: 1bb134c117b2e4104a1369d494138817
-    m_Address: Assets/Main/WorldObjects/Entities/Equipments/Equipment.Weapon/Prefabs/Equipment.Weapon.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 512fb605fa9f54f72b7869b9c3177a21
     m_Address: Assets/Main/MasterIDManager/ScriptableObjects/SkillDataOverview.asset
     m_ReadOnly: 0

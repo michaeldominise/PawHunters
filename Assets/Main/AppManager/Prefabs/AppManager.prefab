@@ -1107,7 +1107,8 @@ MonoBehaviour:
             counterChance: 0.1
             comboChance: 0.1
             specialSkillMax: 0
-          skillDataMasterIdList: []
+          skillDataMasterIdList:
+          - SkillData_TeamSkill_IncreaseAttack
 --- !u!114 &6552250165178000997
 MonoBehaviour:
   m_ObjectHideFlags: 0

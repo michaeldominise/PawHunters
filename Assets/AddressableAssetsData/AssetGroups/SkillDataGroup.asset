@@ -50,6 +50,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee323d941d8c74711b903177d7353445
+    m_Address: Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/TeamSkills/SkillData_TeamSkill_IncreaseAttack.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fb6dd4752a28348f6aaf376c782791d2
     m_Address: Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/TeamSkills/SkillData_TeamSkill_Heal.prefab
     m_ReadOnly: 0

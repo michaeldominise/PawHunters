@@ -1,0 +1,210 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3013112964061770568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1222193199847053492}
+  - component: {fileID: 5757460704594295366}
+  m_Layer: 0
+  m_Name: SkillTargetData_Allies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1222193199847053492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013112964061770568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1076070204815484032}
+  m_Father: {fileID: 1203930370509765833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5757460704594295366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013112964061770568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d492d83ca08d947bea4b2488b081b343, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusEffects:
+  - {fileID: 1220705546881072608}
+  targetGroupType: 1
+  groupOrderType: 0
+  healthStatusType: 1
+  targetCount: 100
+  executeSkillVFX: []
+  customConditions: []
+--- !u!1 &6187895121218135764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1203930370509765833}
+  - component: {fileID: 7754968525061356826}
+  m_Layer: 0
+  m_Name: SkillData_TeamSkill_IncreaseAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1203930370509765833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187895121218135764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1222193199847053492}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7754968525061356826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6187895121218135764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68de5fc8cd9fa43ca826fbb94bee366e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Increase Attack
+  familyName: 
+  description: Increase attack by 7%
+  icon: {fileID: 0}
+  rarity: 0
+  trigger: 128
+  skillTargets:
+  - {fileID: 5757460704594295366}
+  customConditions: []
+--- !u!1001 &6695229114955452022
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1222193199847053492}
+    m_Modifications:
+    - target: {fileID: 745311320287507328, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_Name
+      value: StatusEffectData_AttributeUpdate_IncreaseAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: title
+      value: Decrease Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: baseValue
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: modifierType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: targetAttribute
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: valueModifiers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: valueModifiers.Array.data[0].modifierType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: valueModifiers.Array.data[0].attributeData
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+--- !u!4 &1076070204815484032 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5910063352296336118, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+  m_PrefabInstance: {fileID: 6695229114955452022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1220705546881072608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5483953134452880278, guid: f24fc358963a04eb299eec9a8ad4e28c, type: 3}
+  m_PrefabInstance: {fileID: 6695229114955452022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d581988e30c1546418abc4a409813fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

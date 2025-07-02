@@ -55,9 +55,18 @@ MonoBehaviour:
       m_SubObjectType: 
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
+  - masterID: SkillData_TeamSkill_IncreaseAttack
+    assetReference:
+      m_AssetGUID: ee323d941d8c74711b903177d7353445
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
   folderPaths:
   - Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/_Test
   - Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/CharacterSkills
+  - Assets/Main/WorldObjects/Skills/Prefabs/_SkillData/WeaponSkills
   folderAssets:
   - {fileID: 102900000, guid: f4b470452a6754e81b6a4f8719968c3e, type: 3}
   - {fileID: 102900000, guid: fe53bb4e94cbd4f6f91bdbe1f2a5f530, type: 3}
+  - {fileID: 102900000, guid: 4172052d10de44ef9a81fc400d73d95f, type: 3}
