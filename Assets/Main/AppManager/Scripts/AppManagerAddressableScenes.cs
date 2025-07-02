@@ -10,7 +10,12 @@ namespace LabHavenInteractive.PawHunters
         AssetReferenceScene currentSceneAssetReference;
         AsyncOperationHandle<UnityEngine.ResourceManagement.ResourceProviders.SceneInstance> sceneLoadOperation;
 
-        public AsyncOperationHandle Reload() => LoadScene(currentSceneAssetReference);
+        public AsyncOperationHandle Reload()
+        {
+            currentSceneAssetReference.ReleaseAsset();
+            return LoadScene(currentSceneAssetReference);
+        }
+
         public AsyncOperationHandle LoadScene(AssetReferenceScene sceneAssetReference, LoadSceneMode loadSceneMode = LoadSceneMode.Single, TransitionType transitionType = TransitionType.ShowThenHide)
         {
             currentSceneAssetReference = sceneAssetReference;

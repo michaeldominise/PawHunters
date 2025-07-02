@@ -517,6 +517,7 @@ MonoBehaviour:
   - {fileID: 8254093158811477171}
   - {fileID: 5861758538924738700}
   - {fileID: 2765570848696231919}
+  assetType: 1073741813
   layerSortingOrder: 5
   teamNameInput: {fileID: 1839497094675884846}
   prevTeamButton: {fileID: 6505128144818414344}

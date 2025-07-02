@@ -20,9 +20,9 @@ namespace LabHavenInteractive.PawHunters
 
         public override void Execute() => JourneyButtons.Instance.Init(response => Battle(), ButtonLabel);
 
-        void Battle()
+        async void Battle()
         {
-            TeamManager_GameEnemy.Instance.SpawnEnemy(teamData);
+            await TeamManager_GameEnemy.Instance.SpawnEnemy(teamData);
 
             TeamManager_Game movingTeam = transitionToBattleType == TransitionToBattleType.PlayerRunToEnemy ? TeamManager_GamePlayer.Instance : TeamManager_GameEnemy.Instance;
             TeamManager_Game targetTeam = transitionToBattleType == TransitionToBattleType.PlayerRunToEnemy ? TeamManager_GameEnemy.Instance : TeamManager_GamePlayer.Instance;
@@ -41,8 +41,8 @@ namespace LabHavenInteractive.PawHunters
                 base.End();
         }
 
-        public override async Task LoadAssets() => await teamData.LoadAssets(SaveableTeamData.AssetType.All);
-        public override void UnloadAssets() => teamData.UnloadAssets(SaveableTeamData.AssetType.All);
+        public override async Task LoadAssets() => await teamData.LoadAssets(SaveableTeamData.AssetType.All & ~SaveableTeamData.AssetType.CharacterPrefab);
+        public override void UnloadAssets() => teamData.UnloadAssets(SaveableTeamData.AssetType.All & ~SaveableTeamData.AssetType.CharacterPrefab);
 
     }
 }

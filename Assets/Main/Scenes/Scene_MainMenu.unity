@@ -333,6 +333,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5107095069872096143, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
+      propertyPath: assetType
+      value: 1073741813
+      objectReference: {fileID: 0}
+    - target: {fileID: 5107095069872096143, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
       propertyPath: executeSkillsOnInit
       value: 0
       objectReference: {fileID: 0}
@@ -1436,7 +1440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4483667598068199321, guid: 82077c666e6ab470585e1d6588aaaa79, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -135
+      value: -135.00024
       objectReference: {fileID: 0}
     - target: {fileID: 4630051723955207996, guid: 82077c666e6ab470585e1d6588aaaa79, type: 3}
       propertyPath: m_AnchorMax.y

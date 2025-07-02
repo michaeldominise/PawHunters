@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace LabHavenInteractive.PawHunters
 {
@@ -14,9 +15,9 @@ namespace LabHavenInteractive.PawHunters
 
         void Awake() => Instance = this;
 
-        public override void Init(SaveableTeamData teamData)
+        public override async Task Init(SaveableTeamData teamData)
         {
-            base.Init(teamData);
+            await base.Init(teamData);
             SetState(StateSpeed.State.Walking);
         }
 

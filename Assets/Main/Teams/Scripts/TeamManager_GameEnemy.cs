@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using System;
+using System.Threading.Tasks;
 
 namespace LabHavenInteractive.PawHunters
 {
@@ -16,10 +17,10 @@ namespace LabHavenInteractive.PawHunters
         void Awake() => Instance = this;
 
         [Button]
-        public void SpawnEnemy(SaveableTeamData teamData)
+        public async Task SpawnEnemy(SaveableTeamData teamData)
         {
             spawnParent.transform.position = TeamManager_GamePlayer.Instance.SpawnParent.transform.position + offset;
-            Init(teamData);
+            await Init(teamData);
         }
     }
 }

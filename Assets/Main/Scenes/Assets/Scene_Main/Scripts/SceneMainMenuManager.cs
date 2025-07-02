@@ -28,9 +28,8 @@ namespace LabHavenInteractive.PawHunters
         {
             await StageDataAssetReference.Load();
             await StageData.data.LoadAssets(StageData.AssetType.environmentItem2);
-            await PlayerTeamData.LoadAssets(SaveableTeamData.AssetType.AllPrefabs);
             EnvironmentManager.Instance.Init(StageData.data.environmentItem2.Asset);
-            TeamManager_GamePlayer.Instance.Init(PlayerTeamData);
+            await TeamManager_GamePlayer.Instance.Init(PlayerTeamData);
             InitialUI.Instance.Init(StageData.title);
         }
 
@@ -39,7 +38,6 @@ namespace LabHavenInteractive.PawHunters
             if (StageData == null)
                 return;
             StageData.data.UnloadAssets(StageData.AssetType.environmentItem2);
-            PlayerTeamData.UnloadAssets(SaveableTeamData.AssetType.AllPrefabs);
             AppManager.Instance.userData.battleData.huntStageData.Unload();
         }
     }

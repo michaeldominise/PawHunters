@@ -71,9 +71,9 @@ namespace LabHavenInteractive.PawHunters
         public async Task Load() => await LoadAsset();
         public async Task<T> LoadAsset()
         {
+            UsageCount++;
             if (Asset)
             {
-                UsageCount++;
                 AppManager.AddAssetReferences(this, Asset);
                 return Asset;
             }
@@ -81,7 +81,6 @@ namespace LabHavenInteractive.PawHunters
             var operation = assetReference.IsDone ? assetReference.LoadAssetAsync<Object>() : assetReference.OperationHandle;
             await operation.Task;
 
-            UsageCount++;
             if (!assetReference.IsDone)
                 return null;
             else if (operation.Result is T)

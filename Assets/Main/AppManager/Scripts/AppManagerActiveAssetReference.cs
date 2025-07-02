@@ -38,7 +38,8 @@ namespace LabHavenInteractive.PawHunters
         [Button, BoxGroup("Active Asset References", ShowLabel = false)]
         private void UnloadActiveAssets()
         {
-            foreach (var activeAssetReference in ActiveAssetReferences)
+            var references = new List<AssetReferenceMasterIDProfiler>(ActiveAssetReferences);
+            foreach (var activeAssetReference in references)
             {
                 activeAssetReference.iAssetReference.UsageCount = 1;
                 activeAssetReference.iAssetReference.Unload();

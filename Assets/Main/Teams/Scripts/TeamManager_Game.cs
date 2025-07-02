@@ -23,9 +23,9 @@ namespace LabHavenInteractive.PawHunters
 
         public event Action OnMove;
 
-        public override void Init(SaveableTeamData teamData)
+        public override async Task Init(SaveableTeamData teamData)
         {
-            base.Init(teamData);
+            await base.Init(teamData);
             EntityMainController_Team.Init(this);
             InitEquipments();
 

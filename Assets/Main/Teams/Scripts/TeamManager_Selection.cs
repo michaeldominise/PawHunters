@@ -54,7 +54,6 @@ namespace LabHavenInteractive.PawHunters
         public void PreviousTeam() => SetTeamIndex(teamCollection.SelectedIndex - 1);
         public void SetTeamIndex(int index)
         {
-            TeamUnload();
             teamCollection.SelectedIndex = index;
             teamDataInstance = SaveableData.Initialize(ref teamDataInstance, teamCollection.SelectedTeamData, OnValueChange);
             UpdateDetails();
@@ -65,16 +64,8 @@ namespace LabHavenInteractive.PawHunters
             teamNameInput.text = TeamDataInstance.teamName;
             equipmentSlotManager.Init(teamDataInstance);
 
-            await teamDataInstance.LoadAssets(SaveableTeamData.AssetType.AllPrefabs);
-            Init(teamDataInstance);
+            await Init(teamDataInstance);
             onUpdateDetails?.Invoke();
-        }
-
-        public void TeamUnload()
-        {
-            Clear();
-            if (TeamDataInstance != null)
-                TeamDataInstance.UnloadAssets(SaveableTeamData.AssetType.AllPrefabs);
         }
 
         private void TextNameInput_OnUpdate(string teamName)
@@ -87,7 +78,5 @@ namespace LabHavenInteractive.PawHunters
         {
 
         }
-
-        private void OnDestroy() => TeamUnload();
     }
 }

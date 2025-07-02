@@ -24,9 +24,7 @@ namespace LabHavenInteractive.PawHunters
 
         protected override async Task Init()
         {
-            var loadTask = TeamSkillsAssetReference.Select(x => x.Load());
-            if (loadTask.Count() > 0)
-                await Task.WhenAll(loadTask);
+            await Task.WhenAll(TeamSkillsAssetReference.Select(x => x.Load()));
             await base.Init();
         }
 
