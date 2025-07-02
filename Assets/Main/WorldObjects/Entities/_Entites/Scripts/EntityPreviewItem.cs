@@ -64,7 +64,10 @@ namespace LabHavenInteractive.PawHunters
             if (Asset)
                 Destroy(Asset.gameObject);
             if (data != null)
+            {
                 data.UnloadAssets(assetType);
+                data = null;
+            }
         }
     }
 }

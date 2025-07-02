@@ -334,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5107095069872096143, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
       propertyPath: assetType
-      value: 1073741813
+      value: 1073741809
       objectReference: {fileID: 0}
     - target: {fileID: 5107095069872096143, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
       propertyPath: executeSkillsOnInit

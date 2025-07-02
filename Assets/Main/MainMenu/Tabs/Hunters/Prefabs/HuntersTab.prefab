@@ -432,7 +432,6 @@ MonoBehaviour:
   intialItemCount: 25
   isEndless: 0
   filterType: 0
-  orderType: 1
 --- !u!1 &7239357544393253482
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,8 +468,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 431.38757, y: -0}
-  m_SizeDelta: {x: 862.77515, y: 0}
+  m_AnchoredPosition: {x: 439.99997, y: -0}
+  m_SizeDelta: {x: 879.99994, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3714568472435601841
 CanvasRenderer:
