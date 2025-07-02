@@ -21,7 +21,7 @@ namespace LabHavenInteractive.PawHunters
             set
             {
                 assetList = value;
-                dataList = assetList.Select(x => new AssetReferenceMasterID<T>(x)).ToList();
+                dataList = assetList.Select(x => AssetReferenceMasterID<T>.Create(x)).ToList();
             }
         }
 #endif
@@ -33,7 +33,7 @@ namespace LabHavenInteractive.PawHunters
         public void Refresh()
         {
 #if UNITY_EDITOR
-            dataList = assetList.Select(x => new AssetReferenceMasterID<T>(x)).ToList();
+            dataList = assetList.Select(x => AssetReferenceMasterID<T>.Create(x)).ToList();
 #endif
         }
 

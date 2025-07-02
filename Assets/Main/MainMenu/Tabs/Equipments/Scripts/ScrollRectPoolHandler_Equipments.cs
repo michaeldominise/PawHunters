@@ -6,36 +6,30 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public class ScrollRectPoolHandler_Equipments : ScrollRectPoolHandler<EquipmentPreviewItem, SaveableEquipmentData>
+    public class ScrollRectPoolHandler_Equipments : ScrollRectPoolHandlerSorted<EquipmentPreviewItem, SaveableEquipmentData, ScrollRectPoolHandler_Equipments.FilterType>
     {
-        public enum FilterType { Level, Rarity, DateCreated, DateOwned }
-        public enum OrderType { Acending, Decending }
-
-        [SerializeField] FilterType filterType;
-        [SerializeField] OrderType orderType = OrderType.Decending;
+        public enum FilterType { Level, Category, Element, DateCreated, DateOwned }
 
         public Action<EntityPreviewItem<SaveableEquipmentData>> onItemLoaded;
         public Action<EntityPreviewItem<SaveableEquipmentData>> onItemClick;
 
-        public override void SetSortedList()
-            => SetSortedList(orderType == OrderType.Acending
-                ? data.items.OrderBy(x => GetFilterValue(x)).ToList()
-                : data.items.OrderByDescending(x => GetFilterValue(x)).ToList());
-
-        [Button]
-        public void SetSortedList(FilterType filterType, OrderType orderType)
+        List<KeyValuePair<FilterType, OrderType>> defaultFilters = new()
         {
-            this.filterType = filterType;
-            this.orderType = orderType;
-            SetSortedList();
-        }
+            new(FilterType.Level, OrderType.Decending),
+            new(FilterType.Category, OrderType.Acending),
+            new(FilterType.Element, OrderType.Acending),
+            new(FilterType.DateCreated, OrderType.Decending),
+            new(FilterType.DateOwned, OrderType.Decending),
+        };
+        protected override List<KeyValuePair<FilterType, OrderType>> DefaultFilters => defaultFilters;
 
-        public object GetFilterValue(SaveableEquipmentData data)
+        public override object GetFilterValue(SaveableEquipmentData data, FilterType filter)
         {
-            object value = filterType switch
+            object value = filter switch
             {
                 FilterType.Level => data.level,
-                FilterType.Rarity => data.Rarity,
+                FilterType.Category => (EquipmentEntityOverview.Instance.GetAsset(data.MasterID) as EquipmentEntityOverview.AssetReferenceMasterID).equipmentType,
+                FilterType.Element => (EquipmentEntityOverview.Instance.GetAsset(data.MasterID) as EquipmentEntityOverview.AssetReferenceMasterID).elementType,
                 FilterType.DateCreated => data.InstanceData.dateCreatedString,
                 FilterType.DateOwned => data.InstanceData.dateOwnedString,
                 _ => 0,

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
@@ -12,5 +13,15 @@ namespace LabHavenInteractive.PawHunters
         public SkillDataOverview_TeamSkill skillDataOverview_TeamSkill;
         public CharacterEntityOverview characterEntityOverview;
         public EquipmentEntityOverview equipmentEntityOverview;
+
+        [Button]
+        public void Refresh()
+        {
+            skillDataOverview.Refresh();
+            stageDataOverview.Refresh();
+            skillDataOverview_TeamSkill.Refresh();
+            characterEntityOverview.Refresh();
+            equipmentEntityOverview.Refresh();
+        }
     }
 }

@@ -29,11 +29,11 @@ namespace LabHavenInteractive.PawHunters
         public RarityType Rarity => level.LevelToRarity();
         public Attribute Attribute => attribute;
 
-        public abstract AssetReferenceMasterID<EntityMainController> PrefabAssetReference { get; }
-        public EntityMainController GetPrefab() => PrefabAssetReference.Asset;
+        public abstract IAssetReferenceMasterID PrefabAssetReference { get; }
+        public EntityMainController GetPrefab() => PrefabAssetReference.Asset as EntityMainController;
 
-        IEnumerable<AssetReferenceMasterID<SkillData>> SkillDataAssetReferenceList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x));
-        public IEnumerable<SkillData> SkillDataList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x).Asset).Where(x => x != null);
+        IEnumerable<IAssetReferenceMasterID<SkillData>> SkillDataAssetReferenceList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x));
+        public IEnumerable<SkillData> SkillDataList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x).Asset as SkillData).Where(x => x != null);
 
         public SaveableDataEntity()
         {
@@ -48,7 +48,7 @@ namespace LabHavenInteractive.PawHunters
         {
             var list = new List<IAssetReferenceMasterID>();
             if (assetType.HasFlag(AssetType.Prefab))
-                list.Add(PrefabAssetReference);
+                list.Add(PrefabAssetReference );
             if (assetType.HasFlag(AssetType.Skills))
                 list.AddRange(SkillDataAssetReferenceList);
             return list;

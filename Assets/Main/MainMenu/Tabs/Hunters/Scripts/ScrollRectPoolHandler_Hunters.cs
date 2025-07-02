@@ -6,36 +6,28 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public class ScrollRectPoolHandler_Hunters : ScrollRectPoolHandler<HunterPreviewItem, SaveableCharacterData>
+    public class ScrollRectPoolHandler_Hunters : ScrollRectPoolHandlerSorted<HunterPreviewItem, SaveableCharacterData, ScrollRectPoolHandler_Hunters.FilterType>
     {
-        public enum FilterType { Level, Rarity, DateCreated, DateOwned }
-        public enum OrderType { Acending, Decending }
-
-        [SerializeField] FilterType filterType;
-        [SerializeField] OrderType orderType = OrderType.Decending;
+        public enum FilterType { Level, Element, DateCreated, DateOwned }
 
         public Action<EntityPreviewItem<SaveableCharacterData>> onItemLoaded;
         public Action<EntityPreviewItem<SaveableCharacterData>> onItemClick;
 
-        public override void SetSortedList()
-            => SetSortedList(orderType == OrderType.Acending
-                ? data.items.OrderBy(x => GetFilterValue(x)).ToList()
-                : data.items.OrderByDescending(x => GetFilterValue(x)).ToList());
-
-        [Button]
-        public void SetSortedList(FilterType filterType, OrderType orderType)
+        List<KeyValuePair<FilterType, OrderType>> defaultFilters = new()
         {
-            this.filterType = filterType;
-            this.orderType = orderType;
-            SetSortedList();
-        }
+            new(FilterType.Level, OrderType.Decending),
+            new(FilterType.Element, OrderType.Acending),
+            new(FilterType.DateCreated, OrderType.Decending),
+            new(FilterType.DateOwned, OrderType.Decending),
+        };
+        protected override List<KeyValuePair<FilterType, OrderType>> DefaultFilters => defaultFilters;
 
-        public object GetFilterValue(SaveableCharacterData data)
+        public override object GetFilterValue(SaveableCharacterData data, FilterType filter)
         {
-            object value = filterType switch
+            object value = filter switch
             {
                 FilterType.Level => data.level,
-                FilterType.Rarity => data.Rarity,
+                FilterType.Element => (CharacterEntityOverview.Instance.GetAsset(data.MasterID) as CharacterEntityOverview.AssetReferenceMasterID).elementType,
                 FilterType.DateCreated => data.InstanceData.dateCreatedString,
                 FilterType.DateOwned => data.InstanceData.dateOwnedString,
                 _ => 0,

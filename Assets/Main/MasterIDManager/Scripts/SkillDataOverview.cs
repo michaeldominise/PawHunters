@@ -3,9 +3,12 @@ using UnityEngine;
 namespace LabHavenInteractive.PawHunters
 {
     [CreateAssetMenu(fileName = "SkillDataOverview", menuName = "GameData/Overviews/SkillDataOverview")]
-    public class SkillDataOverview : DataOverview<SkillData>
+    public class SkillDataOverview : DataOverview<SkillDataOverview.AssetReferenceMasterID, SkillData>
     {
         public static SkillDataOverview Instance => MasterIDManager.Instance.skillDataOverview;
+
+        [System.Serializable]
+        public class AssetReferenceMasterID : AssetReferenceMasterID<SkillData> { }
 
         protected override bool IsValid(string guid)
         {

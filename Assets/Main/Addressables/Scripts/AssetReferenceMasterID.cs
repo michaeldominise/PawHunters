@@ -12,7 +12,7 @@ namespace LabHavenInteractive.PawHunters
 {
     [System.Serializable]
     [InlineProperty]
-    public class AssetReferenceMasterID<T> : IAssetReferenceMasterID, IAssetReferenceMasterID<T>, IAssetReference where T : Object
+    public class AssetReferenceMasterID<T> : IAssetReferenceMasterID<T>, IAssetReferenceMasterID, IAssetReference where T : Object
     {
 #if UNITY_EDITOR
         AddressableAssetSettings Settings => AddressableAssetSettingsDefaultObject.Settings;
@@ -24,12 +24,24 @@ namespace LabHavenInteractive.PawHunters
         [ShowInInspector, ReadOnly, HideLabel] public string MasterID => masterID;
         public int UsageCount { get; set; }
         public T Asset { get; private set; }
+        public string GUID
+        {
+            get => assetReference.AssetGUID;
+            set
+            {
+                string assetPath = AssetDatabase.GUIDToAssetPath(value);
+                var asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
+                AssetReference = asset;
+            }
+        }
+
+        Object IAssetReferenceMasterID.Asset => Asset;
 
 #if UNITY_EDITOR
-        [ShowInInspector, HideLabel] T AssetReference
+        [ShowInInspector, HideLabel] public T AssetReference
         {
             get => assetReference.editorAsset;
-            set
+            private set
             {
                 if (value == null)
                 {
@@ -45,14 +57,8 @@ namespace LabHavenInteractive.PawHunters
             }
         }
 
-        public static explicit operator AssetReferenceMasterID<T>(T asset) => new(asset);
-        public AssetReferenceMasterID(T asset) => AssetReference = asset;
-        public AssetReferenceMasterID(string guid)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-            var asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
-            AssetReference = asset;
-        }
+        public static explicit operator AssetReferenceMasterID<T>(T asset) => Create(asset);
+        public static AssetReferenceMasterID<T> Create(T asset) => new() { AssetReference = asset };
 
         string SetAsAddressable(T asset)
         {
@@ -111,23 +117,19 @@ namespace LabHavenInteractive.PawHunters
 
     public interface IAssetReference
     {
-        public Task Load();
-        public void Unload();
+        Task Load();
+        void Unload();
     }
 
-    public interface IAssetReferenceMasterID
+    public interface IAssetReferenceMasterID : IAssetReference
     {
-        public string MasterID { get; }
-        public int UsageCount { get; set; }
-        public Task Load();
-        public void Unload();
+        string MasterID { get; }
+        int UsageCount { get; set; }
+        Object Asset { get; }
     }
 
-    public interface IAssetReferenceMasterID<T> where T : Object
+    public interface IAssetReferenceMasterID<T> : IAssetReferenceMasterID where T : Object
     {
-        public string MasterID { get; }
-        public int UsageCount { get; set; }
-        public Task<T> LoadAsset();
-        public void Unload();
+        Task<T> LoadAsset();
     }
 }

@@ -11,7 +11,7 @@ namespace LabHavenInteractive.PawHunters
     {
         public static SceneGameManager_Hunt Instance_Hunt { get; private set; }
 
-        public List<AssetReferenceMasterID<SkillData>> TeamSkillsAssetReference => SkillDataOverview_TeamSkill.Instance.dataList;
+        public List<SkillDataOverview.AssetReferenceMasterID> TeamSkillsAssetReference => SkillDataOverview_TeamSkill.Instance.dataList;
         public List<SkillData> TeamSkills => SkillDataOverview_TeamSkill.Instance.dataList.Select(x => x.Asset).ToList();
 
         protected override AssetReferenceMasterID<StageData> StageDataAssetReference => AppManager.Instance?.userData.battleData.huntStageData;

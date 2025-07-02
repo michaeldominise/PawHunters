@@ -8,9 +8,11 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public abstract class DataOverview<T> : ScriptableObject, IRefresh where T : Object
+    public abstract class DataOverview<TAssetReferenceMasterID, T> : ScriptableObject, IRefresh
+        where TAssetReferenceMasterID : AssetReferenceMasterID<T>, new()
+        where T : Object
     {
-        public List<AssetReferenceMasterID<T>> dataList;
+        public List<TAssetReferenceMasterID> dataList;
 
         [SerializeField, HideInInspector] string[] folderPaths;
 #if UNITY_EDITOR
@@ -27,7 +29,7 @@ namespace LabHavenInteractive.PawHunters
         }
 #endif
 
-        public AssetReferenceMasterID<T> GetAsset(string masterID)
+        public IAssetReferenceMasterID<T> GetAsset(string masterID)
         {
             var assetReference = dataList.FirstOrDefault(x => x.MasterID == masterID);
             if (assetReference == null)
@@ -48,13 +50,15 @@ namespace LabHavenInteractive.PawHunters
             foreach (string guid in guids)
             {
                 if (IsValid(guid))
-                    dataList.Add(new(guid));
+                    dataList.Add(Create(guid));
             }
 
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
 #endif
         }
+
+        public virtual TAssetReferenceMasterID Create(string guid) => new() { GUID = guid };
     }
 
     public interface IRefresh
