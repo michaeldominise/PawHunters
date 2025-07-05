@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Threading.Tasks;
 
 namespace LabHavenInteractive.PawHunters
 {
@@ -10,15 +11,16 @@ namespace LabHavenInteractive.PawHunters
 
         float FadeInDuration => AppSettings_Global.Instance.uIAnimationValues.effectDuration;
 
-        public void Show(float delay = 0) => SetValue(true, delay);
-        public void Hide(float delay = 0) => SetValue(false, delay);
-        void SetValue(bool isShow, float delay)
+        public async Task Show(float delay = 0) => await SetValue(true, delay);
+        public async Task Hide(float delay = 0) => await SetValue(false, delay);
+        async Task SetValue(bool isShow, float delay)
         {
             if(isShow)
                 container.SetActive(true);
             canvasGroup.blocksRaycasts = isShow;
             canvasGroup.interactable = isShow;
             canvasGroup.DOFade(isShow ? 1 : 0, FadeInDuration).OnComplete(() => container.SetActive(isShow)).SetDelay(delay);
+            await Task.Delay((int)((FadeInDuration + delay) * 1000));
         }
     }
 }

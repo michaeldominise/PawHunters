@@ -1,4 +1,5 @@
-﻿using UnityEngine.ResourceManagement.AsyncOperations;
+﻿using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
 namespace LabHavenInteractive.PawHunters
@@ -10,17 +11,17 @@ namespace LabHavenInteractive.PawHunters
         AssetReferenceScene currentSceneAssetReference;
         AsyncOperationHandle<UnityEngine.ResourceManagement.ResourceProviders.SceneInstance> sceneLoadOperation;
 
-        public AsyncOperationHandle Reload()
+        public async Task<AsyncOperationHandle> Reload()
         {
             currentSceneAssetReference.ReleaseAsset();
-            return LoadScene(currentSceneAssetReference);
+            return await LoadScene(currentSceneAssetReference);
         }
 
-        public AsyncOperationHandle LoadScene(AssetReferenceScene sceneAssetReference, LoadSceneMode loadSceneMode = LoadSceneMode.Single, TransitionType transitionType = TransitionType.ShowThenHide)
+        public async Task<AsyncOperationHandle> LoadScene(AssetReferenceScene sceneAssetReference, LoadSceneMode loadSceneMode = LoadSceneMode.Single, TransitionType transitionType = TransitionType.ShowThenHide)
         {
             currentSceneAssetReference = sceneAssetReference;
             if (transitionType != TransitionType.None)
-                SceneTransitionLoader.Instance.Show();
+                await SceneTransitionLoader.Instance.Show();
             sceneLoadOperation = sceneAssetReference.LoadSceneAsync(loadSceneMode);
             if (transitionType == TransitionType.ShowThenHide)
                 HideSceneTransitionLoaderOnComplete();
@@ -30,7 +31,7 @@ namespace LabHavenInteractive.PawHunters
         public async void HideSceneTransitionLoaderOnComplete()
         {
             await sceneLoadOperation.Task;
-            SceneTransitionLoader.Instance.Hide();
+            await SceneTransitionLoader.Instance.Hide();
         }
     }
 }
