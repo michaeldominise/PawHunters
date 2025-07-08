@@ -1,8 +1,18 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
+    public static class StringFormatExtension
+    {
+        public static string CapitalizeFirst(this string input)
+            => !string.IsNullOrWhiteSpace(input) ? $"{char.ToUpper(input[0])}{input[1..]}" : input;
+
+        public static string SeparateCamelCase(this string input)
+            => Regex.Replace(input, "(?<!^)([A-Z])", " $1");
+    }
+
     public static class NumberFormatterExtension
     {
         public static string Format(this float number)

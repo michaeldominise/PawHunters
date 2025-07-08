@@ -12,16 +12,16 @@ namespace LabHavenInteractive.PawHunters
         protected float RandomAdditionalDistance => AppSettings_Battle.Instance.constantValues.statusTextUISpawnerRandomAdditionalDistance;
 
         private void Awake() => Instance = this;
-        public void Spawn(Vector3 worldPosition, Color colorLabel, float value, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
+        public void Spawn(Vector3 worldPosition, Color colorLabel, float value, Sprite sprite = null)
         {
             if(value != 0)
-                Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, value, type));
+                Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, value, sprite));
         }
 
-        public void Spawn(Vector3 worldPosition, Color colorLabel, string text, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
+        public void Spawn(Vector3 worldPosition, Color colorLabel, string text, Sprite sprite = null)
         {
             if(!string.IsNullOrWhiteSpace(text))
-                Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, text, type));
+                Spawn(prefab, init: item => item.Init(worldPosition, RandomAdditionalDistance, colorLabel, text, sprite));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace LabHavenInteractive.PawHunters
         public void Init(JourneyData journeyData, int index, State state = State.Inactive)
         {
             this.journeyData = journeyData;
-            icon.sprite = AppSettings_Battle.Instance.iconSprite.GetSprite(GetIconType());
+            icon.sprite = AppSettings_Battle.Instance.iconSprites.GetSprite(GetIconType());
             textNum.text = $"{index + 1}";
             SetState(state);
 
@@ -35,12 +35,12 @@ namespace LabHavenInteractive.PawHunters
             CurrentState.Value = state;
         }
 
-        public AppSettings_Battle.Type GetIconType()
+        public AppSettings_Battle.IconSprites.Type GetIconType()
             => journeyData.JourneyType switch
             {
-                JourneyData.Type.Battle => AppSettings_Battle.Type.JourneyBattle,
-                JourneyData.Type.Boss => AppSettings_Battle.Type.JourneyBoss,
-                _ => AppSettings_Battle.Type.JourneyDefault,
+                JourneyData.Type.Battle => AppSettings_Battle.IconSprites.Type.JourneyBattle,
+                JourneyData.Type.Boss => AppSettings_Battle.IconSprites.Type.JourneyBoss,
+                _ => AppSettings_Battle.IconSprites.Type.JourneyDefault,
             };
 
         public Color GetColor()

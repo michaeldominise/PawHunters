@@ -24,7 +24,7 @@ namespace LabHavenInteractive.PawHunters
         public virtual async Task Init(SaveableTeamData teamData)
         {
             Clear();
-            this.teamData = SaveableData.Initialize(ref this.teamData, teamData, Refresh);
+            this.teamData = SaveableData.Initialize(this.teamData, teamData, Refresh);
             await Load();
 
             for (var x = 0; x < teamData.Characters.Count && x < teamManger_EntityParents.Count; x++)

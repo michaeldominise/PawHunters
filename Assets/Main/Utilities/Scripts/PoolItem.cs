@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -10,17 +11,17 @@ namespace LabHavenInteractive.PawHunters
 
         public T Data => data;
 
-        public virtual void Refresh() => Init(index, data);
-        public virtual void Init(int index, T data)
+        public virtual void Refresh() => _ = Init(index, data);
+        public virtual async Task Init(int index, T data)
         {
             if(this.data != null)
                 Unload();
             this.index = index;
-            this.data = SaveableData.Initialize(ref this.data, data, Refresh);
-            Load();
+            this.data = SaveableData.Initialize(this.data, data, Refresh);
+            await Load();
         }
 
-        public virtual void Load() { }
+        public virtual async Task Load() => await Task.Yield();
 
         public virtual void Unload() { }
 

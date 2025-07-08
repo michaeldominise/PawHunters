@@ -8,10 +8,9 @@ namespace LabHavenInteractive.PawHunters
 {
     public class ScrollRectPoolHandler_Equipments : ScrollRectPoolHandlerSorted<EquipmentPreviewItem, SaveableEquipmentData, ScrollRectPoolHandler_Equipments.FilterType>
     {
-        public enum FilterType { Level, Category, Element, DateCreated, DateOwned }
+        public enum FilterType { Level, Category, Element, DateCreated, DateOwned, Name }
 
         public Action<EntityPreviewItem<SaveableEquipmentData>> onItemLoaded;
-        public Action<EntityPreviewItem<SaveableEquipmentData>> onItemClick;
 
         List<KeyValuePair<FilterType, OrderType>> defaultFilters = new()
         {
@@ -20,6 +19,7 @@ namespace LabHavenInteractive.PawHunters
             new(FilterType.Element, OrderType.Acending),
             new(FilterType.DateCreated, OrderType.Decending),
             new(FilterType.DateOwned, OrderType.Decending),
+            new(FilterType.Name, OrderType.Acending),
         };
         protected override List<KeyValuePair<FilterType, OrderType>> DefaultFilters => defaultFilters;
 
@@ -32,6 +32,7 @@ namespace LabHavenInteractive.PawHunters
                 FilterType.Element => (EquipmentEntityOverview.Instance.GetAsset(data.MasterID) as EquipmentEntityOverview.AssetReferenceMasterID).elementType,
                 FilterType.DateCreated => data.InstanceData.dateCreatedString,
                 FilterType.DateOwned => data.InstanceData.dateOwnedString,
+                FilterType.Name => data.MasterID,
                 _ => 0,
             };
             return value;
@@ -40,7 +41,6 @@ namespace LabHavenInteractive.PawHunters
         protected override void InitItem(int index, EquipmentPreviewItem item)
         {
             base.InitItem(index, item);
-            item.onClick = onItemClick;
             item.onLoaded = onItemLoaded;
         }
     }

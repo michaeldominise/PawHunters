@@ -13,6 +13,6 @@ namespace LabHavenInteractive.PawHunters
 
         private void Reset() => button = GetComponent<Button>();
         private void Start() => button.onClick.AddListener(OnClick);
-        private void OnClick() => AppManager.Instance.LoadScene(sceneToLoad, transitionType: transitionType);
+        private void OnClick() => _ = AppManager.Instance.LoadScene(sceneToLoad, transitionType: transitionType);
     }
 }

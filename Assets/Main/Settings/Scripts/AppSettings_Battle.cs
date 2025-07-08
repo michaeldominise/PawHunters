@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LabHavenInteractive.PawHunters
 {
@@ -9,20 +10,8 @@ namespace LabHavenInteractive.PawHunters
     {
         public static AppSettings_Battle Instance => SceneGameManager.Instance?.AppSettings_Battle;
 
-        public enum Type
-        {
-            None,
-            Shield,
-            Speed,
-            Health,
-            Attack,
-            JourneyDefault,
-            JourneyBattle,
-            JourneyBoss,
-        }
-
         [System.Serializable]
-        public class ColorTheme_Battle : ColorTheme
+        public class ColorTheme
         {
             public Gradient healthProgressColor;
             public Color shieldProgressColor;
@@ -45,17 +34,19 @@ namespace LabHavenInteractive.PawHunters
             public Color journeyLogNegativeColor;
             public Color journeyLogPositiveColor;
             public Color journeyLogRewardColor;
-
-            public ElementColorTheme elementColorOverlay;
         }
 
         [System.Serializable]
-        public class IconSprite_Battle : IconSprite
+        public class IconSprites
         {
-            public Sprite shield;
-            public Sprite speed;
-            public Sprite health;
-            public Sprite attack;
+            public enum Type
+            {
+                None,
+                JourneyDefault,
+                JourneyBattle,
+                JourneyBoss,
+            }
+
             public Sprite journeyDefault;
             public Sprite journeyBattle;
             public Sprite journeyBoss;
@@ -63,10 +54,6 @@ namespace LabHavenInteractive.PawHunters
             public Sprite GetSprite(Type enumType)
                 => enumType switch
                 {
-                    Type.Shield => shield,
-                    Type.Speed => speed,
-                    Type.Health => health,
-                    Type.Attack => attack,
                     Type.JourneyDefault => journeyDefault,
                     Type.JourneyBattle => journeyBattle,
                     Type.JourneyBoss => journeyBoss,
@@ -99,8 +86,9 @@ namespace LabHavenInteractive.PawHunters
             public float expMaxValue;
         }
 
-        public ColorTheme_Battle colorTheme;
-        public IconSprite_Battle iconSprite;
+        public ColorTheme colorTheme;
+        [FormerlySerializedAs("iconSprite")]
+        public IconSprites iconSprites;
         public ConstantValues constantValues;
     }
 

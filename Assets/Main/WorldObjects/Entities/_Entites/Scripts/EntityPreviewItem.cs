@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LabHavenInteractive.PawHunters
@@ -15,7 +17,7 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] Button button;
         [SerializeField] GameObject normalBorder;
         [SerializeField] GameObject selectionBorder;
-        [SerializeField] List<RarityUI> rarityUIList;
+        [SerializeField, FormerlySerializedAs("rarityUIList")] List<OverlayUI_Rarity> overlayUIList;
         [SerializeField] SpriteMaskInteraction spriteMaskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; set; } = new(State.NotSelected);
 
@@ -40,13 +42,13 @@ namespace LabHavenInteractive.PawHunters
             selectionBorder?.SetActive(CurrentState.Value == State.Selected);
         }
 
-        public override void Init(int index, T data)
+        public override async Task Init(int index, T data)
         {
-            base.Init(index, data);
-            rarityUIList.ForEach(x => x.Init(data.Rarity));
+            await base.Init(index, data);
+            overlayUIList.ForEach(x => x.Init(data.Rarity));
         }
 
-        public override async void Load()
+        public override async Task Load()
         {
             await data.LoadAssets(assetType);
             if (!data.GetPrefab())

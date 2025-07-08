@@ -9,6 +9,6 @@ namespace LabHavenInteractive.PawHunters
 
         public void Show(bool value) => container.SetActive(value);
 
-        public void OnClaimClicked() => AppManager.Instance.Reload();
+        public void OnClaimClicked() => _ = AppManager.Instance.Reload();
     }
 }

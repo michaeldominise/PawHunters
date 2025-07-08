@@ -19,27 +19,26 @@ namespace LabHavenInteractive.PawHunters
         Camera WorldCamera => Camera.main;
         RectTransform RectParent => transform.parent as RectTransform;
 
-        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, float value, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, float value, Sprite sprite = null)
         {
-            Init(worldPosition, randomAdditionalDistance, colorLabel, type);
+            Init(worldPosition, randomAdditionalDistance, colorLabel, sprite);
             GradualChangeValue.Execute(0, value, UpdateDuration, OnProgressTextUpdate, AnimationTextCurve);
         }
 
-        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, string text, Sprite sprite = null)
         {
-            Init(worldPosition, randomAdditionalDistance, colorLabel, type);
+            Init(worldPosition, randomAdditionalDistance, colorLabel, sprite);
             label.text = text;
             GradualChangeValue.Execute(0, 1, UpdateDuration, OnProgressTransformUpdate, AnimationTransformCurve);
         }
 
-        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, AppSettings_Battle.Type type = AppSettings_Battle.Type.None)
+        public void Init(Vector3 worldPosition, float randomAdditionalDistance, Color colorLabel, Sprite sprite = null)
         {
             var viewportPoint = WorldCamera.WorldToViewportPoint(worldPosition);
             var halfScreenSize = new Vector3(RectParent.rect.width, RectParent.rect.height) * 0.5f;
             transform.localPosition = new Vector3(Mathf.LerpUnclamped(-halfScreenSize.x, halfScreenSize.x, viewportPoint.x), Mathf.LerpUnclamped(-halfScreenSize.y, halfScreenSize.y, viewportPoint.y)) + randomAdditionalDistance * (Vector3)Random.insideUnitCircle;
 
             label.color = colorLabel;
-            var sprite = AppSettings_Battle.Instance.iconSprite.GetSprite(type);
             iconImage.sprite = sprite;
             iconImage.gameObject.SetActive(sprite);
 

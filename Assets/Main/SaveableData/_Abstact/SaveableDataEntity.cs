@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public abstract class SaveableDataEntity : SaveableData<SaveableDataEntity.AssetType>, IAttribute
+    public abstract class SaveableDataEntity : SaveableData<SaveableDataEntity.AssetType>, IAttribute, IMasterID
     {
         [Flags]
         public enum AssetType
@@ -20,6 +20,7 @@ namespace LabHavenInteractive.PawHunters
 
         [SerializeField] protected string masterId;
         public string MasterID => masterId;
+        public string Name => string.IsNullOrWhiteSpace(MasterID) ? string.Empty : MasterID.Split('.')[1].SeparateCamelCase();
 
         public int level;
 
@@ -28,12 +29,14 @@ namespace LabHavenInteractive.PawHunters
 
         public RarityType Rarity => level.LevelToRarity();
         public Attribute Attribute => attribute;
+        public abstract ElementType ElementType { get; }
 
         public abstract IAssetReferenceMasterID PrefabAssetReference { get; }
         public EntityMainController GetPrefab() => PrefabAssetReference.Asset as EntityMainController;
 
         IEnumerable<IAssetReferenceMasterID<SkillData>> SkillDataAssetReferenceList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x));
         public IEnumerable<SkillData> SkillDataList => skillDataMasterIdList.Select(x => SkillDataOverview.Instance.GetAsset(x).Asset as SkillData).Where(x => x != null);
+
 
         public SaveableDataEntity()
         {

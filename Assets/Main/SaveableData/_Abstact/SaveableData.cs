@@ -38,7 +38,7 @@ namespace LabHavenInteractive.PawHunters
             OnExecuteUpdateList.Add(OnValueChangeMethod);
         }
 
-        public static T Initialize<T>(ref T oldData, T newData, Action onValueChange) where T : SaveableData
+        public static T Initialize<T>(T oldData, T newData, Action onValueChange) where T : SaveableData
         {
             oldData?.UnregisterOnValueChange(onValueChange);
             newData?.RegisterOnValueChange(onValueChange);
@@ -59,8 +59,9 @@ namespace LabHavenInteractive.PawHunters
         public void UnloadAssets(AssetType assetType) => GetAssetReference(assetType).ForEach(x => x.Unload());
     }
 
-    public interface IMasterId
+    public interface IMasterID
     {
-        public string MasterId { get; }
+        public string MasterID { get; }
+        public string Name { get; }
     }
 }

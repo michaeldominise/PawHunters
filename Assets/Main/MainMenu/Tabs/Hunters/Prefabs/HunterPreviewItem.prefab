@@ -236,10 +236,12 @@ MonoBehaviour:
   button: {fileID: 5561185107493052173}
   normalBorder: {fileID: 4015503670698868895}
   selectionBorder: {fileID: 6396603786713212224}
-  rarityUIList:
+  overlayUIList:
   - {fileID: 4859197067199777268}
   - {fileID: 7519178931705329060}
   - {fileID: 5613703741837224163}
+  spriteMaskInteraction: 1
+  nameLabel: {fileID: 2413374781900944947}
 --- !u!1 &4015503670698868895
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +530,7 @@ GameObject:
   - component: {fileID: 5973144002573753284}
   - component: {fileID: 2413374781900944947}
   m_Layer: 5
-  m_Name: Tittle
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

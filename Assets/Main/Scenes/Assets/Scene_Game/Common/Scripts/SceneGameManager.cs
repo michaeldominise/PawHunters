@@ -16,7 +16,7 @@ namespace LabHavenInteractive.PawHunters
 
         protected abstract AssetReferenceMasterID<StageData> StageDataAssetReference { get; }
         public StageData StageData => StageDataAssetReference?.Asset;
-        public SaveableTeamData PlayerTeamData => AppManager.Instance?.userData.teamCollection.SelectedTeamData;
+        public SaveableTeamData_CharacterInstance PlayerTeamData => AppManager.Instance?.userData.teamCollection.SelectedTeamData;
         public JourneyData CurrentJourney => StageData.data.journeys[CurrentJourneyIndex].Asset;
         public AppSettings_Battle AppSettings_Battle => appSettings_Battle;
 
@@ -36,9 +36,12 @@ namespace LabHavenInteractive.PawHunters
             await TeamManager_GamePlayer.Instance.Init(PlayerTeamData);
             InitialUI.Instance.Init(StageData.title);
             JourneyLogsUIManager.Instance.Init();
-            SceneTransitionLoader.Instance.Hide(AppSettings_Battle.Instance.constantValues.overlayFadeOutDelayDuration);
+            await PostInit();
+            await SceneTransitionLoader.Instance.Hide(AppSettings_Battle.Instance.constantValues.overlayFadeOutDelayDuration);
             NextJourney();
         }
+
+        protected async virtual Task PostInit() => await Task.Yield();
 
         public virtual void EndJourney() => StageData.data.journeys[CurrentJourneyIndex].Asset.End();
 

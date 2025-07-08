@@ -23,7 +23,7 @@ namespace LabHavenInteractive.PawHunters
 
         private void Start() => toggle.onValueChanged.AddListener(OnToggleClick);
 
-        public void Init(SkillData skillData, ToggleGroup toggleGroup, Action<SkillSelectionItem> onSelect)
+        public void Init(SkillData skillData, ToggleGroup toggleGroup, Action<SkillSelectionItem> onSelect = null)
         {
             this.skillData = skillData;
             this.onSelect = onSelect;

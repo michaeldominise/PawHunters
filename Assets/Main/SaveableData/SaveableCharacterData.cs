@@ -12,5 +12,6 @@ namespace LabHavenInteractive.PawHunters
         public SaveableCharacterData() : base() => masterId = "Character.BlackCat";
 
         public override IAssetReferenceMasterID PrefabAssetReference => CharacterEntityOverview.Instance.GetAsset(masterId);
+        public override ElementType ElementType => (PrefabAssetReference as CharacterEntityOverview.AssetReferenceMasterID).elementType;
     }
 }

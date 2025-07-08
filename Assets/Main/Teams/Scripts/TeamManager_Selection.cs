@@ -55,15 +55,14 @@ namespace LabHavenInteractive.PawHunters
         public void SetTeamIndex(int index)
         {
             teamCollection.SelectedIndex = index;
-            teamDataInstance = SaveableData.Initialize(ref teamDataInstance, teamCollection.SelectedTeamData, OnValueChange);
+            teamDataInstance = SaveableData.Initialize(teamDataInstance, teamCollection.SelectedTeamData, OnValueChange);
             UpdateDetails();
         }
 
         public async void UpdateDetails()
         {
             teamNameInput.text = TeamDataInstance.teamName;
-            equipmentSlotManager.Init(teamDataInstance);
-
+            await equipmentSlotManager.Init(teamDataInstance);
             await Init(teamDataInstance);
             onUpdateDetails?.Invoke();
         }

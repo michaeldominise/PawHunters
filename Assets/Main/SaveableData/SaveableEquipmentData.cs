@@ -12,5 +12,6 @@ namespace LabHavenInteractive.PawHunters
         public SaveableEquipmentData() : base() => masterId = "Equipment.Test";
 
         public override IAssetReferenceMasterID PrefabAssetReference => EquipmentEntityOverview.Instance.GetAsset(MasterID);
+        public override ElementType ElementType => (PrefabAssetReference as EquipmentEntityOverview.AssetReferenceMasterID).elementType;
     }
 }

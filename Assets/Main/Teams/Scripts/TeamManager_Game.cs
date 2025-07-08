@@ -13,6 +13,7 @@ namespace LabHavenInteractive.PawHunters
     {
         public Vector3 offset;
         [SerializeField] EntityMainController_Team entityMainController_Team;
+        [SerializeField] EquipmentSlotManager_Battle equipmentSlotManager_Battle;
         [SerializeField] bool executeSkillsOnInit = true;
         [ShowInInspector, ReadOnly] public StateController<StateSpeed.State> CurrentState { get; private set; } = new();
 
@@ -27,22 +28,27 @@ namespace LabHavenInteractive.PawHunters
         {
             await base.Init(teamData);
             EntityMainController_Team.Init(this);
-            InitEquipments();
+            await InitEquipments();
 
             if (executeSkillsOnInit)
                 _ = ExecuteSkills(GameActionTriggersManager.TriggerType.SetupPhase);
         }
 
-        void InitEquipments()
+        async Task InitEquipments()
         {
-            var skillList = new List<SkillData>();
-            teamData.Equipments.ForEach(x =>
+            if (equipmentSlotManager_Battle)
+                await equipmentSlotManager_Battle.Init(teamData);
+            else
             {
-                if (x == null)
-                    return;
-                foreach (var skillData in x.SkillDataList)
-                    entityMainController_Team.EntitySkillsController.AddSkill(skillData);
-            });
+                var skillList = new List<SkillData>();
+                teamData.Equipments.ForEach(x =>
+                {
+                    if (x == null)
+                        return;
+                    foreach (var skillData in x.SkillDataList)
+                        entityMainController_Team.EntitySkillsController.AddSkill(skillData);
+                });
+            }
         }
 
         [Button]
@@ -83,6 +89,9 @@ namespace LabHavenInteractive.PawHunters
                 if (!(condition?.Invoke() ?? true))
                     return;
             }
+
+            if (equipmentSlotManager_Battle)
+                await equipmentSlotManager_Battle.ExecuteSkills(trigger, srouceTrigger, condition);
         }
 
         public void AddSkill(SkillData skillData) => entityMainController_Team.AddSkill(skillData);

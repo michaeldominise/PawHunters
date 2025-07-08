@@ -108,12 +108,12 @@ namespace LabHavenInteractive.PawHunters
         public virtual async Task PlayExpireDoneVisual(SkillVisualEffect.State state, StatusEffectDataHandler statusEffectDataHandler)
             => await SkillVisualEffect.PlayVisual(state, expireSkillVFXs, statusEffectDataHandler);
 
-        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, AppSettings_Battle.Type icon = AppSettings_Battle.Type.None)
+        protected void ShowStatusTextUI(EntityMainController target, Color color, float value, Sprite sprite = null)
         {
             if (!showStatusTextUI)
                 return;
 
-            StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, color, value, icon);
+            StatusTextUISpawner.Instance.Spawn(target.Anchor.statusTextUI.position, color, value, sprite);
         }
     }
 }

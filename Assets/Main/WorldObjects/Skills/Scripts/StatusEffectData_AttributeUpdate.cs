@@ -10,6 +10,8 @@ namespace LabHavenInteractive.PawHunters
     {
         [SerializeField] SkillAttributeData.AttributeType targetAttribute;
 
+        AppSettings_Global.IconSprites IconSprites = AppSettings_Global.Instance.iconSprites;
+
         public override async Task<float> Execute(StatusEffectDataHandler statusEffectDataHandler)
         {
             var target = statusEffectDataHandler.target;
@@ -29,11 +31,11 @@ namespace LabHavenInteractive.PawHunters
                     break;
                 case SkillAttributeData.AttributeType.MaxHealth:
                     target.EntityHealthController.AddMaxHealth(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, AppSettings_Battle.Type.Health);
+                    ShowStatusTextUI(target, Color.white, cachedValue, IconSprites.battleStats.GetSprite(SkillAttributeData.AttributeType.MaxHealth));
                     break;
                 case SkillAttributeData.AttributeType.Attack:
                     target.BattleAttributes.attack.Update(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, AppSettings_Battle.Type.Attack);
+                    ShowStatusTextUI(target, Color.white, cachedValue, IconSprites.battleStats.GetSprite(SkillAttributeData.AttributeType.Attack));
                     break;
                 case SkillAttributeData.AttributeType.Defense:
                     target.BattleAttributes.defense.Update(cachedValue, statusEffectDataHandler);
@@ -41,7 +43,7 @@ namespace LabHavenInteractive.PawHunters
                     break;
                 case SkillAttributeData.AttributeType.Speed:
                     target.BattleAttributes.speed.Update(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, AppSettings_Battle.Type.Speed);
+                    ShowStatusTextUI(target, Color.white, cachedValue, IconSprites.battleStats.GetSprite(SkillAttributeData.AttributeType.Speed));
                     break;
                 case SkillAttributeData.AttributeType.CritChance:
                     target.BattleAttributes.critChance.Update(cachedValue, statusEffectDataHandler);
@@ -53,7 +55,7 @@ namespace LabHavenInteractive.PawHunters
                     break;
                 case SkillAttributeData.AttributeType.Shield:
                     target.EntityHealthController.AddSheild(cachedValue, statusEffectDataHandler);
-                    ShowStatusTextUI(target, Color.white, cachedValue, AppSettings_Battle.Type.Shield);
+                    ShowStatusTextUI(target, Color.white, cachedValue, IconSprites.battleStats.GetSprite(SkillAttributeData.AttributeType.Defense));
                     break;
                 case SkillAttributeData.AttributeType.SpecialSkill:
                     target.BattleAttributes.specialSkill.Update(cachedValue, statusEffectDataHandler);

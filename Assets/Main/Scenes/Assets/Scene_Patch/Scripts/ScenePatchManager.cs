@@ -37,7 +37,7 @@ namespace LabHavenInteractive.PawHunters
             if (operationStatus == AsyncOperationStatus.Failed)
                 return;
 
-            operation = AppManager.Instance.LoadScene(nextScene, transitionType: AppManager.TransitionType.None);
+            operation = await AppManager.Instance.LoadScene(nextScene, transitionType: AppManager.TransitionType.None);
             operationStatus = await SetOperation(operation, percent => "Laoding next scene...", false);
         }
 

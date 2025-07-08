@@ -1,3 +1,4 @@
+
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public class RarityUI : MonoBehaviour
+    public abstract class OverlayUI<T> : MonoBehaviour where T : System.Enum
     {
         public enum Type { Foreground, Background }
 
@@ -13,14 +14,15 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] List<Graphic> graphics;
         [SerializeField] float alpha = 1;
 
-        AppSettings_Global.ColorTheme_Global ColorTheme => AppSettings_Global.Instance.colorTheme;
-
         [Button]
-        public void Init(RarityType rarityType)
+        public void Init(T value)
         {
-            var color = type == Type.Foreground ? ColorTheme.rarityColorTheme.GetColor(rarityType) : ColorTheme.rarityColorTheme_Background.GetColor(rarityType);
+            var color = type == Type.Foreground ? GetForegroundColor(value) : GetBackgroundColor(value);
             color.a = alpha;
             graphics.ForEach(x => x.color = color);
         }
+
+        protected abstract Color GetBackgroundColor(T value);
+        protected abstract Color GetForegroundColor(T value);
     }
 }

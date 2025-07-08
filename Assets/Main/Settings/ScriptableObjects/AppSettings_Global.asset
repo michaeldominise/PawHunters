@@ -33,6 +33,26 @@ MonoBehaviour:
       Rock: {r: 0.6, g: 0.5, b: 0.3, a: 1}
       Steel: {r: 0.7, g: 0.7, b: 0.8, a: 1}
       Default: {r: 1, g: 1, b: 1, a: 1}
+    elementColorTheme_Background:
+      Normal: {r: 0.3, g: 0.3, b: 0.3, a: 1}
+      Water: {r: 0.065625004, g: 0.13125, b: 0.3, a: 1}
+      Fire: {r: 0.3, g: 0.08941177, b: 0, a: 1}
+      Electric: {r: 0.3, g: 0.3, b: 0.06, a: 1}
+      Dark: {r: 0.2, g: 0.2, b: 0.3, a: 1}
+      Fighter: {r: 0.3, g: 0.038235284, b: 0.038235284, a: 1}
+      Bug: {r: 0.21573035, g: 0.3, b: 0.08595505, a: 1}
+      Dragon: {r: 0.13304353, g: 0.066521734, b: 0.3, a: 1}
+      Fairy: {r: 0.3, g: 0.20941179, b: 0.27058828, a: 1}
+      Flying: {r: 0.18, g: 0.24000001, b: 0.3, a: 1}
+      Ghost: {r: 0.2, g: 0.14901963, b: 0.3, a: 1}
+      Grass: {r: 0.075, g: 0.3, b: 0.075, a: 1}
+      Ground: {r: 0.3, g: 0.21573034, b: 0.08595505, a: 1}
+      Ice: {r: 0.18, g: 0.27058825, b: 0.3, a: 1}
+      Poison: {r: 0.3, g: 0.1, b: 0.3, a: 1}
+      Psychic: {r: 0.3, g: 0.06, b: 0.18, a: 1}
+      Rock: {r: 0.3, g: 0.2509804, b: 0.14901963, a: 1}
+      Steel: {r: 0.2617647, g: 0.2617647, b: 0.3, a: 1}
+      Default: {r: 0.3, g: 0.3, b: 0.3, a: 1}
     rarityColorTheme:
       common: {r: 0.8, g: 0.8, b: 0.8, a: 1}
       uncommon: {r: 0.3, g: 0.8, b: 0.3, a: 1}
@@ -54,6 +74,33 @@ MonoBehaviour:
     tabSelectedText: {r: 0.9882353, g: 0.9647059, b: 0.8, a: 1}
     tabNotSelectedText: {r: 1, g: 1, b: 1, a: 0.5529412}
     tabNotSelectedText_PlayerTeam: {r: 0.7058824, g: 0.60784316, b: 0.7921569, a: 1}
+  iconSprites:
+    battleStats:
+      defense: {fileID: 0}
+      speed: {fileID: 0}
+      health: {fileID: 0}
+      attack: {fileID: 0}
+      critChance: {fileID: 0}
+      critDamage: {fileID: 0}
+    element:
+      normal: {fileID: 21300000, guid: d5b4eaf7987024e339a2056d11426aa6, type: 3}
+      water: {fileID: 21300000, guid: 08c916d29f58541d785e8e85917d044f, type: 3}
+      fire: {fileID: 21300000, guid: 67bc032818b884d23b00919c0dee80a8, type: 3}
+      electric: {fileID: 21300000, guid: 148d7c6997769447e8a01bec915586f9, type: 3}
+      dark: {fileID: 21300000, guid: a9ce03916294d4db1a846b3e908999af, type: 3}
+      fighter: {fileID: 21300000, guid: 74f5a509d40ea4fa7b01b21cbea6f368, type: 3}
+      bug: {fileID: 21300000, guid: 43f5b6361e3d145d7bc32852cdfe5ef2, type: 3}
+      dragon: {fileID: 21300000, guid: 82844b25786714a6a920e259d029bd0b, type: 3}
+      fairy: {fileID: 21300000, guid: c8591758f20994a15aa15033ebbd2d86, type: 3}
+      flying: {fileID: 21300000, guid: a6ce42f591b8c4b2b87ea07d0dd24d55, type: 3}
+      ghost: {fileID: 21300000, guid: b3804d6d9f8e748fcbc116e5bbca867c, type: 3}
+      grass: {fileID: 21300000, guid: fe5d33730cd2c4903ba7eb17887de2f1, type: 3}
+      ground: {fileID: 21300000, guid: a1df4d68aed114b089743faa47ff4c23, type: 3}
+      ice: {fileID: 21300000, guid: 45a3f0555652644b886f5e0e7efe7fe2, type: 3}
+      poison: {fileID: 21300000, guid: a4a0cf8d1f0bc45c295ee3245fe03c5e, type: 3}
+      psychic: {fileID: 21300000, guid: bdcf027f64c234e9a9f00e3253ba896d, type: 3}
+      rock: {fileID: 21300000, guid: c71f72fb4c0164a599532904ed1d1615, type: 3}
+      steel: {fileID: 21300000, guid: 0d2435ff0430e405db840a5ecd540557, type: 3}
   constantValues:
     movementStateSpeedList:
     - state: 0
@@ -62,6 +109,14 @@ MonoBehaviour:
       speed: 1
     - state: 2
       speed: 4
+    battleStatsMinMax:
+      defense: {x: 10, y: 25}
+      speed: {x: 45, y: 95}
+      health: {x: 150, y: 300}
+      attack: {x: 50, y: 90}
+      critChance: {x: 0.05, y: 0.25}
+      critDamage: {x: 1.4, y: 2}
+    holdDuration: 1
   uIAnimationValues:
     genericAnimationCurve:
       serializedVersion: 2

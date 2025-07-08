@@ -47,12 +47,16 @@ namespace LabHavenInteractive.PawHunters
 
         private void EquipmentPreviewItem_OnClick(EntityPreviewItem<SaveableEquipmentData> item)
         {
+            EntityStatsPreview.Instance.Show(item.Data, null);
+            return;
             if (!teamManager_Selection.EquipmentSlotManager.Equip(item.Data))
                 item.SetState(EntityPreviewItem<SaveableEquipmentData>.State.NotSelected);
         }
 
         private void HunterPreviewItem_OnClick(EntityPreviewItem<SaveableCharacterData> item)
         {
+            EntityStatsPreview.Instance.Show(item.Data, null);
+            return;
             if (item.CurrentState.Value == HunterPreviewItem.State.Selected)
             {
                 var slotIndex = TeamDataInstance.characterInstanceList.FindIndex(x => x.instanceId == -1);

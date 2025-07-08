@@ -15,9 +15,9 @@ namespace LabHavenInteractive.PawHunters
         float FadeOpacity => AppSettings_Battle.Instance.constantValues.environmentOverlayFadeOpacity;
 
         public override async Task PlayStart(EntityMainController caster, params EntityMainController[] targets)
-            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(AppSettings_Battle.Instance.colorTheme.elementColorOverlay.GetColor(elementType), FadeOpacity, FadeDuration);
+            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(AppSettings_Global.Instance.colorTheme.elementColorTheme_Background.GetColor(elementType), FadeOpacity, FadeDuration);
 
         public override async Task PlayEnd(EntityMainController caster, params EntityMainController[] targets)
-            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(AppSettings_Battle.Instance.colorTheme.elementColorOverlay.GetColor(elementType), 0, FadeDuration);
+            => EnvironmentManager.Instance.EnvironmentItem.ShowOverlay(AppSettings_Global.Instance.colorTheme.elementColorTheme_Background.GetColor(elementType), 0, FadeDuration);
     }
 }

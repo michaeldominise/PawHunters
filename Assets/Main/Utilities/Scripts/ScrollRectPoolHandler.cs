@@ -144,7 +144,7 @@ namespace LabHavenInteractive.PawHunters
         public void RefreshInit() => Init(data);
         public void Init(Collection<T2> data)
         {
-            this.data = SaveableData.Initialize(ref this.data, data, RefreshInit);
+            this.data = SaveableData.Initialize(this.data, data, RefreshInit);
             SetSortedList();
             LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
         }

@@ -90,24 +90,6 @@ MonoBehaviour:
   - {fileID: 9029841730457597359}
   - {fileID: 7205024003809956515}
   - {fileID: 392511725735643547}
-  teamData:
-    instanceData:
-      instanceId: 1751260075385
-      dateCreatedString: 2025/06/30 13:07:55
-      dateOwnedString: 2025/06/30 13:07:55
-    teamName: Sub Pact
-    characterInstanceList:
-    - instanceId: -1
-    - instanceId: -1
-    - instanceId: -1
-    equipmentInstanceList:
-    - instanceId: -1
-    - instanceId: -1
-    - instanceId: -1
-    - instanceId: -1
-    - instanceId: -1
-    - instanceId: -1
-    - instanceId: -1
 --- !u!1001 &142350492111848779
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,26 +4,28 @@ namespace LabHavenInteractive.PawHunters
 {
     public enum ElementType
     {
-        None,
-        Normal = 1 << 0,
-        Water = 1 << 1,
-        Fire = 1 << 2,
-        Electric = 1 << 3,
-        Dark = 1 << 4,
-        Fighter = 1 << 5,
-        Bug = 1 << 6,
-        Dragon = 1 << 7,
-        Fairy = 1 << 8,
-        Flying = 1 << 9,
-        Ghost = 1 << 10,
-        Grass = 1 << 11,
-        Ground = 1 << 12,
-        Ice = 1 << 13,
-        Poison = 1 << 14,
-        Psychic = 1 << 15,
-        Rock = 1 << 16,
-        Steel = 1 << 17,
-        All = 1 << 32 - 1,
+        None, // No element assigned
+
+        Normal = 1 << 0,  // A well-rounded type with no glaring strengths or weaknesses.
+        Water = 1 << 1,  // Balanced stats across the board, making it adaptable in any situation.
+        Fire = 1 << 2,  // High speed and attack with a fiery crit rate — burns fast, but not built for endurance.
+        Electric = 1 << 3,  // Fast and zappy, with quick attacks and decent crit potential, but fragile defenses.
+        Dark = 1 << 4,  // Cunning and precise, with strong crits and a sneaky balance of power.
+        Fighter = 1 << 5,  // Hits hard and endures well — the brawler’s choice with high attack and health.
+        Bug = 1 << 6,  // Fast but fragile — strikes quickly, then scuttles back before getting crushed.
+        Dragon = 1 << 7,  // Powerhouse with top-tier stats in nearly every category — fear the dragon's wrath.
+        Fairy = 1 << 8,  // Charming but dangerous — solid defenses with a deceptively high crit rate.
+        Flying = 1 << 9,  // Swift and evasive — glides in with good speed and decent offensive pressure.
+        Ghost = 1 << 10, // Elusive and deadly — moderate stats but a high chance of devastating crits.
+        Grass = 1 << 11, // Resilient and steady — focused on healing and outlasting opponents.
+        Ground = 1 << 12, // Tanky and powerful — can take hits and return them with raw force.
+        Ice = 1 << 13, // Glass cannon — low defense but high attack and strong crit bursts.
+        Poison = 1 << 14, // A tricky type with quick strikes and a sting in every blow.
+        Psychic = 1 << 15, // Mind over muscle — high crit chance and good speed for tactical strikes.
+        Rock = 1 << 16, // Solid as stone — massive defense and health, but slow to act.
+        Steel = 1 << 17, // An unbreakable wall — supreme defense and survivability with steady output.
+
+        All = 1 << 32 - 1, // Represents all types — used for universal effects or targeting
     }
 
     [System.Serializable]

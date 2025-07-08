@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -8,17 +9,21 @@ namespace LabHavenInteractive.PawHunters
 {
     public class EquipmentSlotManager : MonoBehaviour
     {
-        [SerializeField] List<EquipmentSlot> equipmentSlots;
-        [SerializeField] SaveableTeamData_CharacterInstance teamData;
+        [SerializeField] protected List<EquipmentSlot> equipmentSlots;
+        [SerializeField] protected SaveableTeamData teamData;
 
-        public void Init(SaveableTeamData_CharacterInstance teamData)
+        SaveableTeamData_CharacterInstance TeamData_CharacterInstance => teamData as SaveableTeamData_CharacterInstance;
+
+        public virtual async Task Init(SaveableTeamData teamData)
         {
             this.teamData = teamData;
+            var tasks = new List<Task>();
             for (int i = 0; i < teamData.Equipments.Count; i++)
             {
                 SaveableEquipmentData equipmentData = teamData.Equipments[i];
-                equipmentSlots[i].Init(equipmentData);
+                tasks.Add(equipmentSlots[i].Init(equipmentData));
             }
+            await Task.WhenAll(tasks);
         }
 
         public bool Equip(SaveableEquipmentData equipmentData)
@@ -39,9 +44,9 @@ namespace LabHavenInteractive.PawHunters
                 value = false;
             }
 
-            equipmentSlot.Init(equipmentData);
-            teamData.equipmentInstanceList[equipmentIndex].instanceId = equipmentData == null ? -1 : equipmentData.InstanceData.instanceId;
-            teamData.SetDirty();
+            _ = equipmentSlot.Init(equipmentData);
+            TeamData_CharacterInstance.equipmentInstanceList[equipmentIndex].instanceId = equipmentData == null ? -1 : equipmentData.InstanceData.instanceId;
+            TeamData_CharacterInstance.SetDirty();
             return value;
         }
     }

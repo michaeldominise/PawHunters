@@ -17,8 +17,6 @@ namespace LabHavenInteractive.PawHunters
         public int speed = 3;
         public float critChance = 0.1f;
         public float critDamage = 1.2f;
-        public float counterChance = 0.1f;
-        public float comboChance = 0.1f;
         public float specialSkillMax;
     }
 
@@ -35,10 +33,7 @@ namespace LabHavenInteractive.PawHunters
         public RecordedFloatClamped specialSkill = new();
         public RecordedFloat critChance = new();
         public RecordedFloat critDamage = new();
-        public RecordedFloat counterChance = new();
-        public RecordedFloat comboChance = new();
-        public RecordedFloat dodgeChance = new();
-        public RecordedFloat stunned = new();
+        public RecordedFloat immobilize = new();
         public float HealthPercentage => maxHealth.Value == 0 ? 0 : currentHealth.Value / maxHealth.Value;
 
         public BattleAttributes() { }
@@ -56,7 +51,7 @@ namespace LabHavenInteractive.PawHunters
             specialSkillMax.Reset(attribute.specialSkillMax);
             specialSkill.Reset(() => 0f, () => attribute.specialSkillMax);
             shield.Reset(0);
-            stunned.Reset(0);
+            immobilize.Reset(0);
         }
 
         public void Reset()
@@ -71,7 +66,7 @@ namespace LabHavenInteractive.PawHunters
             specialSkillMax.Reset(0);
             specialSkill.Reset(0);
             shield.Reset(0);
-            stunned.Reset(0);
+            immobilize.Reset(0);
         }
     }
 }

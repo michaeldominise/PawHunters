@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] SaveableEquipmentData data;
 
         [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
+        public EquipmentPreviewItem EquipmentPreviewItem => equipmentPreviewItem;
         public EquipmentType EquipmentType => equipmentType;
         public SaveableEquipmentData Data => data;
 
@@ -26,7 +28,7 @@ namespace LabHavenInteractive.PawHunters
             stateObjects.SetActive(state);
         }
 
-        public void Init(SaveableEquipmentData data)
+        public async Task Init(SaveableEquipmentData data)
         {
             this.data = data;
             if (data == null)
@@ -38,7 +40,7 @@ namespace LabHavenInteractive.PawHunters
             }
 
             SetState(State.Occupied);
-            equipmentPreviewItem.Init((int)equipmentType, data);
+            await equipmentPreviewItem.Init((int)equipmentType, data);
             animationUI.ScaleNormal();
         }
     }

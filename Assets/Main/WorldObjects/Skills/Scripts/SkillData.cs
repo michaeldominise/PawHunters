@@ -3,12 +3,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LabHavenInteractive.PawHunters
 {
     public class SkillData : MonoBehaviour
     {
+        [System.Serializable]
+        public class Descriptive
+        {
+            public enum Key { ElementEffectivity, ElementResistance }
+
+            public Key key;
+            public ElementType elementType;
+            public float value;
+
+            public Descriptive() { }
+            public Descriptive(Key key, float value)
+            {
+                this.key = key;
+                this.value = value;
+            }
+        }
+
         public string title;
         public string familyName;
         [TextArea] public string description;
@@ -17,6 +33,7 @@ namespace LabHavenInteractive.PawHunters
         public GameActionTriggersManager.TriggerType trigger = GameActionTriggersManager.TriggerType.Instant;
         public List<SkillTargetData> skillTargets;
         public List<SkillCustomCondition> customConditions;
+        public List<Descriptive> descriptives;
 
         public async Task Execute(GameActionTriggersManager.TriggerType trigger, EntityMainController caster, object triggerSource = null)
         {
