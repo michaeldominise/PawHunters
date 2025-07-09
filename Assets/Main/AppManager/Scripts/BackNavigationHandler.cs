@@ -27,6 +27,8 @@ namespace LabHavenInteractive.PawHunters
             backActionList.Add(new(key, backAction));
         }
 
+        public static void Execute() => Instance.OnBackClicked(default);
+
         static Action RemoveDuplicateKeyHirarchy(object key)
         {
             if (backActionList.Count == 0)

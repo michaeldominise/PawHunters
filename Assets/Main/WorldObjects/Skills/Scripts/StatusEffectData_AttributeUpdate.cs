@@ -10,7 +10,7 @@ namespace LabHavenInteractive.PawHunters
     {
         [SerializeField] SkillAttributeData.AttributeType targetAttribute;
 
-        AppSettings_Global.IconSprites IconSprites = AppSettings_Global.Instance.iconSprites;
+        AppSettings_Global.IconSprites IconSprites => AppSettings_Global.Instance.iconSprites;
 
         public override async Task<float> Execute(StatusEffectDataHandler statusEffectDataHandler)
         {

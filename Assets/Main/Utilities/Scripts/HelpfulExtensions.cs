@@ -58,11 +58,8 @@ namespace LabHavenInteractive.PawHunters
             if (rarityType == RarityType.None)
                 return 0;
 
-            var index = (int)rarityType;
-            var level = 0;
-            for (var x = 0; x < index - 1; x++)
-                level += x * 10;
-            return level + 1;
+            var index = (int)rarityType - 1;
+            return RarityHighestLevel((RarityType)index);
         }
 
         public static int RarityHighestLevel(this RarityType rarityType)
@@ -72,9 +69,9 @@ namespace LabHavenInteractive.PawHunters
 
             var index = (int)rarityType;
             var level = 0;
-            for (var x = 0; x < index; x++)
+            for (var x = 0; x < index + 1; x++)
                 level += x * 10;
-            return level - 1;
+            return level;
         }
     }
 }

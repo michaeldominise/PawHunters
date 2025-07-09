@@ -10,6 +10,7 @@ namespace LabHavenInteractive.PawHunters
 {
     public class HuntersUI : SingletonMonoBehaviour<HuntersUI>
     {
+        [SerializeField] GameObject container;
         [SerializeField] TeamManager_Selection teamManager_Selection;
         [SerializeField] HuntersTab huntersTab;
         [SerializeField] EquipmentsTab equipmentsTab;
@@ -47,15 +48,17 @@ namespace LabHavenInteractive.PawHunters
 
         private void EquipmentPreviewItem_OnClick(EntityPreviewItem<SaveableEquipmentData> item)
         {
-            EntityStatsPreview.Instance.Show(item.Data, null);
+            item.SetState(EquipmentPreviewItem.State.NotSelected);
+            ShowStatsPreview(item.Data);
             return;
             if (!teamManager_Selection.EquipmentSlotManager.Equip(item.Data))
-                item.SetState(EntityPreviewItem<SaveableEquipmentData>.State.NotSelected);
+                item.SetState(EquipmentPreviewItem.State.NotSelected);
         }
 
         private void HunterPreviewItem_OnClick(EntityPreviewItem<SaveableCharacterData> item)
         {
-            EntityStatsPreview.Instance.Show(item.Data, null);
+            item.SetState(HunterPreviewItem.State.NotSelected);
+            ShowStatsPreview(item.Data);
             return;
             if (item.CurrentState.Value == HunterPreviewItem.State.Selected)
             {
@@ -79,6 +82,17 @@ namespace LabHavenInteractive.PawHunters
             }
 
             TeamDataInstance.SetDirty();
+        }
+
+        void ShowStatsPreview(SaveableDataEntity saveableDataEntity)
+        {
+            EntityStatsPreview.Instance.Show(saveableDataEntity, null);
+            container.SetActive(false);
+            BackNavigationHandler.Add(this, () =>
+            {
+                EntityStatsPreview.Instance.Show(false);
+                container.SetActive(true);
+            }, BackNavigationHandler.BackHandlerMode.Execute);
         }
     }
 }

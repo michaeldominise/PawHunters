@@ -10,11 +10,12 @@ namespace LabHavenInteractive.PawHunters
     public class EntityStatsPreview : SingletonMonoBehaviour<EntityStatsPreview>
     {
         [SerializeField] GameObject container;
+        [SerializeField] GameObject contents;
         [SerializeField] TextMeshProUGUI nameLabel;
         [SerializeField] EntityElementManager elementManager; 
         [SerializeField] EntityLevelManager levelManager;
-         //[SerializeField] EntityPreviewManager previewManager;
-         [SerializeField] StatsItemManager battleStats;
+        [SerializeField] EntityAssetManager assetManager;
+        [SerializeField] StatsItemManager battleStats;
         [SerializeField] StatsItemManager elementStats;
         [SerializeField] SkillsPreview skillsPreview;
         [SerializeField] ScrollRect scrollRect;
@@ -34,7 +35,9 @@ namespace LabHavenInteractive.PawHunters
             this.data = SaveableData.Initialize(this.data, data, Refresh);
             await Load();
 
+            contents.SetActive(true);
             nameLabel.text = data.Name;
+            assetManager.Init(data);
             elementManager.Init(data);
             levelManager.Init(data);
             battleStats.Init(GetBattleStats());
@@ -93,15 +96,13 @@ namespace LabHavenInteractive.PawHunters
         async Task Load() => await data.LoadAssets(SaveableDataEntity.AssetType.All);
         void Unload() => data?.UnloadAssets(SaveableDataEntity.AssetType.All);
 
-        public void Close()
-        {
-            Show(false);
-        }
+        public void Close() => BackNavigationHandler.Execute();
 
-        void Show(bool value = true)
+        public void Show(bool value = true)
         {
             scrollRect.verticalNormalizedPosition = 1;
             container.SetActive(value);
+            contents.SetActive(false);
         }
     }
 }

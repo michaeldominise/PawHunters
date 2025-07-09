@@ -17,10 +17,11 @@ namespace LabHavenInteractive.PawHunters
             var rarity = saveableDataEntity.Rarity;
             var lowestLevel = rarity.RarityLowestLevel();
             var highestLevel = rarity.RarityHighestLevel();
-            var sliderValue = Mathf.Clamp((float)(saveableDataEntity.level - lowestLevel) / (highestLevel - lowestLevel), 0.04f, 1);
+            var levelPercentage = (float)(saveableDataEntity.level - lowestLevel) / (highestLevel - lowestLevel);
+            var sliderValue = Mathf.Clamp(levelPercentage, 0.04f, 1);
             slider.value = sliderValue;
             levelLabel.text = $"{saveableDataEntity.level - lowestLevel}";
-            percentageLabel.text = $"{sliderValue * 100:0}%";
+            percentageLabel.text = $"{levelPercentage * 100:0}%";
             rarityLabel.text = rarity.ToString().ToUpper();
             overlayUI.Init(saveableDataEntity.Rarity);
         }
