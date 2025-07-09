@@ -50,21 +50,26 @@ namespace LabHavenInteractive.PawHunters
 
         public List<StatsItem_Slider.DataSlider> GetBattleStats()
         {
+            var leveledMultiplier = AppSettings_Global.Instance.constantValues.LeveledMultiplier(data.level);
+
             var statList = new List<StatsItem_Slider.DataSlider>
             {
                 CreateDataSlider(SkillAttributeData.AttributeType.MaxHealth, data.Attribute.health),
                 CreateDataSlider(SkillAttributeData.AttributeType.Attack, data.Attribute.attack),
                 CreateDataSlider(SkillAttributeData.AttributeType.Defense, data.Attribute.defense),
                 CreateDataSlider(SkillAttributeData.AttributeType.Speed, data.Attribute.speed),
-                CreateDataSlider(SkillAttributeData.AttributeType.CritChance, data.Attribute.critChance, true),
-                CreateDataSlider(SkillAttributeData.AttributeType.CritDamage, data.Attribute.critDamage, true)
+                CreateDataSlider(SkillAttributeData.AttributeType.CritChance, data.Attribute.critChance, false, true),
+                CreateDataSlider(SkillAttributeData.AttributeType.CritDamage, data.Attribute.critDamage, false, true)
             };
 
             return statList;
         }
 
-        public StatsItem_Slider.DataSlider CreateDataSlider(SkillAttributeData.AttributeType attributeType, float value, bool isPercentage = false)
-            => new(BattleStatsMinMax.GetNormalizedPercentatge(value, attributeType), attributeType.ToString().SeparateCamelCase(), isPercentage ? $"{value * 100:0}%" : $"{value}", IconSprites.battleStats.GetSprite(attributeType));
+        public StatsItem_Slider.DataSlider CreateDataSlider(SkillAttributeData.AttributeType attributeType, float value, bool isLeveled = true, bool isPercentage = false)
+        {
+            var updatedValue = isLeveled ? value * AppSettings_Global.Instance.constantValues.LeveledMultiplier(data.level) : value;
+            return new(BattleStatsMinMax.GetNormalizedPercentatge(value, attributeType), attributeType.ToString().SeparateCamelCase(), isPercentage ? $"{updatedValue * 100:0}%" : updatedValue.Format(), IconSprites.battleStats.GetSprite(attributeType));
+        }
 
         public List<StatsItem_Element.DataElement> GetElementStats()
         {

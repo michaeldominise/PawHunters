@@ -133,8 +133,10 @@ namespace LabHavenInteractive.PawHunters
             public List<StateSpeed> movementStateSpeedList = new();
             public BattleStatsMinMax battleStatsMinMax = new();
             public float holdDuration = 1f;
+            public float leveledGrowthRateValue = 1.1f;
 
             public float GetSpeed(StateSpeed.State state) => movementStateSpeedList.FirstOrDefault(x => state == x.state)?.speed ?? 0;
+            public float LeveledMultiplier(int level) => Mathf.Pow(leveledGrowthRateValue, level - 1);
         }
 
         [System.Serializable]

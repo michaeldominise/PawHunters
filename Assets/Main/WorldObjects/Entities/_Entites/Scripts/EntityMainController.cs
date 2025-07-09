@@ -62,7 +62,7 @@ namespace LabHavenInteractive.PawHunters
             gameObject.name = $"{gameObject.name.Split(':')[0]}:{(TeamManager_GameEnemy ? "Enemy" : "Player")}";
 
             this.data = SaveableData.Initialize(this.data, data, Refresh);
-            battleAttributes = new(data.Attribute);
+            battleAttributes = new(data.Attribute, data.level);
 
             RegisterListener();
 

@@ -117,6 +117,7 @@ MonoBehaviour:
       critChance: {x: 0.05, y: 0.25}
       critDamage: {x: 1.4, y: 2}
     holdDuration: 1
+    leveledGrowthRateValue: 1.02
   uIAnimationValues:
     genericAnimationCurve:
       serializedVersion: 2

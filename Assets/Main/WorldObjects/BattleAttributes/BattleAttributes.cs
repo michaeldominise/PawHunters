@@ -37,15 +37,15 @@ namespace LabHavenInteractive.PawHunters
         public float HealthPercentage => maxHealth.Value == 0 ? 0 : currentHealth.Value / maxHealth.Value;
 
         public BattleAttributes() { }
-        public BattleAttributes(Attribute attribute) => Init(attribute);
+        public BattleAttributes(Attribute attribute, int level) => Init(attribute, level);
 
-        internal void Init(Attribute attribute)
+        internal void Init(Attribute attribute, int level)
         {
-            maxHealth.Reset(attribute.health);
-            currentHealth.Reset(attribute.health);
-            attack.Reset(attribute.attack);
-            defense.Reset(attribute.defense);
-            speed.Reset(attribute.speed);
+            maxHealth.Reset(attribute.health * LeveledMultiplier(level));
+            currentHealth.Reset(attribute.health * LeveledMultiplier(level));
+            attack.Reset(attribute.attack * LeveledMultiplier(level));
+            defense.Reset(attribute.defense * LeveledMultiplier(level));
+            speed.Reset(attribute.speed * LeveledMultiplier(level));
             critChance.Reset(attribute.critChance);
             critDamage.Reset(attribute.critDamage);
             specialSkillMax.Reset(attribute.specialSkillMax);
@@ -68,5 +68,7 @@ namespace LabHavenInteractive.PawHunters
             shield.Reset(0);
             immobilize.Reset(0);
         }
+
+        float LeveledMultiplier(int level) => AppSettings_Global.Instance.constantValues.LeveledMultiplier(level);
     }
 }
