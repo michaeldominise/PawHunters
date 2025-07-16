@@ -79,6 +79,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
+  teamManager: {fileID: 5107095069872096143}
+  container: {fileID: 7171635700508602653}
+  assetType: 1073741823
 --- !u!1 &2194367209897092924
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,13 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParent: {fileID: 4688722160594464800}
-  teamManger_EntityParents:
+  entityParents:
   - {fileID: 4906769701895701549}
   - {fileID: 1453192005283194253}
   - {fileID: 2977340371771450188}
-  assetType: 1073741811
   offset: {x: 0.75, y: 0, z: -9}
   entityMainController_Team: {fileID: 9159854395507696298}
+  equipmentSlotManager_Battle: {fileID: 0}
   executeSkillsOnInit: 1
 --- !u!114 &9159854395507696298
 MonoBehaviour:
@@ -150,7 +153,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: 0
   avatarSprite: {fileID: 0}
-  teamManager: {fileID: 5107095069872096143}
   model: {fileID: 0}
   sortingGroup: {fileID: 0}
   entitySkillsController: {fileID: 2273149770430294755}
@@ -224,6 +226,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
+  teamManager: {fileID: 5107095069872096143}
+  container: {fileID: 5515533942825722679}
+  assetType: 1073741823
 --- !u!1 &5239813204594895212
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,6 +274,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityMainController: {fileID: 0}
+  teamManager: {fileID: 5107095069872096143}
+  container: {fileID: 4712411373217897489}
+  assetType: 1073741823
 --- !u!1 &5592950785521526762
 GameObject:
   m_ObjectHideFlags: 0

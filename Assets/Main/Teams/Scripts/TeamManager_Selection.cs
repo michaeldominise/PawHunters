@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ namespace LabHavenInteractive.PawHunters
 
         public SaveableTeamData_CharacterInstance TeamDataInstance => teamDataInstance;
         public EquipmentSlotManager EquipmentSlotManager => equipmentSlotManager;
+        public EntityParent SelectedCharacterParent { get; set; }
+        public EntityParent SelectedEntityParent { get; set; }
         protected override int LayerSortingOrder => layerSortingOrder;
         TeamCollection teamCollection;
         Action onUpdateDetails;
@@ -31,23 +34,47 @@ namespace LabHavenInteractive.PawHunters
         {
             this.teamCollection = teamCollection;
             this.onUpdateDetails = onUpdateDetails;
+            SelectedCharacterParent = null;
+            SelectedEntityParent = null;
 
             ReselectTeam();
         }
 
         protected override void Refresh() { }
 
-        public void EntityUnload(EntityMainController entity)
+        private void EntityParent_OnStateChange(EntityParent_Selection entityParent)
         {
-            entity.Data.UnloadAssets(SaveableDataEntity.AssetType.Prefab);
-            Despawn(entity);
+            if (entityParent.CurrentState.Value == EntityParent_Selection.State.NotSelected && entityParent != SelectedCharacterParent)
+                return;
+
+            switch (entityParent.CurrentState.Value)
+            {
+                case EntityParent_Selection.State.NotSelected:
+                    SelectedCharacterParent = null;
+                    break;
+                case EntityParent_Selection.State.Selected:
+                    SelectedCharacterParent = entityParent;
+                    break;
+                case EntityParent_Selection.State.RemoveClicked:
+                    (teamData as SaveableTeamData_CharacterInstance).characterInstanceList[entityParent.Index].instanceId = -1;
+                    EntityUnload(entityParent.Index);
+                    onUpdateDetails?.Invoke();
+                    break;
+            }
+
+            foreach (EntityParent_Selection x in entityParents)
+                if (SelectedCharacterParent != x)
+                    x.SetState(EntityParent_Selection.State.NotSelected);
         }
 
-        public async void CharacterLoad(int index, SaveableCharacterData characterData)
+        public override async Task EntityLoad(int index)
         {
-            await characterData.LoadAssets(SaveableDataEntity.AssetType.Prefab);
-            Spawn(characterData.GetPrefab(), init: entity => EntityInit(index, entity, characterData));
+            await base.EntityLoad(index);
+            var entityParent = entityParents[index] as EntityParent_Selection;
+            entityParent.SetValue(EntityParent_OnStateChange, false);
         }
+
+        public void EntityUnload(int index) => entityParents[index].Unload();
 
         public void ReselectTeam() => SetTeamIndex(teamCollection.SelectedIndex);
         public void NextTeam() => SetTeamIndex(teamCollection.SelectedIndex + 1);

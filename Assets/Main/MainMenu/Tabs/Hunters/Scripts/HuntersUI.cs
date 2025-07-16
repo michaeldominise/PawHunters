@@ -48,38 +48,39 @@ namespace LabHavenInteractive.PawHunters
 
         private void EquipmentPreviewItem_OnClick(EntityPreviewItem<SaveableEquipmentData> item)
         {
-            item.SetState(EquipmentPreviewItem.State.NotSelected);
-            ShowStatsPreview(item.Data);
-            return;
-            if (!teamManager_Selection.EquipmentSlotManager.Equip(item.Data))
+            var slotIndex = -1;
+            if (slotIndex == -1)
+            {
                 item.SetState(EquipmentPreviewItem.State.NotSelected);
+                ShowStatsPreview(item.Data);
+                return;
+            }
+            else if (!teamManager_Selection.EquipmentSlotManager.Equip(item.Data, slotIndex))
+                item.SetState(EquipmentPreviewItem.State.NotSelected);
+            Bag.Instance.equipmentCollection.SetDirty();
         }
 
         private void HunterPreviewItem_OnClick(EntityPreviewItem<SaveableCharacterData> item)
         {
-            item.SetState(HunterPreviewItem.State.NotSelected);
-            ShowStatsPreview(item.Data);
-            return;
-            if (item.CurrentState.Value == HunterPreviewItem.State.Selected)
+            var slotIndex = teamManager_Selection.SelectedCharacterParent == null ? -1 : teamManager_Selection.SelectedCharacterParent.Index;
+            if (slotIndex == -1)
             {
-                var slotIndex = TeamDataInstance.characterInstanceList.FindIndex(x => x.instanceId == -1);
-                if (slotIndex == -1)
-                {
-                    item.SetState(HunterPreviewItem.State.NotSelected);
-                    return;
-                }
-                else
-                {
-                    TeamDataInstance.characterInstanceList[slotIndex].instanceId = item.Asset.Data.InstanceData.instanceId;
-                    teamManager_Selection.CharacterLoad(slotIndex, item.Asset.Data as SaveableCharacterData);
-                }
+                ShowStatsPreview(item.Data);
+                return;
             }
-            else
-            { 
-                var slotIndex = TeamDataInstance.characterInstanceList.FindIndex(x => x.instanceId == item.Asset.Data.InstanceData.instanceId);
-                TeamDataInstance.characterInstanceList[slotIndex].instanceId = -1;
-                teamManager_Selection.EntityUnload(teamManager_Selection.AliveEntityList[slotIndex]);
+
+            huntersTab.ScrollRectPoolHandler.activeList.FirstOrDefault(x => x != item && x.Data.InstanceData.instanceId == TeamDataInstance.characterInstanceList[slotIndex].instanceId)?.SetState(EntityPreviewItem<SaveableCharacterData>.State.NotSelected);
+            item.SetState(HunterPreviewItem.State.Selected);
+            var unloadIndex = TeamDataInstance.characterInstanceList.FindIndex(x => x.instanceId == item.Asset.Data.InstanceData.instanceId);
+            if(unloadIndex != -1)
+            {
+                TeamDataInstance.characterInstanceList[unloadIndex].instanceId = -1;
+                teamManager_Selection.EntityUnload(unloadIndex);
             }
+
+            TeamDataInstance.characterInstanceList[slotIndex].instanceId = item.Asset.Data.InstanceData.instanceId;
+            _ = teamManager_Selection.EntityLoad(slotIndex);
+            teamManager_Selection.SelectedCharacterParent = null;
 
             TeamDataInstance.SetDirty();
         }

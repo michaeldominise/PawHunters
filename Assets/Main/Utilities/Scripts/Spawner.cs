@@ -14,7 +14,7 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] protected Transform spawnParent;
 
         protected List<KeyValuePair<int, T>> spawnedList = new();
-        protected List<T> activeList = new();
+        public List<T> activeList = new();
 
         public Transform SpawnParent => spawnParent;
 

@@ -33,12 +33,17 @@ namespace LabHavenInteractive.PawHunters
             if (equipmentIndex < 0)
                 return false;
 
+            return Equip(equipmentData, equipmentIndex, false);
+        }
+
+        public bool Equip(SaveableEquipmentData equipmentData, int equipmentIndex, bool forceEquip = true)
+        {
             var equipmentSlot = equipmentSlots[equipmentIndex];
             if (equipmentSlot.CurrentState.Value == EquipmentSlot.State.Locked)
                 return false;
 
             var value = true;
-            if (equipmentSlot.CurrentState.Value != EquipmentSlot.State.Empty && equipmentSlot.Data == equipmentData)
+            if (!forceEquip && equipmentSlot.CurrentState.Value != EquipmentSlot.State.Empty && equipmentSlot.Data == equipmentData)
             {
                 equipmentData = null;
                 value = false;

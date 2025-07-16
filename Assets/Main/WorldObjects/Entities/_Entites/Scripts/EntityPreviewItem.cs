@@ -30,7 +30,6 @@ namespace LabHavenInteractive.PawHunters
         {
             if (Asset == null)
                 return;
-            SetState(CurrentState.Value == State.Selected ? State.NotSelected : State.Selected);
             onClick?.Invoke(this);
         }
 

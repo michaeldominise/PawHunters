@@ -3,45 +3,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LabHavenInteractive.PawHunters
 {
     public abstract class TeamManager : Spawner<EntityMainController>
     {
         [SerializeField] protected SaveableTeamData teamData;
-        [SerializeField] List<TeamManager_EntityParent> teamManger_EntityParents;
-        [SerializeField] SaveableTeamData.AssetType assetType = SaveableTeamData.AssetType.All;
+        [SerializeField, FormerlySerializedAs("teamManger_EntityParents")] protected List<EntityParent> entityParents;
 
         protected abstract int LayerSortingOrder { get; }
 
-        public List<EntityMainController> EntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController)?.Select(x => x.entityMainController).ToList();
-        public List<EntityMainController> AliveEntityList => teamManger_EntityParents.FindAll(x => x && x.entityMainController && x.entityMainController.IsAlive)?.Select(x => x.entityMainController).ToList();
+        public List<EntityMainController> EntityList => entityParents.FindAll(x => x && x.entityMainController)?.Select(x => x.entityMainController).ToList();
+        public List<EntityMainController> AliveEntityList => entityParents.FindAll(x => x && x.entityMainController && x.entityMainController.IsAlive)?.Select(x => x.entityMainController).ToList();
         public bool IsAlive => AliveEntityList?.FirstOrDefault(x => x.IsAlive) != null;
-
-        List<IAssetReferenceMasterID> loadedAssetReferences;
 
         protected virtual void Refresh() => _ = Init(teamData);
         public virtual async Task Init(SaveableTeamData teamData)
         {
             Clear();
-            this.teamData = SaveableData.Initialize(this.teamData, teamData, Refresh);
-            await Load();
 
-            for (var x = 0; x < teamData.Characters.Count && x < teamManger_EntityParents.Count; x++)
-            {
-                if (teamData.Characters[x] == null)
-                    continue;
-                Spawn(teamData.Characters[x].GetPrefab(), init: entity => EntityInit(x, entity, teamData.Characters[x]));
-            }
-        }
+            this.teamData = teamData;
+            var tasks = new List<Task>();
+            for (var x = 0; x < teamData.Characters.Count && x < entityParents.Count; x++)
+                tasks.Add(EntityLoad(x));
 
-        public virtual EntityMainController EntityInit(int index, EntityMainController entity, SaveableCharacterData saveableCharacterData)
-        {
-            entity.Init(this, saveableCharacterData);
-            entity.SetSortingOderLayer(LayerSortingOrder);
-            teamManger_EntityParents[index].Init(entity);
-            entity.CurrentState.RegisterListener(state => CurrentState_OnStateUpdate(entity));
-            return entity;
+            await Task.WhenAll(tasks);
         }
 
         protected virtual void CurrentState_OnStateUpdate(EntityMainController entity)
@@ -50,7 +37,7 @@ namespace LabHavenInteractive.PawHunters
                 return;
 
             Despawn(entity, 2);
-            teamManger_EntityParents.FirstOrDefault(x => x.entityMainController == entity).Init(null);
+            entityParents.FirstOrDefault(x => x.entityMainController == entity).Init(null);
         }
 
         [Button]
@@ -61,23 +48,10 @@ namespace LabHavenInteractive.PawHunters
                 return;
             aliveEntityList.Add(aliveEntityList.First());
             aliveEntityList.RemoveAt(0);
-            for (var x = 0; x < teamManger_EntityParents.Count; x++)
-                teamManger_EntityParents[x].Init(aliveEntityList.Count > x ? aliveEntityList[x] : null);
+            for (var x = 0; x < entityParents.Count; x++)
+                entityParents[x].Init(aliveEntityList.Count > x ? aliveEntityList[x] : null);
         }
 
-        public override void Clear()
-        {
-            Unload();
-            base.Clear();
-        }
-
-        public async Task Load()
-        {
-            loadedAssetReferences = teamData.GetAssetReference(assetType);
-            await Task.WhenAll(loadedAssetReferences.Select(x => x.Load()));
-        }
-
-        public void Unload() => loadedAssetReferences?.ForEach(x => x.Unload());
-        protected virtual void OnDestroy() => Unload();
+        public virtual async Task EntityLoad(int index) => await entityParents[index].Init(teamData.Characters[index], index, LayerSortingOrder, CurrentState_OnStateUpdate);
     }
 }

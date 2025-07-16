@@ -8,6 +8,8 @@ namespace LabHavenInteractive.PawHunters
     {
         [SerializeField] ScrollRectPoolHandler_Hunters scrollRectPoolHandler;
 
+        public ScrollRectPoolHandler_Hunters ScrollRectPoolHandler => scrollRectPoolHandler;
+
         private IEnumerator Start()
         {
             yield return null;

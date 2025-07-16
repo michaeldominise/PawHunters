@@ -21,7 +21,6 @@ namespace LabHavenInteractive.PawHunters
 
         [SerializeField] protected ElementType element;
         [SerializeField] protected Sprite avatarSprite;
-        [SerializeField] protected TeamManager teamManager;
         [SerializeField] protected Transform model;
         [SerializeField] protected SortingGroup sortingGroup;
         [SerializeField] protected EntitySkillsController entitySkillsController;
@@ -43,9 +42,9 @@ namespace LabHavenInteractive.PawHunters
         public EntityMovementController EntityMovementController => entityMovementController;
         public EntityAnimationController EntityAnimationController => entityAnimationController;
         public EntityStatusEffectController EntityStatusEffectController => entityStatusEffectController;
-        public TeamManager_Game TeamManager_Game => teamManager as TeamManager_Game;
-        public TeamManager_GamePlayer TeamManager_GamePlayer => teamManager as TeamManager_GamePlayer;
-        public TeamManager_GameEnemy TeamManager_GameEnemy => teamManager as TeamManager_GameEnemy;
+        public TeamManager_Game TeamManager_Game { get; protected set; }
+        public TeamManager_GamePlayer TeamManager_GamePlayer => EntityParent?.teamManager as TeamManager_GamePlayer;
+        public TeamManager_GameEnemy TeamManager_GameEnemy => EntityParent?.teamManager as TeamManager_GameEnemy;
         public LayerManager LayerManager => layerManager;
         public AnchorGroup Anchor => anchor;
 
@@ -54,11 +53,14 @@ namespace LabHavenInteractive.PawHunters
 
         [SerializeField] protected SaveableDataEntity data;
         public SaveableDataEntity Data => data;
+        public EntityParent EntityParent { get; private set; }
 
-        protected void Refresh() => Init(teamManager, data);
-        public virtual void Init(TeamManager teamManager, SaveableDataEntity data)
+        protected void Refresh() => Init(EntityParent, data);
+        public virtual void Init(EntityParent entityParent, SaveableDataEntity data)
         {
-            this.teamManager = teamManager;
+            EntityParent = entityParent;
+            if(entityParent)
+                TeamManager_Game = entityParent.teamManager as TeamManager_Game;
             gameObject.name = $"{gameObject.name.Split(':')[0]}:{(TeamManager_GameEnemy ? "Enemy" : "Player")}";
 
             this.data = SaveableData.Initialize(this.data, data, Refresh);

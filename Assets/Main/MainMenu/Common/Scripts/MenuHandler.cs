@@ -14,6 +14,8 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] MenuItem defaultSelectedItem;
         [ShowInInspector, ReadOnly] MenuItem CurrentSelectedItem { get; set; }
 
+        public int SelectedIndex => CurrentSelectedItem == null ? -1 : CurrentSelectedItem.Index;
+
         public IEnumerator Start()
         {
             yield return null;
@@ -24,7 +26,11 @@ namespace LabHavenInteractive.PawHunters
             LayoutRebuilder.ForceRebuildLayoutImmediate(transform as RectTransform);
         }
 
-        public void Init() => itemList.ForEach(x => x.Init(OnSelect, x == defaultSelectedItem));
+        public void Init()
+        {
+            for(var x = 0; x < itemList.Count; x++)
+                itemList[x].Init(OnSelect, itemList[x] == defaultSelectedItem, x);
+        }
 
         public void OnSelect(MenuItem item) => OnSelect(item, backHandlerMode);
         void OnSelect(MenuItem item, BackNavigationHandler.BackHandlerMode backHandlerMode)

@@ -325,9 +325,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1453192005283194253, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
+      propertyPath: assetType
+      value: 1073741821
+      objectReference: {fileID: 0}
     - target: {fileID: 2194367209897092924, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
       propertyPath: m_Name
       value: PlayerTeamManager_Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977340371771450188, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
+      propertyPath: assetType
+      value: 1073741821
+      objectReference: {fileID: 0}
+    - target: {fileID: 4906769701895701549, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
+      propertyPath: assetType
+      value: 1073741821
       objectReference: {fileID: 0}
     - target: {fileID: 5107095069872096143, guid: 4044cf2eb5fde4bd792d0779fa190f74, type: 3}
       propertyPath: offset.x

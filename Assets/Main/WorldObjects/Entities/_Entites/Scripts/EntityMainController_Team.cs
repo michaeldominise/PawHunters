@@ -9,10 +9,10 @@ namespace LabHavenInteractive.PawHunters
         public override BattleAttributes BattleAttributes => teamBattleAttributes;
         public override bool IsAlive => true;
 
-        public override void Init(TeamManager teamManager, SaveableDataEntity dataEntity) { }
+        public override void Init(EntityParent EntityParent, SaveableDataEntity dataEntity) { }
         public void Init(TeamManager_Game teamManager)
         {
-            this.teamManager = teamManager;
+            TeamManager_Game = teamManager;
             entitySkillsController.Init(this);
             entityStatusEffectController.Init(this);
 

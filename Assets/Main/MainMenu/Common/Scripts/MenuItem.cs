@@ -17,13 +17,16 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] Button button;
         [SerializeField] UnityEvent onSelect;
         [SerializeField] UnityEvent onDeselect;
+        [SerializeField] int index;
 
+        public int Index => index;
         Action<MenuItem> onMenuSelect;
 
         private void Reset() => button = GetComponent<Button>();
         private void Start() => button.onClick.AddListener(() => onMenuSelect?.Invoke(this));
-        public void Init(Action<MenuItem> onSelect, bool isSelected)
+        public void Init(Action<MenuItem> onSelect, bool isSelected, int index)
         {
+            this.index = index;
             onMenuSelect = onSelect;
             SetState(isSelected ? State.Selected : State.NotSelected);
         }
