@@ -37,7 +37,7 @@ namespace LabHavenInteractive.PawHunters
         async Task InitEquipments()
         {
             if (equipmentSlotManager_Battle)
-                await equipmentSlotManager_Battle.Init(teamData);
+                await equipmentSlotManager_Battle.Init(teamData, LayerSortingOrder, null);
             else
             {
                 var skillList = new List<SkillData>();

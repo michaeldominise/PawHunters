@@ -89,7 +89,7 @@ namespace LabHavenInteractive.PawHunters
         public async void UpdateDetails()
         {
             teamNameInput.text = TeamDataInstance.teamName;
-            await equipmentSlotManager.Init(teamDataInstance);
+            await equipmentSlotManager.Init(teamDataInstance, LayerSortingOrder, CurrentState_OnStateUpdate);
             await Init(teamDataInstance);
             onUpdateDetails?.Invoke();
         }

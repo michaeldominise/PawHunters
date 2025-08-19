@@ -29,9 +29,11 @@ namespace LabHavenInteractive.PawHunters
             get => assetReference.AssetGUID;
             set
             {
+#if UNITY_EDITOR
                 string assetPath = AssetDatabase.GUIDToAssetPath(value);
                 var asset = AssetDatabase.LoadAssetAtPath<T>(assetPath);
                 AssetReference = asset;
+#endif
             }
         }
 

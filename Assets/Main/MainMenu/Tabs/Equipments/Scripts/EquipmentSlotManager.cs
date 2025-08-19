@@ -13,46 +13,35 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] protected SaveableTeamData teamData;
 
         SaveableTeamData_CharacterInstance TeamData_CharacterInstance => teamData as SaveableTeamData_CharacterInstance;
+        int layerSortingOrder;
+        Action<EntityMainController> onCurrentState_OnStateUpdate;
 
-        public virtual async Task Init(SaveableTeamData teamData)
+        public virtual async Task Init(SaveableTeamData teamData, int layerSortingOrder, Action<EntityMainController> onCurrentState_OnStateUpdate)
         {
             this.teamData = teamData;
+            this.layerSortingOrder = layerSortingOrder;
+            this.onCurrentState_OnStateUpdate = onCurrentState_OnStateUpdate;
             var tasks = new List<Task>();
             for (int i = 0; i < teamData.Equipments.Count; i++)
-            {
-                SaveableEquipmentData equipmentData = teamData.Equipments[i];
-                tasks.Add(equipmentSlots[i].Init(equipmentData));
-            }
+                tasks.Add(EntityLoad(i));
             await Task.WhenAll(tasks);
         }
 
-        public bool Equip(SaveableEquipmentData equipmentData)
+        public virtual async Task EntityLoad(int index) => await equipmentSlots[index].Init(teamData.Equipments[index], index, layerSortingOrder, onCurrentState_OnStateUpdate);
+
+        public virtual async Task Equip(SaveableEquipmentData equipmentData, EquipmentType equipmentType)
         {
-            var equipmentPrefab = equipmentData.GetPrefab() as EquipmentMainController;
-            var equipmentIndex = equipmentSlots.FindIndex(x => x.EquipmentType == equipmentPrefab.EquipmentType);
+            var equipmentIndex = equipmentSlots.FindIndex(x => x.EquipmentType == equipmentType);
             if (equipmentIndex < 0)
-                return false;
+                return;
 
-            return Equip(equipmentData, equipmentIndex, false);
-        }
-
-        public bool Equip(SaveableEquipmentData equipmentData, int equipmentIndex, bool forceEquip = true)
-        {
             var equipmentSlot = equipmentSlots[equipmentIndex];
-            if (equipmentSlot.CurrentState.Value == EquipmentSlot.State.Locked)
-                return false;
+            if (equipmentSlot.CurrentState.Value == EntityParent_Selection.State.Locked)
+                return;
 
-            var value = true;
-            if (!forceEquip && equipmentSlot.CurrentState.Value != EquipmentSlot.State.Empty && equipmentSlot.Data == equipmentData)
-            {
-                equipmentData = null;
-                value = false;
-            }
-
-            _ = equipmentSlot.Init(equipmentData);
             TeamData_CharacterInstance.equipmentInstanceList[equipmentIndex].instanceId = equipmentData == null ? -1 : equipmentData.InstanceData.instanceId;
+            await EntityLoad(equipmentIndex);
             TeamData_CharacterInstance.SetDirty();
-            return value;
         }
     }
 }

@@ -6,42 +6,34 @@ using UnityEngine;
 
 namespace LabHavenInteractive.PawHunters
 {
-    public class EquipmentSlot : MonoBehaviour
+    public class EquipmentSlot : EntityParent_Selection
     {
-        public enum State { Empty, Occupied, Locked }
-
         [SerializeField] EquipmentType equipmentType;
         [SerializeField] StateObjects<State> stateObjects;
         [SerializeField] EquipmentPreviewItem equipmentPreviewItem;
         [SerializeField] AnimationUI animationUI;
         [SerializeField] SaveableEquipmentData data;
 
-        [ShowInInspector, ReadOnly] public StateController<State> CurrentState { get; private set; } = new();
         public EquipmentPreviewItem EquipmentPreviewItem => equipmentPreviewItem;
         public EquipmentType EquipmentType => equipmentType;
         public SaveableEquipmentData Data => data;
 
         [Button]
-        public void SetState(State state)
+        public override void SetState(State state)
         {
-            CurrentState.Value = state;
+            base.SetState(state);
             stateObjects.SetActive(state);
         }
 
-        public async Task Init(SaveableEquipmentData data)
+        public override Task Init(SaveableDataEntity data, int index, int layerSortingOrder, Action<EntityMainController> onCurrentState_OnStateUpdate)
         {
-            this.data = data;
+            var task = base.Init(data, index, layerSortingOrder, onCurrentState_OnStateUpdate);
+            equipmentPreviewItem.gameObject.SetActive(data != null);
             if (data == null)
-            {
-                SetState(State.Empty);
-                equipmentPreviewItem.Unload();
                 animationUI.ScaleDown();
-                return;
-            }
-
-            SetState(State.Occupied);
-            await equipmentPreviewItem.Init((int)equipmentType, data);
-            animationUI.ScaleNormal();
+            else
+                animationUI.ScaleNormal();
+            return task;
         }
     }
 }

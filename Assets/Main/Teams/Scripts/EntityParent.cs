@@ -21,7 +21,7 @@ namespace LabHavenInteractive.PawHunters
         int layerSortingOrder;
 
         public void Refresh() => _ = Init(data, Index, layerSortingOrder, onCurrentState_OnStateUpdate);
-        public async Task Init(SaveableDataEntity data, int index, int layerSortingOrder, Action<EntityMainController> onCurrentState_OnStateUpdate)
+        public virtual async Task Init(SaveableDataEntity data, int index, int layerSortingOrder, Action<EntityMainController> onCurrentState_OnStateUpdate)
         {
             this.data = data;
             this.layerSortingOrder = layerSortingOrder;

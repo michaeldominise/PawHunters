@@ -22,7 +22,7 @@ namespace LabHavenInteractive.PawHunters
 
         private void BattleManager_OnStateValueChange(BattleManager.State state) => container.SetActive(state != BattleManager.State.None);
 
-        public override async Task Init(SaveableTeamData teamData)
+        public override async Task Init(SaveableTeamData teamData, int layerSortingOrder, Action<EntityMainController> onCurrentState_OnStateUpdate)
         {
             this.teamData = teamData;
             var equipments = teamData.Equipments.Where(x => x != null && x.InstanceData.instanceId != -1).ToList();
@@ -37,7 +37,7 @@ namespace LabHavenInteractive.PawHunters
                 
                 SaveableEquipmentData equipmentData = equipments[i];
                 equipmentSlots[i].gameObject.SetActive(true);
-                tasks.Add(equipmentSlots[i].Init(equipmentData));
+                tasks.Add(equipmentSlots[i].Init(equipmentData, i, layerSortingOrder, onCurrentState_OnStateUpdate));
             }
 
             await Task.WhenAll(tasks);

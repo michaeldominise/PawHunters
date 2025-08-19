@@ -30,14 +30,14 @@ namespace LabHavenInteractive.PawHunters
 
         private void OnEnable() => SetState(State.NotSelected);
 
-        public void SetValue(Action<EntityParent_Selection> onStateChange, bool isLocked)
+        public virtual void SetValue(Action<EntityParent_Selection> onStateChange, bool isLocked)
         {
             CurrentState.ClearListeners();
             SetState(isLocked ? State.Locked : State.NotSelected);
             CurrentState.RegisterListener(state => onStateChange?.Invoke(this));
         }
 
-        public void SetState(State state)
+        public virtual void SetState(State state)
         {
             if (CurrentState.Value == State.Locked && state != State.Unlocked)
                 return;

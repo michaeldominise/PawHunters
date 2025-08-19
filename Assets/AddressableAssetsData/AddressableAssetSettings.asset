@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 723488a33bf224513b0cfd0f7a49ddfc
   m_currentHash:
     serializedVersion: 2
-    Hash: 96e53e4e413b4f9e8aec941611087460
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -51,9 +51,9 @@ MonoBehaviour:
   m_BuildAndReleaseBinFileOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: b420bcb054d864fb88c5fa9a9453768d
+    m_Id: 077717d26fc644ff39bd165e2394b6f8
   m_RemoteCatalogLoadPath:
-    m_Id: d56bc157a1a6a47b0acd430b76b7445b
+    m_Id: 1ff639fa6993b412eb7662365c810ff6
   m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 

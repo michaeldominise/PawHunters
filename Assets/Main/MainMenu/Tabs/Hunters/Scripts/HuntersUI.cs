@@ -48,16 +48,8 @@ namespace LabHavenInteractive.PawHunters
 
         private void EquipmentPreviewItem_OnClick(EntityPreviewItem<SaveableEquipmentData> item)
         {
-            var slotIndex = -1;
-            if (slotIndex == -1)
-            {
-                item.SetState(EquipmentPreviewItem.State.NotSelected);
-                ShowStatsPreview(item.Data);
-                return;
-            }
-            else if (!teamManager_Selection.EquipmentSlotManager.Equip(item.Data, slotIndex))
-                item.SetState(EquipmentPreviewItem.State.NotSelected);
-            Bag.Instance.equipmentCollection.SetDirty();
+            item.SetState(EquipmentPreviewItem.State.NotSelected);
+            ShowStatsPreview(item.Data);
         }
 
         private void HunterPreviewItem_OnClick(EntityPreviewItem<SaveableCharacterData> item)
