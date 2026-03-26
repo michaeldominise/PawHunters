@@ -17,7 +17,7 @@ namespace LabHavenInteractive.PawHunters
         [SerializeField] GameObject tabs;
 
         public TeamCollection TeamCollection => UserData.Instance.teamCollection;
-        [SerializeField, ReadOnly] SaveableTeamData_CharacterInstance TeamDataInstance => teamManager_Selection.TeamDataInstance;
+        [ReadOnly] SaveableTeamData_CharacterInstance TeamDataInstance => teamManager_Selection.TeamDataInstance;
 
         private IEnumerator Start()
         {

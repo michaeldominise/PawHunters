@@ -10,7 +10,7 @@ namespace LabHavenInteractive.PawHunters
         [ShowInInspector, HideReferenceObjectPicker, BoxGroup("Active Asset References", ShowLabel = false)]
         static List<AssetReferenceMasterIDProfiler> ActiveAssetReferences = new();
 
-        [SerializeField]
+        [System.Serializable]
         public class AssetReferenceMasterIDProfiler
         {
             [ShowInInspector, ReadOnly] public string MasterID => iAssetReference.MasterID;
