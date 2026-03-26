@@ -5,6 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 using Object = UnityEngine.Object;
 
 namespace AssetUsageDetectorNamespace
@@ -152,9 +153,7 @@ namespace AssetUsageDetectorNamespace
 					}
 
 					break;
-#if UNITY_2019_3_OR_NEWER
 				case SerializedPropertyType.ManagedReference: SerializedProperty.managedReferenceValue = newValue; break;
-#endif
 			}
 
 			SerializedProperty.serializedObject.ApplyModifiedPropertiesWithoutUndo();
@@ -267,7 +266,7 @@ namespace AssetUsageDetectorNamespace
 
 				for( int i = 0; i < MonoScriptAllVariables.Length; i++ )
 				{
-					if( MonoScriptAllVariables[i].isSerializable && !MonoScriptAllVariables[i].IsProperty )
+                    if (!MonoScriptAllVariables[i].IsProperty)
 					{
 						Object variableDefaultValue = monoImporter.GetDefaultReference( MonoScriptAllVariables[i].Name );
 						if( variableDefaultValue == Value && MonoScriptAllVariables[i].Name == Variable )
@@ -288,20 +287,17 @@ namespace AssetUsageDetectorNamespace
 
 				List<string> textureNames = new List<string>( 16 );
 				List<Texture> textureValues = new List<Texture>( 16 );
-#if UNITY_2018_1_OR_NEWER
 				List<string> nonModifiableTextureNames = new List<string>( 16 );
 				List<Texture> nonModifiableTextureValues = new List<Texture>( 16 );
-#endif
 
-				int shaderPropertyCount = ShaderUtil.GetPropertyCount( shader );
+                int shaderPropertyCount = shader.GetPropertyCount();
 				for( int i = 0; i < shaderPropertyCount; i++ )
 				{
-					if( ShaderUtil.GetPropertyType( shader, i ) != ShaderUtil.ShaderPropertyType.TexEnv )
-						continue;
+                    if (shader.GetPropertyType(i) != ShaderPropertyType.Texture)
+                        continue;
 
-					string propertyName = ShaderUtil.GetPropertyName( shader, i );
-#if UNITY_2018_1_OR_NEWER
-					if( ShaderUtil.IsShaderPropertyNonModifiableTexureProperty( shader, i ) )
+                    string propertyName = shader.GetPropertyName(i);
+                    if ((shader.GetPropertyFlags(i) & ShaderPropertyFlags.NonModifiableTextureData) != 0)
 					{
 						Texture propertyDefaultValue = shaderImporter.GetNonModifiableTexture( propertyName );
 						if( propertyDefaultValue == Value && propertyName == Variable )
@@ -311,7 +307,6 @@ namespace AssetUsageDetectorNamespace
 						nonModifiableTextureValues.Add( propertyDefaultValue );
 					}
 					else
-#endif
 					{
 						Texture propertyDefaultValue = shaderImporter.GetDefaultTexture( propertyName );
 						if( propertyDefaultValue == Value && propertyName == Variable )
@@ -323,9 +318,7 @@ namespace AssetUsageDetectorNamespace
 				}
 
 				shaderImporter.SetDefaultTextures( textureNames.ToArray(), textureValues.ToArray() );
-#if UNITY_2018_1_OR_NEWER
 				shaderImporter.SetNonModifiableTextures( nonModifiableTextureNames.ToArray(), nonModifiableTextureValues.ToArray() );
-#endif
 				AssetDatabase.ImportAsset( shaderImporter.assetPath );
 			}
 			else

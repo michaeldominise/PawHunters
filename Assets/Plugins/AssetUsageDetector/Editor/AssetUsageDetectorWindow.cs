@@ -1,17 +1,9 @@
-// Asset Usage Detector - by Suleyman Yasir KULA (yasirkula@gmail.com)
-
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using System.Collections.Generic;
 using System.Reflection;
 using Object = UnityEngine.Object;
-#if UNITY_2021_2_OR_NEWER
-using PrefabStage = UnityEditor.SceneManagement.PrefabStage;
-using PrefabStageUtility = UnityEditor.SceneManagement.PrefabStageUtility;
-#elif UNITY_2018_3_OR_NEWER
-using PrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStage;
-using PrefabStageUtility = UnityEditor.Experimental.SceneManagement.PrefabStageUtility;
-#endif
 
 namespace AssetUsageDetectorNamespace
 {
@@ -26,10 +18,6 @@ namespace AssetUsageDetectorNamespace
 		private const string PREFS_SEARCH_ASSETS = "AUD_AssetsSearch";
 		private const string PREFS_SEARCH_PROJECT_SETTINGS = "AUD_ProjectSettingsSearch";
 		private const string PREFS_DONT_SEARCH_SOURCE_ASSETS = "AUD_AssetsExcludeSrc";
-		private const string PREFS_SEARCH_DEPTH_LIMIT = "AUD_Depth";
-		private const string PREFS_SEARCH_FIELDS = "AUD_Fields";
-		private const string PREFS_SEARCH_PROPERTIES = "AUD_Properties";
-		private const string PREFS_SEARCH_NON_SERIALIZABLES = "AUD_NonSerializables";
 		private const string PREFS_SEARCH_UNUSED_MATERIAL_PROPERTIES = "AUD_SearchUnusedMaterialProps";
 		private const string PREFS_LAZY_SCENE_SEARCH = "AUD_LazySceneSearch";
 #if ASSET_USAGE_ADDRESSABLES
@@ -64,7 +52,6 @@ namespace AssetUsageDetectorNamespace
 		// This isn't readonly so that it can be serialized
 		private List<ObjectToSearch> objectsToSearch = new List<ObjectToSearch>() { new ObjectToSearch( null ) };
 
-#pragma warning disable 0649
 		[SerializeField] // Since titleContent persists between Editor sessions, so should the IsLocked property because otherwise, "[L]" in title becomes confusing when the EditorWindow isn't actually locked
 		private bool m_isLocked;
 		private bool IsLocked
@@ -79,7 +66,6 @@ namespace AssetUsageDetectorNamespace
 				}
 			}
 		}
-#pragma warning restore 0649
 
 		private Phase currentPhase = Phase.Setup;
 
@@ -96,13 +82,10 @@ namespace AssetUsageDetectorNamespace
 		private List<Object> excludedAssets = new List<Object>() { null }; // These assets won't be searched for references
 		private List<Object> excludedScenes = new List<Object>() { null }; // These scenes won't be searched for references
 
-		private int searchDepthLimit = 4; // Depth limit for recursively searching variables of objects
-
 		private bool lazySceneSearch = true;
 #if ASSET_USAGE_ADDRESSABLES
 		private bool addressablesSupport = false;
 #endif
-		private bool searchNonSerializableVariables = true;
 		private bool searchUnusedMaterialProperties = true;
 		private bool calculateUnusedObjects = false;
 		private bool hideDuplicateRows = true;
@@ -110,8 +93,6 @@ namespace AssetUsageDetectorNamespace
 		private bool hideRedundantPrefabReferencesInScenes = false;
 		private bool noAssetDatabaseChanges = false;
 		private bool showDetailedProgressBar = true;
-
-		private BindingFlags fieldModifiers, propertyModifiers;
 
 		private SearchRefactoring searchRefactoring = null; // Its value can be assigned via ShowAndSearch
 
@@ -131,37 +112,7 @@ namespace AssetUsageDetectorNamespace
 		{
 			contextMenu.AddItem( new GUIContent( "Lock" ), IsLocked, () => IsLocked = !IsLocked );
 			contextMenu.AddSeparator( "" );
-
-#if UNITY_2018_3_OR_NEWER
 			contextMenu.AddItem( new GUIContent( "Settings" ), false, () => SettingsService.OpenProjectSettings( "Project/yasirkula/Asset Usage Detector" ) );
-#else
-			contextMenu.AddItem( new GUIContent( "Settings" ), false, () =>
-			{
-				System.Type preferencesWindowType = typeof( EditorWindow ).Assembly.GetType( "UnityEditor.PreferencesWindow" );
-				preferencesWindowType.GetMethod( "ShowPreferencesWindow", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ).Invoke( null, null );
-
-				EditorWindow preferencesWindow = GetWindow( preferencesWindowType );
-				if( (bool) preferencesWindowType.GetField( "m_RefreshCustomPreferences", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance ).GetValue( preferencesWindow ) )
-				{
-					preferencesWindowType.GetMethod( "AddCustomSections", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance ).Invoke( preferencesWindow, null );
-					preferencesWindowType.GetField( "m_RefreshCustomPreferences", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance ).SetValue( preferencesWindow, false );
-				}
-
-				int targetSectionIndex = -1;
-				System.Collections.IList sections = (System.Collections.IList) preferencesWindowType.GetField( "m_Sections", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance ).GetValue( preferencesWindow );
-				for( int i = 0; i < sections.Count; i++ )
-				{
-					if( ( (GUIContent) sections[i].GetType().GetField( "content", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance ).GetValue( sections[i] ) ).text == "Asset Usage Detector" )
-					{
-						targetSectionIndex = i;
-						break;
-					}
-				}
-
-				if( targetSectionIndex >= 0 )
-					preferencesWindowType.GetProperty( "selectedSectionIndex", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance ).SetValue( preferencesWindow, targetSectionIndex, null );
-			} );
-#endif
 
 			if( currentPhase == Phase.Setup )
 			{
@@ -333,10 +284,6 @@ namespace AssetUsageDetectorNamespace
 				searchInAssetsFolder = searchParameters.searchInAssetsFolder;
 				dontSearchInSourceAssets = searchParameters.dontSearchInSourceAssets;
 				searchInProjectSettings = searchParameters.searchInProjectSettings;
-				searchDepthLimit = searchParameters.searchDepthLimit;
-				fieldModifiers = searchParameters.fieldModifiers;
-				propertyModifiers = searchParameters.propertyModifiers;
-				searchNonSerializableVariables = searchParameters.searchNonSerializableVariables;
 				searchUnusedMaterialProperties = searchParameters.searchUnusedMaterialProperties;
 				searchRefactoring = searchParameters.searchRefactoring;
 				lazySceneSearch = searchParameters.lazySceneSearch;
@@ -386,17 +333,12 @@ namespace AssetUsageDetectorNamespace
 			if( currentPhase == Phase.Complete && AssetUsageDetectorSettings.ShowCustomTooltip )
 				wantsMouseMove = wantsMouseEnterLeaveWindow = true; // These values aren't preserved during domain reload on Unity 2020.3.0f1
 
-#if UNITY_2018_3_OR_NEWER
-			PrefabStage.prefabStageClosing -= ReplacePrefabStageObjectsWithAssets;
 			PrefabStage.prefabStageClosing += ReplacePrefabStageObjectsWithAssets;
-#endif
 		}
 
 		private void OnDisable()
 		{
-#if UNITY_2018_3_OR_NEWER
 			PrefabStage.prefabStageClosing -= ReplacePrefabStageObjectsWithAssets;
-#endif
 			SearchResultTooltip.Hide();
 		}
 
@@ -418,10 +360,6 @@ namespace AssetUsageDetectorNamespace
 			EditorPrefs.SetBool( PREFS_SEARCH_ASSETS, searchInAssetsFolder );
 			EditorPrefs.SetBool( PREFS_DONT_SEARCH_SOURCE_ASSETS, dontSearchInSourceAssets );
 			EditorPrefs.SetBool( PREFS_SEARCH_PROJECT_SETTINGS, searchInProjectSettings );
-			EditorPrefs.SetInt( PREFS_SEARCH_DEPTH_LIMIT, searchDepthLimit );
-			EditorPrefs.SetInt( PREFS_SEARCH_FIELDS, (int) fieldModifiers );
-			EditorPrefs.SetInt( PREFS_SEARCH_PROPERTIES, (int) propertyModifiers );
-			EditorPrefs.SetBool( PREFS_SEARCH_NON_SERIALIZABLES, searchNonSerializableVariables );
 			EditorPrefs.SetBool( PREFS_SEARCH_UNUSED_MATERIAL_PROPERTIES, searchUnusedMaterialProperties );
 			EditorPrefs.SetBool( PREFS_LAZY_SCENE_SEARCH, lazySceneSearch );
 #if ASSET_USAGE_ADDRESSABLES
@@ -441,10 +379,6 @@ namespace AssetUsageDetectorNamespace
 			searchInAssetsFolder = EditorPrefs.GetBool( PREFS_SEARCH_ASSETS, true );
 			dontSearchInSourceAssets = EditorPrefs.GetBool( PREFS_DONT_SEARCH_SOURCE_ASSETS, true );
 			searchInProjectSettings = EditorPrefs.GetBool( PREFS_SEARCH_PROJECT_SETTINGS, true );
-			searchDepthLimit = EditorPrefs.GetInt( PREFS_SEARCH_DEPTH_LIMIT, 4 );
-			fieldModifiers = (BindingFlags) EditorPrefs.GetInt( PREFS_SEARCH_FIELDS, (int) ( BindingFlags.Public | BindingFlags.NonPublic ) );
-			propertyModifiers = (BindingFlags) EditorPrefs.GetInt( PREFS_SEARCH_PROPERTIES, (int) ( BindingFlags.Public | BindingFlags.NonPublic ) );
-			searchNonSerializableVariables = EditorPrefs.GetBool( PREFS_SEARCH_NON_SERIALIZABLES, true );
 			searchUnusedMaterialProperties = EditorPrefs.GetBool( PREFS_SEARCH_UNUSED_MATERIAL_PROPERTIES, true );
 			lazySceneSearch = EditorPrefs.GetBool( PREFS_LAZY_SCENE_SEARCH, true );
 #if ASSET_USAGE_ADDRESSABLES
@@ -712,10 +646,7 @@ namespace AssetUsageDetectorNamespace
 			currentPhase = Phase.Processing;
 
 			SavePrefs();
-
-#if UNITY_2018_3_OR_NEWER
 			ReplacePrefabStageObjectsWithAssets( PrefabStageUtility.GetCurrentPrefabStage() );
-#endif
 
 			// Start searching
 			searchResult = core.Run( new AssetUsageDetector.Parameters()
@@ -729,10 +660,6 @@ namespace AssetUsageDetectorNamespace
 				dontSearchInSourceAssets = dontSearchInSourceAssets,
 				excludedScenesFromSearch = !excludedScenes.IsEmpty() ? excludedScenes.ToArray() : null,
 				searchInProjectSettings = searchInProjectSettings,
-				//fieldModifiers = fieldModifiers,
-				//propertyModifiers = propertyModifiers,
-				//searchDepthLimit = searchDepthLimit,
-				//searchNonSerializableVariables = searchNonSerializableVariables,
 				searchUnusedMaterialProperties = searchUnusedMaterialProperties,
 				searchRefactoring = searchRefactoring,
 #if ASSET_USAGE_ADDRESSABLES
@@ -758,18 +685,13 @@ namespace AssetUsageDetectorNamespace
 				wantsMouseMove = wantsMouseEnterLeaveWindow = true;
 		}
 
-#if UNITY_2018_3_OR_NEWER
 		// Try replacing searched objects who are part of currently open prefab stage with their corresponding prefab assets
 		public void ReplacePrefabStageObjectsWithAssets( PrefabStage prefabStage )
 		{
 			if( prefabStage == null || !prefabStage.stageHandle.IsValid() )
 				return;
 
-#if UNITY_2020_1_OR_NEWER
 			GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>( prefabStage.assetPath );
-#else
-			GameObject prefabAsset = AssetDatabase.LoadAssetAtPath<GameObject>( prefabStage.prefabAssetPath );
-#endif
 			if( prefabAsset == null || prefabAsset.Equals( null ) )
 				return;
 
@@ -796,7 +718,6 @@ namespace AssetUsageDetectorNamespace
 				}
 			}
 		}
-#endif
 
 		private bool ReturnToSetupPhase()
 		{

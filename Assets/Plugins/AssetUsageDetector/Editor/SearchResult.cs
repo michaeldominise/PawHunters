@@ -9,6 +9,14 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
+#if UNITY_6000_3_OR_NEWER
+using EntityId = UnityEngine.EntityId;
+#else
+using EntityId = System.Int32;
+#endif
+#if UNITY_6000_2_OR_NEWER
+using TreeViewItem = UnityEditor.IMGUI.Controls.TreeViewItem<int>;
+#endif
 
 namespace AssetUsageDetectorNamespace
 {
@@ -39,7 +47,7 @@ namespace AssetUsageDetectorNamespace
 			}
 
 			public string label;
-			public int instanceId;
+            public EntityId instanceId;
 			public bool isUnityObject, isMainReference;
 			public ReferenceNode.UsedState usedState;
 
@@ -980,18 +988,7 @@ namespace AssetUsageDetectorNamespace
 
 					Rect treeViewRect = EditorGUILayout.GetControlRect( false, treeView.totalHeight );
 					if( ev.type == EventType.Repaint )
-					{
 						lastTreeViewRect = treeViewRect;
-
-#if !UNITY_2018_2_OR_NEWER
-						// TreeView calls RowGUI for all rows instead of only the visible rows on early Unity versions which leads to performance issues. Do manual row culling on those versions
-						// Credit: https://github.com/Unity-Technologies/UnityCsReference/blob/a048de916b23331bf6dfe92c4a6c205989b83b4f/Editor/Mono/GUI/TreeView/TreeViewGUI.cs#L273-L276
-						float topPixel = scrollPosition - treeViewRect.y;
-						float heightInPixels = window.position.height;
-						treeView.visibleRowTop = (int) Mathf.Floor( topPixel / treeView.rowHeight );
-						treeView.visibleRowBottom = treeView.visibleRowTop + (int) Mathf.Ceil( heightInPixels / treeView.rowHeight );
-#endif
-					}
 
 					treeView.OnGUI( treeViewRect );
 
@@ -1138,8 +1135,8 @@ namespace AssetUsageDetectorNamespace
 		public bool IsMainReference { get; private set; } // True: if belongs to a scene search result group, then it's an object in that scene. If belongs to the assets search result group, then it's an asset
 
 		internal object nodeObject;
-		private int? instanceId; // instanceId of the nodeObject if it is a Unity object, null otherwise
-		public Object UnityObject { get { return instanceId.HasValue ? EditorUtility.InstanceIDToObject( instanceId.Value ) : null; } }
+        private EntityId? instanceId; // instanceId of the nodeObject if it is a Unity object, null otherwise
+        public Object UnityObject => instanceId.HasValue ? Utilities.EntityIdToObject(instanceId.Value) : null;
 
 		private readonly List<Link> links = new List<Link>( 2 );
 		public int NumberOfOutgoingLinks { get { return links.Count; } }
@@ -1233,7 +1230,7 @@ namespace AssetUsageDetectorNamespace
 			Object unityObject = nodeObject as Object;
 			if( unityObject != null )
 			{
-				instanceId = unityObject.GetInstanceID();
+                instanceId = unityObject.GetEntityId();
 				Label = unityObject.name + " (" + unityObject.GetType().Name + ")";
 
 				if( AssetUsageDetectorSettings.ShowRootAssetName && unityObject.IsAsset() && !AssetDatabase.IsMainAsset( unityObject ) )

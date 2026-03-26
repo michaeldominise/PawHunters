@@ -5,22 +5,18 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using UnityEditor;
+#if ASSET_USAGE_ADDRESSABLES
+using UnityEditor.AddressableAssets.Settings;
+#endif
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
-#if UNITY_2017_1_OR_NEWER
 using UnityEngine.U2D;
 using UnityEngine.Playables;
-#endif
-#if UNITY_2018_2_OR_NEWER
 using UnityEditor.U2D;
-#endif
-#if UNITY_2017_3_OR_NEWER
 using UnityEditor.Compilation;
-#endif
-#if UNITY_2017_2_OR_NEWER
+using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
-#endif
 #if ASSET_USAGE_ADDRESSABLES
 using UnityEngine.AddressableAssets;
 #endif
@@ -31,19 +27,14 @@ namespace AssetUsageDetectorNamespace
 	public partial class AssetUsageDetector
 	{
 		#region Helper Classes
-#if UNITY_2017_3_OR_NEWER
-#pragma warning disable 0649 // The fields' values are assigned via JsonUtility
+#pragma warning disable 0649
 		[Serializable]
 		private struct AssemblyDefinitionReferences
 		{
 			public string reference; // Used by AssemblyDefinitionReferenceAssets
 			public List<string> references; // Used by AssemblyDefinitionAssets
 		}
-#pragma warning restore 0649
-#endif
 
-#if UNITY_2018_1_OR_NEWER
-#pragma warning disable 0649 // The fields' values are assigned via JsonUtility
 		[Serializable]
 		private struct ShaderGraphReferences // Used by old Shader Graph serialization format
 		{
@@ -157,7 +148,6 @@ namespace AssetUsageDetectorNamespace
 			}
 		}
 #pragma warning restore 0649
-#endif
 		#endregion
 
 		// Dictionary to quickly find the function to search a specific type with
@@ -176,10 +166,8 @@ namespace AssetUsageDetectorNamespace
 		// Path(s) of .cginc, .cg, .hlsl and .glslinc assets in assetsToSearchSet
 		private readonly HashSet<string> shaderIncludesToSearchSet = new HashSet<string>();
 
-#if UNITY_2017_3_OR_NEWER
 		// Path(s) of the Assembly Definition Files in objectsToSearchSet (Value: files themselves)
 		private readonly Dictionary<string, Object> assemblyDefinitionFilesToSearch = new Dictionary<string, Object>( 8 );
-#endif
 
 		// An optimization to fetch an animation clip's curve bindings only once
 		private readonly Dictionary<AnimationClip, EditorCurveBinding[]> animationClipUniqueBindings = new Dictionary<AnimationClip, EditorCurveBinding[]>( 256 );
@@ -187,33 +175,20 @@ namespace AssetUsageDetectorNamespace
 		private bool searchPrefabConnections;
 		private bool searchMonoBehavioursForScript;
 		private bool searchTextureReferences;
-#if UNITY_2018_1_OR_NEWER
 		private bool searchShaderGraphsForSubGraphs;
-#endif
-
-		private bool searchSerializableVariablesOnly;
-		private bool prevSearchSerializableVariablesOnly;
-
-		private BindingFlags fieldModifiers, propertyModifiers;
-		private BindingFlags prevFieldModifiers, prevPropertyModifiers;
 
 		// Unity's internal function that returns a SerializedProperty's corresponding FieldInfo
 		private delegate FieldInfo FieldInfoGetter( SerializedProperty p, out Type t );
-#if UNITY_2019_3_OR_NEWER
 		private readonly FieldInfoGetter fieldInfoGetter = (FieldInfoGetter) Delegate.CreateDelegate( typeof( FieldInfoGetter ), typeof( Editor ).Assembly.GetType( "UnityEditor.ScriptAttributeUtility" ).GetMethod( "GetFieldInfoAndStaticTypeFromProperty", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ) );
-#else
-		private readonly FieldInfoGetter fieldInfoGetter = (FieldInfoGetter) Delegate.CreateDelegate( typeof( FieldInfoGetter ), typeof( Editor ).Assembly.GetType( "UnityEditor.ScriptAttributeUtility" ).GetMethod( "GetFieldInfoFromProperty", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ) );
-#endif
-
 		private readonly Func<Object> lightmapSettingsGetter = (Func<Object>) Delegate.CreateDelegate( typeof( Func<Object> ), typeof( LightmapEditorSettings ).GetMethod( "GetLightmapSettings", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ) );
 		private readonly Func<Object> renderSettingsGetter = (Func<Object>) Delegate.CreateDelegate( typeof( Func<Object> ), typeof( RenderSettings ).GetMethod( "GetRenderSettings", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ) );
-#if UNITY_2021_2_OR_NEWER
 		private readonly Func<Cubemap> defaultReflectionProbeGetter = (Func<Cubemap>) Delegate.CreateDelegate( typeof( Func<Cubemap> ), typeof( RenderSettings ).GetProperty( "defaultReflection", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ).GetGetMethod( true ) );
-#endif
 
+		internal static readonly Func<SpriteAtlas, Sprite[]> spriteAtlasPackedSpritesGetter = (Func<SpriteAtlas, Sprite[]>) Delegate.CreateDelegate( typeof( Func<SpriteAtlas, Sprite[]> ), typeof( SpriteAtlasExtensions ).GetMethod( "GetPackedSprites", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ) );
 #if ASSET_USAGE_ADDRESSABLES
-		private readonly Func<SpriteAtlas, Sprite[]> spriteAtlasPackedSpritesGetter = (Func<SpriteAtlas, Sprite[]>) Delegate.CreateDelegate( typeof( Func<SpriteAtlas, Sprite[]> ), typeof( SpriteAtlasExtensions ).GetMethod( "GetPackedSprites", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static ) );
-		private readonly PropertyInfo assetReferenceSubObjectTypeGetter = typeof( AssetReference ).GetProperty( "SubOjbectType", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance );
+		private readonly PropertyInfo assetReferenceSubObjectTypeGetter = 
+			typeof( AssetReference ).GetProperty( "SubObjectType", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance )
+			?? typeof( AssetReference ).GetProperty( "SubOjbectType", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance );
 #endif
 
 #if ASSET_USAGE_VFX_GRAPH
@@ -244,8 +219,9 @@ namespace AssetUsageDetectorNamespace
 					{ typeof( TerrainData ), SearchTerrainData },
 					{ typeof( LightmapSettings ), SearchLightmapSettings },
 					{ typeof( RenderSettings ), SearchRenderSettings },
-#if UNITY_2017_1_OR_NEWER
 					{ typeof( SpriteAtlas ), SearchSpriteAtlas },
+#if ASSET_USAGE_ADDRESSABLES
+                    { typeof(AddressableAssetSettings), SearchAddressableAssetSettings },
 #endif
 				};
 			}
@@ -259,16 +235,10 @@ namespace AssetUsageDetectorNamespace
 					{ "cg", SearchShaderSecondaryAsset },
 					{ "glslinc", SearchShaderSecondaryAsset },
 					{ "hlsl", SearchShaderSecondaryAsset },
-#if UNITY_2017_3_OR_NEWER
 					{ "asmdef", SearchAssemblyDefinitionFile },
-#endif
-#if UNITY_2019_2_OR_NEWER
 					{ "asmref", SearchAssemblyDefinitionFile },
-#endif
-#if UNITY_2018_1_OR_NEWER
 					{ "shadergraph", SearchShaderGraph },
 					{ "shadersubgraph", SearchShaderGraph },
-#endif
 #if ASSET_USAGE_VFX_GRAPH
 					{ "vfx", SearchVFXGraphAsset },
 					{ "vfxoperator", SearchVFXGraphAsset },
@@ -277,23 +247,10 @@ namespace AssetUsageDetectorNamespace
 				};
 			}
 
-			fieldModifiers = searchParameters.fieldModifiers | BindingFlags.Instance | BindingFlags.DeclaredOnly;
-			propertyModifiers = searchParameters.propertyModifiers | BindingFlags.Instance | BindingFlags.DeclaredOnly;
-			searchSerializableVariablesOnly = !searchParameters.searchNonSerializableVariables;
-
-			if( prevFieldModifiers != fieldModifiers || prevPropertyModifiers != propertyModifiers || prevSearchSerializableVariablesOnly != searchSerializableVariablesOnly )
-				typeToVariables.Clear();
-
-			prevFieldModifiers = fieldModifiers;
-			prevPropertyModifiers = propertyModifiers;
-			prevSearchSerializableVariablesOnly = searchSerializableVariablesOnly;
-
 			searchPrefabConnections = false;
 			searchMonoBehavioursForScript = false;
 			searchTextureReferences = false;
-#if UNITY_2018_1_OR_NEWER
 			searchShaderGraphsForSubGraphs = false;
-#endif
 #if ASSET_USAGE_VFX_GRAPH
 			bool searchVFXGraphs = false;
 #endif
@@ -315,10 +272,8 @@ namespace AssetUsageDetectorNamespace
 				}
 				else if( obj is GameObject )
 					searchPrefabConnections = true;
-#if UNITY_2017_3_OR_NEWER
 				else if( obj is UnityEditorInternal.AssemblyDefinitionAsset )
 					assemblyDefinitionFilesToSearch[AssetDatabase.GetAssetPath( obj )] = obj;
-#endif
 #if ASSET_USAGE_VFX_GRAPH
 				else if( !searchVFXGraphs && ( obj is Shader || obj is Mesh || obj.GetType().Name.StartsWithFast( "PointCache" ) || obj.GetType().Name == "ShaderGraphVfxAsset" ) )
 					searchVFXGraphs = true;
@@ -337,10 +292,8 @@ namespace AssetUsageDetectorNamespace
 				string extension = Utilities.GetFileExtension( path );
 				if( extension == "hlsl" || extension == "cginc" || extension == "cg" || extension == "glslinc" )
 					shaderIncludesToSearchSet.Add( path );
-#if UNITY_2018_1_OR_NEWER
 				else if( extension == "shadersubgraph" )
 					searchShaderGraphsForSubGraphs = true;
-#endif
 			}
 
 			// AssetDatabase.GetDependencies doesn't take #include lines in shader source codes into consideration. If we are searching for references
@@ -355,19 +308,14 @@ namespace AssetUsageDetectorNamespace
 				alwaysSearchedExtensionsSet.Add( "hlsl" );
 			}
 
-#if UNITY_2017_3_OR_NEWER
 			// AssetDatabase.GetDependencies doesn't return references from Assembly Definition Files to their Assembly Definition References,
 			// so if we are searching for an Assembly Definition File's usages, we must search all Assembly Definition Files' references manually.
 			if( assemblyDefinitionFilesToSearch.Count > 0 )
 			{
 				alwaysSearchedExtensionsSet.Add( "asmdef" );
-#if UNITY_2019_2_OR_NEWER
 				alwaysSearchedExtensionsSet.Add( "asmref" );
-#endif
 			}
-#endif
 
-#if UNITY_2018_1_OR_NEWER
 			// AssetDatabase.GetDependencies doesn't work with Shader Graph assets. We must search all Shader Graph assets in the following cases:
 			// searchTextureReferences: to find Texture references used in various nodes and properties
 			// searchShaderGraphsForSubGraphs: to find Shader Sub-graph references in other Shader Graph assets
@@ -377,7 +325,6 @@ namespace AssetUsageDetectorNamespace
 				alwaysSearchedExtensionsSet.Add( "shadergraph" );
 				alwaysSearchedExtensionsSet.Add( "shadersubgraph" );
 			}
-#endif
 
 #if ASSET_USAGE_VFX_GRAPH
 			if( searchTextureReferences || searchVFXGraphs )
@@ -502,7 +449,6 @@ namespace AssetUsageDetectorNamespace
 				// Search the objects that are animated by this Animator component for references
 				SearchAnimatedObjects( referenceNode );
 			}
-#if UNITY_2017_2_OR_NEWER
 			else if( component is Tilemap )
 			{
 				// Search the tiles for references
@@ -520,8 +466,6 @@ namespace AssetUsageDetectorNamespace
 					}
 				}
 			}
-#endif
-#if UNITY_2017_1_OR_NEWER
 			else if( component is PlayableDirector )
 			{
 				// Search the PlayableAsset's scene bindings for references
@@ -538,7 +482,6 @@ namespace AssetUsageDetectorNamespace
 					}
 				}
 			}
-#endif
 			else if( component is ParticleSystemRenderer )
 			{
 				// Search ParticleSystemRenderer's custom meshes for references (at runtime, they can't be searched with reflection, unfortunately)
@@ -575,11 +518,7 @@ namespace AssetUsageDetectorNamespace
 					try
 					{
 						ParticleSystem.CollisionModule collisionModule = particleSystem.collision;
-#if UNITY_2020_2_OR_NEWER
 						for( int i = 0, j = collisionModule.planeCount; i < j; i++ )
-#else
-						for( int i = 0, j = collisionModule.maxPlaneCount; i < j; i++ )
-#endif
 						{
 							Transform plane = collisionModule.GetPlane( i );
 							referenceNode.AddLinkTo( SearchObject( plane ), "Collision Module: Plane" );
@@ -593,11 +532,7 @@ namespace AssetUsageDetectorNamespace
 					try
 					{
 						ParticleSystem.TriggerModule triggerModule = particleSystem.trigger;
-#if UNITY_2020_2_OR_NEWER
 						for( int i = 0, j = triggerModule.colliderCount; i < j; i++ )
-#else
-						for( int i = 0, j = triggerModule.maxColliderCount; i < j; i++ )
-#endif
 						{
 							Component collider = triggerModule.GetCollider( i );
 							referenceNode.AddLinkTo( SearchObject( collider ), "Trigger Module: Collider" );
@@ -608,7 +543,6 @@ namespace AssetUsageDetectorNamespace
 					}
 					catch { }
 
-#if UNITY_2017_1_OR_NEWER
 					try
 					{
 						ParticleSystem.TextureSheetAnimationModule textureSheetAnimationModule = particleSystem.textureSheetAnimation;
@@ -622,9 +556,7 @@ namespace AssetUsageDetectorNamespace
 						}
 					}
 					catch { }
-#endif
 
-#if UNITY_5_5_OR_NEWER
 					try
 					{
 						ParticleSystem.SubEmittersModule subEmittersModule = particleSystem.subEmitters;
@@ -638,7 +570,6 @@ namespace AssetUsageDetectorNamespace
 						}
 					}
 					catch { }
-#endif
 				}
 			}
 
@@ -703,12 +634,12 @@ namespace AssetUsageDetectorNamespace
 			if( searchTextureReferences && isInPlayMode && !AssetDatabase.Contains( material ) )
 			{
 				Shader shader = material.shader;
-				int shaderPropertyCount = ShaderUtil.GetPropertyCount( shader );
+                int shaderPropertyCount = shader.GetPropertyCount();
 				for( int i = 0; i < shaderPropertyCount; i++ )
 				{
-					if( ShaderUtil.GetPropertyType( shader, i ) == ShaderUtil.ShaderPropertyType.TexEnv )
+                    if (shader.GetPropertyType(i) == ShaderPropertyType.Texture)
 					{
-						string propertyName = ShaderUtil.GetPropertyName( shader, i );
+                        string propertyName = shader.GetPropertyName(i);
 						Texture assignedTexture = material.GetTexture( propertyName );
 						if( objectsToSearchSet.Contains( assignedTexture ) )
 						{
@@ -735,17 +666,15 @@ namespace AssetUsageDetectorNamespace
 				ShaderImporter shaderImporter = AssetImporter.GetAtPath( AssetDatabase.GetAssetPath( shader ) ) as ShaderImporter;
 				if( shaderImporter != null )
 				{
-					int shaderPropertyCount = ShaderUtil.GetPropertyCount( shader );
+                    int shaderPropertyCount = shader.GetPropertyCount();
 					for( int i = 0; i < shaderPropertyCount; i++ )
 					{
-						if( ShaderUtil.GetPropertyType( shader, i ) == ShaderUtil.ShaderPropertyType.TexEnv )
+                        if (shader.GetPropertyType(i) == ShaderPropertyType.Texture)
 						{
-							string propertyName = ShaderUtil.GetPropertyName( shader, i );
+                            string propertyName = shader.GetPropertyName(i);
 							Texture defaultTexture = shaderImporter.GetDefaultTexture( propertyName );
-#if UNITY_2018_1_OR_NEWER
 							if( !defaultTexture )
 								defaultTexture = shaderImporter.GetNonModifiableTexture( propertyName );
-#endif
 
 							if( objectsToSearchSet.Contains( defaultTexture ) )
 							{
@@ -800,7 +729,7 @@ namespace AssetUsageDetectorNamespace
 				VariableGetterHolder[] variables = GetFilteredVariablesForType( scriptType );
 				for( int i = 0; i < variables.Length; i++ )
 				{
-					if( variables[i].isSerializable && !variables[i].IsProperty )
+                    if (!variables[i].IsProperty)
 					{
 						Object defaultValue = scriptImporter.GetDefaultReference( variables[i].Name );
 						if( objectsToSearchSet.Contains( defaultValue ) )
@@ -1047,16 +976,11 @@ namespace AssetUsageDetectorNamespace
 		{
 			ReferenceNode referenceNode = PopReferenceNode( obj );
 
-#if UNITY_2021_2_OR_NEWER
 			referenceNode.AddLinkTo( SearchObject( defaultReflectionProbeGetter() ), "Default Reflection Probe" );
-#else
-			referenceNode.AddLinkTo( SearchObject( ReflectionProbe.defaultTexture ), "Default Reflection Probe" );
-#endif
 			SearchVariablesWithSerializedObject( referenceNode, true );
 			return referenceNode;
 		}
 
-#if UNITY_2017_1_OR_NEWER
 		private ReferenceNode SearchSpriteAtlas( object obj )
 		{
 			SpriteAtlas spriteAtlas = (SpriteAtlas) obj;
@@ -1089,7 +1013,6 @@ namespace AssetUsageDetectorNamespace
 						searchParameters.searchRefactoring( new SerializedPropertyMatch( spriteAtlas, packedSprite, packedSpriteProperty ) );
 				}
 			}
-#if UNITY_2018_2_OR_NEWER
 			else
 			{
 				Object[] _packables = spriteAtlas.GetPackables();
@@ -1099,7 +1022,6 @@ namespace AssetUsageDetectorNamespace
 						SearchSpriteAtlas( referenceNode, _packables[i] );
 				}
 			}
-#endif
 
 			return referenceNode;
 		}
@@ -1145,9 +1067,30 @@ namespace AssetUsageDetectorNamespace
 				}
 			}
 		}
+
+#if ASSET_USAGE_ADDRESSABLES
+        private ReferenceNode SearchAddressableAssetSettings(object obj)
+        {
+            AddressableAssetSettings addressableSettings = (AddressableAssetSettings)obj;
+            ReferenceNode referenceNode = PopReferenceNode(addressableSettings);
+
+            // Search Addressable groups
+            foreach (Object asset in assetsToSearchSet)
+            {
+                // Don't check redundant prefab objects
+                if (asset is Component)
+                    continue;
+                if (asset is GameObject gameObject && gameObject.transform.parent != null)
+                    continue;
+
+                if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out string guid, out long _) && addressableSettings.FindAssetEntry(guid, true) is AddressableAssetEntry addressableEntry)
+                    referenceNode.AddLinkTo(GetReferenceNode(asset), $"Addressable: \"{addressableEntry.parentGroup.Name}\" -> \"{addressableEntry.address}\"");
+            }
+
+            return referenceNode;
+        }
 #endif
 
-#if UNITY_2017_3_OR_NEWER
 		// Find references from an Assembly Definition File to its Assembly Definition References
 		private ReferenceNode SearchAssemblyDefinitionFile( object obj )
 		{
@@ -1169,11 +1112,7 @@ namespace AssetUsageDetectorNamespace
 			{
 				for( int i = 0; i < assemblyDefinitionFile.references.Count; i++ )
 				{
-#if UNITY_2019_1_OR_NEWER
 					string assemblyPath = CompilationPipeline.GetAssemblyDefinitionFilePathFromAssemblyReference( assemblyDefinitionFile.references[i] );
-#else
-					string assemblyPath = CompilationPipeline.GetAssemblyDefinitionFilePathFromAssemblyName( assemblyDefinitionFile.references[i] );
-#endif
 					if( !string.IsNullOrEmpty( assemblyPath ) )
 					{
 						Object searchedAssemblyDefinitionFile;
@@ -1185,9 +1124,7 @@ namespace AssetUsageDetectorNamespace
 
 			return referenceNode;
 		}
-#endif
 
-#if UNITY_2018_1_OR_NEWER
 		// Searches Shader Graph assets for references
 		private ReferenceNode SearchShaderGraph( object obj )
 		{
@@ -1316,7 +1253,6 @@ namespace AssetUsageDetectorNamespace
 
 			return referenceNode;
 		}
-#endif
 
 #if ASSET_USAGE_VFX_GRAPH
 		private ReferenceNode SearchVFXGraphAsset( object obj )
@@ -1463,6 +1399,7 @@ namespace AssetUsageDetectorNamespace
 				{
 					bool iteratingVisible = iteratorVisible.NextVisible( true );
 					bool searchPrefabOverridesOnly = ShouldExcludeRedundantPrefabReferences( unityObject );
+                    GameObject unityObjectPrefabInstanceRoot = searchPrefabOverridesOnly ? PrefabUtility.GetOutermostPrefabInstanceRoot(unityObject) : null;
 					bool enterChildren;
 					do
 					{
@@ -1495,14 +1432,12 @@ namespace AssetUsageDetectorNamespace
 									searchResult = SearchObject( PreferablyGameObject( propertyValue ) );
 									enterChildren = false;
 									break;
-#if UNITY_2019_3_OR_NEWER
 								case SerializedPropertyType.ManagedReference:
 									object managedReferenceValue = GetRawSerializedPropertyValue( iterator );
 									propertyValue = managedReferenceValue as Object;
 									searchResult = SearchObject( PreferablyGameObject( managedReferenceValue ) );
 									enterChildren = false;
 									break;
-#endif
 								case SerializedPropertyType.Generic:
 								{
 #if ASSET_USAGE_ADDRESSABLES
@@ -1546,7 +1481,7 @@ namespace AssetUsageDetectorNamespace
 								// m_RD.texture is a redundant reference that shows up when searching sprites
 								if( !propertyPath.EndsWithFast( "m_RD.texture" ) )
 								{
-									if( searchPrefabOverridesOnly && !iterator.prefabOverride )
+                                    if (searchPrefabOverridesOnly && !iterator.prefabOverride && ObjectBelongsToDifferentPrefabInstance(propertyValue, unityObjectPrefabInstanceRoot))
 									{
 										currentSearchResultGroup.NumberOfRedundantReferences++;
 										enterChildren = false;
@@ -1558,6 +1493,22 @@ namespace AssetUsageDetectorNamespace
 										if( searchParameters.searchRefactoring != null && objectsToSearchSet.Contains( propertyValue ) )
 											searchParameters.searchRefactoring( new SerializedPropertyMatch( unityObject, propertyValue, iterator ) );
 									}
+
+                                    /// Searching for references of a prefab instance's child object in either a scene or prefab mode should show the references coming from
+                                    /// that prefab instance to the child object. That's because even though <see cref="SerializedProperty.prefabOverride"/> returns
+                                    /// false for the variable that points to the child GameObject, that child GameObject is essentially different than its counterpart
+                                    /// in the prefab asset (it's an instance/clone of it after all). So no references will be reported unless we intervene.
+                                    bool ObjectBelongsToDifferentPrefabInstance(Object obj, GameObject prefabInstanceRoot)
+                                    {
+                                        if (obj == null)
+                                            return true;
+
+                                        GameObject objPrefabInstanceRoot = PrefabUtility.GetOutermostPrefabInstanceRoot(obj);
+                                        if (objPrefabInstanceRoot == null)
+                                            return true;
+
+                                        return objPrefabInstanceRoot != prefabInstanceRoot;
+                                    }
 								}
 							}
 						}
@@ -1581,10 +1532,6 @@ namespace AssetUsageDetectorNamespace
 			VariableGetterHolder[] variables = GetFilteredVariablesForType( referenceNode.nodeObject.GetType() );
 			for( int i = 0; i < variables.Length; i++ )
 			{
-				// When possible, don't search non-serializable variables
-				if( searchSerializableVariablesOnly && !variables[i].isSerializable )
-					continue;
-
 				try
 				{
 					object variableValue = variables[i].Get( referenceNode.nodeObject );
@@ -1682,135 +1629,99 @@ namespace AssetUsageDetectorNamespace
 
 			validVariables.Clear();
 
-			// Filter the fields
-			if( fieldModifiers != ( BindingFlags.Instance | BindingFlags.DeclaredOnly ) )
+			Type currType = type;
+			while( currType != typeof( object ) )
 			{
-				Type currType = type;
-				while( currType != typeof( object ) )
+                foreach (FieldInfo field in currType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
 				{
-					FieldInfo[] fields = currType.GetFields( fieldModifiers );
-					for( int i = 0; i < fields.Length; i++ )
-					{
-						FieldInfo field = fields[i];
+					// Skip obsolete fields
+					if( Attribute.IsDefined( field, typeof( ObsoleteAttribute ) ) )
+						continue;
 
-						// Skip obsolete fields
-						if( Attribute.IsDefined( field, typeof( ObsoleteAttribute ) ) )
-							continue;
+					// Skip primitive types
+					if( field.FieldType.IsIgnoredUnityType() )
+						continue;
 
-						// Skip primitive types
-						if( field.FieldType.IsIgnoredUnityType() )
-							continue;
+					// Additional filtering for fields:
+					// 1- Ignore "m_RectTransform", "m_CanvasRenderer" and "m_Canvas" fields of Graphic components
+					string fieldName = field.Name;
+					if( typeof( Graphic ).IsAssignableFrom( currType ) &&
+						( fieldName == "m_RectTransform" || fieldName == "m_CanvasRenderer" || fieldName == "m_Canvas" ) )
+						continue;
 
-#if UNITY_2021_2_OR_NEWER
-						// "ref struct"s can't be accessed via reflection
-						if( field.FieldType.IsByRefLike )
-							continue;
-#endif
-
-						// Additional filtering for fields:
-						// 1- Ignore "m_RectTransform", "m_CanvasRenderer" and "m_Canvas" fields of Graphic components
-						string fieldName = field.Name;
-						if( typeof( Graphic ).IsAssignableFrom( currType ) &&
-							( fieldName == "m_RectTransform" || fieldName == "m_CanvasRenderer" || fieldName == "m_Canvas" ) )
-							continue;
-
-						VariableGetVal getter = field.CreateGetter( type );
-						if( getter != null )
-							validVariables.Add( new VariableGetterHolder( field, getter, searchSerializableVariablesOnly ? field.IsSerializable() : true ) );
-					}
-
-					currType = currType.BaseType;
+					VariableGetVal getter = field.CreateGetter( type );
+                    if (getter != null)
+                        validVariables.Add(new VariableGetterHolder(field, getter));
 				}
-			}
 
-			if( propertyModifiers != ( BindingFlags.Instance | BindingFlags.DeclaredOnly ) )
-			{
-				Type currType = type;
-				while( currType != typeof( object ) )
+                foreach (PropertyInfo property in currType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
 				{
-					PropertyInfo[] properties = currType.GetProperties( propertyModifiers );
-					for( int i = 0; i < properties.Length; i++ )
+					// Skip obsolete properties
+					if( Attribute.IsDefined( property, typeof( ObsoleteAttribute ) ) )
+						continue;
+
+					// Skip primitive types
+					if( property.PropertyType.IsIgnoredUnityType() )
+						continue;
+
+					// Skip properties without a getter function
+					MethodInfo propertyGetter = property.GetGetMethod( true );
+					if( propertyGetter == null )
+						continue;
+
+					// Skip indexer properties
+					if( property.GetIndexParameters().Length > 0 )
+						continue;
+
+					// No need to check properties with 'override' keyword
+					if( propertyGetter.GetBaseDefinition().DeclaringType != propertyGetter.DeclaringType )
+						continue;
+
+					string propertyName = property.Name;
+
+					// Ignore "gameObject", "transform", "rectTransform" and "attachedRigidbody" properties of components to get more useful results
+					if( typeof( Component ).IsAssignableFrom( currType ) && ( propertyName == "gameObject" ||
+						propertyName == "transform" || propertyName == "attachedRigidbody" || propertyName == "rectTransform" ) )
+						continue;
+					// Ignore "canvasRenderer" and "canvas" properties of Graphic components to get more useful results
+					else if( typeof( Graphic ).IsAssignableFrom( currType ) &&
+						( propertyName == "canvasRenderer" || propertyName == "canvas" ) )
+						continue;
+					// Prevent accessing properties of Unity that instantiate an existing resource (causing memory leak)
+					else if( typeof( MeshFilter ).IsAssignableFrom( currType ) && propertyName == "mesh" )
+						continue;
+					// Same as above
+					else if( ( propertyName == "material" || propertyName == "materials" ) &&
+						( typeof( Renderer ).IsAssignableFrom( currType ) || typeof( Collider ).IsAssignableFrom( currType ) ||
+						typeof( Collider2D ).IsAssignableFrom( currType ) ) )
+						continue;
+					// Ignore certain Material properties that are already searched via SearchMaterial function (also, if a material doesn't have a _Color or _BaseColor
+					// property and its "color" property is called, it logs an error to the console, so this rule helps avoid that scenario, as well)
+					else if( ( propertyName == "color" || propertyName == "mainTexture" ) && typeof( Material ).IsAssignableFrom( currType ) )
+						continue;
+					// Ignore "parameters" property of Animator since it doesn't contain any useful data and logs a warning to the console when Animator is inactive
+					else if( typeof( Animator ).IsAssignableFrom( currType ) && propertyName == "parameters" )
+						continue;
+					// Ignore "spriteAnimator" property of TMP_Text component because this property adds a TMP_SpriteAnimator component to the object if it doesn't exist
+					else if( propertyName == "spriteAnimator" && currType.Name == "TMP_Text" )
+						continue;
+					// Ignore "meshFilter" property of TextMeshPro and TMP_SubMesh components because this property adds a MeshFilter component to the object if it doesn't exist
+					else if( propertyName == "meshFilter" && ( currType.Name == "TextMeshPro" || currType.Name == "TMP_SubMesh" ) )
+						continue;
+					// Ignore "users" property of TerrainData because it returns the Terrains in the scene that use that TerrainData. This causes issues with callStack because TerrainData
+					// is already in callStack when Terrains are searched via "users" property of it and hence, Terrain->TerrainData references for that TerrainData can't be found in scenes
+					// (this is how callStack works, it prevents searching an object if it's already in callStack to avoid infinite recursion)
+					else if( propertyName == "users" && typeof( TerrainData ).IsAssignableFrom( currType ) )
+						continue;
+					else
 					{
-						PropertyInfo property = properties[i];
-
-						// Skip obsolete properties
-						if( Attribute.IsDefined( property, typeof( ObsoleteAttribute ) ) )
-							continue;
-
-						// Skip primitive types
-						if( property.PropertyType.IsIgnoredUnityType() )
-							continue;
-
-#if UNITY_2021_2_OR_NEWER
-						// "ref struct"s can't be accessed via reflection
-						if( property.PropertyType.IsByRefLike )
-							continue;
-#endif
-
-						// Skip properties without a getter function
-						MethodInfo propertyGetter = property.GetGetMethod( true );
-						if( propertyGetter == null )
-							continue;
-
-						// Skip indexer properties
-						if( property.GetIndexParameters().Length > 0 )
-							continue;
-
-						// No need to check properties with 'override' keyword
-						if( propertyGetter.GetBaseDefinition().DeclaringType != propertyGetter.DeclaringType )
-							continue;
-
-						string propertyName = property.Name;
-
-						// Ignore "gameObject", "transform", "rectTransform" and "attachedRigidbody" properties of components to get more useful results
-						if( typeof( Component ).IsAssignableFrom( currType ) && ( propertyName == "gameObject" ||
-							propertyName == "transform" || propertyName == "attachedRigidbody" || propertyName == "rectTransform" ) )
-							continue;
-						// Ignore "canvasRenderer" and "canvas" properties of Graphic components to get more useful results
-						else if( typeof( Graphic ).IsAssignableFrom( currType ) &&
-							( propertyName == "canvasRenderer" || propertyName == "canvas" ) )
-							continue;
-						// Prevent accessing properties of Unity that instantiate an existing resource (causing memory leak)
-						else if( typeof( MeshFilter ).IsAssignableFrom( currType ) && propertyName == "mesh" )
-							continue;
-						// Same as above
-						else if( ( propertyName == "material" || propertyName == "materials" ) &&
-							( typeof( Renderer ).IsAssignableFrom( currType ) || typeof( Collider ).IsAssignableFrom( currType ) ||
-#if !UNITY_2019_3_OR_NEWER
-#pragma warning disable 0618
-							typeof( GUIText ).IsAssignableFrom( currType ) ||
-#pragma warning restore 0618
-#endif
-							typeof( Collider2D ).IsAssignableFrom( currType ) ) )
-							continue;
-						// Ignore certain Material properties that are already searched via SearchMaterial function (also, if a material doesn't have a _Color or _BaseColor
-						// property and its "color" property is called, it logs an error to the console, so this rule helps avoid that scenario, as well)
-						else if( ( propertyName == "color" || propertyName == "mainTexture" ) && typeof( Material ).IsAssignableFrom( currType ) )
-							continue;
-						// Ignore "parameters" property of Animator since it doesn't contain any useful data and logs a warning to the console when Animator is inactive
-						else if( typeof( Animator ).IsAssignableFrom( currType ) && propertyName == "parameters" )
-							continue;
-						// Ignore "spriteAnimator" property of TMP_Text component because this property adds a TMP_SpriteAnimator component to the object if it doesn't exist
-						else if( propertyName == "spriteAnimator" && currType.Name == "TMP_Text" )
-							continue;
-						// Ignore "meshFilter" property of TextMeshPro and TMP_SubMesh components because this property adds a MeshFilter component to the object if it doesn't exist
-						else if( propertyName == "meshFilter" && ( currType.Name == "TextMeshPro" || currType.Name == "TMP_SubMesh" ) )
-							continue;
-						// Ignore "users" property of TerrainData because it returns the Terrains in the scene that use that TerrainData. This causes issues with callStack because TerrainData
-						// is already in callStack when Terrains are searched via "users" property of it and hence, Terrain->TerrainData references for that TerrainData can't be found in scenes
-						// (this is how callStack works, it prevents searching an object if it's already in callStack to avoid infinite recursion)
-						else if( propertyName == "users" && typeof( TerrainData ).IsAssignableFrom( currType ) )
-							continue;
-						else
-						{
-							VariableGetVal getter = property.CreateGetter();
-							if( getter != null )
-								validVariables.Add( new VariableGetterHolder( property, getter, searchSerializableVariablesOnly ? property.IsSerializable() : true ) );
-						}
+						VariableGetVal getter = property.CreateGetter();
+                        if (getter != null)
+                            validVariables.Add(new VariableGetterHolder(property, getter));
 					}
-
-					currType = currType.BaseType;
 				}
+
+				currType = currType.BaseType;
 			}
 
 			result = validVariables.ToArray();
