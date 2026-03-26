@@ -41,7 +41,8 @@ namespace LabHavenInteractive.PawHunters
         public async void Despawn(T spawnedItem, float setInactiveDelay = 0)
         {
             activeList.Remove(spawnedItem);
-            spawnedItem.transform.SetParent(transform);
+            if(transform.gameObject)
+                spawnedItem.transform.SetParent(transform);
             await Task.Delay((int)(setInactiveDelay * 1000));
             spawnedItem.gameObject.SetActive(false);
         }
